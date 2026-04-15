@@ -18,8 +18,14 @@ autobots_NBA/
 │
 ├── 【主程式】
 ├── nba_predictor.py             ← 核心：Elo + XGBoost + 邊際偵測（1329 行）
-├── dashboard.py                 ← Flask 儀表板 API server
+├── dashboard.py                 ← Flask 儀表板 API server（本機 port 8090）
 ├── nba_daily_update.sh          ← 每日自動更新腳本
+│
+├── 【Streamlit 雲端版】
+├── streamlit_app/
+│   ├── app.py                   ← Streamlit Cloud 主程式
+│   ├── requirements.txt         ← Streamlit 依賴
+│   └── sync_data.py             ← 上傳 nba_data.json 到 GitHub Release
 │
 ├── 【前端 + 輸出】
 ├── nba.html                     ← 儀表板頁面
@@ -74,7 +80,51 @@ $VENV dashboard.py
 
 ---
 
-## 🌐 儀表板
+## ☁️ Streamlit 雲端版（手機任何地方存取）
+
+**公開 URL：** https://nba-dashboard.streamlit.app（部署後）
+
+### 架構
+
+```
+Mac mini（本機）
+  ├─ nba_predictor.py 每日 09:00 產出 nba_data.json
+  └─ sync_data.py 自動上傳到 GitHub Release
+                         ↓
+GitHub Release: datadigshawn/nba_dashboard:data-latest
+                         ↓
+Streamlit Cloud（讀取 JSON 渲染儀表板）
+                         ↓
+手機/電腦: https://nba-dashboard.streamlit.app
+```
+
+### 部署步驟（1 次設定）
+
+1. 開 https://share.streamlit.io
+2. 用 GitHub 登入（datadigshawn）
+3. **Create app** → Deploy from GitHub
+4. 填：
+
+| 欄位 | 值 |
+|------|---|
+| Repository | `datadigshawn/nba_dashboard` |
+| Branch | `main` |
+| Main file path | `streamlit_app/app.py` |
+| App URL | `nba-dashboard` |
+| Python version | `3.11` |
+
+5. Deploy → 3 分鐘後可用
+
+### 手動同步（測試用）
+
+```bash
+cd /Users/shawnclaw/autobot/autobots_NBA
+.venv/bin/python streamlit_app/sync_data.py
+```
+
+---
+
+## 🌐 本機儀表板
 
 | URL | 說明 |
 |-----|------|

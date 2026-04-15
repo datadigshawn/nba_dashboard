@@ -49,4 +49,10 @@ echo "[$(date '+%H:%M:%S')] ✅ $GAMES 場比賽 | $EDGES 個邊際機會 → $D
 echo "" | tee -a "$LOG"
 "$PYTHON" nba_predictor.py 2>&1 | grep "Prediction:" | tee -a "$LOG"
 
+# ── 4. 同步到 GitHub Release（供 Streamlit Cloud 讀取） ─
+if [ -f "$NBA_DIR/streamlit_app/sync_data.py" ]; then
+    echo "[$(date '+%H:%M:%S')] 同步至 GitHub Release..." | tee -a "$LOG"
+    "$PYTHON" "$NBA_DIR/streamlit_app/sync_data.py" 2>&1 | tee -a "$LOG"
+fi
+
 echo "[$(date '+%H:%M:%S')] 更新完成" | tee -a "$LOG"
