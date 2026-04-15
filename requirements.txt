@@ -1,0 +1,5 @@
+# NBA 預測系統必要套件
+httpx>=0.27.0
+numpy>=1.26.0
+xgboost>=2.0.0
+flask>=3.0.0

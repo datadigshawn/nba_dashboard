@@ -1,0 +1,20 @@
+# Python
+.venv/
+venv/
+__pycache__/
+*.pyc
+
+# Logs
+logs/
+*.log
+
+# macOS
+.DS_Store
+
+# Models（二進位太大，不進 git；每日會重訓）
+state/*.xgb
+
+# Editor
+.vscode/
+.idea/
+*.swp

@@ -1,0 +1,1182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NBA Predictions — Elo + XGBoost Model</title>
+<link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Exo+2:wght@300;400;600;700;900&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg:#f5f7fa;--surface:#ffffff;--border:#e2e8f0;
+    --accent:#0066cc;--accent2:#059669;--warn:#d97706;--danger:#dc2626;
+    --text:#1a202c;--muted:#64748b;--up:#059669;--down:#dc2626;
+    --gold:#b45309;--purple:#7c3aed;
+    --glow:0 4px 12px rgba(0,0,0,0.08);
+    --nba-orange:#c9531c;
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  body{background:var(--bg);color:var(--text);font-family:'Exo 2',sans-serif;min-height:100vh;}
+  .wrap{max-width:1400px;margin:0 auto;padding:0 24px;position:relative;z-index:1;}
+
+  /* HEADER */
+  header{border-bottom:1px solid var(--border);padding:16px 0;position:sticky;top:0;
+    box-shadow:0 1px 3px rgba(0,0,0,.06);
+    background:rgba(255,255,255,.97);backdrop-filter:blur(20px);z-index:100;}
+  .h-inner{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;}
+  .logo{display:flex;align-items:center;gap:12px;}
+  .logo-hex{width:40px;height:40px;background:linear-gradient(135deg,#fde68a,#fed7aa);
+    border:1px solid var(--nba-orange);clip-path:polygon(50% 0%,100% 25%,100% 75%,50% 100%,0% 75%,0% 25%);
+    display:flex;align-items:center;justify-content:center;font-size:20px;}
+  .logo-text{font-weight:900;font-size:18px;letter-spacing:2px;color:var(--text);}
+  .logo-sub{font-family:'Share Tech Mono';font-size:9px;color:var(--muted);letter-spacing:3px;}
+  .hbar{display:flex;align-items:center;gap:14px;font-family:'Share Tech Mono';font-size:11px;flex-wrap:wrap;}
+  .back-link{color:var(--accent);text-decoration:none;font-family:'Share Tech Mono';font-size:11px;
+    letter-spacing:1px;padding:4px 10px;border:1px solid rgba(0,102,204,.3);
+    background:rgba(0,102,204,.06);transition:all .2s;
+    clip-path:polygon(6px 0%,100% 0%,calc(100% - 6px) 100%,0% 100%);}
+  .back-link:hover{background:#eff6ff;}
+  .back-link.active{background:#eff6ff;color:#1e40af;border-color:#3b82f6;}
+  .dot{width:8px;height:8px;border-radius:50%;display:inline-block;}
+  .dot.ok{background:var(--up);box-shadow:0 0 8px var(--up);animation:pulse 2s infinite;}
+  @keyframes pulse{50%{opacity:.4;}}
+  .last-updated-label{color:var(--muted);font-size:10px;letter-spacing:1px;}
+  .last-updated-label span{color:var(--accent);}
+
+  /* SECTION */
+  section{padding:20px 0;}
+  .section-title{font-size:11px;font-weight:700;letter-spacing:4px;text-transform:uppercase;
+    color:var(--accent);font-family:'Share Tech Mono';margin-bottom:16px;display:flex;align-items:center;gap:10px;}
+  .section-title::after{content:'';flex:1;height:1px;background:linear-gradient(90deg,var(--accent),transparent);}
+
+  /* REFRESH BAR */
+  .refresh-bar{display:flex;align-items:center;justify-content:space-between;padding:8px 0 4px;
+    font-family:'Share Tech Mono';font-size:10px;color:var(--muted);flex-wrap:wrap;gap:8px;}
+  .refresh-bar .status{display:flex;align-items:center;gap:6px;}
+  .refresh-bar .countdown{color:var(--accent);}
+  .refresh-btn{background:rgba(0,102,204,.1);border:1px solid rgba(0,102,204,.3);color:var(--accent);
+    font-family:'Share Tech Mono';font-size:10px;padding:4px 14px;cursor:pointer;letter-spacing:1px;
+    clip-path:polygon(6px 0%,100% 0%,calc(100% - 6px) 100%,0% 100%);transition:all .2s;}
+  .refresh-btn:hover{background:rgba(0,102,204,.2);box-shadow:var(--glow);}
+
+  /* GAME GRID */
+  .game-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin:4px 0 20px;}
+
+  /* GAME CARD */
+  .game-card{background:var(--surface);border:1px solid var(--border);padding:20px;
+    border-radius:8px;transition:all .3s;cursor:pointer;position:relative;overflow:hidden;
+    text-decoration:none;display:block;color:inherit;}
+  .game-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;
+    background:linear-gradient(90deg,transparent,rgba(201,83,28,.5),transparent);
+    opacity:0;transition:opacity .3s;}
+  .game-card:hover::before{opacity:1;}
+  .game-card:hover{border-color:#fdba74;transform:translateY(-3px);box-shadow:0 8px 25px rgba(0,0,0,.08);}
+
+  .game-status-row{display:flex;justify-content:space-between;align-items:center;margin-bottom:14px;}
+  .game-status{font-family:'Share Tech Mono';font-size:9px;font-weight:700;letter-spacing:2px;
+    text-transform:uppercase;padding:3px 8px;border-radius:3px;}
+  .game-status.scheduled{background:#eff6ff;color:#1d4ed8;border:1px solid #93c5fd;}
+  .game-status.live{background:#fef9c3;color:#854d0e;border:1px solid #fde047;animation:pulse 1.5s infinite;}
+  .game-status.final{background:#f1f5f9;color:var(--muted);border:1px solid var(--border);}
+  .game-time{font-family:'Share Tech Mono';font-size:10px;color:var(--muted);}
+
+  /* MATCHUP */
+  .matchup{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-bottom:14px;}
+  .team-side{flex:1;text-align:center;}
+  .team-name{font-size:13px;font-weight:700;line-height:1.3;color:var(--text);}
+  .team-record{font-family:'Share Tech Mono';font-size:10px;color:var(--muted);margin-top:2px;}
+  .vs-badge{font-family:'Share Tech Mono';font-size:11px;font-weight:700;color:var(--muted);
+    flex-shrink:0;padding:4px 6px;background:var(--bg);border-radius:4px;border:1px solid var(--border);}
+
+  /* PROB BOXES */
+  .prob-boxes{display:flex;align-items:center;gap:8px;margin-bottom:10px;}
+  .prob-box{flex:1;text-align:center;padding:10px 6px;border-radius:6px;border:2px solid var(--border);
+    transition:all .3s;}
+  .prob-box.winner{border-color:#6ee7b7;background:linear-gradient(135deg,#ecfdf5,#d1fae5);}
+  .prob-box.loser{border-color:var(--border);background:var(--bg);}
+  .prob-pct{font-family:'Share Tech Mono';font-size:20px;font-weight:700;line-height:1;}
+  .prob-box.winner .prob-pct{color:var(--up);}
+  .prob-box.loser .prob-pct{color:var(--muted);}
+  .prob-label{font-size:10px;font-weight:600;color:var(--muted);margin-top:3px;
+    white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+  .prob-box.winner .prob-label{color:var(--up);font-weight:700;}
+  .prob-box-vs{font-family:'Share Tech Mono';font-size:10px;color:var(--muted);flex-shrink:0;}
+
+  /* PROB BAR */
+  .prob-bar-wrap{margin:8px 0;}
+  .prob-bar{display:flex;height:24px;border-radius:4px;overflow:hidden;
+    font-family:'Share Tech Mono';font-size:10px;font-weight:700;line-height:24px;}
+  .prob-away{background:linear-gradient(90deg,rgba(220,38,38,.15),rgba(220,38,38,.08));
+    color:var(--down);text-align:left;padding:0 6px;min-width:32px;transition:width .6s;}
+  .prob-home{background:linear-gradient(90deg,rgba(5,150,105,.08),rgba(5,150,105,.2));
+    color:var(--up);text-align:right;padding:0 6px;min-width:32px;transition:width .6s;}
+
+  /* ELO ROW */
+  .elo-row{display:flex;justify-content:space-between;align-items:center;
+    font-family:'Share Tech Mono';font-size:10px;color:var(--muted);margin-top:8px;padding-top:8px;
+    border-top:1px solid var(--border);}
+  .elo-val{display:flex;align-items:center;gap:4px;}
+  .elo-num{color:var(--text);font-weight:700;}
+  .prediction-label{font-family:'Share Tech Mono';font-size:11px;font-weight:700;
+    text-align:center;padding:6px;margin-top:8px;border-radius:4px;letter-spacing:1px;
+    background:#ecfdf5;color:#065f46;border:1px solid #6ee7b7;}
+
+  /* ELO RANKINGS */
+  .elo-rankings{background:var(--surface);border:1px solid var(--border);border-radius:8px;
+    padding:20px;margin-bottom:4px;}
+  .elo-row-item{display:flex;align-items:center;gap:10px;padding:6px 0;
+    border-bottom:1px solid rgba(226,232,240,.5);}
+  .elo-row-item:last-child{border-bottom:none;}
+  .elo-rank{font-family:'Share Tech Mono';font-size:11px;color:var(--muted);width:22px;
+    text-align:right;flex-shrink:0;}
+  .elo-rank.top3{color:var(--gold);font-weight:700;}
+  .elo-team{font-size:13px;font-weight:600;flex:1;min-width:0;
+    white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+  .elo-score{font-family:'Share Tech Mono';font-size:12px;font-weight:700;color:var(--accent);
+    width:38px;text-align:right;flex-shrink:0;}
+  .elo-bar-bg{flex:1.2;height:8px;background:var(--bg);border-radius:4px;overflow:hidden;
+    border:1px solid var(--border);}
+  .elo-bar-fill{height:100%;border-radius:4px;transition:width .8s ease;
+    background:linear-gradient(90deg,#3b82f6,#06b6d4);}
+  .elo-bar-fill.top3{background:linear-gradient(90deg,var(--gold),#f59e0b);}
+
+  /* TW LOTTERY CARDS */
+  .tw-lottery-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(380px,1fr));gap:16px;margin:4px 0;}
+  .tw-card{background:var(--surface);border:1px solid var(--border);padding:0;border-radius:10px;
+    overflow:hidden;transition:all .3s;}
+  .tw-card:hover{box-shadow:0 8px 25px rgba(0,0,0,.08);transform:translateY(-2px);}
+  .tw-card-header{padding:14px 18px;display:flex;justify-content:space-between;align-items:center;
+    border-bottom:1px solid var(--border);}
+  .tw-card-header.strong{background:linear-gradient(135deg,#ecfdf5,#f0fdf4);}
+  .tw-card-header.good{background:linear-gradient(135deg,#eff6ff,#f0f9ff);}
+  .tw-card-header.risky{background:linear-gradient(135deg,#fefce8,#fffbeb);}
+  .tw-matchup{font-weight:800;font-size:15px;color:var(--text);}
+  .tw-stars{font-size:14px;letter-spacing:2px;}
+  .tw-card-body{padding:16px 18px;}
+  .tw-row{display:flex;justify-content:space-between;align-items:center;padding:6px 0;
+    border-bottom:1px solid #f1f5f9;font-family:'Share Tech Mono';font-size:12px;}
+  .tw-row:last-child{border-bottom:none;}
+  .tw-label{color:var(--muted);font-size:10px;letter-spacing:1px;text-transform:uppercase;}
+  .tw-val{font-weight:700;font-size:13px;}
+  .tw-model-bar{height:32px;border-radius:6px;overflow:hidden;display:flex;margin:10px 0;
+    font-family:'Share Tech Mono';font-size:11px;font-weight:700;line-height:32px;}
+  .tw-bar-home{background:linear-gradient(90deg,#059669,#10b981);color:#fff;text-align:center;min-width:30px;
+    transition:width .5s;}
+  .tw-bar-away{background:linear-gradient(90deg,#e2e8f0,#cbd5e1);color:#475569;text-align:center;min-width:30px;
+    transition:width .5s;}
+  .tw-verdict{margin-top:12px;padding:10px 14px;border-radius:8px;font-family:'Share Tech Mono';font-size:12px;}
+  .tw-verdict.buy{background:#ecfdf5;border:1px solid #6ee7b7;color:#065f46;}
+  .tw-verdict.caution{background:#fefce8;border:1px solid #fde047;color:#854d0e;}
+  .tw-verdict.skip{background:#f8fafc;border:1px solid #e2e8f0;color:#94a3b8;}
+  .tw-verdict b{font-size:14px;}
+  .tw-edge-badge{display:inline-block;padding:2px 8px;border-radius:3px;font-family:'Share Tech Mono';
+    font-size:10px;font-weight:700;letter-spacing:1px;margin-left:6px;}
+  .tw-edge-badge.huge{background:#fef2f2;color:#991b1b;border:1px solid #fca5a5;}
+  .tw-edge-badge.big{background:#ecfdf5;color:#065f46;border:1px solid #6ee7b7;}
+  .tw-edge-badge.mid{background:#eff6ff;color:#1e40af;border:1px solid #93c5fd;}
+  .tw-edge-badge.small{background:#f8fafc;color:#64748b;border:1px solid #cbd5e1;}
+
+  /* EDGE CARDS */
+  .edge-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin:4px 0;}
+  .edge-card{background:var(--surface);border:1px solid var(--border);padding:18px;
+    border-radius:8px;transition:all .3s;}
+  .edge-card:hover{transform:translateY(-2px);box-shadow:var(--glow);}
+  .edge-card.strong{border-left:3px solid var(--down);}
+  .edge-card.moderate{border-left:3px solid var(--warn);}
+  .edge-card.small{border-left:3px solid var(--muted);}
+
+  .edge-header{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:12px;gap:8px;}
+  .edge-question{font-size:14px;font-weight:700;line-height:1.4;flex:1;}
+  .edge-badge{font-family:'Share Tech Mono';font-size:8px;font-weight:700;letter-spacing:1px;
+    padding:3px 7px;border-radius:3px;text-transform:uppercase;flex-shrink:0;white-space:nowrap;}
+  .edge-badge.strong{background:#fef2f2;color:#991b1b;border:1px solid #fca5a5;}
+  .edge-badge.moderate{background:#fff7ed;color:#9a3412;border:1px solid #fdba74;}
+  .edge-badge.small{background:#f8fafc;color:var(--muted);border:1px solid var(--border);}
+
+  .edge-probs{display:flex;justify-content:space-between;margin-bottom:10px;gap:8px;}
+  .edge-prob-item{flex:1;text-align:center;}
+  .edge-prob-label{font-family:'Share Tech Mono';font-size:9px;color:var(--muted);
+    letter-spacing:1px;text-transform:uppercase;margin-bottom:3px;}
+  .edge-prob-val{font-family:'Share Tech Mono';font-size:16px;font-weight:700;}
+  .edge-prob-val.model{color:var(--accent);}
+  .edge-prob-val.poly{color:var(--purple);}
+
+  .edge-comparison-bar{margin:8px 0;position:relative;}
+  .edge-bar-track{height:8px;background:var(--bg);border-radius:4px;overflow:visible;
+    border:1px solid var(--border);position:relative;}
+  .edge-bar-model{position:absolute;top:-1px;width:2px;height:10px;background:var(--accent);
+    border-radius:1px;transition:left .6s;}
+  .edge-bar-poly{position:absolute;top:-1px;width:2px;height:10px;background:var(--purple);
+    border-radius:1px;transition:left .6s;}
+  .edge-bar-range{position:absolute;top:0;height:8px;opacity:.3;transition:all .6s;}
+  .edge-bar-range.yes-edge{background:var(--up);}
+  .edge-bar-range.no-edge{background:var(--down);}
+  .edge-bar-labels{display:flex;justify-content:space-between;
+    font-family:'Share Tech Mono';font-size:9px;color:var(--muted);margin-top:4px;}
+  .edge-bar-labels .model-lbl{color:var(--accent);}
+  .edge-bar-labels .poly-lbl{color:var(--purple);}
+
+  .edge-footer{display:flex;justify-content:space-between;align-items:center;
+    margin-top:10px;padding-top:8px;border-top:1px solid var(--border);}
+  .edge-amount{font-family:'Share Tech Mono';font-size:11px;font-weight:700;}
+  .edge-amount .pct{color:var(--danger);font-size:14px;}
+  .edge-amount .lbl{color:var(--muted);font-size:9px;}
+  .bet-chip{font-family:'Share Tech Mono';font-size:11px;font-weight:700;
+    padding:4px 12px;border-radius:3px;letter-spacing:1px;
+    clip-path:polygon(5px 0%,100% 0%,calc(100% - 5px) 100%,0% 100%);}
+  .bet-chip.yes{background:#ecfdf5;color:#065f46;border:1px solid #6ee7b7;}
+  .bet-chip.no{background:#fef2f2;color:#991b1b;border:1px solid #fca5a5;}
+  .vol-label{font-family:'Share Tech Mono';font-size:9px;color:var(--muted);}
+
+  /* MODEL INFO CARD */
+  .model-info{background:var(--surface);border:1px solid var(--border);border-radius:8px;
+    padding:20px;display:grid;grid-template-columns:repeat(3,1fr);gap:16px;}
+  .model-item .mi-label{font-family:'Share Tech Mono';font-size:9px;color:var(--muted);
+    letter-spacing:2px;text-transform:uppercase;margin-bottom:5px;}
+  .model-item .mi-val{font-family:'Share Tech Mono';font-size:13px;font-weight:700;color:var(--text);}
+  .model-item .mi-sub{font-size:11px;color:var(--muted);margin-top:3px;line-height:1.5;}
+  .feature-pill{display:inline-block;background:#eff6ff;color:#1e40af;border:1px solid #93c5fd;
+    font-family:'Share Tech Mono';font-size:9px;padding:2px 7px;border-radius:2px;
+    margin:2px 2px 0 0;}
+
+  /* SKELETON */
+  .skeleton-card{background:var(--surface);border:1px solid var(--border);padding:20px;
+    border-radius:8px;animation:shimmer 1.4s infinite;}
+  .skel-line{height:12px;background:rgba(0,102,204,.06);border-radius:3px;margin-bottom:10px;}
+  .skel-line.short{width:40%;}
+  .skel-line.full{width:100%;}
+  .skel-line.med{width:70%;}
+  .skel-bar{height:24px;background:rgba(0,102,204,.06);border-radius:4px;margin:10px 0;}
+  @keyframes shimmer{0%,100%{opacity:.5;}50%{opacity:1;}}
+
+  /* ERROR / EMPTY */
+  .error-state{padding:20px;font-family:'Share Tech Mono';font-size:11px;
+    color:var(--down);background:rgba(220,38,38,.04);border-left:3px solid var(--down);
+    border-radius:4px;grid-column:1/-1;letter-spacing:1px;}
+  .empty-state{grid-column:1/-1;padding:48px;text-align:center;
+    font-family:'Share Tech Mono';color:var(--muted);font-size:12px;letter-spacing:2px;}
+  .empty-state .big{font-size:36px;margin-bottom:12px;opacity:.3;}
+
+  /* LOADING */
+  .loading-spinner{display:inline-block;width:18px;height:18px;border:2px solid var(--border);
+    border-top-color:var(--accent);border-radius:50%;animation:spin .8s linear infinite;
+    vertical-align:middle;margin-right:8px;}
+  @keyframes spin{to{transform:rotate(360deg);}}
+
+  /* FOOTER */
+  footer{border-top:1px solid var(--border);padding:20px 0;text-align:center;
+    font-size:10px;font-family:'Share Tech Mono';color:var(--muted);letter-spacing:2px;}
+  footer a{color:var(--accent);text-decoration:none;}
+
+  /* RESPONSIVE */
+  @media(max-width:1024px){
+    .game-grid,.edge-grid,.tw-lottery-grid{grid-template-columns:repeat(2,1fr);}
+    .model-info{grid-template-columns:repeat(2,1fr);}}
+  @media(max-width:640px){
+    .game-grid,.edge-grid,.tw-lottery-grid{grid-template-columns:1fr;}
+    .model-info{grid-template-columns:1fr;}
+    .h-inner{flex-direction:column;align-items:flex-start;}}
+
+  /* LIVE SCORE CARDS */
+  .score-card{background:var(--surface);border:1px solid var(--border);border-radius:8px;
+    padding:14px 18px;min-width:260px;flex:1;max-width:320px;transition:all .3s;}
+  .score-card:hover{box-shadow:0 4px 12px rgba(0,0,0,.06);}
+  .score-card.live{border-left:3px solid #dc2626;animation:livePulse 2s infinite;}
+  .score-card.final{border-left:3px solid var(--up);}
+  .score-card.scheduled{border-left:3px solid var(--border);}
+  @keyframes livePulse{0%,100%{border-left-color:#dc2626;}50%{border-left-color:#fca5a5;}}
+  .score-teams{display:flex;justify-content:space-between;align-items:center;gap:10px;}
+  .score-team{text-align:center;flex:1;}
+  .score-team-name{font-family:'Share Tech Mono';font-size:12px;font-weight:700;color:var(--text);}
+  .score-team-score{font-family:'Share Tech Mono';font-size:28px;font-weight:900;margin:4px 0;}
+  .score-team-score.winning{color:var(--up);}
+  .score-team-score.losing{color:var(--muted);}
+  .score-vs{font-family:'Share Tech Mono';font-size:10px;color:var(--muted);padding:0 4px;}
+  .score-status{font-family:'Share Tech Mono';font-size:10px;text-align:center;margin-top:6px;
+    padding:3px 8px;border-radius:3px;}
+  .score-status.live-status{background:#fef2f2;color:#dc2626;font-weight:700;}
+  .score-status.final-status{background:#ecfdf5;color:#065f46;}
+  .score-status.sched-status{background:#f8fafc;color:#64748b;}
+  .score-record{font-family:'Share Tech Mono';font-size:9px;color:var(--muted);}
+</style>
+</head>
+<body>
+<nav id="global-nav" style="display:flex;gap:0;background:#0f172a;border-bottom:1px solid #334155;position:sticky;top:0;z-index:200;overflow-x:auto;-webkit-overflow-scrolling:touch;">
+<a href="/" class="nav-tab" data-page="trading" style="padding:10px 18px;font-family:'JetBrains Mono','Share Tech Mono',monospace;font-size:12px;font-weight:700;text-decoration:none;white-space:nowrap;border-bottom:2px solid transparent;transition:all .2s;color:#64748b;">Trading</a>
+<a href="/polymarket" class="nav-tab" data-page="polymarket" style="padding:10px 18px;font-family:'JetBrains Mono','Share Tech Mono',monospace;font-size:12px;font-weight:700;text-decoration:none;white-space:nowrap;border-bottom:2px solid transparent;transition:all .2s;color:#64748b;">Polymarket</a>
+<a href="/nba" class="nav-tab" data-page="nba" style="padding:10px 18px;font-family:'JetBrains Mono','Share Tech Mono',monospace;font-size:12px;font-weight:700;text-decoration:none;white-space:nowrap;border-bottom:2px solid transparent;transition:all .2s;color:#64748b;">NBA</a>
+<a href="/btc" class="nav-tab" data-page="btc" style="padding:10px 18px;font-family:'JetBrains Mono','Share Tech Mono',monospace;font-size:12px;font-weight:700;text-decoration:none;white-space:nowrap;border-bottom:2px solid transparent;transition:all .2s;color:#64748b;">BTC</a>
+<a href="/eth" class="nav-tab" data-page="eth" style="padding:10px 18px;font-family:'JetBrains Mono','Share Tech Mono',monospace;font-size:12px;font-weight:700;text-decoration:none;white-space:nowrap;border-bottom:2px solid transparent;transition:all .2s;color:#64748b;">ETH</a>
+</nav>
+<script>document.querySelectorAll('.nav-tab').forEach(function(t){var p=location.pathname;var d=t.dataset.page;var active=(p==='/'&&d==='trading')||(p==='/'+d);if(active){t.style.borderBottomColor='#6366f1';t.style.color='#e2e8f0';t.style.background='rgba(99,102,241,0.1)'}});</script>
+
+<header>
+  <div class="wrap">
+    <div class="h-inner">
+      <div class="logo">
+        <div class="logo-hex">🏀</div>
+        <div>
+          <div class="logo-text">NBA PREDICTIONS</div>
+          <div class="logo-sub">ELO + XGBOOST MODEL VS POLYMARKET</div>
+        </div>
+      </div>
+      <div class="hbar">
+        <a href="/" class="back-link">&#8592; Trading Dashboard</a>
+        <a href="/polymarket" class="back-link">Polymarket</a>
+        <span class="back-link active">NBA</span>
+        <span class="dot ok"></span>
+        <span class="last-updated-label">UPDATED <span id="timestamp">—</span></span>
+      </div>
+    </div>
+  </div>
+</header>
+
+<div class="wrap">
+
+  <!-- REFRESH BAR -->
+  <div class="refresh-bar">
+    <div class="status">
+      <span class="dot ok"></span>
+      <span>AUTO-REFRESH IN <span class="countdown" id="countdown">5:00</span></span>
+    </div>
+    <button class="refresh-btn" onclick="loadNBA()">&#8635; REFRESH</button>
+  </div>
+
+  <!-- LIVE SCOREBOARD -->
+  <section>
+    <div class="section-title">🔴 LIVE SCOREBOARD
+      <span style="font-size:10px;color:var(--muted);font-weight:400;margin-left:12px;" id="score-status">Loading...</span>
+    </div>
+    <div id="live-scores" style="display:flex;flex-wrap:wrap;gap:12px;margin-bottom:8px;">
+      <div style="color:var(--muted);font-family:'Share Tech Mono';font-size:11px;padding:12px;">Fetching scores...</div>
+    </div>
+  </section>
+
+  <!-- SECTION 1: TODAY'S GAMES -->
+  <section>
+    <div class="section-title">Today's Games</div>
+    <div class="game-grid" id="games-grid">
+      <!-- skeleton -->
+      <div class="skeleton-card">
+        <div class="skel-line short"></div>
+        <div class="skel-line full"></div>
+        <div class="skel-bar"></div>
+        <div class="skel-line med"></div>
+      </div>
+      <div class="skeleton-card">
+        <div class="skel-line short"></div>
+        <div class="skel-line full"></div>
+        <div class="skel-bar"></div>
+        <div class="skel-line med"></div>
+      </div>
+      <div class="skeleton-card">
+        <div class="skel-line short"></div>
+        <div class="skel-line full"></div>
+        <div class="skel-bar"></div>
+        <div class="skel-line med"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION 2: ELO POWER RANKINGS -->
+  <section>
+    <div class="section-title">Elo Power Rankings — Top 15</div>
+    <div class="elo-rankings" id="elo-rankings">
+      <div style="text-align:center;padding:20px;font-family:'Share Tech Mono';color:var(--muted);font-size:11px;">
+        <span class="loading-spinner"></span>Loading rankings...
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION 3: TAIWAN SPORTS LOTTERY vs MODEL -->
+  <section>
+    <div class="section-title">🇹🇼 台灣運彩盤口 vs 模型預測 — 下注建議</div>
+    <div class="tw-lottery-grid" id="tw-lottery-grid">
+      <div style="text-align:center;padding:40px;font-family:'Share Tech Mono';color:var(--muted);">Loading...</div>
+    </div>
+  </section>
+
+  <!-- SECTION 4: POLYMARKET EDGE OPPORTUNITIES -->
+  <section>
+    <div class="section-title">🎯 NBA Betting Guide — Model vs Polymarket (Kelly Criterion)</div>
+    <div class="edge-grid" id="edges-grid">
+      <div class="skeleton-card">
+        <div class="skel-line med"></div>
+        <div class="skel-bar"></div>
+        <div class="skel-line short"></div>
+      </div>
+      <div class="skeleton-card">
+        <div class="skel-line med"></div>
+        <div class="skel-bar"></div>
+        <div class="skel-line short"></div>
+      </div>
+      <div class="skeleton-card">
+        <div class="skel-line med"></div>
+        <div class="skel-bar"></div>
+        <div class="skel-line short"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION 4: BACKTEST RESULTS -->
+  <section>
+    <div class="section-title">📊 回測績效 — 模型歷史驗證 (每日更新)</div>
+
+    <!-- KPI row -->
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:12px;margin-bottom:16px;">
+      <div class="kpi"><div class="kpi-label">全部勝率</div><div class="kpi-val" id="bt-all-wr">—</div>
+        <div style="font-family:'Share Tech Mono';font-size:10px;color:var(--muted);" id="bt-all-count">0 games</div></div>
+      <div class="kpi"><div class="kpi-label">高信心 >70%</div><div class="kpi-val" id="bt-strong-wr" style="color:var(--accent);">—</div>
+        <div style="font-family:'Share Tech Mono';font-size:10px;color:var(--muted);" id="bt-strong-count">0 games</div></div>
+      <div class="kpi"><div class="kpi-label">超高信心 >85%</div><div class="kpi-val" id="bt-vstrong-wr" style="color:var(--up);">—</div>
+        <div style="font-family:'Share Tech Mono';font-size:10px;color:var(--muted);" id="bt-vstrong-count">0 games</div></div>
+      <div class="kpi"><div class="kpi-label">三星推薦</div><div class="kpi-val" id="bt-star3-wr" style="color:var(--gold);">—</div>
+        <div style="font-family:'Share Tech Mono';font-size:10px;color:var(--muted);" id="bt-star3-count">0 games</div></div>
+    </div>
+
+    <!-- Recent results table -->
+    <div style="background:var(--surface);border:1px solid var(--border);border-radius:8px;overflow:hidden;">
+      <div style="padding:12px 18px;border-bottom:1px solid var(--border);display:flex;justify-content:space-between;align-items:center;">
+        <span style="font-family:'Share Tech Mono';font-size:11px;font-weight:700;letter-spacing:2px;color:var(--accent);">
+          RECENT PREDICTIONS</span>
+        <span style="font-family:'Share Tech Mono';font-size:10px;color:var(--muted);" id="bt-last-update">—</span>
+      </div>
+      <div style="overflow-x:auto;">
+        <table style="width:100%;border-collapse:collapse;" id="bt-table">
+          <thead>
+            <tr style="font-family:'Share Tech Mono';font-size:9px;color:var(--muted);letter-spacing:1px;">
+              <th style="padding:8px 12px;text-align:left;">DATE</th>
+              <th style="padding:8px 12px;text-align:left;">MATCHUP</th>
+              <th style="padding:8px 12px;text-align:center;">CONF</th>
+              <th style="padding:8px 12px;text-align:left;">PICK</th>
+              <th style="padding:8px 12px;text-align:left;">WINNER</th>
+              <th style="padding:8px 12px;text-align:center;">SCORE</th>
+              <th style="padding:8px 12px;text-align:center;">RESULT</th>
+            </tr>
+          </thead>
+          <tbody id="bt-body">
+            <tr><td colspan="7" style="text-align:center;padding:20px;color:var(--muted);font-family:'Share Tech Mono';">Loading...</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION 5: MODEL INFO -->
+  <section>
+    <div class="section-title">Model Info</div>
+    <div class="model-info">
+      <div class="model-item">
+        <div class="mi-label">Model Type</div>
+        <div class="mi-val">Elo + XGBoost</div>
+        <div class="mi-sub">Ensemble: Elo rating system combined with gradient-boosted trees</div>
+      </div>
+      <div class="model-item">
+        <div class="mi-label">Training Data</div>
+        <div class="mi-val">402 Games</div>
+        <div class="mi-sub">60-day rolling window, updated daily</div>
+      </div>
+      <div class="model-item">
+        <div class="mi-label">Features Used</div>
+        <div class="mi-val" style="margin-bottom:6px;">6 Features</div>
+        <div>
+          <span class="feature-pill">Elo Diff</span>
+          <span class="feature-pill">Win %</span>
+          <span class="feature-pill">PPG</span>
+          <span class="feature-pill">OPPG</span>
+          <span class="feature-pill">Streak</span>
+          <span class="feature-pill">Home/Away</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</div>
+
+<footer>
+  <div class="wrap">
+    NBA PREDICTIONS &nbsp;|&nbsp; Elo + XGBoost Model &nbsp;|&nbsp;
+    <a href="/">Trading Dashboard</a> &nbsp;|&nbsp;
+    <a href="/polymarket">Polymarket</a> &nbsp;|&nbsp;
+    Data: public NBA stats &amp; Polymarket API
+  </div>
+</footer>
+
+<script>
+// ─── State ────────────────────────────────────────────────────────
+let countdownSec = 300;
+let countdownTimer = null;
+
+// ─── Helpers ──────────────────────────────────────────────────────
+function fmt$M(n) {
+  if (n >= 1e6) return '$' + (n / 1e6).toFixed(1) + 'M';
+  if (n >= 1e3) return '$' + (n / 1e3).toFixed(0) + 'K';
+  return '$' + n;
+}
+
+function fmtTime() {
+  const d = new Date();
+  return d.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit', second: '2-digit' });
+}
+
+function updateTimestamp() {
+  const el = document.getElementById('timestamp');
+  if (el) el.textContent = fmtTime();
+}
+
+function startCountdown() {
+  if (countdownTimer) clearInterval(countdownTimer);
+  countdownSec = 300;
+  countdownTimer = setInterval(() => {
+    countdownSec--;
+    const m = Math.floor(countdownSec / 60);
+    const s = countdownSec % 60;
+    const el = document.getElementById('countdown');
+    if (el) el.textContent = m + ':' + String(s).padStart(2, '0');
+    if (countdownSec <= 0) {
+      clearInterval(countdownTimer);
+      loadNBA();
+    }
+  }, 1000);
+}
+
+// ─── Render: Games ────────────────────────────────────────────────
+// Store live scores globally for game card rendering
+let liveScoreMap = {};
+
+function updateLiveScoreMap(espnData) {
+  if (!espnData || !espnData.events) return;
+  espnData.events.forEach(ev => {
+    const comp = ev.competitions?.[0] || {};
+    const teams = comp.competitors || [];
+    const status = ev.status?.type || {};
+    const away = teams.find(t => t.homeAway === 'away') || {};
+    const home = teams.find(t => t.homeAway === 'home') || {};
+    const key = (home.team?.displayName || '') + '|' + (away.team?.displayName || '');
+    liveScoreMap[key] = {
+      homeScore: parseInt(home.score) || 0,
+      awayScore: parseInt(away.score) || 0,
+      state: status.name || '',
+      completed: status.completed || false,
+      detail: status.detail || '',
+      period: ev.status?.period || 0,
+      clock: ev.status?.displayClock || '',
+    };
+  });
+}
+
+function renderGames(games) {
+  const grid = document.getElementById('games-grid');
+  if (!games || games.length === 0) {
+    grid.innerHTML = `<div class="empty-state"><div class="big">🏀</div>No games scheduled today.</div>`;
+    return;
+  }
+  grid.innerHTML = games.map(g => {
+    const homeWin = g.home_prob > g.away_prob;
+    const winnerName = homeWin ? g.home : g.away;
+    const polyQuery = encodeURIComponent(g.away + ' ' + g.home);
+    const polyURL = `https://polymarket.com/markets?_c=${polyQuery}`;
+
+    // Check live/final score
+    const scoreKey = g.home + '|' + g.away;
+    const score = liveScoreMap[scoreKey];
+    const hasScore = score && (score.homeScore > 0 || score.awayScore > 0);
+    const isFinal = score && (score.completed || score.state === 'STATUS_FINAL');
+    const isLive = score && score.state === 'STATUS_IN_PROGRESS';
+
+    let statusClass = 'scheduled';
+    let statusIcon = '🏀 SCHEDULED';
+    if (isFinal) { statusClass = 'final'; statusIcon = '✓ FINAL'; }
+    else if (isLive) { statusClass = 'live'; statusIcon = '🔴 Q' + score.period + ' ' + score.clock; }
+
+    // Determine actual winner (if game finished or in progress)
+    let resultHTML = '';
+    let cardBorder = '';
+    if (hasScore) {
+      const actualHomeWin = score.homeScore > score.awayScore;
+      const predictCorrect = homeWin === actualHomeWin;
+      const actualMargin = Math.abs(score.homeScore - score.awayScore);
+      const actualWinner = actualHomeWin ? abbrevTeam(g.home) : abbrevTeam(g.away);
+
+      if (isFinal) {
+        if (predictCorrect) {
+          resultHTML = `<div style="text-align:center;padding:8px;margin-top:8px;border-radius:6px;
+            background:#ecfdf5;border:1px solid #6ee7b7;font-family:'Share Tech Mono';font-size:12px;color:#065f46;">
+            ✅ 預測正確！ ${actualWinner} WIN ${score.awayScore}-${score.homeScore} (差${actualMargin}分)
+          </div>`;
+          cardBorder = 'border-left:4px solid #059669;';
+        } else {
+          resultHTML = `<div style="text-align:center;padding:8px;margin-top:8px;border-radius:6px;
+            background:#fef2f2;border:1px solid #fca5a5;font-family:'Share Tech Mono';font-size:12px;color:#991b1b;">
+            ❌ 預測錯誤 — 實際: ${actualWinner} WIN ${score.awayScore}-${score.homeScore} (差${actualMargin}分)
+          </div>`;
+          cardBorder = 'border-left:4px solid #dc2626;';
+        }
+      } else if (isLive) {
+        const onTrack = homeWin === actualHomeWin;
+        resultHTML = `<div style="text-align:center;padding:6px;margin-top:8px;border-radius:6px;
+          background:${onTrack ? '#f0fdf4' : '#fff7ed'};border:1px solid ${onTrack ? '#bbf7d0' : '#fed7aa'};
+          font-family:'Share Tech Mono';font-size:11px;color:${onTrack ? '#166534' : '#9a3412'};">
+          ${onTrack ? '🟢' : '🟡'} LIVE: ${score.awayScore}-${score.homeScore} (${onTrack ? '預測中' : '預測落後'})
+        </div>`;
+        cardBorder = onTrack ? 'border-left:4px solid #059669;' : 'border-left:4px solid #d97706;';
+      }
+    }
+
+    // away is always shown on left per NBA convention
+    const awayBoxClass = !homeWin ? 'winner' : 'loser';
+    const homeBoxClass = homeWin ? 'winner' : 'loser';
+
+    return `
+      <a class="game-card" href="${polyURL}" target="_blank" rel="noopener" style="${cardBorder}">
+        <div class="game-status-row">
+          <span class="game-status ${statusClass}">${statusIcon}</span>
+          ${hasScore ? `<span style="font-family:'Share Tech Mono';font-size:14px;font-weight:900;color:var(--text);">${score.awayScore} - ${score.homeScore}</span>` : ''}
+        </div>
+        <div class="matchup">
+          <div class="team-side">
+            <div class="team-name">${g.away}</div>
+            <div class="team-record">${g.away_record || ''}</div>
+          </div>
+          <div class="vs-badge">@</div>
+          <div class="team-side">
+            <div class="team-name">${g.home}</div>
+            <div class="team-record">${g.home_record || ''}</div>
+          </div>
+        </div>
+
+        <div class="prob-boxes">
+          <div class="prob-box ${awayBoxClass}">
+            <div class="prob-pct">${g.away_prob.toFixed(1)}%</div>
+            <div class="prob-label">${abbrevTeam(g.away)}</div>
+          </div>
+          <div class="prob-box-vs">VS</div>
+          <div class="prob-box ${homeBoxClass}">
+            <div class="prob-pct">${g.home_prob.toFixed(1)}%</div>
+            <div class="prob-label">${abbrevTeam(g.home)}</div>
+          </div>
+        </div>
+
+        <div class="prob-bar-wrap">
+          <div class="prob-bar">
+            <div class="prob-away" style="width:${g.away_prob}%">${g.away_prob >= 15 ? g.away_prob.toFixed(0) + '%' : ''}</div>
+            <div class="prob-home" style="width:${g.home_prob}%">${g.home_prob >= 15 ? g.home_prob.toFixed(0) + '%' : ''}</div>
+          </div>
+        </div>
+
+        <div class="elo-row">
+          <div class="elo-val"><span>Elo:</span><span class="elo-num">${g.away_elo || '—'}</span></div>
+          <div style="font-size:10px;color:var(--muted);">★ Elo Rating</div>
+          <div class="elo-val"><span>Elo:</span><span class="elo-num">${g.home_elo || '—'}</span></div>
+        </div>
+
+        <div class="prediction-label">
+          預測 ${winnerName.split(' ').pop().toUpperCase()} 勝出 +${Math.abs(g.pred_spread || 0).toFixed(1)} pts
+        </div>
+        ${g.pred_total ? `
+        <div style="display:flex;justify-content:space-between;align-items:center;padding:4px 8px;margin-top:4px;
+          border-radius:4px;background:#eff6ff;border:1px solid #93c5fd;font-family:'Share Tech Mono';font-size:10px;">
+          <span style="color:#1e40af;">預測總分: <b style="font-size:13px;">${g.pred_total.toFixed(1)}</b></span>
+          <span style="color:#64748b;">${g.away_expected ? abbrevTeam(g.away) + ' ' + g.away_expected.toFixed(0) + ' — ' + abbrevTeam(g.home) + ' ' + g.home_expected.toFixed(0) : ''}</span>
+        </div>` : ''}
+        ${resultHTML}
+      </a>
+    `;
+  }).join('');
+}
+
+function abbrevTeam(name) {
+  // Return last word (city removed) or first 10 chars
+  const parts = name.split(' ');
+  return parts.length > 1 ? parts[parts.length - 1] : name.substring(0, 10);
+}
+
+// ─── Render: Elo Rankings ─────────────────────────────────────────
+function renderEloRankings(eloTeams) {
+  const container = document.getElementById('elo-rankings');
+  if (!eloTeams || Object.keys(eloTeams).length === 0) {
+    container.innerHTML = `<div class="empty-state"><div class="big">📊</div>No ranking data.</div>`;
+    return;
+  }
+  const sorted = Object.entries(eloTeams)
+    .sort(([,a],[,b]) => b - a)
+    .slice(0, 15);
+  const maxElo = sorted[0][1];
+  const minElo = sorted[sorted.length - 1][1];
+  const range = maxElo - minElo || 1;
+
+  container.innerHTML = sorted.map(([team, elo], i) => {
+    const rank = i + 1;
+    const rankClass = rank <= 3 ? 'top3' : '';
+    const fillClass = rank <= 3 ? 'top3' : '';
+    const barPct = ((elo - minElo) / range * 70 + 30).toFixed(1); // 30–100% range for visual
+    return `
+      <div class="elo-row-item">
+        <span class="elo-rank ${rankClass}">${rank}</span>
+        <span class="elo-team">${team}</span>
+        <span class="elo-score">${elo}</span>
+        <div class="elo-bar-bg">
+          <div class="elo-bar-fill ${fillClass}" style="width:${barPct}%"></div>
+        </div>
+      </div>
+    `;
+  }).join('');
+}
+
+// ─── Render: Edge Cards ───────────────────────────────────────────
+function renderEdges(edges) {
+  const grid = document.getElementById('edges-grid');
+  if (!edges || edges.length === 0) {
+    grid.innerHTML = `<div class="empty-state"><div class="big">📈</div>No significant edges found today.</div>`;
+    return;
+  }
+  // Sort: actionable (has liquidity + kelly) first, then by edge size
+  edges.sort((a, b) => {
+    const aScore = (a.liquidity > 1000 ? 1000 : 0) + (a.kelly_pct > 0 ? 500 : 0) + a.edge;
+    const bScore = (b.liquidity > 1000 ? 1000 : 0) + (b.kelly_pct > 0 ? 500 : 0) + b.edge;
+    return bScore - aScore;
+  });
+  grid.innerHTML = edges.map(e => {
+    const edgeAbs = Math.abs(e.edge);
+    let tier = 'small';
+    let tierLabel = 'SMALL EDGE';
+    if (edgeAbs > 20) { tier = 'strong'; tierLabel = 'STRONG EDGE'; }
+    else if (edgeAbs >= 10) { tier = 'moderate'; tierLabel = 'MODERATE EDGE'; }
+
+    const betChipClass = e.bet === 'YES' ? 'yes' : 'no';
+
+    // Bar: model marker and poly marker on 0–100 track
+    const modelLeft = e.model_prob.toFixed(1);
+    const polyLeft = e.poly_prob.toFixed(1);
+    const rangeLeft = Math.min(e.model_prob, e.poly_prob);
+    const rangeWidth = Math.abs(e.model_prob - e.poly_prob);
+    const rangeClass = e.bet === 'YES' ? 'yes-edge' : 'no-edge';
+
+    return `
+      <div class="edge-card ${tier}">
+        <div class="edge-header">
+          <div class="edge-question">${e.question}</div>
+          <span class="edge-badge ${tier}">${tierLabel}</span>
+        </div>
+        ${e.pred_winner ? `
+        <div style="text-align:center;padding:6px 0;margin:4px 0;border-radius:6px;
+          background:#ecfdf5;border:1px solid #6ee7b7;
+          font-family:'Share Tech Mono';font-size:13px;font-weight:700;color:#065f46;">
+          預測 ${e.pred_winner.split(' ').pop()} 勝出 +${e.pred_margin.toFixed(1)} pts
+        </div>` : ''}
+
+        <div class="edge-probs">
+          <div class="edge-prob-item">
+            <div class="edge-prob-label">Model</div>
+            <div class="edge-prob-val model">${e.model_prob.toFixed(1)}%</div>
+          </div>
+          <div class="edge-prob-item" style="flex:0;align-self:center;
+            font-family:'Share Tech Mono';font-size:16px;color:var(--muted);padding:0 4px;">→</div>
+          <div class="edge-prob-item">
+            <div class="edge-prob-label">Polymarket</div>
+            <div class="edge-prob-val poly">${e.poly_prob.toFixed(1)}%</div>
+          </div>
+        </div>
+
+        <div class="edge-comparison-bar">
+          <div class="edge-bar-track">
+            <div class="edge-bar-range ${rangeClass}"
+              style="left:${rangeLeft}%;width:${rangeWidth}%"></div>
+            <div class="edge-bar-model" style="left:${modelLeft}%"></div>
+            <div class="edge-bar-poly" style="left:${polyLeft}%"></div>
+          </div>
+          <div class="edge-bar-labels">
+            <span class="model-lbl">■ Model</span>
+            <span class="poly-lbl">■ Polymarket</span>
+          </div>
+        </div>
+
+        <div class="edge-footer">
+          <div>
+            <div class="edge-amount">
+              <span class="pct">${edgeAbs.toFixed(1)}%</span>
+              <span class="lbl"> EDGE</span>
+            </div>
+            <div class="vol-label">Vol: ${fmt$M(e.volume || 0)} · Liq: ${fmt$M(e.liquidity || 0)}</div>
+          </div>
+          <span class="bet-chip ${betChipClass}">BET ${e.bet}</span>
+        </div>
+        ${e.kelly_pct > 0 ? `
+        <div style="margin-top:8px;padding:8px 12px;border-radius:6px;font-family:'Share Tech Mono';font-size:11px;
+          background:${e.kelly_pct > 15 ? '#ecfdf5' : '#eff6ff'};
+          border:1px solid ${e.kelly_pct > 15 ? '#6ee7b7' : '#93c5fd'};
+          color:${e.kelly_pct > 15 ? '#065f46' : '#1e40af'};">
+          💰 Kelly: <b>${e.kelly_pct.toFixed(1)}%</b> of bankroll
+          · $<b>${e.kelly_pct.toFixed(0)}</b> per $100
+          ${(e.liquidity || 0) < 1000 ? ' · ⚠️ Low liquidity' : ''}
+        </div>` : `
+        <div style="margin-top:8px;padding:6px 12px;border-radius:6px;font-family:'Share Tech Mono';font-size:10px;
+          background:#f8fafc;border:1px solid #e2e8f0;color:#94a3b8;">
+          ${(e.liquidity || 0) < 1000 ? '⚠️ No liquidity — cannot bet' : '— No Kelly edge (odds too tight)'}
+        </div>`}
+      </div>
+    `;
+  }).join('');
+}
+
+// ─── Show error ───────────────────────────────────────────────────
+// ─── Render: Taiwan Sports Lottery vs Model ───────────────────────
+function renderTWLottery(games) {
+  const grid = document.getElementById('tw-lottery-grid');
+  if (!games || games.length === 0) {
+    grid.innerHTML = '<div style="text-align:center;padding:40px;color:var(--muted);font-family:Share Tech Mono;">No games today</div>';
+    return;
+  }
+
+  // Taiwan lottery odds (hardcoded for today — ideally fetched from API)
+  const twOdds = {
+    'Atlanta Hawks': { spread: -1.5, spreadOdds: 1.73, ou: 226.5, opponent: 'New York Knicks' },
+    'Orlando Magic': { spread: 1.5, spreadOdds: 1.70, ou: 222.5, opponent: 'Detroit Pistons' },
+    'San Antonio Spurs': { spread: -8.5, spreadOdds: 1.70, ou: 236.5, opponent: 'Philadelphia 76ers' },
+    'Memphis Grizzlies': { spread: 13.5, spreadOdds: 1.70, ou: 231.5, opponent: 'Cleveland Cavaliers' },
+    'Denver Nuggets': { spread: -7.5, spreadOdds: 1.70, ou: 236.5, opponent: 'Portland Trail Blazers' },
+  };
+
+  grid.innerHTML = games.map(g => {
+    const homeProb = g.home_prob;
+    const awayProb = g.away_prob;
+    const winner = homeProb > awayProb ? g.home : g.away;
+    const winnerProb = Math.max(homeProb, awayProb);
+    const tw = twOdds[g.home] || null;
+
+    // Calculate implied probability from spread
+    let spreadImplied = 50;
+    let spreadText = 'N/A';
+    let ouText = 'N/A';
+    if (tw) {
+      spreadImplied = tw.spreadOdds > 0 ? (1 / tw.spreadOdds * 100) : 50;
+      const sign = tw.spread > 0 ? '+' : '';
+      spreadText = g.home + ' ' + sign + tw.spread + ' (' + tw.spreadOdds + ')';
+      ouText = tw.ou + ' 分';
+    }
+
+    // Edge: model vs spread implied
+    const modelEdge = winnerProb - spreadImplied;
+    let edgeSize, edgeCls, edgeLabel;
+    if (modelEdge > 30) { edgeSize = 'huge'; edgeCls = 'huge'; edgeLabel = '超大 Edge'; }
+    else if (modelEdge > 15) { edgeSize = 'big'; edgeCls = 'big'; edgeLabel = '大 Edge'; }
+    else if (modelEdge > 5) { edgeSize = 'mid'; edgeCls = 'mid'; edgeLabel = '中 Edge'; }
+    else { edgeSize = 'small'; edgeCls = 'small'; edgeLabel = '小 Edge'; }
+
+    // Stars rating
+    let stars, starText, headerCls, verdictCls, verdictText;
+    if (winnerProb > 90 && tw && Math.abs(tw.spread) < 5) {
+      stars = '⭐⭐⭐'; starText = '強力推薦';
+      headerCls = 'strong'; verdictCls = 'buy';
+      verdictText = '✅ <b>強力推薦</b> — 模型 ' + winnerProb.toFixed(0) + '% 但運彩只讓 ' + (tw ? Math.abs(tw.spread) : '?') + ' 分，edge 巨大';
+    } else if (winnerProb > 85) {
+      stars = '⭐⭐'; starText = '推薦';
+      headerCls = 'good'; verdictCls = 'buy';
+      verdictText = '👍 <b>推薦</b> — 模型高度看好 ' + winner + '，讓分合理';
+    } else if (winnerProb > 70) {
+      stars = '⭐'; starText = '可考慮';
+      headerCls = 'good'; verdictCls = 'caution';
+      verdictText = '🤔 <b>可考慮</b> — 有一定 edge 但需注意讓分風險';
+    } else {
+      stars = '—'; starText = '觀望';
+      headerCls = 'risky'; verdictCls = 'skip';
+      verdictText = '⏸️ <b>觀望</b> — 勝率不夠高，風險較大';
+    }
+
+    const b2bHome = g.b2b_home ? ' <span style="color:var(--down);font-size:10px;">[B2B]</span>' : '';
+    const b2bAway = g.b2b_away ? ' <span style="color:var(--down);font-size:10px;">[B2B]</span>' : '';
+
+    return `
+    <div class="tw-card">
+      <div class="tw-card-header ${headerCls}">
+        <div>
+          <div class="tw-matchup">${g.away}${b2bAway} @ ${g.home}${b2bHome}</div>
+          <div style="font-family:'Share Tech Mono';font-size:10px;color:var(--muted);margin-top:2px;">
+            ${g.away_record} vs ${g.home_record}
+          </div>
+        </div>
+        <div style="text-align:right;">
+          <div class="tw-stars">${stars}</div>
+          <div style="font-family:'Share Tech Mono';font-size:10px;color:var(--muted);">${starText}</div>
+        </div>
+      </div>
+      <div class="tw-card-body">
+        <div class="tw-model-bar">
+          <div class="tw-bar-away" style="width:${awayProb}%">${g.away.split(' ').pop()} ${awayProb.toFixed(0)}%</div>
+          <div class="tw-bar-home" style="width:${homeProb}%">${g.home.split(' ').pop()} ${homeProb.toFixed(0)}%</div>
+        </div>
+
+        <div class="tw-row">
+          <span class="tw-label">運彩讓分</span>
+          <span class="tw-val">${spreadText}</span>
+        </div>
+        <div class="tw-row">
+          <span class="tw-label">運彩大小</span>
+          <span class="tw-val">O/U ${ouText}</span>
+        </div>
+        <div class="tw-row">
+          <span class="tw-label">模型預測總分</span>
+          <span class="tw-val" style="font-weight:900; color:var(--accent);">
+            ${g.pred_total ? g.pred_total.toFixed(1) : 'N/A'}
+            ${g.pred_total && tw && tw.ou ? (g.pred_total > tw.ou
+              ? ' <span style=\"color:var(--up);font-size:10px;\">▲ 看大</span>'
+              : ' <span style=\"color:var(--down);font-size:10px;\">▼ 看小</span>') : ''}
+          </span>
+        </div>
+        <div class="tw-row" style="font-size:10px;color:var(--muted);">
+          <span class="tw-label">預測比分</span>
+          <span class="tw-val" style="font-size:11px;">
+            ${g.away_expected ? g.away.split(' ').pop() + ' ' + g.away_expected.toFixed(0) + ' — ' + g.home.split(' ').pop() + ' ' + g.home_expected.toFixed(0) : 'N/A'}
+          </span>
+        </div>
+        <div class="tw-row">
+          <span class="tw-label">模型勝率</span>
+          <span class="tw-val" style="color:var(--up);">${winner} <b>${winnerProb.toFixed(1)}%</b></span>
+        </div>
+        <div class="tw-row">
+          <span class="tw-label">模型預測分差</span>
+          <span class="tw-val" style="color:${g.pred_spread > 0 ? 'var(--up)' : 'var(--down)'}; font-weight:900;">
+            ${g.pred_spread != null ? '預測 ' + (g.pred_spread > 0 ? g.home.split(' ').pop() : g.away.split(' ').pop()) + ' 勝出 +' + Math.abs(g.pred_spread).toFixed(1) + ' pts' : 'N/A'}
+          </span>
+        </div>
+        <div class="tw-row">
+          <span class="tw-label">運彩隱含勝率</span>
+          <span class="tw-val">${spreadImplied.toFixed(0)}%</span>
+        </div>
+        <div class="tw-row">
+          <span class="tw-label">Elo 評分</span>
+          <span class="tw-val">${g.away.split(' ').pop()} ${g.away_elo} vs ${g.home.split(' ').pop()} ${g.home_elo}</span>
+        </div>
+        <div class="tw-row">
+          <span class="tw-label">Edge</span>
+          <span class="tw-val">${modelEdge.toFixed(1)}% <span class="tw-edge-badge ${edgeCls}">${edgeLabel}</span></span>
+        </div>
+
+        <div class="tw-verdict ${verdictCls}">${verdictText}</div>
+      </div>
+    </div>`;
+  }).join('');
+}
+
+// ─── Render: Backtest Results ──────────────────────────────────────
+function renderBacktest(bt) {
+  if (!bt) return;
+
+  // KPI cards
+  const setKpi = (id, val) => { const el = document.getElementById(id); if(el) el.textContent = val; };
+  setKpi('bt-all-wr', bt.all_wr + '%');
+  setKpi('bt-all-count', bt.games_tested + ' games');
+  setKpi('bt-strong-wr', bt.strong_wr + '%');
+  setKpi('bt-strong-count', bt.strong_count + ' games');
+  setKpi('bt-vstrong-wr', bt.vstrong_wr + '%');
+  setKpi('bt-vstrong-count', bt.vstrong_count + ' games');
+  setKpi('bt-star3-wr', bt.star3_wr + '%');
+  setKpi('bt-star3-count', bt.star3_count + ' games');
+
+  // Color KPIs
+  const colorKpi = (id, val) => {
+    const el = document.getElementById(id);
+    if (!el) return;
+    if (val >= 95) el.style.color = '#059669';
+    else if (val >= 85) el.style.color = '#0066cc';
+    else if (val >= 70) el.style.color = '#d97706';
+    else el.style.color = '#dc2626';
+  };
+  colorKpi('bt-all-wr', bt.all_wr);
+  colorKpi('bt-strong-wr', bt.strong_wr);
+  colorKpi('bt-vstrong-wr', bt.vstrong_wr);
+  colorKpi('bt-star3-wr', bt.star3_wr);
+
+  setKpi('bt-last-update', 'Last ' + (bt.recent ? bt.recent.length : 0) + ' predictions');
+
+  // Recent results table
+  const tbody = document.getElementById('bt-body');
+  if (!tbody || !bt.recent) return;
+
+  // Show newest first
+  const recent = [...bt.recent].reverse();
+
+  tbody.innerHTML = recent.map(r => {
+    const mark = r.correct ? '✅' : '❌';
+    const rowBg = r.correct ? '' : 'background:rgba(220,38,38,.04);';
+    const confColor = r.conf >= 90 ? '#059669' : r.conf >= 70 ? '#0066cc' : '#64748b';
+    const confBar = `<div style="width:${r.conf}%;height:4px;border-radius:2px;background:${confColor};margin-top:2px;"></div>`;
+    const date = r.date ? r.date.substring(4,6) + '/' + r.date.substring(6,8) : '';
+    const away_short = r.away.split(' ').pop();
+    const home_short = r.home.split(' ').pop();
+    const pick_short = r.pick.split(' ').pop();
+    const winner_short = r.winner.split(' ').pop();
+
+    return `<tr style="font-family:'Share Tech Mono';font-size:11px;${rowBg}">
+      <td style="padding:6px 12px;color:var(--muted);">${date}</td>
+      <td style="padding:6px 12px;">${away_short} @ ${home_short}</td>
+      <td style="padding:6px 12px;text-align:center;">
+        <span style="color:${confColor};font-weight:700;">${r.conf}%</span>${confBar}</td>
+      <td style="padding:6px 12px;font-weight:700;">${pick_short}</td>
+      <td style="padding:6px 12px;">${winner_short}</td>
+      <td style="padding:6px 12px;text-align:center;color:var(--muted);">${r.score}</td>
+      <td style="padding:6px 12px;text-align:center;font-size:14px;">${mark}</td>
+    </tr>`;
+  }).join('');
+}
+
+// ─── Render: Live Scoreboard ──────────────────────────────────────
+async function fetchLiveScores() {
+  try {
+    let data;
+    try {
+      const r = await fetch('/api/nba/scoreboard');
+      if (r.ok) data = await r.json();
+      else throw new Error('proxy');
+    } catch(e) {
+      const r2 = await fetch('https://site.api.espn.com/apis/site/v2/sports/basketball/nba/scoreboard');
+      data = await r2.json();
+    }
+
+    // Update score map for game cards
+    updateLiveScoreMap(data);
+    // Re-render game cards with updated scores (if loadedGames available)
+    if (window._loadedGames) renderGames(window._loadedGames);
+
+    const container = document.getElementById('live-scores');
+    const statusEl = document.getElementById('score-status');
+    if (!data || !data.events || data.events.length === 0) {
+      container.innerHTML = '<div style="color:var(--muted);font-family:Share Tech Mono;font-size:11px;padding:12px;">No games today</div>';
+      return;
+    }
+
+    let liveCount = 0;
+    container.innerHTML = data.events.map(ev => {
+      const comp = ev.competitions?.[0] || {};
+      const teams = comp.competitors || [];
+      const status = ev.status?.type || {};
+      const state = status.name || 'STATUS_SCHEDULED';
+      const detail = status.detail || status.shortDetail || '';
+      const clock = ev.status?.displayClock || '';
+      const period = ev.status?.period || 0;
+
+      const away = teams.find(t => t.homeAway === 'away') || teams[0] || {};
+      const home = teams.find(t => t.homeAway === 'home') || teams[1] || {};
+      const awayScore = parseInt(away.score) || 0;
+      const homeScore = parseInt(home.score) || 0;
+      const awayName = away.team?.abbreviation || '?';
+      const homeName = home.team?.abbreviation || '?';
+      const awayRecord = away.records?.[0]?.summary || '';
+      const homeRecord = home.records?.[0]?.summary || '';
+
+      let cardClass = 'scheduled';
+      let statusClass = 'sched-status';
+      let statusText = detail;
+      let awayScoreClass = '';
+      let homeScoreClass = '';
+
+      if (state === 'STATUS_IN_PROGRESS') {
+        cardClass = 'live';
+        statusClass = 'live-status';
+        statusText = 'Q' + period + ' ' + clock;
+        liveCount++;
+        awayScoreClass = awayScore > homeScore ? 'winning' : 'losing';
+        homeScoreClass = homeScore > awayScore ? 'winning' : 'losing';
+      } else if (state === 'STATUS_FINAL') {
+        cardClass = 'final';
+        statusClass = 'final-status';
+        statusText = 'FINAL';
+        awayScoreClass = awayScore > homeScore ? 'winning' : 'losing';
+        homeScoreClass = homeScore > awayScore ? 'winning' : 'losing';
+      }
+
+      const awayDisplay = state === 'STATUS_SCHEDULED' ? '-' : awayScore;
+      const homeDisplay = state === 'STATUS_SCHEDULED' ? '-' : homeScore;
+
+      return `
+      <div class="score-card ${cardClass}">
+        <div class="score-teams">
+          <div class="score-team">
+            <div class="score-team-name">${awayName}</div>
+            <div class="score-record">${awayRecord}</div>
+            <div class="score-team-score ${awayScoreClass}">${awayDisplay}</div>
+          </div>
+          <div class="score-vs">@</div>
+          <div class="score-team">
+            <div class="score-team-name">${homeName}</div>
+            <div class="score-record">${homeRecord}</div>
+            <div class="score-team-score ${homeScoreClass}">${homeDisplay}</div>
+          </div>
+        </div>
+        <div class="score-status ${statusClass}">${statusText}</div>
+      </div>`;
+    }).join('');
+
+    if (statusEl) {
+      if (liveCount > 0) statusEl.innerHTML = '<span style="color:#dc2626;font-weight:700;">' + liveCount + ' LIVE</span> · Updated ' + new Date().toLocaleTimeString();
+      else statusEl.textContent = 'Updated ' + new Date().toLocaleTimeString();
+    }
+
+    // If any game is live, refresh faster (30s)
+    return liveCount > 0;
+  } catch(err) {
+    console.warn('[Scores] Error:', err);
+    return false;
+  }
+}
+
+// Auto-refresh scores: 30s when live, 60s otherwise
+let scoreInterval = null;
+async function startScoreRefresh() {
+  const hasLive = await fetchLiveScores();
+  clearInterval(scoreInterval);
+  scoreInterval = setInterval(async () => {
+    const live = await fetchLiveScores();
+    if (live && scoreInterval) {
+      clearInterval(scoreInterval);
+      scoreInterval = setInterval(fetchLiveScores, 30000); // 30s when live
+    }
+  }, hasLive ? 30000 : 60000);
+}
+
+function showError(msg) {
+  const grids = ['games-grid', 'edges-grid'];
+  grids.forEach(id => {
+    const el = document.getElementById(id);
+    if (el) el.innerHTML = `<div class="error-state">API ERROR: ${msg} — Check /api/nba/predictions</div>`;
+  });
+  const elo = document.getElementById('elo-rankings');
+  if (elo) elo.innerHTML = `<div style="font-family:'Share Tech Mono';font-size:11px;color:var(--down);padding:12px;">
+    Failed to load Elo data: ${msg}</div>`;
+}
+
+// ─── Main load ────────────────────────────────────────────────────
+async function loadNBA() {
+  try {
+    let data;
+    try {
+      const r = await fetch('/api/nba/predictions');
+      if (r.ok) data = await r.json();
+      else throw new Error('api');
+    } catch(e) {
+      const r2 = await fetch('/nba_data.json');
+      if (!r2.ok) throw new Error('No data source');
+      data = await r2.json();
+    }
+    window._loadedGames = data.games || [];
+    renderGames(window._loadedGames);
+    renderEloRankings(data.elo_teams || {});
+    renderTWLottery(window._loadedGames);
+    renderBacktest(data.backtest);
+    renderEdges(data.edges || []);
+    updateTimestamp();
+    startCountdown();
+  } catch (err) {
+    showError(err.message);
+    // Still restart the countdown so it retries
+    startCountdown();
+  }
+}
+
+// ─── Boot ─────────────────────────────────────────────────────────
+document.addEventListener('DOMContentLoaded', () => {
+  loadNBA();
+  startScoreRefresh();
+});
+</script>
+</body>
+</html>
