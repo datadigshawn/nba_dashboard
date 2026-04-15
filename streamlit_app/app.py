@@ -33,80 +33,175 @@ TZ_TAIPEI = timezone(timedelta(hours=8))
 TZ_ET     = timezone(timedelta(hours=-4))  # 美東夏令
 
 
-# ── 樣式（仿 Pionex 風格，手機友善）──────────────────────
+# ── 樣式（最大可讀性：超大字、高對比、手機友善）──────────
 st.markdown("""
 <style>
-  .stApp { background: #0a1020; }
-  h1 { color: #ff6b35 !important; font-size: 32px !important; letter-spacing: 1px; }
-  h2, h3 { color: #ffa500 !important; font-size: 22px !important; }
+  .stApp { background: #0a1020; color: #ffffff; }
 
+  /* 標題 */
+  h1 {
+    color: #ff6b35 !important;
+    font-size: 36px !important;
+    font-weight: 900 !important;
+    letter-spacing: 1px;
+    margin-bottom: 4px !important;
+  }
+  h2, h3 {
+    color: #ffa500 !important;
+    font-size: 24px !important;
+    font-weight: 800 !important;
+    margin-top: 20px !important;
+  }
+
+  /* 一般文字 */
+  p, div, span, label { color: #e8f1ff; }
+  .stCaption, [data-testid="stCaptionContainer"] { color: #9fb8d0 !important; font-size: 13px !important; }
+
+  /* 比賽卡片 */
   .game-card {
-    background: linear-gradient(135deg, #162031 0%, #0a1520 100%);
-    border: 1px solid #2a4060;
-    border-radius: 12px;
-    padding: 16px;
-    margin-bottom: 12px;
+    background: linear-gradient(135deg, #1e2d47 0%, #0d1a2f 100%);
+    border: 2px solid #2a4066;
+    border-radius: 16px;
+    padding: 20px;
+    margin-bottom: 16px;
+    box-shadow: 0 4px 12px rgba(0,0,0,.3);
+  }
+  .game-status {
+    display: inline-block;
+    font-size: 13px;
+    font-weight: 700;
+    color: #ffa500;
+    background: rgba(255,165,0,.15);
+    padding: 3px 10px;
+    border-radius: 4px;
+    margin-bottom: 14px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
   }
   .teams-row {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 10px;
+    gap: 12px;
+    margin-bottom: 14px;
   }
-  .team-box { flex: 1; text-align: center; }
-  .team-name { font-size: 18px; font-weight: 700; color: #fff; }
-  .team-record { font-size: 12px; color: #88a8c8; margin-top: 2px; }
-  .team-prob { font-family: monospace; font-size: 28px; font-weight: 900; color: #fff; margin-top: 4px; }
+  .team-box {
+    flex: 1;
+    text-align: center;
+    padding: 10px;
+    border-radius: 10px;
+    background: rgba(0,0,0,.25);
+  }
+  .team-name {
+    font-size: 18px;
+    font-weight: 800;
+    color: #ffffff;
+    line-height: 1.25;
+    margin-bottom: 4px;
+  }
+  .team-record {
+    font-size: 13px;
+    font-weight: 600;
+    color: #9fb8d0;
+    margin-bottom: 8px;
+    font-family: monospace;
+  }
+  .team-prob {
+    font-family: monospace;
+    font-size: 42px;
+    font-weight: 900;
+    line-height: 1;
+    margin-top: 4px;
+    text-shadow: 0 2px 8px rgba(0,0,0,.5);
+  }
 
   .vs-divider {
     font-family: monospace;
-    font-size: 14px;
-    color: #4a7a9b;
-    padding: 0 16px;
+    font-size: 24px;
+    font-weight: 900;
+    color: #ff6b35;
+    padding: 0 6px;
   }
 
-  .winner-hilite { color: #00ff88 !important; }
-  .loser-dim { color: #88a8c8 !important; }
+  /* 勝方高亮（超顯眼） */
+  .winner-box {
+    background: linear-gradient(135deg, rgba(0,255,136,.2) 0%, rgba(0,200,100,.1) 100%) !important;
+    border: 2px solid #00ff88;
+    box-shadow: 0 0 20px rgba(0,255,136,.25);
+  }
+  .winner-box .team-name { color: #00ff88 !important; }
+  .winner-box .team-prob { color: #00ff88 !important; }
 
-  .spread-badge {
+  .loser-box {
+    background: rgba(0,0,0,.35) !important;
+  }
+  .loser-box .team-name { color: #7a90a8 !important; }
+  .loser-box .team-prob { color: #7a90a8 !important; }
+
+  /* 讓分、大小 徽章（大一點） */
+  .spread-badge, .total-badge {
     display: inline-block;
-    padding: 4px 10px;
-    border-radius: 4px;
+    padding: 8px 14px;
+    border-radius: 8px;
     font-family: monospace;
-    font-size: 13px;
-    font-weight: 700;
-    background: rgba(255,167,0,.15);
-    border: 1px solid #ffa500;
-    color: #ffa500;
-    margin-right: 6px;
+    font-size: 16px;
+    font-weight: 800;
+    margin-right: 8px;
+    margin-top: 4px;
+  }
+  .spread-badge {
+    background: rgba(255,167,0,.2);
+    border: 2px solid #ffa500;
+    color: #ffcc66;
   }
   .total-badge {
-    display: inline-block;
-    padding: 4px 10px;
-    border-radius: 4px;
-    font-family: monospace;
-    font-size: 13px;
-    font-weight: 700;
-    background: rgba(100,160,220,.15);
-    border: 1px solid #64a0dc;
-    color: #64a0dc;
-  }
-  .b2b-badge {
-    display: inline-block;
-    padding: 2px 6px;
-    border-radius: 3px;
-    font-family: monospace;
-    font-size: 10px;
-    background: rgba(255,51,102,.2);
-    color: #ff6688;
-    margin-left: 4px;
+    background: rgba(100,180,255,.2);
+    border: 2px solid #64b4ff;
+    color: #9fd0ff;
   }
 
+  .b2b-badge {
+    display: inline-block;
+    padding: 3px 8px;
+    border-radius: 4px;
+    font-family: monospace;
+    font-size: 11px;
+    font-weight: 800;
+    background: rgba(255,51,102,.3);
+    color: #ff88aa;
+    margin-left: 6px;
+    vertical-align: middle;
+  }
+
+  /* Streamlit metrics 放大 */
+  [data-testid="stMetric"] {
+    background: linear-gradient(135deg, #1a2842 0%, #0d1a2f 100%);
+    border: 2px solid #2a4066;
+    border-radius: 12px;
+    padding: 14px;
+  }
   [data-testid="stMetricValue"] {
     font-family: monospace !important;
-    font-size: 22px !important;
-    color: #fff !important;
+    font-size: 32px !important;
+    font-weight: 900 !important;
+    color: #ffffff !important;
   }
+  [data-testid="stMetricLabel"] {
+    font-size: 15px !important;
+    font-weight: 700 !important;
+    color: #ffa500 !important;
+    margin-bottom: 6px !important;
+  }
+  [data-testid="stMetricDelta"] {
+    font-size: 14px !important;
+    font-weight: 700 !important;
+  }
+
+  /* DataFrame */
+  [data-testid="stDataFrame"] { font-size: 14px !important; }
+
+  /* 成功/資訊提示框 */
+  [data-testid="stNotificationContentSuccess"] { font-size: 15px; }
 </style>
 """, unsafe_allow_html=True)
 
@@ -181,40 +276,42 @@ def render_game_card(g: dict):
     b2b_away  = g.get("b2b_away", False)
     b2b_home  = g.get("b2b_home", False)
 
-    # 標記勝方
+    # 贏隊框加高亮
     if away_prob > home_prob:
-        away_cls, home_cls = "winner-hilite", "loser-dim"
+        away_cls, home_cls = "winner-box", "loser-box"
     elif home_prob > away_prob:
-        away_cls, home_cls = "loser-dim", "winner-hilite"
+        away_cls, home_cls = "loser-box", "winner-box"
     else:
         away_cls = home_cls = ""
 
     away_b2b = '<span class="b2b-badge">B2B</span>' if b2b_away else ""
     home_b2b = '<span class="b2b-badge">B2B</span>' if b2b_home else ""
 
-    # 讓分符號
+    # 讓分符號（主隊為基準）
     if spread >= 0:
         spread_txt = f"{home[:3].upper()} -{spread:.1f}"
     else:
         spread_txt = f"{away[:3].upper()} -{abs(spread):.1f}"
 
+    status_txt = status if status else "上場"
+
     card = f"""
     <div class="game-card">
-      <div style="font-size:12px;color:#88a8c8;margin-bottom:8px">{status}</div>
+      <span class="game-status">{status_txt}</span>
       <div class="teams-row">
-        <div class="team-box">
-          <div class="team-name {away_cls}">{away}{away_b2b}</div>
+        <div class="team-box {away_cls}">
+          <div class="team-name">{away}{away_b2b}</div>
           <div class="team-record">{away_rec}</div>
-          <div class="team-prob {away_cls}">{away_prob:.1f}%</div>
+          <div class="team-prob">{away_prob:.1f}%</div>
         </div>
         <div class="vs-divider">@</div>
-        <div class="team-box">
-          <div class="team-name {home_cls}">{home}{home_b2b}</div>
+        <div class="team-box {home_cls}">
+          <div class="team-name">{home}{home_b2b}</div>
           <div class="team-record">{home_rec}</div>
-          <div class="team-prob {home_cls}">{home_prob:.1f}%</div>
+          <div class="team-prob">{home_prob:.1f}%</div>
         </div>
       </div>
-      <div style="margin-top:12px">
+      <div style="margin-top:14px">
         <span class="spread-badge">讓分 {spread_txt}</span>
         <span class="total-badge">大小 {total:.0f}</span>
       </div>
