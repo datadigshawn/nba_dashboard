@@ -224,30 +224,50 @@ DATA_ASSET = "nba_data.json"
 # ── 資料載入 ────────────────────────────────────────────
 @st.cache_data(ttl=300, show_spinner=False)
 def load_nba_data() -> dict:
-    """從 GitHub Release 抓 nba_data.json。"""
-    api = f"https://api.github.com/repos/{DATA_REPO}/releases/tags/{DATA_TAG}"
+    """
+    從 GitHub Release 抓 nba_data.json。
+    優先走直接下載 URL（無 API rate limit），失敗才 fallback 到 API。
+    """
+    # 方法 1: 直接下載 URL（不走 api.github.com，避免 60req/hr 限制）
+    # GitHub releases assets 的直接 URL 格式是：
+    #   https://github.com/<owner>/<repo>/releases/download/<tag>/<filename>
+    direct_url = f"https://github.com/{DATA_REPO}/releases/download/{DATA_TAG}/{DATA_ASSET}"
     try:
-        req = urllib.request.Request(api, headers={"Accept": "application/vnd.github+json"})
-        with urllib.request.urlopen(req, timeout=10) as r:
-            release = json.loads(r.read())
-    except Exception as e:
-        return {"_error": f"release API: {e}"}
-
-    asset_url = None
-    for a in release.get("assets", []):
-        if a.get("name") == DATA_ASSET:
-            asset_url = a.get("browser_download_url")
-            break
-    if not asset_url:
-        return {"_error": f"找不到 asset: {DATA_ASSET}"}
-
-    try:
-        with urllib.request.urlopen(asset_url, timeout=15) as r:
+        req = urllib.request.Request(direct_url, headers={
+            "User-Agent": "Mozilla/5.0 (Streamlit NBA Dashboard)",
+            "Accept": "application/json",
+        })
+        with urllib.request.urlopen(req, timeout=15) as r:
             data = json.loads(r.read())
-        data["_synced_at"] = release.get("published_at", "")
+        # 從 HTTP header 找發布時間（備用）
+        last_mod = r.headers.get("Last-Modified", "")
+        data["_synced_at"] = last_mod or "unknown"
+        data["_source"] = "direct"
         return data
-    except Exception as e:
-        return {"_error": f"下載失敗: {e}"}
+    except Exception as direct_err:
+        # 方法 2: Fallback → API（有 rate limit 風險但更精確）
+        api = f"https://api.github.com/repos/{DATA_REPO}/releases/tags/{DATA_TAG}"
+        try:
+            req = urllib.request.Request(api, headers={
+                "Accept": "application/vnd.github+json",
+                "User-Agent": "Mozilla/5.0 (Streamlit NBA Dashboard)",
+            })
+            with urllib.request.urlopen(req, timeout=10) as r:
+                release = json.loads(r.read())
+            asset_url = None
+            for a in release.get("assets", []):
+                if a.get("name") == DATA_ASSET:
+                    asset_url = a.get("browser_download_url")
+                    break
+            if not asset_url:
+                return {"_error": f"找不到 asset: {DATA_ASSET}"}
+            with urllib.request.urlopen(asset_url, timeout=15) as r:
+                data = json.loads(r.read())
+            data["_synced_at"] = release.get("published_at", "")
+            data["_source"] = "api-fallback"
+            return data
+        except Exception as api_err:
+            return {"_error": f"direct: {direct_err} | api: {api_err}"}
 
 
 @st.cache_data(ttl=60, show_spinner=False)
