@@ -82,7 +82,7 @@ $VENV dashboard.py
 
 ## ☁️ Streamlit 雲端版（手機任何地方存取）
 
-**公開 URL：** https://nba-dashboard.streamlit.app（部署後）
+**公開 URL：** https://nba-dashboard2t.streamlit.app（部署後）
 
 ### 架構
 
@@ -95,7 +95,7 @@ GitHub Release: datadigshawn/nba_dashboard:data-latest
                          ↓
 Streamlit Cloud（讀取 JSON 渲染儀表板）
                          ↓
-手機/電腦: https://nba-dashboard.streamlit.app
+手機/電腦: https://nba-dashboard2t.streamlit.app
 ```
 
 ### 部署步驟（1 次設定）
@@ -110,7 +110,7 @@ Streamlit Cloud（讀取 JSON 渲染儀表板）
 | Repository | `datadigshawn/nba_dashboard` |
 | Branch | `main` |
 | Main file path | `streamlit_app/app.py` |
-| App URL | `nba-dashboard` |
+| App URL | `nba-dashboard2t` |
 | Python version | `3.11` |
 
 5. Deploy → 3 分鐘後可用
