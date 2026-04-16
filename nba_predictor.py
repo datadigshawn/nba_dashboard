@@ -133,11 +133,17 @@ def _http() -> httpx.Client:
     return httpx.Client(timeout=15, follow_redirects=True)
 
 
-def fetch_espn_scoreboard() -> list[dict]:
-    """Fetch today's NBA games from ESPN."""
+def fetch_espn_scoreboard(date_str: str | None = None) -> list[dict]:
+    """Fetch NBA games from ESPN for a specific date (or today if None).
+
+    date_str format: YYYYMMDD (e.g. '20260418') — matches ESPN's `dates` query param.
+    """
     try:
         with _http() as c:
-            r = c.get(f"{ESPN_BASE}/scoreboard")
+            url = f"{ESPN_BASE}/scoreboard"
+            if date_str:
+                url = f"{url}?dates={date_str}"
+            r = c.get(url)
             if r.status_code != 200:
                 return []
             data = r.json()
@@ -164,6 +170,27 @@ def fetch_espn_scoreboard() -> list[dict]:
             "date": event.get("date", ""),
         })
     return games
+
+
+def fetch_espn_scoreboard_range(days_ahead: int = 3) -> list[dict]:
+    """Fetch today + next N days of NBA games. Dedup by home+away+date.
+
+    days_ahead=0 => today only
+    days_ahead=3 => today + 3 days ahead (4 days total)
+    """
+    all_games = []
+    seen = set()
+    for offset in range(0, days_ahead + 1):
+        date = (datetime.now() + timedelta(days=offset)).strftime("%Y%m%d")
+        games = fetch_espn_scoreboard(date_str=date if offset > 0 else None)
+        for g in games:
+            key = (g.get("home", ""), g.get("away", ""), g.get("date", "")[:10])
+            if key in seen:
+                continue
+            seen.add(key)
+            g["_fetched_for_date"] = date
+            all_games.append(g)
+    return all_games
 
 
 def fetch_espn_standings() -> dict[str, dict]:
@@ -874,15 +901,19 @@ def _build_elo_from_recent(predictor: NBAPredictor, days: int = 60):
     return games
 
 
-def cmd_today(predictor: NBAPredictor):
-    """Show today's game predictions with B2B awareness and projected margins."""
+def cmd_today(predictor: NBAPredictor, days_ahead: int = 0):
+    """Show upcoming game predictions with B2B awareness and projected margins."""
     print("\n" + "=" * 70)
-    print("  NBA PREDICTIONS -- Today's Games (Regression Model)")
+    title = "Today's Games" if days_ahead == 0 else f"Today + Next {days_ahead} Days"
+    print(f"  NBA PREDICTIONS -- {title} (Regression Model)")
     print("=" * 70)
 
-    today = fetch_espn_scoreboard()
+    if days_ahead > 0:
+        today = fetch_espn_scoreboard_range(days_ahead=days_ahead)
+    else:
+        today = fetch_espn_scoreboard()
     if not today:
-        print("\n  No games scheduled today (or ESPN API unavailable).")
+        print("\n  No games scheduled (or ESPN API unavailable).")
         return
 
     standings = fetch_espn_standings()
@@ -1099,6 +1130,8 @@ def main():
     parser.add_argument("--limit", type=int, help="Limit number of games for backtest")
     parser.add_argument("--json", action="store_true", help="Output JSON for dashboard API")
     parser.add_argument("--train-spread", action="store_true", help="Train spread prediction model")
+    parser.add_argument("--days-ahead", type=int, default=0,
+                        help="Include future N days of upcoming games (default: 0 = today only)")
     args = parser.parse_args()
 
     predictor = NBAPredictor()
@@ -1127,8 +1160,11 @@ def main():
         import json as _json
         output = {"games": [], "edges": [], "elo_teams": {}}
 
-        # Today's games
-        today_games = fetch_espn_scoreboard()
+        # Today (or today + N days ahead) games
+        if args.days_ahead > 0:
+            today_games = fetch_espn_scoreboard_range(days_ahead=args.days_ahead)
+        else:
+            today_games = fetch_espn_scoreboard()
         standings = fetch_espn_standings()
         predictor.team_stats = standings
 
@@ -1319,7 +1355,7 @@ def main():
         cmd_backtest(predictor, args.days, limit=args.limit)
 
     if not (args.train and not args.edge):
-        cmd_today(predictor)
+        cmd_today(predictor, days_ahead=args.days_ahead)
 
     if args.edge:
         cmd_edge(predictor)

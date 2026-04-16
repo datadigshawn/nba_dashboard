@@ -39,7 +39,7 @@ fi
 
 # ── 2. 生成今日預測 JSON ──────────────────────────
 echo "[$(date '+%H:%M:%S')] 生成今日預測..." | tee -a "$LOG"
-"$PYTHON" nba_predictor.py --json > "$DATA_OUT" 2>>"$LOG"
+"$PYTHON" nba_predictor.py --days-ahead 3 --json > "$DATA_OUT" 2>>"$LOG"
 
 GAMES=$("$PYTHON" -c "import json; d=json.load(open('$DATA_OUT')); print(len(d.get('games',[])))" 2>/dev/null || echo "?")
 EDGES=$("$PYTHON" -c "import json; d=json.load(open('$DATA_OUT')); print(len(d.get('edges',[])))" 2>/dev/null || echo "?")
