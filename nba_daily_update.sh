@@ -55,4 +55,8 @@ if [ -f "$NBA_DIR/streamlit_app/sync_data.py" ]; then
     "$PYTHON" "$NBA_DIR/streamlit_app/sync_data.py" 2>&1 | tee -a "$LOG"
 fi
 
+# ── 5. Resolve 昨日比賽結果（填入 DB outcome）──
+echo "[$(date '+%H:%M:%S')] Resolving past game outcomes..." | tee -a "$LOG"
+"$PYTHON" nba_resolve.py 2>&1 | tee -a "$LOG"
+
 echo "[$(date '+%H:%M:%S')] 更新完成" | tee -a "$LOG"

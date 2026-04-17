@@ -297,6 +297,69 @@
   .score-status.final-status{background:#ecfdf5;color:#065f46;}
   .score-status.sched-status{background:#f8fafc;color:#64748b;}
   .score-record{font-family:'Share Tech Mono';font-size:9px;color:var(--muted);}
+
+  /* ═══════════ PLAYOFF BRACKET ═══════════ */
+  .bracket-wrap{background:#0a0f1a;border:1px solid #1e293b;border-radius:12px;padding:28px 16px;
+    box-shadow:inset 0 2px 20px rgba(0,0,0,.4);overflow-x:auto;}
+  .bracket-meta{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;
+    font-family:'Share Tech Mono';font-size:10px;color:#64748b;margin-bottom:16px;padding:0 4px;}
+  .bracket-meta .west-lbl{color:#fbbf24;font-weight:700;letter-spacing:2px;}
+  .bracket-meta .east-lbl{color:#60a5fa;font-weight:700;letter-spacing:2px;}
+  .bracket-grid{display:grid;grid-template-columns:170px 170px 170px 200px 170px 170px 170px;
+    gap:16px;min-width:1240px;align-items:center;}
+  .bk-col{display:flex;flex-direction:column;}
+  .bk-col.r1{gap:12px;}
+  .bk-col.r2{gap:100px;justify-content:center;}
+  .bk-col.cf{justify-content:center;}
+  .bk-col.fn{justify-content:center;align-items:center;}
+  .bk-round-label{font-family:'Share Tech Mono';font-size:9px;color:#475569;letter-spacing:2px;
+    text-transform:uppercase;text-align:center;margin-bottom:10px;grid-column:1/-1;}
+  .bk-round-row{display:grid;grid-template-columns:170px 170px 170px 200px 170px 170px 170px;gap:16px;margin-bottom:6px;}
+  .bk-round-row>span{font-family:'Share Tech Mono';font-size:9px;color:#475569;letter-spacing:2px;text-align:center;}
+
+  /* Card */
+  .bk-card{background:#121826;border:1px solid #1e293b;border-radius:8px;padding:10px;
+    font-family:'Exo 2',sans-serif;transition:border-color .2s,transform .2s;min-height:118px;}
+  .bk-card:hover{border-color:#334155;transform:translateY(-2px);}
+  .bk-card.is-finals{background:linear-gradient(135deg,#1a2332,#0f172a);border-color:#fbbf24;box-shadow:0 0 24px rgba(251,191,36,.18);}
+  .bk-card-hdr{display:flex;justify-content:space-between;align-items:center;font-family:'Share Tech Mono';
+    font-size:9px;color:#475569;letter-spacing:1px;margin-bottom:6px;}
+  .bk-side{display:grid;grid-template-columns:auto 1fr auto;align-items:center;gap:6px;padding:5px 6px;
+    border-radius:5px;margin-bottom:3px;border:1px solid transparent;}
+  .bk-side.winner{background:rgba(16,185,129,.08);border-color:rgba(16,185,129,.35);}
+  .bk-side.loser{background:rgba(100,116,139,.05);color:#94a3b8;}
+  .bk-side .seed{font-family:'Share Tech Mono';font-size:10px;color:#64748b;min-width:20px;}
+  .bk-side.winner .seed{color:#34d399;}
+  .bk-side .tname{font-size:13px;font-weight:700;color:#e2e8f0;letter-spacing:0.5px;}
+  .bk-side.loser .tname{color:#64748b;}
+  .bk-side .tprob{font-family:'Share Tech Mono';font-size:13px;font-weight:700;color:#e2e8f0;}
+  .bk-side.winner .tprob{color:#10b981;}
+  .bk-side.loser .tprob{color:#64748b;}
+  .bk-vs-line{font-family:'Share Tech Mono';font-size:8px;color:#475569;text-align:center;margin:2px 0;letter-spacing:1px;}
+  .bk-meta{display:flex;justify-content:space-between;align-items:center;margin-top:6px;padding-top:6px;
+    border-top:1px solid #1e293b;font-family:'Share Tech Mono';font-size:9px;color:#64748b;}
+  .bk-meta .elo-line{color:#64748b;}
+  .bk-meta .games-line{color:#94a3b8;font-weight:700;}
+  .bk-players{margin-top:6px;padding-top:6px;border-top:1px solid #1e293b;display:flex;flex-direction:column;gap:3px;}
+  .bk-player{display:flex;justify-content:space-between;align-items:center;font-size:10px;font-family:'Exo 2',sans-serif;}
+  .bk-player .star{color:#fbbf24;margin-right:4px;font-size:9px;}
+  .bk-player .pname{color:#cbd5e1;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;flex:1;font-size:10px;}
+  .bk-player .pbadge{font-family:'Share Tech Mono';font-size:8px;font-weight:700;padding:1px 5px;border-radius:2px;letter-spacing:1px;margin-left:4px;white-space:nowrap;}
+  .bk-player .pbadge.healthy{background:rgba(16,185,129,.15);color:#34d399;}
+  .bk-player .pbadge.out{background:rgba(239,68,68,.15);color:#f87171;}
+  .bk-player .pbadge.d2d{background:rgba(251,191,36,.15);color:#fbbf24;}
+
+  /* Finals card */
+  .bk-finals-label{font-family:'Share Tech Mono';font-size:10px;color:#fbbf24;letter-spacing:3px;
+    text-align:center;margin-bottom:8px;font-weight:700;}
+
+  @media(max-width:1280px){
+    .bracket-grid{grid-template-columns:155px 155px 155px 180px 155px 155px 155px;min-width:1120px;gap:12px;}
+  }
+  @media(max-width:900px){
+    .bracket-wrap{padding:16px 8px;}
+    .bracket-grid{min-width:1120px;}
+  }
 </style>
 </head>
 <body>
@@ -383,6 +446,26 @@
     <div class="elo-rankings" id="elo-rankings">
       <div style="text-align:center;padding:20px;font-family:'Share Tech Mono';color:var(--muted);font-size:11px;">
         <span class="loading-spinner"></span>Loading rankings...
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION: 🏆 PLAYOFF BRACKET -->
+  <section id="bracket-section" style="display:none;">
+    <div class="section-title">🏆 季後賽版面 — Monte Carlo 推演 <span style="color:var(--muted);font-weight:400;letter-spacing:normal;margin-left:12px;" id="bracket-meta">—</span></div>
+    <div class="bracket-wrap">
+      <div class="bracket-meta">
+        <span class="west-lbl">◤ WEST · 西區</span>
+        <span>每張卡片顯示該隊挺進下一輪的機率（Monte Carlo）</span>
+        <span class="east-lbl">EAST · 東區 ◢</span>
+      </div>
+      <div class="bk-round-row">
+        <span>R1 · 首輪</span><span>R2 · 準決賽</span><span>西區冠軍</span>
+        <span style="color:#fbbf24;">TOTAL FINALS</span>
+        <span>東區冠軍</span><span>R2 · 準決賽</span><span>R1 · 首輪</span>
+      </div>
+      <div class="bracket-grid" id="bracket-grid">
+        <!-- filled by renderBracket() -->
       </div>
     </div>
   </section>
@@ -720,6 +803,116 @@ function renderEloRankings(eloTeams) {
       </div>
     `;
   }).join('');
+}
+
+// ─── Render: Playoff Bracket ──────────────────────────────────────
+function _bkBadgeClass(status) {
+  const s = (status || '').toLowerCase();
+  if (s === 'healthy' || s === 'active') return 'healthy';
+  if (s === 'out' || s === 'season-ending' || s === 'injured reserve') return 'out';
+  if (s.includes('day') || s.includes('probable') || s.includes('questionable')) return 'd2d';
+  return 'd2d';
+}
+
+function _bkSide(team, isWinner) {
+  const cls = isWinner ? 'winner' : 'loser';
+  return `
+    <div class="bk-side ${cls}">
+      <span class="seed">#${team.seed || ''}</span>
+      <span class="tname">${team.abbrev}</span>
+      <span class="tprob">${team.advance_prob.toFixed(1)}%</span>
+    </div>`;
+}
+
+function _bkPlayer(team) {
+  if (!team.star || !team.star.name) return '';
+  const bc = _bkBadgeClass(team.star.status);
+  const lbl = team.star.status || 'Healthy';
+  return `
+    <div class="bk-player">
+      <span class="pname"><span class="star">★</span>${team.star.name}</span>
+      <span class="pbadge ${bc}">${lbl}</span>
+    </div>`;
+}
+
+function _bkMatchCard(m, opts) {
+  opts = opts || {};
+  const topWins = m.top.advance_prob >= m.bot.advance_prob;
+  const showPlayers = opts.showPlayers !== false;
+  const eloLine = (m.top.elo && m.bot.elo)
+    ? `Elo ${m.top.elo} vs ${m.bot.elo}` : '';
+  const games = m.expected_games ? `${m.expected_games.toFixed(1)} 場` : '';
+  const headerLabel = opts.label || 'VS';
+  return `
+    <div class="bk-card">
+      <div class="bk-card-hdr">
+        <span>${headerLabel}</span>
+        <span>${games}</span>
+      </div>
+      ${_bkSide(m.top, topWins)}
+      <div class="bk-vs-line">— VS —</div>
+      ${_bkSide(m.bot, !topWins)}
+      <div class="bk-meta">
+        <span class="elo-line">${eloLine}</span>
+      </div>
+      ${showPlayers ? `<div class="bk-players">${_bkPlayer(m.top)}${_bkPlayer(m.bot)}</div>` : ''}
+    </div>`;
+}
+
+function _bkFinalsCard(finals) {
+  // finals.west / finals.east → {team, abbrev, elo, seed, advance_prob (champ prob)}
+  const westWins = finals.west.advance_prob >= finals.east.advance_prob;
+  const games = finals.expected_games ? `${finals.expected_games.toFixed(1)} 場` : '';
+  return `
+    <div class="bk-card is-finals">
+      <div class="bk-finals-label">★ TOTAL FINALS ★</div>
+      <div class="bk-card-hdr">
+        <span>W vs E</span>
+        <span>${games}</span>
+      </div>
+      ${_bkSide(finals.west, westWins)}
+      <div class="bk-vs-line">— VS —</div>
+      ${_bkSide(finals.east, !westWins)}
+      <div class="bk-meta">
+        <span class="elo-line">Elo ${finals.west.elo} vs ${finals.east.elo}</span>
+      </div>
+    </div>`;
+}
+
+function renderBracket(bracket) {
+  const sec = document.getElementById('bracket-section');
+  if (!sec) return;
+  if (!bracket || bracket.error || !bracket.west || !bracket.east) {
+    sec.style.display = 'none';
+    return;
+  }
+  sec.style.display = '';
+
+  const meta = document.getElementById('bracket-meta');
+  if (meta) {
+    const t = bracket.generated_at ? bracket.generated_at.replace('T', ' ') : '—';
+    meta.textContent = `Monte Carlo n=${(bracket.n_sims||0).toLocaleString()} · ${t}`;
+  }
+
+  const w = bracket.west, e = bracket.east, f = bracket.finals;
+  const grid = document.getElementById('bracket-grid');
+  const r1wHtml = w.r1.map(m => _bkMatchCard(m, {label: `#${m.top.seed} vs #${m.bot.seed}`})).join('');
+  const r2wHtml = w.r2.map(m => _bkMatchCard(m, {label: '西區準決賽'})).join('');
+  const cfwHtml = w.conf_finals.map(m => _bkMatchCard(m, {label: '西區冠軍賽'})).join('');
+  const fnHtml  = f ? _bkFinalsCard(f) : '';
+  const cfeHtml = e.conf_finals.map(m => _bkMatchCard(m, {label: '東區冠軍賽'})).join('');
+  const r2eHtml = e.r2.map(m => _bkMatchCard(m, {label: '東區準決賽'})).join('');
+  const r1eHtml = e.r1.map(m => _bkMatchCard(m, {label: `#${m.top.seed} vs #${m.bot.seed}`})).join('');
+
+  grid.innerHTML = `
+    <div class="bk-col r1">${r1wHtml}</div>
+    <div class="bk-col r2">${r2wHtml}</div>
+    <div class="bk-col cf">${cfwHtml}</div>
+    <div class="bk-col fn">${fnHtml}</div>
+    <div class="bk-col cf">${cfeHtml}</div>
+    <div class="bk-col r2">${r2eHtml}</div>
+    <div class="bk-col r1">${r1eHtml}</div>
+  `;
 }
 
 // ─── Render: Edge Cards ───────────────────────────────────────────
@@ -1160,6 +1353,7 @@ async function loadNBA() {
     window._loadedGames = data.games || [];
     renderGames(window._loadedGames);
     renderEloRankings(data.elo_teams || {});
+    renderBracket(data.playoff_bracket || null);
     renderTWLottery(window._loadedGames);
     renderBacktest(data.backtest);
     renderEdges(data.edges || []);

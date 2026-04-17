@@ -202,6 +202,56 @@ st.markdown("""
 
   /* 成功/資訊提示框 */
   [data-testid="stNotificationContentSuccess"] { font-size: 15px; }
+
+  /* ═════ PLAYOFF BRACKET ═════ */
+  .bk-wrap{background:#060b17;border:1px solid #1e293b;border-radius:12px;padding:22px 14px;
+    box-shadow:inset 0 2px 20px rgba(0,0,0,.5);overflow-x:auto;}
+  .bk-meta-row{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;
+    font-family:monospace;font-size:11px;color:#64748b;margin-bottom:12px;padding:0 4px;}
+  .bk-meta-row .west{color:#fbbf24;font-weight:700;letter-spacing:2px;}
+  .bk-meta-row .east{color:#60a5fa;font-weight:700;letter-spacing:2px;}
+  .bk-round-row{display:grid;grid-template-columns:155px 155px 155px 180px 155px 155px 155px;
+    gap:12px;margin-bottom:8px;min-width:1120px;}
+  .bk-round-row>span{font-family:monospace;font-size:10px;color:#475569;letter-spacing:2px;text-align:center;}
+  .bk-grid{display:grid;grid-template-columns:155px 155px 155px 180px 155px 155px 155px;
+    gap:12px;min-width:1120px;align-items:center;}
+  .bk-col{display:flex;flex-direction:column;}
+  .bk-col.r1{gap:10px;}
+  .bk-col.r2{gap:90px;justify-content:center;}
+  .bk-col.cf,.bk-col.fn{justify-content:center;align-items:center;}
+  .bk-card{background:#121826;border:1px solid #1e293b;border-radius:8px;padding:10px;
+    min-height:112px;transition:border-color .2s;}
+  .bk-card:hover{border-color:#334155;}
+  .bk-card.is-finals{background:linear-gradient(135deg,#1a2332,#0f172a);border-color:#fbbf24;
+    box-shadow:0 0 24px rgba(251,191,36,.2);}
+  .bk-card-hdr{display:flex;justify-content:space-between;align-items:center;
+    font-family:monospace;font-size:9px;color:#475569;letter-spacing:1px;margin-bottom:5px;}
+  .bk-side{display:grid;grid-template-columns:auto 1fr auto;align-items:center;gap:6px;
+    padding:4px 6px;border-radius:5px;margin-bottom:2px;border:1px solid transparent;}
+  .bk-side.winner{background:rgba(16,185,129,.08);border-color:rgba(16,185,129,.35);}
+  .bk-side.loser{background:rgba(100,116,139,.05);}
+  .bk-side .seed{font-family:monospace;font-size:10px;color:#64748b;min-width:20px;}
+  .bk-side.winner .seed{color:#34d399;}
+  .bk-side .tn{font-size:13px;font-weight:700;color:#e2e8f0 !important;letter-spacing:.5px;}
+  .bk-side.loser .tn{color:#64748b !important;}
+  .bk-side .tp{font-family:monospace;font-size:13px;font-weight:700;color:#e2e8f0;}
+  .bk-side.winner .tp{color:#10b981;}
+  .bk-side.loser .tp{color:#64748b;}
+  .bk-vs{font-family:monospace;font-size:8px;color:#475569;text-align:center;margin:1px 0;letter-spacing:1px;}
+  .bk-metabar{display:flex;justify-content:space-between;align-items:center;margin-top:5px;
+    padding-top:5px;border-top:1px solid #1e293b;font-family:monospace;font-size:9px;color:#64748b;}
+  .bk-players{margin-top:5px;padding-top:5px;border-top:1px solid #1e293b;
+    display:flex;flex-direction:column;gap:3px;}
+  .bk-pl{display:flex;justify-content:space-between;align-items:center;font-size:10px;}
+  .bk-pl .pnm{color:#cbd5e1 !important;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;flex:1;}
+  .bk-pl .st{color:#fbbf24;margin-right:4px;font-size:9px;}
+  .bk-pl .pbd{font-family:monospace;font-size:8px;font-weight:700;padding:1px 5px;border-radius:2px;
+    letter-spacing:1px;margin-left:4px;white-space:nowrap;}
+  .bk-pl .pbd.healthy{background:rgba(16,185,129,.15);color:#34d399;}
+  .bk-pl .pbd.out{background:rgba(239,68,68,.15);color:#f87171;}
+  .bk-pl .pbd.d2d{background:rgba(251,191,36,.15);color:#fbbf24;}
+  .bk-fn-label{font-family:monospace;font-size:10px;color:#fbbf24;letter-spacing:3px;
+    text-align:center;margin-bottom:7px;font-weight:700;}
 </style>
 """, unsafe_allow_html=True)
 
@@ -340,6 +390,121 @@ def render_game_card(g: dict):
     st.markdown(card, unsafe_allow_html=True)
 
 
+# ── 季後賽版面 ──────────────────────────────────────────
+def _bk_badge_class(status: str) -> str:
+    s = (status or "").lower()
+    if s in ("healthy", "active", ""):
+        return "healthy"
+    if s in ("out", "season-ending", "injured reserve"):
+        return "out"
+    if "day" in s or "probable" in s or "questionable" in s:
+        return "d2d"
+    return "d2d"
+
+
+def _bk_side(team: dict, is_winner: bool) -> str:
+    cls = "winner" if is_winner else "loser"
+    return (
+        f'<div class="bk-side {cls}">'
+        f'<span class="seed">#{team.get("seed","")}</span>'
+        f'<span class="tn">{team["abbrev"]}</span>'
+        f'<span class="tp">{team["advance_prob"]:.1f}%</span>'
+        f'</div>'
+    )
+
+
+def _bk_player_row(team: dict) -> str:
+    star = team.get("star") or {}
+    name = star.get("name", "")
+    if not name:
+        return ""
+    bc = _bk_badge_class(star.get("status", ""))
+    lbl = star.get("status", "") or "Healthy"
+    return (
+        f'<div class="bk-pl">'
+        f'<span class="pnm"><span class="st">★</span>{name}</span>'
+        f'<span class="pbd {bc}">{lbl}</span>'
+        f'</div>'
+    )
+
+
+def _bk_card(matchup: dict, label: str, show_players: bool = True) -> str:
+    top, bot = matchup["top"], matchup["bot"]
+    top_wins = top["advance_prob"] >= bot["advance_prob"]
+    games = f'{matchup.get("expected_games", 0):.1f} 場' if matchup.get("expected_games") else ""
+    elo_line = f'Elo {top.get("elo","?")} vs {bot.get("elo","?")}'
+    players_html = ""
+    if show_players:
+        players_html = f'<div class="bk-players">{_bk_player_row(top)}{_bk_player_row(bot)}</div>'
+    return (
+        f'<div class="bk-card">'
+        f'<div class="bk-card-hdr"><span>{label}</span><span>{games}</span></div>'
+        f'{_bk_side(top, top_wins)}'
+        f'<div class="bk-vs">— VS —</div>'
+        f'{_bk_side(bot, not top_wins)}'
+        f'<div class="bk-metabar"><span>{elo_line}</span></div>'
+        f'{players_html}'
+        f'</div>'
+    )
+
+
+def _bk_finals_card(finals: dict) -> str:
+    w, e = finals["west"], finals["east"]
+    west_wins = w["advance_prob"] >= e["advance_prob"]
+    games = f'{finals.get("expected_games", 0):.1f} 場' if finals.get("expected_games") else ""
+    return (
+        f'<div class="bk-card is-finals">'
+        f'<div class="bk-fn-label">★ TOTAL FINALS ★</div>'
+        f'<div class="bk-card-hdr"><span>W vs E</span><span>{games}</span></div>'
+        f'{_bk_side(w, west_wins)}'
+        f'<div class="bk-vs">— VS —</div>'
+        f'{_bk_side(e, not west_wins)}'
+        f'<div class="bk-metabar"><span>Elo {w.get("elo","?")} vs {e.get("elo","?")}</span></div>'
+        f'</div>'
+    )
+
+
+def render_bracket(bracket: dict):
+    if not bracket or bracket.get("error") or not bracket.get("west"):
+        return
+    west, east, finals = bracket["west"], bracket["east"], bracket["finals"]
+    gen = (bracket.get("generated_at") or "").replace("T", " ")
+    n_sims = bracket.get("n_sims", 0)
+
+    r1w = "".join(_bk_card(m, f'#{m["top"]["seed"]} vs #{m["bot"]["seed"]}') for m in west["r1"])
+    r2w = "".join(_bk_card(m, "西區準決賽") for m in west["r2"])
+    cfw = "".join(_bk_card(m, "西區冠軍賽") for m in west["conf_finals"])
+    fn  = _bk_finals_card(finals) if finals else ""
+    cfe = "".join(_bk_card(m, "東區冠軍賽") for m in east["conf_finals"])
+    r2e = "".join(_bk_card(m, "東區準決賽") for m in east["r2"])
+    r1e = "".join(_bk_card(m, f'#{m["top"]["seed"]} vs #{m["bot"]["seed"]}') for m in east["r1"])
+
+    html = f"""
+    <div class="bk-wrap">
+      <div class="bk-meta-row">
+        <span class="west">◤ WEST · 西區</span>
+        <span>Monte Carlo n={n_sims:,} · {gen}</span>
+        <span class="east">EAST · 東區 ◢</span>
+      </div>
+      <div class="bk-round-row">
+        <span>R1 · 首輪</span><span>R2 · 準決賽</span><span>西區冠軍</span>
+        <span style="color:#fbbf24;">TOTAL FINALS</span>
+        <span>東區冠軍</span><span>R2 · 準決賽</span><span>R1 · 首輪</span>
+      </div>
+      <div class="bk-grid">
+        <div class="bk-col r1">{r1w}</div>
+        <div class="bk-col r2">{r2w}</div>
+        <div class="bk-col cf">{cfw}</div>
+        <div class="bk-col fn">{fn}</div>
+        <div class="bk-col cf">{cfe}</div>
+        <div class="bk-col r2">{r2e}</div>
+        <div class="bk-col r1">{r1e}</div>
+      </div>
+    </div>
+    """
+    st.markdown(html, unsafe_allow_html=True)
+
+
 # ── 主畫面 ─────────────────────────────────────────────
 try:
     st.title("🏀 NBA 預測儀表板")
@@ -359,6 +524,7 @@ try:
     edges   = data.get("edges", [])
     elo     = data.get("elo_teams", {})
     bt      = data.get("backtest", {})
+    bracket = data.get("playoff_bracket", {})
 
     # ─── 模型效能總覽 ───
     c1, c2, c3, c4 = st.columns(4)
@@ -379,6 +545,13 @@ try:
     else:
         for g in games:
             render_game_card(g)
+
+    # ─── 🏆 季後賽版面 ───
+    if bracket and not bracket.get("error") and bracket.get("west"):
+        st.markdown("---")
+        st.subheader("🏆 季後賽版面 — Monte Carlo 推演")
+        st.caption("每張卡片顯示該隊挺進下一輪的機率（勝率%），底部顯示該隊球星與 ESPN 傷病狀態。")
+        render_bracket(bracket)
 
     # ─── Polymarket 邊際 ───
     if edges:

@@ -237,6 +237,309 @@ def fetch_espn_standings() -> dict[str, dict]:
     return teams
 
 
+# ── Playoff bracket support ──
+
+CONFERENCE_MAP: dict[str, str] = {
+    # East
+    "Boston Celtics": "east", "Brooklyn Nets": "east", "New York Knicks": "east",
+    "Philadelphia 76ers": "east", "Toronto Raptors": "east", "Chicago Bulls": "east",
+    "Cleveland Cavaliers": "east", "Detroit Pistons": "east", "Indiana Pacers": "east",
+    "Milwaukee Bucks": "east", "Atlanta Hawks": "east", "Charlotte Hornets": "east",
+    "Miami Heat": "east", "Orlando Magic": "east", "Washington Wizards": "east",
+    # West
+    "Denver Nuggets": "west", "Minnesota Timberwolves": "west",
+    "Oklahoma City Thunder": "west", "Portland Trail Blazers": "west",
+    "Utah Jazz": "west", "Golden State Warriors": "west", "LA Clippers": "west",
+    "Los Angeles Lakers": "west", "Phoenix Suns": "west", "Sacramento Kings": "west",
+    "Dallas Mavericks": "west", "Houston Rockets": "west",
+    "Memphis Grizzlies": "west", "New Orleans Pelicans": "west", "San Antonio Spurs": "west",
+}
+
+TEAM_ABBREV: dict[str, str] = {
+    "Boston Celtics": "BOS", "Brooklyn Nets": "BKN", "New York Knicks": "NY",
+    "Philadelphia 76ers": "PHI", "Toronto Raptors": "TOR", "Chicago Bulls": "CHI",
+    "Cleveland Cavaliers": "CLE", "Detroit Pistons": "DET", "Indiana Pacers": "IND",
+    "Milwaukee Bucks": "MIL", "Atlanta Hawks": "ATL", "Charlotte Hornets": "CHA",
+    "Miami Heat": "MIA", "Orlando Magic": "ORL", "Washington Wizards": "WAS",
+    "Denver Nuggets": "DEN", "Minnesota Timberwolves": "MIN",
+    "Oklahoma City Thunder": "OKC", "Portland Trail Blazers": "POR",
+    "Utah Jazz": "UTA", "Golden State Warriors": "GS", "LA Clippers": "LAC",
+    "Los Angeles Lakers": "LAL", "Phoenix Suns": "PHX", "Sacramento Kings": "SAC",
+    "Dallas Mavericks": "DAL", "Houston Rockets": "HOU",
+    "Memphis Grizzlies": "MEM", "New Orleans Pelicans": "NO", "San Antonio Spurs": "SA",
+}
+
+# Star player per team (one franchise face, used for the bracket card)
+TEAM_STARS: dict[str, str] = {
+    "Boston Celtics": "Jayson Tatum",
+    "Brooklyn Nets": "Cam Thomas",
+    "New York Knicks": "Jalen Brunson",
+    "Philadelphia 76ers": "Tyrese Maxey",
+    "Toronto Raptors": "Scottie Barnes",
+    "Chicago Bulls": "Coby White",
+    "Cleveland Cavaliers": "Donovan Mitchell",
+    "Detroit Pistons": "Cade Cunningham",
+    "Indiana Pacers": "Tyrese Haliburton",
+    "Milwaukee Bucks": "Giannis Antetokounmpo",
+    "Atlanta Hawks": "Trae Young",
+    "Charlotte Hornets": "LaMelo Ball",
+    "Miami Heat": "Bam Adebayo",
+    "Orlando Magic": "Paolo Banchero",
+    "Washington Wizards": "Jordan Poole",
+    "Denver Nuggets": "Nikola Jokic",
+    "Minnesota Timberwolves": "Anthony Edwards",
+    "Oklahoma City Thunder": "Shai Gilgeous-Alexander",
+    "Portland Trail Blazers": "Scoot Henderson",
+    "Utah Jazz": "Lauri Markkanen",
+    "Golden State Warriors": "Stephen Curry",
+    "LA Clippers": "Kawhi Leonard",
+    "Los Angeles Lakers": "Luka Doncic",
+    "Phoenix Suns": "Devin Booker",
+    "Sacramento Kings": "De'Aaron Fox",
+    "Dallas Mavericks": "Anthony Davis",
+    "Houston Rockets": "Alperen Sengun",
+    "Memphis Grizzlies": "Ja Morant",
+    "New Orleans Pelicans": "Zion Williamson",
+    "San Antonio Spurs": "Victor Wembanyama",
+}
+
+
+def fetch_espn_injuries() -> dict[str, list[dict]]:
+    """Fetch NBA injury report from ESPN. Returns {team_display_name: [injuries]}."""
+    try:
+        with _http() as c:
+            r = c.get(f"{ESPN_BASE}/injuries")
+            if r.status_code != 200:
+                return {}
+            data = r.json()
+    except Exception as exc:
+        print(f"  [warn] ESPN injuries fetch failed: {exc}", file=sys.stderr)
+        return {}
+
+    result: dict[str, list[dict]] = {}
+    for team_block in data.get("injuries", []):
+        team_name = team_block.get("displayName", "") or team_block.get("name", "")
+        if not team_name:
+            continue
+        items = []
+        for inj in team_block.get("injuries", []):
+            ath = inj.get("athlete", {}) or {}
+            items.append({
+                "name": ath.get("displayName") or ath.get("fullName", ""),
+                "status": inj.get("status", "Unknown"),
+                "detail": (inj.get("type", {}) or {}).get("description", "") or inj.get("details", ""),
+            })
+        if items:
+            result[team_name] = items
+    return result
+
+
+def _elo_game_prob(elo_a: float, elo_b: float, hca: float = 48.0) -> float:
+    """Per-game win probability for team A with home-court advantage."""
+    diff = elo_a - elo_b + hca
+    return 1.0 / (1.0 + 10.0 ** (-diff / 400.0))
+
+
+def _series_expected_games(p_a: float, best_of: int = 7) -> float:
+    """Expected number of games in a best-of-N series given A's per-game prob p_a."""
+    from math import comb
+    wins_needed = (best_of + 1) // 2
+    ev = 0.0
+    for g in range(wins_needed, best_of + 1):
+        p_a_ends = comb(g - 1, wins_needed - 1) * p_a ** wins_needed * (1 - p_a) ** (g - wins_needed)
+        p_b_ends = comb(g - 1, wins_needed - 1) * (1 - p_a) ** wins_needed * p_a ** (g - wins_needed)
+        ev += g * (p_a_ends + p_b_ends)
+    return ev
+
+
+def _simulate_series(team_a: str, team_b: str, elo: dict[str, float],
+                     hca: float = 48.0, best_of: int = 7, rng=None) -> str:
+    """Simulate a best-of-N series with 2-2-1-1-1 home pattern. Return winner."""
+    import random as _random
+    rng = rng or _random
+    wins_a, wins_b = 0, 0
+    wins_needed = (best_of + 1) // 2
+    # Home pattern for team A (higher seed): games 0,1,4,6 are home
+    a_home_idx = {0, 1, 4, 6}
+    i = 0
+    while wins_a < wins_needed and wins_b < wins_needed:
+        home_bonus = hca if i in a_home_idx else -hca
+        diff = elo.get(team_a, 1500) - elo.get(team_b, 1500) + home_bonus
+        p_a = 1.0 / (1.0 + 10.0 ** (-diff / 400.0))
+        if rng.random() < p_a:
+            wins_a += 1
+        else:
+            wins_b += 1
+        i += 1
+    return team_a if wins_a >= wins_needed else team_b
+
+
+def build_playoff_bracket(standings: dict, elo_teams: dict,
+                          injuries: dict | None = None,
+                          hca: float = 48.0, n_sims: int = 10000,
+                          seed: int = 42) -> dict:
+    """Build playoff bracket with Monte Carlo advance probabilities.
+
+    Standard bracket pairings (per conference, top 8 by win %):
+        R1: 1v8, 4v5, 3v6, 2v7  (display order top→bottom)
+        R2: winner(1v8) vs winner(4v5); winner(3v6) vs winner(2v7)
+        Conf Finals: winner(R2 upper) vs winner(R2 lower)
+        Finals:      West Conf champ vs East Conf champ (neutral court)
+    """
+    import random as _random
+    from collections import defaultdict as _dd
+    rng = _random.Random(seed)
+    injuries = injuries or {}
+
+    # 1) Pool teams into conferences, sort by wins → win_pct, take top 8
+    pool: dict[str, list[dict]] = {"east": [], "west": []}
+    for team, info in standings.items():
+        conf = CONFERENCE_MAP.get(team)
+        if not conf:
+            continue
+        wins = int(info.get("wins", 0))
+        losses = int(info.get("losses", 0))
+        wp = float(info.get("win_pct", 0)) or (wins / max(1, wins + losses))
+        pool[conf].append({
+            "team": team, "wins": wins, "losses": losses,
+            "win_pct": wp, "elo": float(elo_teams.get(team, 1500)),
+        })
+    for conf in pool:
+        pool[conf].sort(key=lambda x: (x["win_pct"], x["elo"]), reverse=True)
+        pool[conf] = pool[conf][:8]
+        for i, e in enumerate(pool[conf]):
+            e["seed"] = i + 1
+    if len(pool["east"]) < 8 or len(pool["west"]) < 8:
+        return {"error": "not enough teams to form bracket",
+                "east_count": len(pool["east"]), "west_count": len(pool["west"])}
+
+    # 2) Pair structure (indices into 8-team list)
+    R1_PAIRS = [(0, 7), (3, 4), (2, 5), (1, 6)]  # 1v8, 4v5, 3v6, 2v7
+    R2_PAIRS = [(0, 1), (2, 3)]  # upper half (R1[0] winner vs R1[1] winner), lower half
+
+    # 3) Monte Carlo
+    stages = _dd(lambda: {"r1": 0, "r2": 0, "cf": 0, "finals": 0, "champ": 0})
+    for _ in range(n_sims):
+        conf_champ = {}
+        for conf in ("east", "west"):
+            ss = pool[conf]
+            r1_win = []
+            for (i_top, i_bot) in R1_PAIRS:
+                w = _simulate_series(ss[i_top]["team"], ss[i_bot]["team"], elo_teams, hca, rng=rng)
+                r1_win.append(w)
+                stages[w]["r1"] += 1
+            r2_win = []
+            for (i_top, i_bot) in R2_PAIRS:
+                w = _simulate_series(r1_win[i_top], r1_win[i_bot], elo_teams, hca, rng=rng)
+                r2_win.append(w)
+                stages[w]["r2"] += 1
+            cf_w = _simulate_series(r2_win[0], r2_win[1], elo_teams, hca, rng=rng)
+            stages[cf_w]["cf"] += 1
+            conf_champ[conf] = cf_w
+        # Finals — neutral court, no HCA for the simulation (use 0)
+        stages[conf_champ["east"]]["finals"] += 1
+        stages[conf_champ["west"]]["finals"] += 1
+        champ = _simulate_series(conf_champ["west"], conf_champ["east"], elo_teams, hca=0.0, rng=rng)
+        stages[champ]["champ"] += 1
+
+    # 4) Build card entries
+    def star_of(team: str) -> dict:
+        name = TEAM_STARS.get(team, "")
+        status = "Healthy"
+        detail = ""
+        for inj in injuries.get(team, []):
+            if (inj.get("name") or "").lower() == name.lower():
+                status = inj.get("status", "Unknown")
+                detail = inj.get("detail", "")
+                break
+        return {"name": name, "status": status, "detail": detail}
+
+    def team_node(info: dict, stage_key: str, wins_denom: int = n_sims) -> dict:
+        team = info["team"]
+        return {
+            "seed": info["seed"],
+            "team": team,
+            "abbrev": TEAM_ABBREV.get(team, team.split()[-1][:3].upper()),
+            "elo": int(info["elo"]),
+            "record": f"{info['wins']}-{info['losses']}",
+            "advance_prob": round(stages[team][stage_key] / wins_denom * 100, 1),
+            "star": star_of(team),
+        }
+
+    def most_likely(candidate_teams: list[str], stage_key: str) -> str:
+        return max(candidate_teams, key=lambda t: stages[t][stage_key])
+
+    def build_conf(conf: str) -> dict:
+        ss = pool[conf]
+        # R1
+        r1 = []
+        for (i_top, i_bot) in R1_PAIRS:
+            top_info, bot_info = ss[i_top], ss[i_bot]
+            p = _elo_game_prob(top_info["elo"], bot_info["elo"], hca)
+            r1.append({
+                "top": team_node(top_info, "r1"),
+                "bot": team_node(bot_info, "r1"),
+                "expected_games": round(_series_expected_games(p), 1),
+            })
+        # R2 (per slot: pick most likely team out of 2 possible R1 winners)
+        r2 = []
+        for (i_top, i_bot) in R2_PAIRS:
+            half_top_teams = [ss[R1_PAIRS[i_top][0]]["team"], ss[R1_PAIRS[i_top][1]]["team"]]
+            half_bot_teams = [ss[R1_PAIRS[i_bot][0]]["team"], ss[R1_PAIRS[i_bot][1]]["team"]]
+            t_top = most_likely(half_top_teams, "r2")
+            t_bot = most_likely(half_bot_teams, "r2")
+            info_top = next(x for x in ss if x["team"] == t_top)
+            info_bot = next(x for x in ss if x["team"] == t_bot)
+            p = _elo_game_prob(info_top["elo"], info_bot["elo"], hca)
+            r2.append({
+                "top": team_node(info_top, "r2"),
+                "bot": team_node(info_bot, "r2"),
+                "expected_games": round(_series_expected_games(p), 1),
+            })
+        # Conf finals
+        upper = [ss[i]["team"] for pair in R1_PAIRS[:2] for i in pair]
+        lower = [ss[i]["team"] for pair in R1_PAIRS[2:] for i in pair]
+        t_top = most_likely(upper, "cf")
+        t_bot = most_likely(lower, "cf")
+        info_top = next(x for x in ss if x["team"] == t_top)
+        info_bot = next(x for x in ss if x["team"] == t_bot)
+        p = _elo_game_prob(info_top["elo"], info_bot["elo"], hca)
+        cf = [{
+            "top": team_node(info_top, "cf"),
+            "bot": team_node(info_bot, "cf"),
+            "expected_games": round(_series_expected_games(p), 1),
+        }]
+        return {
+            "seeds": [
+                {"seed": x["seed"], "team": x["team"],
+                 "abbrev": TEAM_ABBREV.get(x["team"], x["team"][:3].upper()),
+                 "record": f"{x['wins']}-{x['losses']}", "elo": int(x["elo"])}
+                for x in ss
+            ],
+            "r1": r1, "r2": r2, "conf_finals": cf,
+        }
+
+    # 5) Finals
+    west_rep = max((x["team"] for x in pool["west"]), key=lambda t: stages[t]["finals"])
+    east_rep = max((x["team"] for x in pool["east"]), key=lambda t: stages[t]["finals"])
+    w_info = next(x for x in pool["west"] if x["team"] == west_rep)
+    e_info = next(x for x in pool["east"] if x["team"] == east_rep)
+    p_finals = _elo_game_prob(w_info["elo"], e_info["elo"], hca=0.0)
+    finals = {
+        "west": team_node(w_info, "champ"),
+        "east": team_node(e_info, "champ"),
+        "expected_games": round(_series_expected_games(p_finals), 1),
+    }
+
+    return {
+        "generated_at": datetime.now().isoformat(timespec="seconds"),
+        "n_sims": n_sims,
+        "west": build_conf("west"),
+        "east": build_conf("east"),
+        "finals": finals,
+    }
+
+
 def fetch_espn_results(last_n_days: int = 60) -> list[dict]:
     """Fetch recent game results for Elo building."""
     games: list[dict] = []
@@ -1332,7 +1635,33 @@ def main():
         except Exception:
             output["backtest"] = None
 
+        # Playoff bracket (Monte Carlo advance probs + injury-aware star badges)
+        try:
+            elo_map = {name: rating for name, rating in predictor.elo.ratings.items()}
+            injuries_map = fetch_espn_injuries()
+            bracket = build_playoff_bracket(standings, elo_map, injuries=injuries_map)
+            output["playoff_bracket"] = bracket
+        except Exception as _be:
+            output["playoff_bracket"] = {"error": str(_be)}
+
         print(_json.dumps(output))
+
+        # Write to SQLite (alongside JSON, never blocks JSON pipeline)
+        try:
+            from nba_db import init_db as _db_init, insert_predictions, insert_elo_snapshot
+            from nba_db import insert_daily_performance, insert_backtest_results, DB_PATH as _db
+            _db_init(_db)
+            _today = datetime.now().strftime("%Y%m%d")
+            insert_predictions(_db, output["games"], _today)
+            insert_elo_snapshot(_db, output["elo_teams"], _today)
+            if output.get("backtest"):
+                insert_daily_performance(_db, output["backtest"], _today)
+                insert_backtest_results(_db, output["backtest"].get("recent", []), _today)
+            print(f"[db] wrote {len(output['games'])} predictions + elo to {_db.name}",
+                  file=sys.stderr)
+        except Exception as _db_err:
+            print(f"[warn] DB write failed: {_db_err}", file=sys.stderr)
+
         return
 
     if args.train:
