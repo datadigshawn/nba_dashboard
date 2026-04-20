@@ -19,3 +19,6 @@ state/*.xgb
 .idea/
 *.swp
 *.db
+
+# Secrets
+.env

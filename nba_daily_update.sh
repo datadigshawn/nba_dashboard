@@ -59,4 +59,12 @@ fi
 echo "[$(date '+%H:%M:%S')] Resolving past game outcomes..." | tee -a "$LOG"
 "$PYTHON" nba_resolve.py 2>&1 | tee -a "$LOG"
 
+# ── 6. 推送每日預測 digest 到 @NBA_predict55_bot ──
+if [ -f "$NBA_DIR/telegram_push.py" ] && grep -q '^NBA_TG_CHAT_ID=.' "$NBA_DIR/.env" 2>/dev/null; then
+    echo "[$(date '+%H:%M:%S')] 推送 Telegram digest..." | tee -a "$LOG"
+    "$PYTHON" "$NBA_DIR/telegram_push.py" --digest 2>&1 | tee -a "$LOG"
+else
+    echo "[$(date '+%H:%M:%S')] ⚠️ Telegram push 略過（chat_id 尚未設定，請跑 setup_chat_id.py）" | tee -a "$LOG"
+fi
+
 echo "[$(date '+%H:%M:%S')] 更新完成" | tee -a "$LOG"

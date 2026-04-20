@@ -364,13 +364,13 @@
 </head>
 <body>
 <nav id="global-nav" style="display:flex;gap:0;background:#0f172a;border-bottom:1px solid #334155;position:sticky;top:0;z-index:200;overflow-x:auto;-webkit-overflow-scrolling:touch;">
-<a href="/" class="nav-tab" data-page="trading" style="padding:10px 18px;font-family:'JetBrains Mono','Share Tech Mono',monospace;font-size:12px;font-weight:700;text-decoration:none;white-space:nowrap;border-bottom:2px solid transparent;transition:all .2s;color:#64748b;">Trading</a>
-<a href="/polymarket" class="nav-tab" data-page="polymarket" style="padding:10px 18px;font-family:'JetBrains Mono','Share Tech Mono',monospace;font-size:12px;font-weight:700;text-decoration:none;white-space:nowrap;border-bottom:2px solid transparent;transition:all .2s;color:#64748b;">Polymarket</a>
-<a href="/nba" class="nav-tab" data-page="nba" style="padding:10px 18px;font-family:'JetBrains Mono','Share Tech Mono',monospace;font-size:12px;font-weight:700;text-decoration:none;white-space:nowrap;border-bottom:2px solid transparent;transition:all .2s;color:#64748b;">NBA</a>
-<a href="/btc" class="nav-tab" data-page="btc" style="padding:10px 18px;font-family:'JetBrains Mono','Share Tech Mono',monospace;font-size:12px;font-weight:700;text-decoration:none;white-space:nowrap;border-bottom:2px solid transparent;transition:all .2s;color:#64748b;">BTC</a>
-<a href="/eth" class="nav-tab" data-page="eth" style="padding:10px 18px;font-family:'JetBrains Mono','Share Tech Mono',monospace;font-size:12px;font-weight:700;text-decoration:none;white-space:nowrap;border-bottom:2px solid transparent;transition:all .2s;color:#64748b;">ETH</a>
+<a href="https://pionex.shawny-project42.com/" class="nav-tab" data-page="trading" style="padding:10px 18px;font-family:'JetBrains Mono','Share Tech Mono',monospace;font-size:12px;font-weight:700;text-decoration:none;white-space:nowrap;border-bottom:2px solid transparent;transition:all .2s;color:#64748b;">Trading</a>
+<a href="https://polymarket.shawny-project42.com/" class="nav-tab" data-page="polymarket" style="padding:10px 18px;font-family:'JetBrains Mono','Share Tech Mono',monospace;font-size:12px;font-weight:700;text-decoration:none;white-space:nowrap;border-bottom:2px solid transparent;transition:all .2s;color:#64748b;">Polymarket</a>
+<a href="/" class="nav-tab" data-page="nba" style="padding:10px 18px;font-family:'JetBrains Mono','Share Tech Mono',monospace;font-size:12px;font-weight:700;text-decoration:none;white-space:nowrap;border-bottom:2px solid transparent;transition:all .2s;color:#64748b;">NBA</a>
+<a href="https://polymarket.shawny-project42.com/btc" class="nav-tab" data-page="btc" style="padding:10px 18px;font-family:'JetBrains Mono','Share Tech Mono',monospace;font-size:12px;font-weight:700;text-decoration:none;white-space:nowrap;border-bottom:2px solid transparent;transition:all .2s;color:#64748b;">BTC</a>
+<a href="https://polymarket.shawny-project42.com/eth" class="nav-tab" data-page="eth" style="padding:10px 18px;font-family:'JetBrains Mono','Share Tech Mono',monospace;font-size:12px;font-weight:700;text-decoration:none;white-space:nowrap;border-bottom:2px solid transparent;transition:all .2s;color:#64748b;">ETH</a>
 </nav>
-<script>document.querySelectorAll('.nav-tab').forEach(function(t){var p=location.pathname;var d=t.dataset.page;var active=(p==='/'&&d==='trading')||(p==='/'+d);if(active){t.style.borderBottomColor='#6366f1';t.style.color='#e2e8f0';t.style.background='rgba(99,102,241,0.1)'}});</script>
+<script>document.querySelectorAll('.nav-tab').forEach(function(t){if(t.dataset.page==='nba'){t.style.borderBottomColor='#6366f1';t.style.color='#e2e8f0';t.style.background='rgba(99,102,241,0.1)'}});</script>
 
 <header>
   <div class="wrap">
@@ -384,7 +384,7 @@
       </div>
       <div class="hbar">
         <a href="/" class="back-link">&#8592; Trading Dashboard</a>
-        <a href="/polymarket" class="back-link">Polymarket</a>
+        <a href="https://polymarket.shawny-project42.com/" class="back-link">Polymarket</a>
         <span class="back-link active">NBA</span>
         <span class="dot ok"></span>
         <span class="last-updated-label">UPDATED <span id="timestamp">—</span></span>
@@ -579,7 +579,7 @@
   <div class="wrap">
     NBA PREDICTIONS &nbsp;|&nbsp; Elo + XGBoost Model &nbsp;|&nbsp;
     <a href="/">Trading Dashboard</a> &nbsp;|&nbsp;
-    <a href="/polymarket">Polymarket</a> &nbsp;|&nbsp;
+    <a href="https://polymarket.shawny-project42.com/">Polymarket</a> &nbsp;|&nbsp;
     Data: public NBA stats &amp; Polymarket API
   </div>
 </footer>
