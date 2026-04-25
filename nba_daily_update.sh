@@ -37,27 +37,27 @@ if [ "$1" != "--predict-only" ]; then
     "$PYTHON" nba_predictor.py --train-spread --days 90 2>&1 | tee -a "$LOG"
 fi
 
-# ── 2. 生成今日預測 JSON ──────────────────────────
+# ── 2. Resolve 昨日比賽結果（先更新 DB，讓校準可用） ──
+echo "[$(date '+%H:%M:%S')] Resolving past game outcomes..." | tee -a "$LOG"
+"$PYTHON" nba_resolve.py 2>&1 | tee -a "$LOG"
+
+# ── 3. 生成今日預測 JSON ──────────────────────────
 echo "[$(date '+%H:%M:%S')] 生成今日預測..." | tee -a "$LOG"
 "$PYTHON" nba_predictor.py --days-ahead 3 --json > "$DATA_OUT" 2>>"$LOG"
 
-GAMES=$("$PYTHON" -c "import json; d=json.load(open('$DATA_OUT')); print(len(d.get('games',[])))" 2>/dev/null || echo "?")
+GAMES=$("$PYTHON" -c "import json; d=json.load(open('$DATA_OUT')); print(len(d.get('games',[])) + len(d.get('next_games',[])))" 2>/dev/null || echo "?")
 EDGES=$("$PYTHON" -c "import json; d=json.load(open('$DATA_OUT')); print(len(d.get('edges',[])))" 2>/dev/null || echo "?")
 echo "[$(date '+%H:%M:%S')] ✅ $GAMES 場比賽 | $EDGES 個邊際機會 → $DATA_OUT" | tee -a "$LOG"
 
-# ── 3. 印出今日預測摘要 ────────────────────────────
+# ── 4. 印出今日預測摘要 ────────────────────────────
 echo "" | tee -a "$LOG"
 "$PYTHON" nba_predictor.py 2>&1 | grep "Prediction:" | tee -a "$LOG"
 
-# ── 4. 同步到 GitHub Release（供 Streamlit Cloud 讀取） ─
+# ── 5. 同步到 GitHub Release（供 Streamlit Cloud 讀取） ─
 if [ -f "$NBA_DIR/streamlit_app/sync_data.py" ]; then
     echo "[$(date '+%H:%M:%S')] 同步至 GitHub Release..." | tee -a "$LOG"
     "$PYTHON" "$NBA_DIR/streamlit_app/sync_data.py" 2>&1 | tee -a "$LOG"
 fi
-
-# ── 5. Resolve 昨日比賽結果（填入 DB outcome）──
-echo "[$(date '+%H:%M:%S')] Resolving past game outcomes..." | tee -a "$LOG"
-"$PYTHON" nba_resolve.py 2>&1 | tee -a "$LOG"
 
 # ── 6. 推送每日預測 digest 到 @NBA_predict55_bot ──
 if [ -f "$NBA_DIR/telegram_push.py" ] && grep -q '^NBA_TG_CHAT_ID=.' "$NBA_DIR/.env" 2>/dev/null; then

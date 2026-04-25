@@ -20,6 +20,7 @@ autobots_NBA/
 ├── nba_predictor.py             ← 核心：Elo + XGBoost + 邊際偵測（1329 行）
 ├── dashboard.py                 ← Flask 儀表板 API server（本機 port 8090）
 ├── nba_daily_update.sh          ← 每日自動更新腳本
+├── deploy_nba_site.sh           ← 一鍵部署到 nba.shawny-project42.com
 │
 ├── 【Streamlit 雲端版】
 ├── streamlit_app/
@@ -35,6 +36,7 @@ autobots_NBA/
 ├── state/
 │   ├── nba_model.json           ← Elo + 元資料
 │   ├── nba_model.xgb            ← XGBoost 主模型（二進位）
+│   ├── nba_calibration.json     ← deploy 用校準快照
 │   ├── nba_spread_model.json    ← Spread 模型特徵清單
 │   └── nba_spread_model.xgb     ← Spread 模型（二進位）
 │
@@ -74,8 +76,44 @@ bash nba_daily_update.sh
 # 只更新預測，不重訓
 bash nba_daily_update.sh --predict-only
 
+# 一鍵部署到 nba.shawny-project42.com
+bash deploy_nba_site.sh -m "Deploy NBA dashboard update"
+
 # 啟動儀表板（本機 http://localhost:8090）
 $VENV dashboard.py
+```
+
+---
+
+## 🚢 一鍵部署到 `nba.shawny-project42.com`
+
+`deploy_nba_site.sh` 會把本地修改整理成固定流程，並把 `/api/nba/predictions` 需要的模型狀態一起帶上：
+
+1. `nba_resolve.py` 先補過去賽果
+2. `nba_predictor.py --days-ahead 3 --json` 重建 `nba_data.json`，同時刷新 `state/nba_calibration.json`
+3. 跑 Python / shell / 前端 JS 基本檢查
+4. `git add -A`，並明確 stage `nba_data.json`、`state/nba_model.*`、`state/nba_spread_model.*`、`state/nba_calibration.json`
+5. `git commit`
+6. `git push origin HEAD:main`
+
+前提是假設 `origin/main` 已經綁定到線上的自動部署服務（目前 `https://nba.shawny-project42.com/` 的行為就是這種模式）。
+
+這樣做的目的是讓線上的 `/api/nba/predictions` 在 redeploy 後也直接吃到和本地相同的 Elo、spread model 與 calibration，而不是只同步頁面和 `nba_data.json`。
+
+常用指令：
+
+```bash
+# 標準部署：更新資料 + 檢查 + commit + push
+bash deploy_nba_site.sh -m "Deploy NBA dashboard calibration update"
+
+# 只部署程式碼，不重抓資料
+bash deploy_nba_site.sh --skip-data -m "Deploy UI-only change"
+
+# 連 GitHub Release 的 nba_data.json 一起同步
+bash deploy_nba_site.sh --sync-release -m "Deploy + sync data snapshot"
+
+# 只在本地 commit，不 push
+bash deploy_nba_site.sh --no-push -m "Prepare deploy locally"
 ```
 
 ---

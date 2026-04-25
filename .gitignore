@@ -11,8 +11,9 @@ logs/
 # macOS
 .DS_Store
 
-# Models（二進位太大，不進 git；每日會重訓）
-state/*.xgb
+# Models
+# state/*.json / state/*.xgb are deploy-critical for keeping
+# /api/nba/predictions aligned with the local model state.
 
 # Editor
 .vscode/

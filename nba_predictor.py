@@ -29,6 +29,8 @@ if sys.platform == "win32":
 
 STATE_DIR = Path(__file__).parent / "state"
 MODEL_PATH = STATE_DIR / "nba_model.json"
+CALIBRATION_PATH = STATE_DIR / "nba_calibration.json"
+SPREAD_MODEL_PATH = STATE_DIR / "nba_spread_model.xgb"
 
 ESPN_BASE = "https://site.api.espn.com/apis/site/v2/sports/basketball/nba"
 GAMMA = "https://gamma-api.polymarket.com"
@@ -332,6 +334,223 @@ def fetch_espn_injuries() -> dict[str, list[dict]]:
         if items:
             result[team_name] = items
     return result
+
+
+def _injury_buckets(items: list[dict]) -> tuple[list[dict], list[dict]]:
+    out_statuses = {"out", "season-ending", "injured reserve"}
+    out, gtd = [], []
+    for item in items:
+        status = (item.get("status") or "").lower()
+        if status in out_statuses:
+            out.append(item)
+        elif any(x in status for x in ("day", "questionable", "probable", "doubtful", "gtd")):
+            gtd.append(item)
+    return out, gtd
+
+
+def build_game_injuries(home: str, away: str, injuries_map: dict[str, list[dict]]) -> dict | None:
+    home_items = injuries_map.get(home, [])
+    away_items = injuries_map.get(away, [])
+    if not home_items and not away_items:
+        return None
+
+    home_out, home_gtd = _injury_buckets(home_items)
+    away_out, away_gtd = _injury_buckets(away_items)
+    if not (home_out or home_gtd or away_out or away_gtd):
+        return None
+
+    return {
+        "home_out": home_out,
+        "home_gtd": home_gtd,
+        "away_out": away_out,
+        "away_gtd": away_gtd,
+    }
+
+
+def normalize_game_date(game: dict, fallback_ymd: str) -> str:
+    raw = (game.get("date") or "")[:10]
+    if raw:
+        return raw.replace("-", "")
+    fetched = game.get("_fetched_for_date")
+    if fetched:
+        return fetched
+    return fallback_ymd
+
+
+def build_recent_team_form(results: list[dict], max_games_per_team: int = 6) -> dict[str, dict]:
+    buckets: dict[str, list[tuple[float, float]]] = {}
+    for game in sorted(results, key=lambda x: x["date"], reverse=True):
+        home = game.get("home_team") or game.get("team_a")
+        away = game.get("away_team") or game.get("team_b")
+        home_score = game.get("home_score")
+        away_score = game.get("away_score")
+        if not home or not away:
+            continue
+
+        for team, scored, allowed in (
+            (home, home_score, away_score),
+            (away, away_score, home_score),
+        ):
+            bucket = buckets.setdefault(team, [])
+            if len(bucket) >= max_games_per_team:
+                continue
+            bucket.append((float(scored or 0.0), float(allowed or 0.0)))
+
+    summary: dict[str, dict] = {}
+    for team, games in buckets.items():
+        if not games:
+            continue
+        total_scored = sum(g[0] for g in games)
+        total_allowed = sum(g[1] for g in games)
+        n = len(games)
+        summary[team] = {
+            "games": n,
+            "ppg": total_scored / n,
+            "oppg": total_allowed / n,
+        }
+    return summary
+
+
+def _blend_recent_stat(
+    season_value: float,
+    recent_value: float | None,
+    recent_games: int,
+    *,
+    recent_weight: float = 0.35,
+    min_games: int = 3,
+) -> float:
+    if recent_value is None or recent_games < min_games:
+        return season_value
+    weight = recent_weight * min(recent_games / 6.0, 1.0)
+    return season_value * (1.0 - weight) + float(recent_value) * weight
+
+
+def _weighted_bias_adjustment(bias: float, samples: int, *, full_samples: int, cap: float) -> float:
+    if not samples:
+        return 0.0
+    weight = min(samples / full_samples, 1.0)
+    adj = float(bias) * weight
+    return max(-cap, min(cap, adj))
+
+
+def _default_calibration_snapshot() -> dict:
+    return {
+        "lookback_days": 21,
+        "games_considered": 0,
+        "spread_samples": 0,
+        "spread_bias": 0.0,
+        "spread_mae": 0.0,
+        "spread_sign_accuracy": None,
+        "moneyline_accuracy": None,
+        "total_samples": 0,
+        "total_bias": 0.0,
+        "total_mae": 0.0,
+    }
+
+
+def save_prediction_calibration_snapshot(snapshot: dict, path: Path | None = None) -> dict:
+    path = path or CALIBRATION_PATH
+    path.parent.mkdir(parents=True, exist_ok=True)
+    payload = _default_calibration_snapshot()
+    for key in payload:
+        if key in snapshot:
+            payload[key] = snapshot[key]
+    payload["saved_at"] = datetime.now().isoformat(timespec="seconds")
+    path.write_text(json.dumps(payload, indent=2), encoding="utf-8")
+    return payload
+
+
+def load_prediction_calibration_snapshot() -> dict:
+    try:
+        from nba_db import DB_PATH as _db, get_prediction_calibration
+        snapshot = get_prediction_calibration(_db)
+        if int(snapshot.get("games_considered") or 0) > 0:
+            try:
+                save_prediction_calibration_snapshot(snapshot)
+            except Exception:
+                pass
+            return snapshot
+    except Exception:
+        pass
+
+    if CALIBRATION_PATH.exists():
+        try:
+            payload = json.loads(CALIBRATION_PATH.read_text(encoding="utf-8"))
+            snapshot = _default_calibration_snapshot()
+            for key in snapshot:
+                if key in payload:
+                    snapshot[key] = payload[key]
+            return snapshot
+        except Exception:
+            pass
+
+    return _default_calibration_snapshot()
+
+
+def calibrate_spread_projection(base_margin: float, raw_spread: float | None, calibration: dict | None) -> tuple[float, dict]:
+    if raw_spread is None:
+        blended = base_margin
+        model_weight = 0.0
+    else:
+        agree = (base_margin == 0) or (raw_spread == 0) or (base_margin * raw_spread >= 0)
+        model_weight = 0.35 if agree else 0.15
+        blended = base_margin * (1.0 - model_weight) + raw_spread * model_weight
+        if abs(base_margin) >= 1.5 and blended * base_margin < 0:
+            blended = abs(blended) * (1.0 if base_margin >= 0 else -1.0)
+
+    spread_samples = int((calibration or {}).get("spread_samples") or 0)
+    spread_bias = float((calibration or {}).get("spread_bias") or 0.0)
+    bias_adj = _weighted_bias_adjustment(spread_bias, spread_samples, full_samples=24, cap=6.0)
+    calibrated = blended + bias_adj
+
+    if abs(base_margin) >= 6 and abs(calibrated) < 1.5:
+        calibrated = 1.5 if base_margin > 0 else -1.5
+
+    return calibrated, {
+        "base_margin": round(base_margin, 2),
+        "raw_spread": round(raw_spread, 2) if raw_spread is not None else None,
+        "model_weight": round(model_weight, 2),
+        "bias_adjustment": round(bias_adj, 2),
+    }
+
+
+def project_total_points(
+    home: str,
+    away: str,
+    standings: dict[str, dict],
+    recent_form: dict[str, dict],
+    calibration: dict | None,
+) -> dict[str, float]:
+    h_stats = standings.get(home, {})
+    a_stats = standings.get(away, {})
+    h_recent = recent_form.get(home, {})
+    a_recent = recent_form.get(away, {})
+
+    h_ppg = _blend_recent_stat(h_stats.get("ppg", 110.0), h_recent.get("ppg"), h_recent.get("games", 0))
+    a_ppg = _blend_recent_stat(a_stats.get("ppg", 110.0), a_recent.get("ppg"), a_recent.get("games", 0))
+    h_oppg = _blend_recent_stat(h_stats.get("oppg", 110.0), h_recent.get("oppg"), h_recent.get("games", 0))
+    a_oppg = _blend_recent_stat(a_stats.get("oppg", 110.0), a_recent.get("oppg"), a_recent.get("games", 0))
+
+    away_expected_raw = (a_ppg + h_oppg) / 2.0
+    home_expected_raw = (h_ppg + a_oppg) / 2.0
+    avg_pace = (a_ppg + a_oppg + h_ppg + h_oppg) / 4.0
+    league_avg = 113.0
+    pace_adj = (avg_pace - league_avg) * 0.35
+    raw_total = away_expected_raw + home_expected_raw + pace_adj
+
+    total_samples = int((calibration or {}).get("total_samples") or 0)
+    total_bias = float((calibration or {}).get("total_bias") or 0.0)
+    bias_adj = _weighted_bias_adjustment(total_bias, total_samples, full_samples=24, cap=10.0)
+    pred_total = max(185.0, min(255.0, raw_total + bias_adj))
+
+    scale = pred_total / raw_total if raw_total > 0 else 1.0
+    return {
+        "pred_total": pred_total,
+        "raw_total": raw_total,
+        "away_expected": away_expected_raw * scale,
+        "home_expected": home_expected_raw * scale,
+        "bias_adjustment": bias_adj,
+    }
 
 
 def _elo_game_prob(elo_a: float, elo_b: float, hca: float = 48.0) -> float:
@@ -1091,7 +1310,7 @@ class SpreadPredictor:
         return float(self.model.predict(dtest)[0])
 
     def save(self, path: Path | None = None):
-        path = path or (STATE_DIR / "nba_spread_model.xgb")
+        path = path or SPREAD_MODEL_PATH
         path.parent.mkdir(parents=True, exist_ok=True)
         if self.model:
             self.model.save_model(str(path))
@@ -1100,7 +1319,7 @@ class SpreadPredictor:
             print(f"  Spread model saved to {path}")
 
     def load(self, path: Path | None = None) -> bool:
-        path = path or (STATE_DIR / "nba_spread_model.xgb")
+        path = path or SPREAD_MODEL_PATH
         meta = path.with_suffix(".json")
         if path.exists() and meta.exists():
             xgb = _ensure_xgboost()
@@ -1222,9 +1441,11 @@ def cmd_today(predictor: NBAPredictor, days_ahead: int = 0):
     standings = fetch_espn_standings()
     predictor.team_stats = standings
 
-    recent = fetch_espn_results(7)
+    recent_results = fetch_espn_results(21)
+    recent_form = build_recent_team_form(recent_results)
+    calibration = load_prediction_calibration_snapshot()
     last_game: dict[str, str] = {}
-    for g in recent:
+    for g in recent_results:
         # Track most recent game date per team (keep latest)
         for team_key in ("team_a", "team_b"):
             tname = g[team_key]
@@ -1245,13 +1466,12 @@ def cmd_today(predictor: NBAPredictor, days_ahead: int = 0):
         rest_h = calc_rest_days(home, last_game)
         rest_a = calc_rest_days(away, last_game)
 
-        # Predict Margin
-        margin = predictor.predict_margin(home, away, is_home=True,
-                                         b2b_a=b2b_home, b2b_b=b2b_away)
-        prob = predictor.margin_to_prob(margin, 0)
+        base_margin = predictor.predict_margin(home, away, is_home=True,
+                                               b2b_a=b2b_home, b2b_b=b2b_away)
+        prob = predictor.margin_to_prob(base_margin, 0)
 
-        pick = home if margin > 0 else away
-        conf = prob if margin > 0 else 1 - prob
+        pick = home if base_margin > 0 else away
+        conf = prob if base_margin > 0 else 1 - prob
 
         home_elo = predictor.elo.ratings.get(home, 1500)
         away_elo = predictor.elo.ratings.get(away, 1500)
@@ -1261,19 +1481,14 @@ def cmd_today(predictor: NBAPredictor, days_ahead: int = 0):
         a_tag = " [B2B]" if b2b_away else ""
 
         print(f"\n  {away}{a_tag} ({game['away_record']}) @ {home}{h_tag} ({game['home_record']}){status}")
-        print(f"  Prediction: {pick} by {abs(margin):.1f} points ({conf*100:.1f}% confidence)")
+        print(f"  Prediction: {pick} by {abs(base_margin):.1f} points ({conf*100:.1f}% confidence)")
         print(f"  Elo Ratings: {home}={home_elo:.0f} | {away}={away_elo:.0f}")
 
-        if has_spread:
-            sp_margin = spread_model.predict(home, away, standings, predictor.elo, rest_h, rest_a)
-            h_stats = standings.get(home, {})
-            a_stats = standings.get(away, {})
-            pred_total = (
-                h_stats.get("ppg", 110) + h_stats.get("oppg", 110) +
-                a_stats.get("ppg", 110) + a_stats.get("oppg", 110)
-            ) / 2
-            home_abbr = game.get("home_abbr", home[:3].upper())
-            print(f"  Spread: {home_abbr} {sp_margin:+.1f}  |  Total: {pred_total:.0f}")
+        raw_spread = spread_model.predict(home, away, standings, predictor.elo, rest_h, rest_a) if has_spread else None
+        sp_margin, _spread_meta = calibrate_spread_projection(base_margin, raw_spread, calibration)
+        total_proj = project_total_points(home, away, standings, recent_form, calibration)
+        home_abbr = game.get("home_abbr", home[:3].upper())
+        print(f"  Spread: {home_abbr} {sp_margin:+.1f}  |  Total: {total_proj['pred_total']:.0f}")
 
     print()
 
@@ -1461,7 +1676,14 @@ def main():
         sys.stdout = sys.__stdout__
         sys.stdout.reconfigure(encoding="utf-8")
         import json as _json
-        output = {"games": [], "edges": [], "elo_teams": {}}
+        output = {
+            "games": [],
+            "next_games": [],
+            "next_games_date": None,
+            "edges": [],
+            "elo_teams": {},
+            "calibration": {},
+        }
 
         # Today (or today + N days ahead) games
         if args.days_ahead > 0:
@@ -1470,11 +1692,17 @@ def main():
             today_games = fetch_espn_scoreboard()
         standings = fetch_espn_standings()
         predictor.team_stats = standings
+        injuries_map = fetch_espn_injuries()
+        today_ymd = datetime.now().strftime("%Y%m%d")
+        first_future_ymd = None
 
         # Fetch recent results for B2B detection and rest days
-        recent = fetch_espn_results(7)
+        recent_results = fetch_espn_results(21)
+        recent_form = build_recent_team_form(recent_results)
+        calibration = load_prediction_calibration_snapshot()
+        output["calibration"] = calibration
         last_game: dict[str, str] = {}
-        for g in recent:
+        for g in recent_results:
             for _tk in ("team_a", "team_b"):
                 _tn = g[_tk]
                 if _tn not in last_game or g["date"] > last_game[_tn]:
@@ -1487,6 +1715,7 @@ def main():
 
         for g in today_games:
             home, away = g["home"], g["away"]
+            game_date = normalize_game_date(g, today_ymd)
 
             # B2B Detection -- only flag if team played exactly yesterday
             b2b_home = (home in last_game and last_game[home] == yesterday_str)
@@ -1495,14 +1724,17 @@ def main():
             rest_h = calc_rest_days(home, last_game)
             rest_a = calc_rest_days(away, last_game)
 
-            prob = predictor.predict(home, away, is_home=True, b2b_a=b2b_home, b2b_b=b2b_away)
+            base_margin = predictor.predict_margin(home, away, is_home=True, b2b_a=b2b_home, b2b_b=b2b_away)
+            prob = predictor.margin_to_prob(base_margin, 0)
 
             game_entry = {
+                "game_date": game_date,
                 "home": home, "away": away,
                 "home_record": g.get("home_record", ""),
                 "away_record": g.get("away_record", ""),
                 "home_prob": round(prob * 100, 1),
                 "away_prob": round((1 - prob) * 100, 1),
+                "model_margin": round(base_margin, 1),
                 "home_elo": round(predictor.elo.ratings.get(home, 1500)),
                 "away_elo": round(predictor.elo.ratings.get(away, 1500)),
                 "status": g.get("status", ""),
@@ -1510,32 +1742,33 @@ def main():
                 "b2b_away": b2b_away,
                 "rest_home": rest_h,
                 "rest_away": rest_a,
+                "injuries": build_game_injuries(home, away, injuries_map),
             }
 
-            if has_spread:
-                sp_margin = spread_model.predict(home, away, standings, predictor.elo, rest_h, rest_a)
-                game_entry["pred_spread"] = round(sp_margin, 1)
+            raw_spread = spread_model.predict(home, away, standings, predictor.elo, rest_h, rest_a) if has_spread else None
+            sp_margin, spread_meta = calibrate_spread_projection(base_margin, raw_spread, calibration)
+            total_proj = project_total_points(home, away, standings, recent_form, calibration)
 
-            # Total points prediction
-            h_stats = standings.get(home, {})
-            a_stats = standings.get(away, {})
-            h_ppg = h_stats.get("ppg", 110)
-            a_ppg = a_stats.get("ppg", 110)
-            h_oppg = h_stats.get("oppg", 110)
-            a_oppg = a_stats.get("oppg", 110)
-            # Expected score per team: average of their offense vs opponent defense
-            away_expected = (a_ppg + h_oppg) / 2
-            home_expected = (h_ppg + a_oppg) / 2
-            # Pace adjustment: high-scoring matchups trend higher
-            avg_pace = (a_ppg + a_oppg + h_ppg + h_oppg) / 4
-            league_avg = 113.0
-            pace_adj = (avg_pace - league_avg) * 0.5
-            pred_total = away_expected + home_expected + pace_adj
-            game_entry["pred_total"] = round(pred_total, 1)
-            game_entry["away_expected"] = round(away_expected, 1)
-            game_entry["home_expected"] = round(home_expected, 1)
+            game_entry["pred_spread"] = round(sp_margin, 1)
+            game_entry["spread_model_raw"] = round(raw_spread, 1) if raw_spread is not None else None
+            game_entry["spread_bias_adj"] = round(spread_meta["bias_adjustment"], 1)
+            game_entry["pred_total"] = round(total_proj["pred_total"], 1)
+            game_entry["raw_total"] = round(total_proj["raw_total"], 1)
+            game_entry["total_bias_adj"] = round(total_proj["bias_adjustment"], 1)
+            game_entry["away_expected"] = round(total_proj["away_expected"], 1)
+            game_entry["home_expected"] = round(total_proj["home_expected"], 1)
 
-            output["games"].append(game_entry)
+            if game_date == today_ymd:
+                output["games"].append(game_entry)
+            else:
+                output["next_games"].append(game_entry)
+                if first_future_ymd is None:
+                    first_future_ymd = game_date
+
+        if first_future_ymd:
+            output["next_games_date"] = (
+                f"{first_future_ymd[:4]}-{first_future_ymd[4:6]}-{first_future_ymd[6:8]}"
+            )
 
         # Edge detection
         nba_markets = fetch_polymarket_nba()
@@ -1563,6 +1796,7 @@ def main():
             output["elo_teams"][name] = round(rating)
 
         # Backtest results (walk-forward on recent games)
+        elo_before_backtest = predictor.elo.ratings.copy()
         try:
             all_games = fetch_espn_results(args.days)
             sorted_g = sorted(all_games, key=lambda x: x["date"])
@@ -1634,6 +1868,8 @@ def main():
             }
         except Exception:
             output["backtest"] = None
+        finally:
+            predictor.elo.ratings = elo_before_backtest
 
         # Playoff bracket (Monte Carlo advance probs + injury-aware star badges)
         try:
@@ -1652,12 +1888,13 @@ def main():
             from nba_db import insert_daily_performance, insert_backtest_results, DB_PATH as _db
             _db_init(_db)
             _today = datetime.now().strftime("%Y%m%d")
-            insert_predictions(_db, output["games"], _today)
+            all_pred_games = output["games"] + output.get("next_games", [])
+            insert_predictions(_db, all_pred_games, _today)
             insert_elo_snapshot(_db, output["elo_teams"], _today)
             if output.get("backtest"):
                 insert_daily_performance(_db, output["backtest"], _today)
                 insert_backtest_results(_db, output["backtest"].get("recent", []), _today)
-            print(f"[db] wrote {len(output['games'])} predictions + elo to {_db.name}",
+            print(f"[db] wrote {len(all_pred_games)} predictions + elo to {_db.name}",
                   file=sys.stderr)
         except Exception as _db_err:
             print(f"[warn] DB write failed: {_db_err}", file=sys.stderr)

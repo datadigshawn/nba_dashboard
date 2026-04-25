@@ -5,7 +5,7 @@ NBA SQLite 資料庫模組 — 儲存預測、Elo 歷史、回測績效。
 所有 insert 函式皆冪等（UNIQUE + INSERT OR IGNORE）。
 """
 import sqlite3
-from datetime import datetime
+from datetime import datetime, timedelta
 from pathlib import Path
 
 DB_PATH = Path(__file__).parent / "nba.db"
@@ -77,6 +77,38 @@ CREATE TABLE IF NOT EXISTS backtest_results (
     score     TEXT,
     UNIQUE(run_date, game_date, home, away)
 );
+
+CREATE TABLE IF NOT EXISTS odds_lines (
+    game       TEXT PRIMARY KEY,
+    spread     REAL,
+    ou         REAL,
+    updated_at TEXT NOT NULL
+);
+
+CREATE TABLE IF NOT EXISTS recommended_picks (
+    id           INTEGER PRIMARY KEY AUTOINCREMENT,
+    pick_date    TEXT NOT NULL,
+    game_date    TEXT NOT NULL,
+    game_key     TEXT NOT NULL,
+    away         TEXT NOT NULL,
+    home         TEXT NOT NULL,
+    pick_type    TEXT NOT NULL,
+    pick_target  TEXT NOT NULL,
+    pick_line    REAL,
+    pick_detail  TEXT NOT NULL,
+    edge         REAL,
+    confidence   REAL,
+    tw_spread    REAL,
+    tw_ou        REAL,
+    model_spread REAL,
+    model_total  REAL,
+    result       TEXT,
+    correct      INTEGER,
+    verified_at  TEXT,
+    UNIQUE(pick_date, game_date, game_key, pick_type, pick_detail)
+);
+CREATE INDEX IF NOT EXISTS idx_picks_game_date ON recommended_picks(game_date);
+CREATE INDEX IF NOT EXISTS idx_picks_pick_date ON recommended_picks(pick_date);
 """
 
 
@@ -85,9 +117,16 @@ def init_db(db_path: Path | str = DB_PATH):
         conn.executescript(SCHEMA)
 
 
+def _connect(db_path: Path | str = DB_PATH) -> sqlite3.Connection:
+    conn = sqlite3.connect(str(db_path), timeout=10)
+    conn.row_factory = sqlite3.Row
+    return conn
+
+
 def insert_predictions(db_path: Path | str, games: list[dict], prediction_date: str):
     with sqlite3.connect(str(db_path), timeout=10) as conn:
         for g in games:
+            game_date = g.get("game_date") or prediction_date
             conn.execute("""
                 INSERT OR IGNORE INTO predictions
                 (prediction_date, game_date, home, away,
@@ -97,7 +136,7 @@ def insert_predictions(db_path: Path | str, games: list[dict], prediction_date: 
                 VALUES (?,?,?,?, ?,?,?,?, ?,?,?,?, ?,?,?,?,?)
             """, (
                 prediction_date,
-                prediction_date,  # game_date = prediction_date for now
+                game_date,
                 g.get("home", ""),
                 g.get("away", ""),
                 g.get("home_prob", 0),
@@ -227,10 +266,399 @@ def db_summary(db_path: Path | str = DB_PATH) -> dict:
         elo_dates = conn.execute("SELECT COUNT(DISTINCT date) FROM elo_history").fetchone()[0]
         perf_days = conn.execute("SELECT COUNT(*) FROM daily_performance").fetchone()[0]
         bt_games = conn.execute("SELECT COUNT(*) FROM backtest_results").fetchone()[0]
+        odds_lines = conn.execute("SELECT COUNT(*) FROM odds_lines").fetchone()[0]
+        picks_total = conn.execute("SELECT COUNT(*) FROM recommended_picks").fetchone()[0]
     return {
         "predictions": pred_total,
         "resolved": pred_resolved,
         "elo_snapshots": elo_dates,
         "performance_days": perf_days,
         "backtest_games": bt_games,
+        "odds_lines": odds_lines,
+        "recommended_picks": picks_total,
+    }
+
+
+def upsert_odds(db_path: Path | str, game: str, spread: float | None, ou: float | None) -> dict:
+    now = datetime.now().isoformat(timespec="seconds")
+    with sqlite3.connect(str(db_path), timeout=10) as conn:
+        conn.execute("""
+            INSERT INTO odds_lines (game, spread, ou, updated_at)
+            VALUES (?, ?, ?, ?)
+            ON CONFLICT(game) DO UPDATE SET
+                spread = excluded.spread,
+                ou = excluded.ou,
+                updated_at = excluded.updated_at
+        """, (game, spread, ou, now))
+    return {"game": game, "spread": spread, "ou": ou, "updated_at": now}
+
+
+def list_odds(db_path: Path | str = DB_PATH) -> list[dict]:
+    with _connect(db_path) as conn:
+        rows = conn.execute("""
+            SELECT game, spread, ou, updated_at
+            FROM odds_lines
+            ORDER BY game
+        """).fetchall()
+    return [dict(r) for r in rows]
+
+
+def save_recommended_picks(db_path: Path | str, picks: list[dict]) -> int:
+    saved = 0
+    with sqlite3.connect(str(db_path), timeout=10) as conn:
+        for p in picks:
+            cur = conn.execute("""
+                INSERT OR IGNORE INTO recommended_picks
+                (pick_date, game_date, game_key, away, home,
+                 pick_type, pick_target, pick_line, pick_detail,
+                 edge, confidence, tw_spread, tw_ou, model_spread, model_total)
+                VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+            """, (
+                p.get("pick_date", ""),
+                p.get("game_date", ""),
+                p.get("game_key", ""),
+                p.get("away", ""),
+                p.get("home", ""),
+                p.get("pick_type", ""),
+                p.get("pick_target", ""),
+                p.get("pick_line"),
+                p.get("pick_detail", ""),
+                p.get("edge"),
+                p.get("confidence"),
+                p.get("tw_spread"),
+                p.get("tw_ou"),
+                p.get("model_spread"),
+                p.get("model_total"),
+            ))
+            if cur.rowcount:
+                saved += 1
+    return saved
+
+
+def _evaluate_pick_result(row: sqlite3.Row, home_score: int, away_score: int) -> tuple[str, int | None]:
+    pick_type = row["pick_type"]
+    pick_target = row["pick_target"]
+    pick_line = row["pick_line"]
+    if pick_line is None:
+        pick_line = row["tw_spread"] if pick_type == "spread" else row["tw_ou"]
+
+    if pick_line is None:
+        return "missing_line", None
+
+    if pick_type == "spread":
+        adjusted_home_margin = (home_score - away_score) + float(pick_line)
+        if adjusted_home_margin == 0:
+            return "push", None
+        if pick_target == "home":
+            return ("win", 1) if adjusted_home_margin > 0 else ("loss", 0)
+        if pick_target == "away":
+            return ("win", 1) if adjusted_home_margin < 0 else ("loss", 0)
+        return "invalid_target", None
+
+    if pick_type == "ou":
+        total = home_score + away_score
+        if total == float(pick_line):
+            return "push", None
+        if pick_target == "over":
+            return ("win", 1) if total > float(pick_line) else ("loss", 0)
+        if pick_target == "under":
+            return ("win", 1) if total < float(pick_line) else ("loss", 0)
+        return "invalid_target", None
+
+    return "invalid_type", None
+
+
+def verify_pending_picks(db_path: Path | str = DB_PATH) -> dict:
+    today = datetime.now().strftime("%Y%m%d")
+    now = datetime.now().isoformat(timespec="seconds")
+    verified = 0
+    wins = 0
+    losses = 0
+    pushes = 0
+
+    with _connect(db_path) as conn:
+        rows = conn.execute("""
+            SELECT *
+            FROM recommended_picks
+            WHERE correct IS NULL
+              AND game_date <= ?
+            ORDER BY game_date, id
+        """, (today,)).fetchall()
+
+        for row in rows:
+            pred = conn.execute("""
+                SELECT home_score, away_score
+                FROM predictions
+                WHERE game_date = ?
+                  AND home = ?
+                  AND away = ?
+                  AND resolved_at IS NOT NULL
+                ORDER BY prediction_date DESC
+                LIMIT 1
+            """, (row["game_date"], row["home"], row["away"])).fetchone()
+            if not pred:
+                continue
+
+            result, correct = _evaluate_pick_result(row, pred["home_score"], pred["away_score"])
+            conn.execute("""
+                UPDATE recommended_picks
+                SET result = ?, correct = ?, verified_at = ?
+                WHERE id = ?
+            """, (result, correct, now, row["id"]))
+            verified += 1
+            if correct == 1:
+                wins += 1
+            elif correct == 0:
+                losses += 1
+            elif result == "push":
+                pushes += 1
+
+    return {
+        "verified": verified,
+        "wins": wins,
+        "losses": losses,
+        "pushes": pushes,
+    }
+
+
+def get_pick_stats(db_path: Path | str = DB_PATH) -> dict:
+    with _connect(db_path) as conn:
+        total, wins = conn.execute("""
+            SELECT COUNT(*),
+                   COALESCE(SUM(CASE WHEN correct = 1 THEN 1 ELSE 0 END), 0)
+            FROM recommended_picks
+            WHERE correct IN (0, 1)
+        """).fetchone()
+
+        spread_total, spread_wins = conn.execute("""
+            SELECT COUNT(*),
+                   COALESCE(SUM(CASE WHEN correct = 1 THEN 1 ELSE 0 END), 0)
+            FROM recommended_picks
+            WHERE pick_type = 'spread'
+              AND correct IN (0, 1)
+        """).fetchone()
+
+        ou_total, ou_wins = conn.execute("""
+            SELECT COUNT(*),
+                   COALESCE(SUM(CASE WHEN correct = 1 THEN 1 ELSE 0 END), 0)
+            FROM recommended_picks
+            WHERE pick_type = 'ou'
+              AND correct IN (0, 1)
+        """).fetchone()
+
+        daily_rows = conn.execute("""
+            SELECT pick_date AS date,
+                   COUNT(*) AS total,
+                   COALESCE(SUM(CASE WHEN correct = 1 THEN 1 ELSE 0 END), 0) AS wins
+            FROM recommended_picks
+            WHERE correct IN (0, 1)
+            GROUP BY pick_date
+            ORDER BY pick_date DESC
+            LIMIT 12
+        """).fetchall()
+
+    def _wr(w: int, t: int) -> float:
+        return round(w / t * 100, 1) if t else 0.0
+
+    daily = []
+    for row in daily_rows:
+        daily.append({
+            "date": row["date"],
+            "wins": row["wins"],
+            "total": row["total"],
+            "wr": _wr(row["wins"], row["total"]),
+        })
+
+    return {
+        "total": total or 0,
+        "wins": wins or 0,
+        "wr": _wr(wins or 0, total or 0),
+        "spread_total": spread_total or 0,
+        "spread_wins": spread_wins or 0,
+        "spread_wr": _wr(spread_wins or 0, spread_total or 0),
+        "ou_total": ou_total or 0,
+        "ou_wins": ou_wins or 0,
+        "ou_wr": _wr(ou_wins or 0, ou_total or 0),
+        "daily": list(reversed(daily)),
+    }
+
+
+def _prediction_window_stats(conn: sqlite3.Connection, start_date: str, end_date: str) -> dict:
+    row = conn.execute("""
+        WITH latest AS (
+            SELECT game_date, home, away, MAX(prediction_date) AS prediction_date
+            FROM predictions
+            WHERE game_date BETWEEN ? AND ?
+            GROUP BY game_date, home, away
+        )
+        SELECT
+            COUNT(*) AS total,
+            COALESCE(SUM(CASE WHEN p.resolved_at IS NOT NULL THEN 1 ELSE 0 END), 0) AS resolved,
+            COALESCE(SUM(CASE WHEN p.pick_correct = 1 THEN 1 ELSE 0 END), 0) AS wins,
+            COALESCE(SUM(CASE WHEN p.pick_correct = 0 THEN 1 ELSE 0 END), 0) AS losses,
+            AVG(CASE WHEN p.margin_error IS NOT NULL THEN ABS(p.margin_error) END) AS avg_margin_error
+        FROM latest l
+        JOIN predictions p
+          ON p.game_date = l.game_date
+         AND p.home = l.home
+         AND p.away = l.away
+         AND p.prediction_date = l.prediction_date
+    """, (start_date, end_date)).fetchone()
+
+    total = row["total"] or 0
+    resolved = row["resolved"] or 0
+    wins = row["wins"] or 0
+    losses = row["losses"] or 0
+    pending = max(total - resolved, 0)
+    avg_margin_error = row["avg_margin_error"]
+
+    return {
+        "start_date": start_date,
+        "end_date": end_date,
+        "total": total,
+        "resolved": resolved,
+        "pending": pending,
+        "wins": wins,
+        "losses": losses,
+        "wr": round(wins / resolved * 100, 1) if resolved else None,
+        "avg_margin_error": round(float(avg_margin_error), 1) if avg_margin_error is not None else None,
+    }
+
+
+def get_prediction_summary(db_path: Path | str = DB_PATH, reference_date: str | None = None) -> dict:
+    ref_dt = datetime.strptime(reference_date, "%Y%m%d") if reference_date else datetime.now()
+    ref_ymd = ref_dt.strftime("%Y%m%d")
+    week_start = (ref_dt - timedelta(days=ref_dt.weekday())).strftime("%Y%m%d")
+    month_start = ref_dt.replace(day=1).strftime("%Y%m%d")
+
+    with _connect(db_path) as conn:
+        today = _prediction_window_stats(conn, ref_ymd, ref_ymd)
+        week = _prediction_window_stats(conn, week_start, ref_ymd)
+        month = _prediction_window_stats(conn, month_start, ref_ymd)
+
+        season_total = conn.execute("""
+            WITH latest AS (
+                SELECT game_date, home, away, MAX(prediction_date) AS prediction_date
+                FROM predictions
+                GROUP BY game_date, home, away
+            )
+            SELECT
+                MIN(p.game_date) AS start_date,
+                MAX(p.game_date) AS end_date,
+                COUNT(*) AS total,
+                COALESCE(SUM(CASE WHEN p.resolved_at IS NOT NULL THEN 1 ELSE 0 END), 0) AS resolved,
+                COALESCE(SUM(CASE WHEN p.pick_correct = 1 THEN 1 ELSE 0 END), 0) AS wins,
+                AVG(CASE WHEN p.margin_error IS NOT NULL THEN ABS(p.margin_error) END) AS avg_margin_error
+            FROM latest l
+            JOIN predictions p
+              ON p.game_date = l.game_date
+             AND p.home = l.home
+             AND p.away = l.away
+             AND p.prediction_date = l.prediction_date
+        """).fetchone()
+
+    season_avg_margin_error = season_total["avg_margin_error"]
+    total = season_total["total"] or 0
+    resolved = season_total["resolved"] or 0
+    wins = season_total["wins"] or 0
+
+    return {
+        "reference_date": ref_ymd,
+        "today": today,
+        "week": week,
+        "month": month,
+        "season": {
+            "start_date": season_total["start_date"],
+            "end_date": season_total["end_date"],
+            "total": total,
+            "resolved": resolved,
+            "pending": max(total - resolved, 0),
+            "wins": wins,
+            "losses": max(resolved - wins, 0),
+            "wr": round(wins / resolved * 100, 1) if resolved else None,
+            "avg_margin_error": round(float(season_avg_margin_error), 1) if season_avg_margin_error is not None else None,
+        },
+    }
+
+
+def get_prediction_calibration(
+    db_path: Path | str = DB_PATH,
+    lookback_days: int = 21,
+    max_games: int = 30,
+) -> dict:
+    cutoff = (datetime.now() - timedelta(days=lookback_days)).strftime("%Y%m%d")
+    with _connect(db_path) as conn:
+        rows = conn.execute("""
+            WITH latest AS (
+                SELECT game_date, home, away, MAX(prediction_date) AS prediction_date
+                FROM predictions
+                WHERE resolved_at IS NOT NULL
+                  AND game_date >= ?
+                GROUP BY game_date, home, away
+            )
+            SELECT
+                p.game_date,
+                p.home,
+                p.away,
+                p.home_prob,
+                p.away_prob,
+                p.pred_spread,
+                p.pred_total,
+                p.home_score,
+                p.away_score,
+                (p.home_score - p.away_score) AS actual_margin,
+                (p.home_score + p.away_score) AS actual_total
+            FROM latest l
+            JOIN predictions p
+              ON p.game_date = l.game_date
+             AND p.home = l.home
+             AND p.away = l.away
+             AND p.prediction_date = l.prediction_date
+            ORDER BY p.game_date DESC, p.id DESC
+            LIMIT ?
+        """, (cutoff, max_games)).fetchall()
+
+    spread_errors: list[float] = []
+    total_errors: list[float] = []
+    spread_sign_hits = 0
+    spread_sign_total = 0
+    moneyline_hits = 0
+
+    for row in rows:
+        actual_margin = float(row["actual_margin"] or 0.0)
+        if row["pred_spread"] is not None:
+            pred_spread = float(row["pred_spread"])
+            spread_errors.append(actual_margin - pred_spread)
+            if actual_margin != 0:
+                spread_sign_total += 1
+                if (pred_spread > 0 and actual_margin > 0) or (pred_spread < 0 and actual_margin < 0):
+                    spread_sign_hits += 1
+
+        if row["pred_total"] is not None:
+            pred_total = float(row["pred_total"])
+            actual_total = float(row["actual_total"] or 0.0)
+            total_errors.append(actual_total - pred_total)
+
+        home_pick = float(row["home_prob"] or 0.0) >= float(row["away_prob"] or 0.0)
+        home_won = actual_margin >= 0
+        if home_pick == home_won:
+            moneyline_hits += 1
+
+    def _avg(values: list[float]) -> float:
+        return round(sum(values) / len(values), 2) if values else 0.0
+
+    def _mae(values: list[float]) -> float:
+        return round(sum(abs(v) for v in values) / len(values), 2) if values else 0.0
+
+    return {
+        "lookback_days": lookback_days,
+        "games_considered": len(rows),
+        "spread_samples": len(spread_errors),
+        "spread_bias": _avg(spread_errors),
+        "spread_mae": _mae(spread_errors),
+        "spread_sign_accuracy": round(spread_sign_hits / spread_sign_total, 3) if spread_sign_total else None,
+        "moneyline_accuracy": round(moneyline_hits / len(rows), 3) if rows else None,
+        "total_samples": len(total_errors),
+        "total_bias": _avg(total_errors),
+        "total_mae": _mae(total_errors),
     }

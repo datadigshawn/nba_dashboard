@@ -77,6 +77,7 @@
   .game-status.scheduled{background:#eff6ff;color:#1d4ed8;border:1px solid #93c5fd;}
   .game-status.live{background:#fef9c3;color:#854d0e;border:1px solid #fde047;animation:pulse 1.5s infinite;}
   .game-status.final{background:#f1f5f9;color:var(--muted);border:1px solid var(--border);}
+  .game-status.next{background:#ecfeff;color:#0f766e;border:1px solid #67e8f9;}
   .game-time{font-family:'Share Tech Mono';font-size:10px;color:var(--muted);}
 
   /* MATCHUP */
@@ -238,6 +239,20 @@
     font-family:'Share Tech Mono';font-size:9px;padding:2px 7px;border-radius:2px;
     margin:2px 2px 0 0;}
 
+  .perf-summary-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px;margin:4px 0 20px;}
+  .perf-card{background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:16px;box-shadow:var(--glow);}
+  .perf-card-header{display:flex;justify-content:space-between;align-items:flex-start;gap:10px;margin-bottom:10px;}
+  .perf-label{font-family:'Share Tech Mono';font-size:10px;letter-spacing:2px;color:var(--muted);text-transform:uppercase;}
+  .perf-range{font-family:'Share Tech Mono';font-size:10px;color:var(--muted);margin-top:3px;}
+  .perf-pill{font-family:'Share Tech Mono';font-size:9px;font-weight:700;padding:3px 8px;border-radius:999px;background:#f8fafc;border:1px solid var(--border);color:var(--muted);white-space:nowrap;}
+  .perf-rate{font-family:'Share Tech Mono';font-size:34px;font-weight:900;line-height:1;margin-bottom:8px;}
+  .perf-sub{font-family:'Share Tech Mono';font-size:11px;color:var(--text);margin-bottom:5px;}
+  .perf-note{font-family:'Share Tech Mono';font-size:10px;color:var(--muted);line-height:1.6;}
+
+  .kpi{background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:14px 16px;box-shadow:var(--glow);}
+  .kpi-label{font-family:'Share Tech Mono';font-size:10px;color:var(--muted);letter-spacing:2px;text-transform:uppercase;margin-bottom:8px;}
+  .kpi-val{font-family:'Share Tech Mono';font-size:28px;font-weight:900;line-height:1;}
+
   /* SKELETON */
   .skeleton-card{background:var(--surface);border:1px solid var(--border);padding:20px;
     border-radius:8px;animation:shimmer 1.4s infinite;}
@@ -261,6 +276,12 @@
     border-top-color:var(--accent);border-radius:50%;animation:spin .8s linear infinite;
     vertical-align:middle;margin-right:8px;}
   @keyframes spin{to{transform:rotate(360deg);}}
+
+  .odds-input{
+    width:100%;padding:8px 10px;font-family:'Share Tech Mono';font-size:12px;
+    border:1px solid var(--border);border-radius:6px;background:var(--surface);color:var(--text);
+  }
+  .odds-input:focus{border-color:var(--accent);box-shadow:0 0 0 3px rgba(0,102,204,.12);}
 
   /* FOOTER */
   footer{border-top:1px solid var(--border);padding:20px 0;text-align:center;
@@ -414,6 +435,9 @@
     </div>
   </section>
 
+  <div id="performance-summary"></div>
+  <div id="today-top-picks-container"></div>
+
   <!-- SECTION 1: TODAY'S GAMES -->
   <section>
     <div class="section-title">Today's Games</div>
@@ -437,6 +461,25 @@
         <div class="skel-bar"></div>
         <div class="skel-line med"></div>
       </div>
+    </div>
+  </section>
+
+  <section id="next-games-section" style="display:none;">
+    <div id="top-picks-container"></div>
+    <div class="section-title">🎯 Next Games
+      <span style="font-size:10px;color:var(--muted);font-weight:400;margin-left:12px;" id="next-games-date">—</span>
+    </div>
+    <div class="game-grid" id="next-games-grid">
+      <div class="skeleton-card">
+        <div class="skel-line short"></div>
+        <div class="skel-line full"></div>
+        <div class="skel-bar"></div>
+        <div class="skel-line med"></div>
+      </div>
+    </div>
+    <div class="section-title" style="margin-top:20px;">🇹🇼 Next Games — 運彩盤口 vs 模型預測</div>
+    <div class="tw-lottery-grid" id="next-tw-lottery-grid">
+      <div style="text-align:center;padding:40px;font-family:'Share Tech Mono';color:var(--muted);">Waiting for future games...</div>
     </div>
   </section>
 
@@ -555,21 +598,48 @@
       </div>
       <div class="model-item">
         <div class="mi-label">Training Data</div>
-        <div class="mi-val">402 Games</div>
-        <div class="mi-sub">60-day rolling window, updated daily</div>
+        <div class="mi-val">~90 Days</div>
+        <div class="mi-sub">Rolling retrain with daily prediction snapshots and future game tracking</div>
       </div>
       <div class="model-item">
         <div class="mi-label">Features Used</div>
-        <div class="mi-val" style="margin-bottom:6px;">6 Features</div>
+        <div class="mi-val" style="margin-bottom:6px;">18+ Features</div>
         <div>
           <span class="feature-pill">Elo Diff</span>
           <span class="feature-pill">Win %</span>
           <span class="feature-pill">PPG</span>
           <span class="feature-pill">OPPG</span>
           <span class="feature-pill">Streak</span>
-          <span class="feature-pill">Home/Away</span>
+          <span class="feature-pill">B2B</span>
+          <span class="feature-pill">Rest</span>
+          <span class="feature-pill">Pace Proxy</span>
         </div>
       </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="section-title">🇹🇼 輸入運彩盤口</div>
+    <div style="background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:16px;">
+      <div style="display:flex;gap:10px;flex-wrap:wrap;align-items:flex-end;">
+        <div style="flex:2;min-width:220px;">
+          <label style="display:block;font-family:'Share Tech Mono';font-size:10px;color:var(--muted);letter-spacing:1px;margin-bottom:4px;">比賽 (客隊 @ 主隊)</label>
+          <select id="odds-game" class="odds-input">
+            <option value="">— 選擇比賽 —</option>
+          </select>
+        </div>
+        <div style="flex:1;min-width:120px;">
+          <label style="display:block;font-family:'Share Tech Mono';font-size:10px;color:var(--muted);letter-spacing:1px;margin-bottom:4px;">主隊讓分</label>
+          <input id="odds-spread" type="number" step="0.5" placeholder="-3.5" class="odds-input">
+        </div>
+        <div style="flex:1;min-width:120px;">
+          <label style="display:block;font-family:'Share Tech Mono';font-size:10px;color:var(--muted);letter-spacing:1px;margin-bottom:4px;">大小分 (O/U)</label>
+          <input id="odds-ou" type="number" step="0.5" placeholder="226.5" class="odds-input">
+        </div>
+        <button onclick="submitOdds()" class="refresh-btn" style="padding:8px 18px;">SAVE</button>
+      </div>
+      <div id="odds-status" style="font-family:'Share Tech Mono';font-size:11px;color:var(--muted);margin-top:10px;"></div>
+      <div id="odds-list" style="margin-top:10px;font-family:'Share Tech Mono';font-size:11px;color:var(--muted);"></div>
     </div>
   </section>
 
@@ -585,11 +655,14 @@
 </footer>
 
 <script>
-// ─── State ────────────────────────────────────────────────────────
 let countdownSec = 300;
 let countdownTimer = null;
+let scoreInterval = null;
+let liveScoreMap = {};
+window._loadedGames = [];
+window._nextGames = [];
+window._twOddsMap = {};
 
-// ─── Helpers ──────────────────────────────────────────────────────
 function fmt$M(n) {
   if (n >= 1e6) return '$' + (n / 1e6).toFixed(1) + 'M';
   if (n >= 1e3) return '$' + (n / 1e3).toFixed(0) + 'K';
@@ -597,13 +670,32 @@ function fmt$M(n) {
 }
 
 function fmtTime() {
-  const d = new Date();
-  return d.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit', second: '2-digit' });
+  return new Date().toLocaleTimeString('en-US', {
+    hour: '2-digit',
+    minute: '2-digit',
+    second: '2-digit'
+  });
+}
+
+function abbrevTeam(name) {
+  const parts = (name || '').split(' ');
+  return parts.length > 1 ? parts[parts.length - 1] : (name || '').substring(0, 10);
 }
 
 function updateTimestamp() {
   const el = document.getElementById('timestamp');
   if (el) el.textContent = fmtTime();
+}
+
+function formatYmdLabel(ymd) {
+  if (!ymd || ymd.length !== 8) return ymd || '—';
+  return ymd.slice(4, 6) + '/' + ymd.slice(6, 8);
+}
+
+function formatRangeLabel(startDate, endDate) {
+  if (!startDate && !endDate) return '—';
+  if (startDate === endDate) return formatYmdLabel(startDate);
+  return `${formatYmdLabel(startDate)} - ${formatYmdLabel(endDate)}`;
 }
 
 function startCountdown() {
@@ -621,10 +713,6 @@ function startCountdown() {
     }
   }, 1000);
 }
-
-// ─── Render: Games ────────────────────────────────────────────────
-// Store live scores globally for game card rendering
-let liveScoreMap = {};
 
 function updateLiveScoreMap(espnData) {
   if (!espnData || !espnData.events) return;
@@ -647,165 +735,257 @@ function updateLiveScoreMap(espnData) {
   });
 }
 
+function renderInjuryBadge(g) {
+  const inj = g.injuries;
+  if (!inj) return '';
+  const homeOut = inj.home_out || [];
+  const awayOut = inj.away_out || [];
+  const homeGtd = inj.home_gtd || [];
+  const awayGtd = inj.away_gtd || [];
+  if (!homeOut.length && !awayOut.length && !homeGtd.length && !awayGtd.length) return '';
+
+  let html = `<div style="margin-top:8px;padding:8px 10px;border-radius:6px;background:#fff7ed;border:1px solid #fdba74;font-family:'Share Tech Mono';font-size:10px;line-height:1.7;">`;
+  html += `<div style="font-weight:700;color:#9a3412;margin-bottom:4px;">🏥 傷兵報告</div>`;
+
+  function row(team, out, gtd) {
+    let block = '';
+    if (out.length) {
+      block += `<div style="color:#991b1b;">${team} ❌ OUT: <b>${out.map(p => p.name).join(', ')}</b></div>`;
+    }
+    if (gtd.length) {
+      block += `<div style="color:#9a3412;">${team} ⚠️ GTD: ${gtd.map(p => p.name).join(', ')}</div>`;
+    }
+    return block;
+  }
+
+  html += row(abbrevTeam(g.away), awayOut, awayGtd);
+  html += row(abbrevTeam(g.home), homeOut, homeGtd);
+  html += `</div>`;
+  return html;
+}
+
+function buildGameCard(g, isNext) {
+  const homeWin = g.home_prob > g.away_prob;
+  const winnerName = homeWin ? g.home : g.away;
+  const polyQuery = encodeURIComponent(g.away + ' ' + g.home);
+  const polyURL = `https://polymarket.com/markets?_c=${polyQuery}`;
+  const scoreKey = g.home + '|' + g.away;
+  const score = liveScoreMap[scoreKey];
+  const hasScore = score && (score.homeScore > 0 || score.awayScore > 0);
+  const isFinal = !isNext && score && (score.completed || score.state === 'STATUS_FINAL');
+  const isLive = !isNext && score && score.state === 'STATUS_IN_PROGRESS';
+  const conf = Math.max(g.home_prob, g.away_prob);
+
+  let statusClass = isNext ? 'next' : 'scheduled';
+  let statusIcon = isNext ? '📅 NEXT' : '🏀 SCHEDULED';
+  if (!isNext) {
+    if (isFinal) {
+      statusClass = 'final';
+      statusIcon = '✓ FINAL';
+    } else if (isLive) {
+      statusClass = 'live';
+      statusIcon = '🔴 Q' + score.period + ' ' + score.clock;
+    }
+  }
+
+  let resultHTML = '';
+  let cardBorder = '';
+  if (!isNext && hasScore) {
+    const actualHomeWin = score.homeScore > score.awayScore;
+    const predictCorrect = homeWin === actualHomeWin;
+    const actualMargin = Math.abs(score.homeScore - score.awayScore);
+    const actualWinner = actualHomeWin ? abbrevTeam(g.home) : abbrevTeam(g.away);
+    const actualTotal = score.homeScore + score.awayScore;
+    const predTotal = g.pred_total || 0;
+    const totalDiff = actualTotal - predTotal;
+    const totalAccurate = predTotal > 0 && Math.abs(totalDiff) <= 10;
+    const totalTag = predTotal > 0
+      ? `<div style="display:flex;justify-content:space-between;padding:6px 8px;margin-top:6px;border-radius:5px;background:${totalAccurate ? '#eff6ff' : '#fff7ed'};border:1px solid ${totalAccurate ? '#93c5fd' : '#fdba74'};font-family:'Share Tech Mono';font-size:11px;"><span style="color:${totalAccurate ? '#1d4ed8' : '#9a3412'};">${totalAccurate ? '✅' : '⚠️'} 總分: 預測 <b>${predTotal.toFixed(1)}</b> → 實際 <b>${actualTotal}</b></span><span style="color:${totalDiff > 0 ? 'var(--up)' : 'var(--down)'};font-weight:700;">${totalDiff > 0 ? '+' : ''}${totalDiff.toFixed(1)}</span></div>`
+      : '';
+
+    if (isFinal) {
+      if (predictCorrect) {
+        resultHTML = `<div style="text-align:center;padding:8px;margin-top:8px;border-radius:6px;background:#ecfdf5;border:1px solid #6ee7b7;font-family:'Share Tech Mono';font-size:12px;color:#065f46;">✅ 預測正確！ ${actualWinner} WIN ${score.awayScore}-${score.homeScore} (差${actualMargin}分)</div>${totalTag}`;
+        cardBorder = 'border-left:4px solid #059669;';
+      } else {
+        resultHTML = `<div style="text-align:center;padding:8px;margin-top:8px;border-radius:6px;background:#fef2f2;border:1px solid #fca5a5;font-family:'Share Tech Mono';font-size:12px;color:#991b1b;">❌ 預測錯誤 — 實際: ${actualWinner} WIN ${score.awayScore}-${score.homeScore} (差${actualMargin}分)</div>${totalTag}`;
+        cardBorder = 'border-left:4px solid #dc2626;';
+      }
+    } else if (isLive) {
+      const onTrack = homeWin === actualHomeWin;
+      resultHTML = `<div style="text-align:center;padding:6px;margin-top:8px;border-radius:6px;background:${onTrack ? '#ecfdf5' : '#fff7ed'};border:1px solid ${onTrack ? '#6ee7b7' : '#fdba74'};font-family:'Share Tech Mono';font-size:11px;color:${onTrack ? '#166534' : '#9a3412'};">${onTrack ? '🟢' : '🟡'} LIVE: ${score.awayScore}-${score.homeScore} (${onTrack ? '預測中' : '預測落後'})</div>`;
+      cardBorder = onTrack ? 'border-left:4px solid #059669;' : 'border-left:4px solid #d97706;';
+    }
+  }
+
+  let b2bHTML = '';
+  if (g.b2b_home) b2bHTML += `<span style="font-family:'Share Tech Mono';font-size:9px;color:#9a3412;background:#fff7ed;padding:1px 6px;border-radius:3px;margin-right:4px;">⚠ ${abbrevTeam(g.home)} B2B</span>`;
+  if (g.b2b_away) b2bHTML += `<span style="font-family:'Share Tech Mono';font-size:9px;color:#9a3412;background:#fff7ed;padding:1px 6px;border-radius:3px;">⚠ ${abbrevTeam(g.away)} B2B</span>`;
+
+  const awayBoxClass = !homeWin ? 'winner' : 'loser';
+  const homeBoxClass = homeWin ? 'winner' : 'loser';
+  const nextConfHTML = isNext
+    ? `<div style="text-align:center;padding:6px;margin-top:8px;border-radius:6px;background:${conf >= 68 ? '#ecfdf5' : conf >= 58 ? '#eff6ff' : '#f8fafc'};border:1px solid ${conf >= 68 ? '#6ee7b7' : conf >= 58 ? '#93c5fd' : '#e2e8f0'};font-family:'Share Tech Mono';font-size:11px;color:${conf >= 68 ? '#166534' : conf >= 58 ? '#1d4ed8' : '#64748b'};">${conf >= 68 ? '🔥 高信心推薦' : conf >= 58 ? '📊 中等信心' : '📋 低信心 — 觀望'} <span style="font-weight:700;">(${conf.toFixed(1)}%)</span></div>`
+    : '';
+
+  const tag = isNext ? 'div' : 'a';
+  const attrs = isNext ? '' : `href="${polyURL}" target="_blank" rel="noopener"`;
+
+  return `
+    <${tag} class="game-card" ${attrs} style="${cardBorder}">
+      <div class="game-status-row">
+        <span class="game-status ${statusClass}">${statusIcon}</span>
+        ${hasScore && !isNext ? `<span style="font-family:'Share Tech Mono';font-size:14px;font-weight:900;color:var(--text);">${score.awayScore} - ${score.homeScore}</span>` : ''}
+      </div>
+      <div class="matchup">
+        <div class="team-side">
+          <div class="team-name">${g.away}</div>
+          <div class="team-record">${g.away_record || ''}</div>
+        </div>
+        <div class="vs-badge">@</div>
+        <div class="team-side">
+          <div class="team-name">${g.home}</div>
+          <div class="team-record">${g.home_record || ''}</div>
+        </div>
+      </div>
+      <div class="prob-boxes">
+        <div class="prob-box ${awayBoxClass}">
+          <div class="prob-pct">${g.away_prob.toFixed(1)}%</div>
+          <div class="prob-label">${abbrevTeam(g.away)}</div>
+        </div>
+        <div class="prob-box-vs">VS</div>
+        <div class="prob-box ${homeBoxClass}">
+          <div class="prob-pct">${g.home_prob.toFixed(1)}%</div>
+          <div class="prob-label">${abbrevTeam(g.home)}</div>
+        </div>
+      </div>
+      <div class="prob-bar-wrap">
+        <div class="prob-bar">
+          <div class="prob-away" style="width:${g.away_prob}%">${g.away_prob >= 15 ? g.away_prob.toFixed(0) + '%' : ''}</div>
+          <div class="prob-home" style="width:${g.home_prob}%">${g.home_prob >= 15 ? g.home_prob.toFixed(0) + '%' : ''}</div>
+        </div>
+      </div>
+      <div class="elo-row">
+        <div class="elo-val"><span>Elo:</span><span class="elo-num">${g.away_elo || '—'}</span></div>
+        <div style="font-size:10px;color:var(--muted);">★ Elo Rating</div>
+        <div class="elo-val"><span>Elo:</span><span class="elo-num">${g.home_elo || '—'}</span></div>
+      </div>
+      <div class="prediction-label">預測 ${winnerName.split(' ').pop().toUpperCase()} 勝出 +${Math.abs(g.pred_spread || 0).toFixed(1)} pts</div>
+      ${g.pred_total ? `<div style="display:flex;justify-content:space-between;align-items:center;padding:4px 8px;margin-top:4px;border-radius:4px;background:#eff6ff;border:1px solid #93c5fd;font-family:'Share Tech Mono';font-size:10px;"><span style="color:#1e40af;">預測總分: <b style="font-size:13px;">${g.pred_total.toFixed(1)}</b></span><span style="color:#64748b;">${g.away_expected ? abbrevTeam(g.away) + ' ' + g.away_expected.toFixed(0) + ' — ' + abbrevTeam(g.home) + ' ' + g.home_expected.toFixed(0) : ''}</span></div>` : ''}
+      ${b2bHTML ? `<div style="margin-top:6px;">${b2bHTML}</div>` : ''}
+      ${resultHTML}
+      ${nextConfHTML}
+      ${renderInjuryBadge(g)}
+    </${tag}>
+  `;
+}
+
 function renderGames(games) {
   const grid = document.getElementById('games-grid');
-  if (!games || games.length === 0) {
+  if (!games || !games.length) {
     grid.innerHTML = `<div class="empty-state"><div class="big">🏀</div>No games scheduled today.</div>`;
     return;
   }
-  grid.innerHTML = games.map(g => {
-    const homeWin = g.home_prob > g.away_prob;
-    const winnerName = homeWin ? g.home : g.away;
-    const polyQuery = encodeURIComponent(g.away + ' ' + g.home);
-    const polyURL = `https://polymarket.com/markets?_c=${polyQuery}`;
+  grid.innerHTML = games.map(g => buildGameCard(g, false)).join('');
+}
 
-    // Check live/final score
-    const scoreKey = g.home + '|' + g.away;
-    const score = liveScoreMap[scoreKey];
-    const hasScore = score && (score.homeScore > 0 || score.awayScore > 0);
-    const isFinal = score && (score.completed || score.state === 'STATUS_FINAL');
-    const isLive = score && score.state === 'STATUS_IN_PROGRESS';
+function renderNextGames(games, dateLabel) {
+  const section = document.getElementById('next-games-section');
+  const grid = document.getElementById('next-games-grid');
+  if (!section || !grid) return;
+  if (!games || !games.length) {
+    section.style.display = 'none';
+    return;
+  }
+  section.style.display = '';
+  grid.innerHTML = games.map(g => buildGameCard(g, true)).join('');
+  const dateEl = document.getElementById('next-games-date');
+  if (dateEl) {
+    const first = games[0].game_date || '';
+    const label = dateLabel || formatYmdLabel(first);
+    dateEl.textContent = label ? `(${label} · ${games.length} games)` : `${games.length} games`;
+  }
+  renderTWLotteryInto('next-tw-lottery-grid', games, window._twOddsMap || {});
+}
 
-    let statusClass = 'scheduled';
-    let statusIcon = '🏀 SCHEDULED';
-    if (isFinal) { statusClass = 'final'; statusIcon = '✓ FINAL'; }
-    else if (isLive) { statusClass = 'live'; statusIcon = '🔴 Q' + score.period + ' ' + score.clock; }
+function renderPerformanceSummary(summary) {
+  const container = document.getElementById('performance-summary');
+  if (!container) return;
+  if (!summary || !summary.today || !summary.week || !summary.month) {
+    container.innerHTML = '';
+    return;
+  }
 
-    // Determine actual winner (if game finished or in progress)
-    let resultHTML = '';
-    let cardBorder = '';
-    if (hasScore) {
-      const actualHomeWin = score.homeScore > score.awayScore;
-      const predictCorrect = homeWin === actualHomeWin;
-      const actualMargin = Math.abs(score.homeScore - score.awayScore);
-      const actualWinner = actualHomeWin ? abbrevTeam(g.home) : abbrevTeam(g.away);
+  const cards = [
+    {key: 'today', label: '今日', pill: 'Today', accent: 'var(--accent)'},
+    {key: 'week', label: '本週', pill: 'Week', accent: 'var(--up)'},
+    {key: 'month', label: '本月', pill: 'Month', accent: 'var(--gold)'},
+    {key: 'season', label: '累積', pill: 'Season', accent: 'var(--warn)'},
+  ];
 
-      if (isFinal) {
-        if (predictCorrect) {
-          resultHTML = `<div style="text-align:center;padding:8px;margin-top:8px;border-radius:6px;
-            background:#ecfdf5;border:1px solid #6ee7b7;font-family:'Share Tech Mono';font-size:12px;color:#065f46;">
-            ✅ 預測正確！ ${actualWinner} WIN ${score.awayScore}-${score.homeScore} (差${actualMargin}分)
-          </div>`;
-          cardBorder = 'border-left:4px solid #059669;';
-        } else {
-          resultHTML = `<div style="text-align:center;padding:8px;margin-top:8px;border-radius:6px;
-            background:#fef2f2;border:1px solid #fca5a5;font-family:'Share Tech Mono';font-size:12px;color:#991b1b;">
-            ❌ 預測錯誤 — 實際: ${actualWinner} WIN ${score.awayScore}-${score.homeScore} (差${actualMargin}分)
-          </div>`;
-          cardBorder = 'border-left:4px solid #dc2626;';
-        }
-      } else if (isLive) {
-        const onTrack = homeWin === actualHomeWin;
-        resultHTML = `<div style="text-align:center;padding:6px;margin-top:8px;border-radius:6px;
-          background:${onTrack ? '#f0fdf4' : '#fff7ed'};border:1px solid ${onTrack ? '#bbf7d0' : '#fed7aa'};
-          font-family:'Share Tech Mono';font-size:11px;color:${onTrack ? '#166534' : '#9a3412'};">
-          ${onTrack ? '🟢' : '🟡'} LIVE: ${score.awayScore}-${score.homeScore} (${onTrack ? '預測中' : '預測落後'})
-        </div>`;
-        cardBorder = onTrack ? 'border-left:4px solid #059669;' : 'border-left:4px solid #d97706;';
-      }
+  function rateColor(block, accent) {
+    if (block.wr == null) return 'var(--muted)';
+    if (block.wr >= 65) return 'var(--up)';
+    if (block.wr >= 55) return accent;
+    return 'var(--down)';
+  }
+
+  function subline(block) {
+    if (!block.total) return '尚無比賽資料';
+    if (!block.resolved) return `已排定 ${block.total} 場 · 尚未結算`;
+    return `${block.wins}-${block.losses} · 已結算 ${block.resolved}/${block.total}`;
+  }
+
+  function note(block) {
+    if (!block.total) return '等待新的比賽樣本';
+    if (block.avg_margin_error != null) {
+      return `平均分差誤差 ${block.avg_margin_error} 分${block.pending ? ` · 待結算 ${block.pending} 場` : ''}`;
     }
+    return block.pending ? `待結算 ${block.pending} 場` : '已全部結算';
+  }
 
-    // away is always shown on left per NBA convention
-    const awayBoxClass = !homeWin ? 'winner' : 'loser';
-    const homeBoxClass = homeWin ? 'winner' : 'loser';
-
-    return `
-      <a class="game-card" href="${polyURL}" target="_blank" rel="noopener" style="${cardBorder}">
-        <div class="game-status-row">
-          <span class="game-status ${statusClass}">${statusIcon}</span>
-          ${hasScore ? `<span style="font-family:'Share Tech Mono';font-size:14px;font-weight:900;color:var(--text);">${score.awayScore} - ${score.homeScore}</span>` : ''}
-        </div>
-        <div class="matchup">
-          <div class="team-side">
-            <div class="team-name">${g.away}</div>
-            <div class="team-record">${g.away_record || ''}</div>
+  container.innerHTML = `<section>
+    <div class="section-title">📈 近期真實績效
+      <span style="font-size:10px;color:var(--muted);font-weight:400;margin-left:12px;">每場只取最新一筆賽前預測</span>
+    </div>
+    <div class="perf-summary-grid">
+      ${cards.map(card => {
+        const block = summary[card.key] || {};
+        return `<div class="perf-card" style="border-left:4px solid ${card.accent};">
+          <div class="perf-card-header">
+            <div>
+              <div class="perf-label">${card.label} 命中率</div>
+              <div class="perf-range">${formatRangeLabel(block.start_date, block.end_date)}</div>
+            </div>
+            <span class="perf-pill">${card.pill}</span>
           </div>
-          <div class="vs-badge">@</div>
-          <div class="team-side">
-            <div class="team-name">${g.home}</div>
-            <div class="team-record">${g.home_record || ''}</div>
-          </div>
-        </div>
-
-        <div class="prob-boxes">
-          <div class="prob-box ${awayBoxClass}">
-            <div class="prob-pct">${g.away_prob.toFixed(1)}%</div>
-            <div class="prob-label">${abbrevTeam(g.away)}</div>
-          </div>
-          <div class="prob-box-vs">VS</div>
-          <div class="prob-box ${homeBoxClass}">
-            <div class="prob-pct">${g.home_prob.toFixed(1)}%</div>
-            <div class="prob-label">${abbrevTeam(g.home)}</div>
-          </div>
-        </div>
-
-        <div class="prob-bar-wrap">
-          <div class="prob-bar">
-            <div class="prob-away" style="width:${g.away_prob}%">${g.away_prob >= 15 ? g.away_prob.toFixed(0) + '%' : ''}</div>
-            <div class="prob-home" style="width:${g.home_prob}%">${g.home_prob >= 15 ? g.home_prob.toFixed(0) + '%' : ''}</div>
-          </div>
-        </div>
-
-        <div class="elo-row">
-          <div class="elo-val"><span>Elo:</span><span class="elo-num">${g.away_elo || '—'}</span></div>
-          <div style="font-size:10px;color:var(--muted);">★ Elo Rating</div>
-          <div class="elo-val"><span>Elo:</span><span class="elo-num">${g.home_elo || '—'}</span></div>
-        </div>
-
-        <div class="prediction-label">
-          預測 ${winnerName.split(' ').pop().toUpperCase()} 勝出 +${Math.abs(g.pred_spread || 0).toFixed(1)} pts
-        </div>
-        ${g.pred_total ? `
-        <div style="display:flex;justify-content:space-between;align-items:center;padding:4px 8px;margin-top:4px;
-          border-radius:4px;background:#eff6ff;border:1px solid #93c5fd;font-family:'Share Tech Mono';font-size:10px;">
-          <span style="color:#1e40af;">預測總分: <b style="font-size:13px;">${g.pred_total.toFixed(1)}</b></span>
-          <span style="color:#64748b;">${g.away_expected ? abbrevTeam(g.away) + ' ' + g.away_expected.toFixed(0) + ' — ' + abbrevTeam(g.home) + ' ' + g.home_expected.toFixed(0) : ''}</span>
-        </div>` : ''}
-        ${resultHTML}
-      </a>
-    `;
-  }).join('');
+          <div class="perf-rate" style="color:${rateColor(block, card.accent)};">${block.wr == null ? '—' : block.wr.toFixed(1) + '%'}</div>
+          <div class="perf-sub">${subline(block)}</div>
+          <div class="perf-note">${note(block)}</div>
+        </div>`;
+      }).join('')}
+    </div>
+  </section>`;
 }
 
-function abbrevTeam(name) {
-  // Return last word (city removed) or first 10 chars
-  const parts = name.split(' ');
-  return parts.length > 1 ? parts[parts.length - 1] : name.substring(0, 10);
-}
-
-// ─── Render: Elo Rankings ─────────────────────────────────────────
 function renderEloRankings(eloTeams) {
   const container = document.getElementById('elo-rankings');
-  if (!eloTeams || Object.keys(eloTeams).length === 0) {
+  if (!eloTeams || !Object.keys(eloTeams).length) {
     container.innerHTML = `<div class="empty-state"><div class="big">📊</div>No ranking data.</div>`;
     return;
   }
-  const sorted = Object.entries(eloTeams)
-    .sort(([,a],[,b]) => b - a)
-    .slice(0, 15);
+  const sorted = Object.entries(eloTeams).sort(([, a], [, b]) => b - a).slice(0, 15);
   const maxElo = sorted[0][1];
   const minElo = sorted[sorted.length - 1][1];
   const range = maxElo - minElo || 1;
-
   container.innerHTML = sorted.map(([team, elo], i) => {
     const rank = i + 1;
     const rankClass = rank <= 3 ? 'top3' : '';
-    const fillClass = rank <= 3 ? 'top3' : '';
-    const barPct = ((elo - minElo) / range * 70 + 30).toFixed(1); // 30–100% range for visual
-    return `
-      <div class="elo-row-item">
-        <span class="elo-rank ${rankClass}">${rank}</span>
-        <span class="elo-team">${team}</span>
-        <span class="elo-score">${elo}</span>
-        <div class="elo-bar-bg">
-          <div class="elo-bar-fill ${fillClass}" style="width:${barPct}%"></div>
-        </div>
-      </div>
-    `;
+    const barPct = ((elo - minElo) / range * 70 + 30).toFixed(1);
+    return `<div class="elo-row-item"><span class="elo-rank ${rankClass}">${rank}</span><span class="elo-team">${team}</span><span class="elo-score">${elo}</span><div class="elo-bar-bg"><div class="elo-bar-fill ${rankClass}" style="width:${barPct}%"></div></div></div>`;
   }).join('');
 }
 
-// ─── Render: Playoff Bracket ──────────────────────────────────────
 function _bkBadgeClass(status) {
   const s = (status || '').toLowerCase();
   if (s === 'healthy' || s === 'active') return 'healthy';
@@ -816,67 +996,30 @@ function _bkBadgeClass(status) {
 
 function _bkSide(team, isWinner) {
   const cls = isWinner ? 'winner' : 'loser';
-  return `
-    <div class="bk-side ${cls}">
-      <span class="seed">#${team.seed || ''}</span>
-      <span class="tname">${team.abbrev}</span>
-      <span class="tprob">${team.advance_prob.toFixed(1)}%</span>
-    </div>`;
+  return `<div class="bk-side ${cls}"><span class="seed">#${team.seed || ''}</span><span class="tname">${team.abbrev}</span><span class="tprob">${team.advance_prob.toFixed(1)}%</span></div>`;
 }
 
 function _bkPlayer(team) {
   if (!team.star || !team.star.name) return '';
   const bc = _bkBadgeClass(team.star.status);
   const lbl = team.star.status || 'Healthy';
-  return `
-    <div class="bk-player">
-      <span class="pname"><span class="star">★</span>${team.star.name}</span>
-      <span class="pbadge ${bc}">${lbl}</span>
-    </div>`;
+  return `<div class="bk-player"><span class="pname"><span class="star">★</span>${team.star.name}</span><span class="pbadge ${bc}">${lbl}</span></div>`;
 }
 
 function _bkMatchCard(m, opts) {
   opts = opts || {};
   const topWins = m.top.advance_prob >= m.bot.advance_prob;
   const showPlayers = opts.showPlayers !== false;
-  const eloLine = (m.top.elo && m.bot.elo)
-    ? `Elo ${m.top.elo} vs ${m.bot.elo}` : '';
+  const eloLine = (m.top.elo && m.bot.elo) ? `Elo ${m.top.elo} vs ${m.bot.elo}` : '';
   const games = m.expected_games ? `${m.expected_games.toFixed(1)} 場` : '';
   const headerLabel = opts.label || 'VS';
-  return `
-    <div class="bk-card">
-      <div class="bk-card-hdr">
-        <span>${headerLabel}</span>
-        <span>${games}</span>
-      </div>
-      ${_bkSide(m.top, topWins)}
-      <div class="bk-vs-line">— VS —</div>
-      ${_bkSide(m.bot, !topWins)}
-      <div class="bk-meta">
-        <span class="elo-line">${eloLine}</span>
-      </div>
-      ${showPlayers ? `<div class="bk-players">${_bkPlayer(m.top)}${_bkPlayer(m.bot)}</div>` : ''}
-    </div>`;
+  return `<div class="bk-card"><div class="bk-card-hdr"><span>${headerLabel}</span><span>${games}</span></div>${_bkSide(m.top, topWins)}<div class="bk-vs-line">— VS —</div>${_bkSide(m.bot, !topWins)}<div class="bk-meta"><span class="elo-line">${eloLine}</span></div>${showPlayers ? `<div class="bk-players">${_bkPlayer(m.top)}${_bkPlayer(m.bot)}</div>` : ''}</div>`;
 }
 
 function _bkFinalsCard(finals) {
-  // finals.west / finals.east → {team, abbrev, elo, seed, advance_prob (champ prob)}
   const westWins = finals.west.advance_prob >= finals.east.advance_prob;
   const games = finals.expected_games ? `${finals.expected_games.toFixed(1)} 場` : '';
-  return `
-    <div class="bk-card is-finals">
-      <div class="bk-finals-label">★ TOTAL FINALS ★</div>
-      <div class="bk-card-hdr">
-        <span>W vs E</span>
-        <span>${games}</span>
-      </div>
-      ${_bkSide(finals.west, westWins)}
-      <div class="bk-vs-line">— VS —</div>
-      ${_bkSide(finals.east, !westWins)}
-      <div class="bk-meta">
-        <span class="elo-line">Elo ${finals.west.elo} vs ${finals.east.elo}</span>
-      </div>
-    </div>`;
+  return `<div class="bk-card is-finals"><div class="bk-finals-label">★ TOTAL FINALS ★</div><div class="bk-card-hdr"><span>W vs E</span><span>${games}</span></div>${_bkSide(finals.west, westWins)}<div class="bk-vs-line">— VS —</div>${_bkSide(finals.east, !westWins)}<div class="bk-meta"><span class="elo-line">Elo ${finals.west.elo} vs ${finals.east.elo}</span></div></div>`;
 }
 
 function renderBracket(bracket) {
@@ -887,42 +1030,32 @@ function renderBracket(bracket) {
     return;
   }
   sec.style.display = '';
-
   const meta = document.getElementById('bracket-meta');
   if (meta) {
     const t = bracket.generated_at ? bracket.generated_at.replace('T', ' ') : '—';
-    meta.textContent = `Monte Carlo n=${(bracket.n_sims||0).toLocaleString()} · ${t}`;
+    meta.textContent = `Monte Carlo n=${(bracket.n_sims || 0).toLocaleString()} · ${t}`;
   }
-
-  const w = bracket.west, e = bracket.east, f = bracket.finals;
+  const w = bracket.west;
+  const e = bracket.east;
+  const f = bracket.finals;
   const grid = document.getElementById('bracket-grid');
-  const r1wHtml = w.r1.map(m => _bkMatchCard(m, {label: `#${m.top.seed} vs #${m.bot.seed}`})).join('');
-  const r2wHtml = w.r2.map(m => _bkMatchCard(m, {label: '西區準決賽'})).join('');
-  const cfwHtml = w.conf_finals.map(m => _bkMatchCard(m, {label: '西區冠軍賽'})).join('');
-  const fnHtml  = f ? _bkFinalsCard(f) : '';
-  const cfeHtml = e.conf_finals.map(m => _bkMatchCard(m, {label: '東區冠軍賽'})).join('');
-  const r2eHtml = e.r2.map(m => _bkMatchCard(m, {label: '東區準決賽'})).join('');
-  const r1eHtml = e.r1.map(m => _bkMatchCard(m, {label: `#${m.top.seed} vs #${m.bot.seed}`})).join('');
-
   grid.innerHTML = `
-    <div class="bk-col r1">${r1wHtml}</div>
-    <div class="bk-col r2">${r2wHtml}</div>
-    <div class="bk-col cf">${cfwHtml}</div>
-    <div class="bk-col fn">${fnHtml}</div>
-    <div class="bk-col cf">${cfeHtml}</div>
-    <div class="bk-col r2">${r2eHtml}</div>
-    <div class="bk-col r1">${r1eHtml}</div>
+    <div class="bk-col r1">${w.r1.map(m => _bkMatchCard(m, {label: `#${m.top.seed} vs #${m.bot.seed}`})).join('')}</div>
+    <div class="bk-col r2">${w.r2.map(m => _bkMatchCard(m, {label: '西區準決賽'})).join('')}</div>
+    <div class="bk-col cf">${w.conf_finals.map(m => _bkMatchCard(m, {label: '西區冠軍賽'})).join('')}</div>
+    <div class="bk-col fn">${f ? _bkFinalsCard(f) : ''}</div>
+    <div class="bk-col cf">${e.conf_finals.map(m => _bkMatchCard(m, {label: '東區冠軍賽'})).join('')}</div>
+    <div class="bk-col r2">${e.r2.map(m => _bkMatchCard(m, {label: '東區準決賽'})).join('')}</div>
+    <div class="bk-col r1">${e.r1.map(m => _bkMatchCard(m, {label: `#${m.top.seed} vs #${m.bot.seed}`})).join('')}</div>
   `;
 }
 
-// ─── Render: Edge Cards ───────────────────────────────────────────
 function renderEdges(edges) {
   const grid = document.getElementById('edges-grid');
-  if (!edges || edges.length === 0) {
+  if (!edges || !edges.length) {
     grid.innerHTML = `<div class="empty-state"><div class="big">📈</div>No significant edges found today.</div>`;
     return;
   }
-  // Sort: actionable (has liquidity + kelly) first, then by edge size
   edges.sort((a, b) => {
     const aScore = (a.liquidity > 1000 ? 1000 : 0) + (a.kelly_pct > 0 ? 500 : 0) + a.edge;
     const bScore = (b.liquidity > 1000 ? 1000 : 0) + (b.kelly_pct > 0 ? 500 : 0) + b.edge;
@@ -932,160 +1065,158 @@ function renderEdges(edges) {
     const edgeAbs = Math.abs(e.edge);
     let tier = 'small';
     let tierLabel = 'SMALL EDGE';
-    if (edgeAbs > 20) { tier = 'strong'; tierLabel = 'STRONG EDGE'; }
-    else if (edgeAbs >= 10) { tier = 'moderate'; tierLabel = 'MODERATE EDGE'; }
-
+    if (edgeAbs > 20) {
+      tier = 'strong';
+      tierLabel = 'STRONG EDGE';
+    } else if (edgeAbs >= 10) {
+      tier = 'moderate';
+      tierLabel = 'MODERATE EDGE';
+    }
     const betChipClass = e.bet === 'YES' ? 'yes' : 'no';
-
-    // Bar: model marker and poly marker on 0–100 track
     const modelLeft = e.model_prob.toFixed(1);
     const polyLeft = e.poly_prob.toFixed(1);
     const rangeLeft = Math.min(e.model_prob, e.poly_prob);
     const rangeWidth = Math.abs(e.model_prob - e.poly_prob);
     const rangeClass = e.bet === 'YES' ? 'yes-edge' : 'no-edge';
-
-    return `
-      <div class="edge-card ${tier}">
-        <div class="edge-header">
-          <div class="edge-question">${e.question}</div>
-          <span class="edge-badge ${tier}">${tierLabel}</span>
-        </div>
-        ${e.pred_winner ? `
-        <div style="text-align:center;padding:6px 0;margin:4px 0;border-radius:6px;
-          background:#ecfdf5;border:1px solid #6ee7b7;
-          font-family:'Share Tech Mono';font-size:13px;font-weight:700;color:#065f46;">
-          預測 ${e.pred_winner.split(' ').pop()} 勝出 +${e.pred_margin.toFixed(1)} pts
-        </div>` : ''}
-
-        <div class="edge-probs">
-          <div class="edge-prob-item">
-            <div class="edge-prob-label">Model</div>
-            <div class="edge-prob-val model">${e.model_prob.toFixed(1)}%</div>
-          </div>
-          <div class="edge-prob-item" style="flex:0;align-self:center;
-            font-family:'Share Tech Mono';font-size:16px;color:var(--muted);padding:0 4px;">→</div>
-          <div class="edge-prob-item">
-            <div class="edge-prob-label">Polymarket</div>
-            <div class="edge-prob-val poly">${e.poly_prob.toFixed(1)}%</div>
-          </div>
-        </div>
-
-        <div class="edge-comparison-bar">
-          <div class="edge-bar-track">
-            <div class="edge-bar-range ${rangeClass}"
-              style="left:${rangeLeft}%;width:${rangeWidth}%"></div>
-            <div class="edge-bar-model" style="left:${modelLeft}%"></div>
-            <div class="edge-bar-poly" style="left:${polyLeft}%"></div>
-          </div>
-          <div class="edge-bar-labels">
-            <span class="model-lbl">■ Model</span>
-            <span class="poly-lbl">■ Polymarket</span>
-          </div>
-        </div>
-
-        <div class="edge-footer">
-          <div>
-            <div class="edge-amount">
-              <span class="pct">${edgeAbs.toFixed(1)}%</span>
-              <span class="lbl"> EDGE</span>
-            </div>
-            <div class="vol-label">Vol: ${fmt$M(e.volume || 0)} · Liq: ${fmt$M(e.liquidity || 0)}</div>
-          </div>
-          <span class="bet-chip ${betChipClass}">BET ${e.bet}</span>
-        </div>
-        ${e.kelly_pct > 0 ? `
-        <div style="margin-top:8px;padding:8px 12px;border-radius:6px;font-family:'Share Tech Mono';font-size:11px;
-          background:${e.kelly_pct > 15 ? '#ecfdf5' : '#eff6ff'};
-          border:1px solid ${e.kelly_pct > 15 ? '#6ee7b7' : '#93c5fd'};
-          color:${e.kelly_pct > 15 ? '#065f46' : '#1e40af'};">
-          💰 Kelly: <b>${e.kelly_pct.toFixed(1)}%</b> of bankroll
-          · $<b>${e.kelly_pct.toFixed(0)}</b> per $100
-          ${(e.liquidity || 0) < 1000 ? ' · ⚠️ Low liquidity' : ''}
-        </div>` : `
-        <div style="margin-top:8px;padding:6px 12px;border-radius:6px;font-family:'Share Tech Mono';font-size:10px;
-          background:#f8fafc;border:1px solid #e2e8f0;color:#94a3b8;">
-          ${(e.liquidity || 0) < 1000 ? '⚠️ No liquidity — cannot bet' : '— No Kelly edge (odds too tight)'}
-        </div>`}
+    return `<div class="edge-card ${tier}">
+      <div class="edge-header"><div class="edge-question">${e.question}</div><span class="edge-badge ${tier}">${tierLabel}</span></div>
+      ${e.pred_winner ? `<div style="text-align:center;padding:6px 0;margin:4px 0;border-radius:6px;background:#ecfdf5;border:1px solid #6ee7b7;font-family:'Share Tech Mono';font-size:13px;font-weight:700;color:#065f46;">預測 ${e.pred_winner.split(' ').pop()} 勝出 +${e.pred_margin.toFixed(1)} pts</div>` : ''}
+      <div class="edge-probs">
+        <div class="edge-prob-item"><div class="edge-prob-label">Model</div><div class="edge-prob-val model">${e.model_prob.toFixed(1)}%</div></div>
+        <div class="edge-prob-item" style="flex:0;align-self:center;font-family:'Share Tech Mono';font-size:16px;color:var(--muted);padding:0 4px;">→</div>
+        <div class="edge-prob-item"><div class="edge-prob-label">Polymarket</div><div class="edge-prob-val poly">${e.poly_prob.toFixed(1)}%</div></div>
       </div>
-    `;
+      <div class="edge-comparison-bar">
+        <div class="edge-bar-track">
+          <div class="edge-bar-range ${rangeClass}" style="left:${rangeLeft}%;width:${rangeWidth}%"></div>
+          <div class="edge-bar-model" style="left:${modelLeft}%"></div>
+          <div class="edge-bar-poly" style="left:${polyLeft}%"></div>
+        </div>
+        <div class="edge-bar-labels"><span class="model-lbl">■ Model</span><span class="poly-lbl">■ Polymarket</span></div>
+      </div>
+      <div class="edge-footer">
+        <div><div class="edge-amount"><span class="pct">${edgeAbs.toFixed(1)}%</span><span class="lbl"> EDGE</span></div><div class="vol-label">Vol: ${fmt$M(e.volume || 0)} · Liq: ${fmt$M(e.liquidity || 0)}</div></div>
+        <span class="bet-chip ${betChipClass}">BET ${e.bet}</span>
+      </div>
+      ${e.kelly_pct > 0 ? `<div style="margin-top:8px;padding:8px 12px;border-radius:6px;font-family:'Share Tech Mono';font-size:11px;background:${e.kelly_pct > 15 ? '#ecfdf5' : '#eff6ff'};border:1px solid ${e.kelly_pct > 15 ? '#6ee7b7' : '#93c5fd'};color:${e.kelly_pct > 15 ? '#065f46' : '#1e40af'};">💰 Kelly: <b>${e.kelly_pct.toFixed(1)}%</b> of bankroll · $<b>${e.kelly_pct.toFixed(0)}</b> per $100${(e.liquidity || 0) < 1000 ? ' · ⚠️ Low liquidity' : ''}</div>` : `<div style="margin-top:8px;padding:6px 12px;border-radius:6px;font-family:'Share Tech Mono';font-size:10px;background:#f8fafc;border:1px solid #e2e8f0;color:#94a3b8;">${(e.liquidity || 0) < 1000 ? '⚠️ No liquidity — cannot bet' : '— No Kelly edge (odds too tight)'}</div>`}
+    </div>`;
   }).join('');
 }
 
-// ─── Show error ───────────────────────────────────────────────────
-// ─── Render: Taiwan Sports Lottery vs Model ───────────────────────
-function renderTWLottery(games) {
-  const grid = document.getElementById('tw-lottery-grid');
-  if (!games || games.length === 0) {
-    grid.innerHTML = '<div style="text-align:center;padding:40px;color:var(--muted);font-family:Share Tech Mono;">No games today</div>';
+function renderTWLotteryInto(gridId, games, oddsMap) {
+  const grid = document.getElementById(gridId);
+  if (!grid) return;
+  if (!games || !games.length) {
+    grid.innerHTML = '<div style="text-align:center;padding:40px;color:var(--muted);font-family:Share Tech Mono;">No games</div>';
     return;
   }
-
-  // Taiwan lottery odds (hardcoded for today — ideally fetched from API)
-  const twOdds = {
-    'Atlanta Hawks': { spread: -1.5, spreadOdds: 1.73, ou: 226.5, opponent: 'New York Knicks' },
-    'Orlando Magic': { spread: 1.5, spreadOdds: 1.70, ou: 222.5, opponent: 'Detroit Pistons' },
-    'San Antonio Spurs': { spread: -8.5, spreadOdds: 1.70, ou: 236.5, opponent: 'Philadelphia 76ers' },
-    'Memphis Grizzlies': { spread: 13.5, spreadOdds: 1.70, ou: 231.5, opponent: 'Cleveland Cavaliers' },
-    'Denver Nuggets': { spread: -7.5, spreadOdds: 1.70, ou: 236.5, opponent: 'Portland Trail Blazers' },
-  };
-
   grid.innerHTML = games.map(g => {
-    const homeProb = g.home_prob;
-    const awayProb = g.away_prob;
-    const winner = homeProb > awayProb ? g.home : g.away;
-    const winnerProb = Math.max(homeProb, awayProb);
-    const tw = twOdds[g.home] || null;
-
-    // Calculate implied probability from spread
+    const hp = g.home_prob;
+    const ap = g.away_prob;
+    const winner = hp > ap ? g.home : g.away;
+    const winnerProb = Math.max(hp, ap);
+    const tw = (oddsMap || {})[g.away + ' @ ' + g.home] || null;
+    const sp = g.pred_spread || 0;
     let spreadImplied = 50;
     let spreadText = 'N/A';
     let ouText = 'N/A';
     if (tw) {
-      spreadImplied = tw.spreadOdds > 0 ? (1 / tw.spreadOdds * 100) : 50;
-      const sign = tw.spread > 0 ? '+' : '';
-      spreadText = g.home + ' ' + sign + tw.spread + ' (' + tw.spreadOdds + ')';
-      ouText = tw.ou + ' 分';
+      if (tw.spread != null) {
+        spreadImplied = Math.max(10, Math.min(90, 50 - tw.spread * 2.5));
+        spreadText = g.home.split(' ').pop() + ' ' + (tw.spread > 0 ? '+' : '') + tw.spread;
+      }
+      if (tw.ou) ouText = tw.ou + ' 分';
     }
 
-    // Edge: model vs spread implied
-    const modelEdge = winnerProb - spreadImplied;
-    let edgeSize, edgeCls, edgeLabel;
-    if (modelEdge > 30) { edgeSize = 'huge'; edgeCls = 'huge'; edgeLabel = '超大 Edge'; }
-    else if (modelEdge > 15) { edgeSize = 'big'; edgeCls = 'big'; edgeLabel = '大 Edge'; }
-    else if (modelEdge > 5) { edgeSize = 'mid'; edgeCls = 'mid'; edgeLabel = '中 Edge'; }
-    else { edgeSize = 'small'; edgeCls = 'small'; edgeLabel = '小 Edge'; }
+    const absEdgePts = tw && tw.spread != null ? Math.abs(Math.abs(tw.spread) - Math.abs(sp)) : 0;
+    let edgeCls = 'small';
+    let edgeLabel = '小 Edge';
+    if (absEdgePts > 10) {
+      edgeCls = 'huge';
+      edgeLabel = '超大 Edge';
+    } else if (absEdgePts > 5) {
+      edgeCls = 'big';
+      edgeLabel = '大 Edge';
+    } else if (absEdgePts > 2) {
+      edgeCls = 'mid';
+      edgeLabel = '中 Edge';
+    }
 
-    // Stars rating
-    let stars, starText, headerCls, verdictCls, verdictText;
-    if (winnerProb > 90 && tw && Math.abs(tw.spread) < 5) {
-      stars = '⭐⭐⭐'; starText = '強力推薦';
-      headerCls = 'strong'; verdictCls = 'buy';
-      verdictText = '✅ <b>強力推薦</b> — 模型 ' + winnerProb.toFixed(0) + '% 但運彩只讓 ' + (tw ? Math.abs(tw.spread) : '?') + ' 分，edge 巨大';
-    } else if (winnerProb > 85) {
-      stars = '⭐⭐'; starText = '推薦';
-      headerCls = 'good'; verdictCls = 'buy';
-      verdictText = '👍 <b>推薦</b> — 模型高度看好 ' + winner + '，讓分合理';
-    } else if (winnerProb > 70) {
-      stars = '⭐'; starText = '可考慮';
-      headerCls = 'good'; verdictCls = 'caution';
-      verdictText = '🤔 <b>可考慮</b> — 有一定 edge 但需注意讓分風險';
-    } else {
-      stars = '—'; starText = '觀望';
-      headerCls = 'risky'; verdictCls = 'skip';
-      verdictText = '⏸️ <b>觀望</b> — 勝率不夠高，風險較大';
+    const homeS = g.home.split(' ').pop();
+    const awayS = g.away.split(' ').pop();
+    const modelFavorHome = sp > 0;
+    const oddsFavorHome = tw && tw.spread != null && tw.spread < 0;
+    const directionMatch = tw && tw.spread != null && (modelFavorHome === oddsFavorHome);
+
+    let stars = '—';
+    let starText = '觀望';
+    let headerCls = 'risky';
+    let verdictCls = 'skip';
+    let verdictText = '⏸️ <b>觀望</b> — Edge 不夠大';
+
+    if (tw && tw.spread != null) {
+      if (directionMatch && Math.abs(sp) > Math.abs(tw.spread) && absEdgePts >= 2) {
+        const favTeam = modelFavorHome ? homeS : awayS;
+        if (absEdgePts >= 5 && winnerProb >= 60) {
+          stars = '⭐⭐⭐';
+          starText = '強力推薦';
+          headerCls = 'strong';
+          verdictCls = 'buy';
+          verdictText = `✅ <b>強力推薦</b> — 模型與盤口同向，模型更看好 ${favTeam}（模型 ${Math.abs(sp).toFixed(1)} > 盤口 ${Math.abs(tw.spread)} → Edge +${absEdgePts.toFixed(1)} 分）`;
+        } else {
+          stars = '⭐⭐';
+          starText = '推薦';
+          headerCls = 'good';
+          verdictCls = 'buy';
+          verdictText = `👍 <b>推薦</b> — 買 ${favTeam} 讓分覆蓋（Edge +${absEdgePts.toFixed(1)} 分）`;
+        }
+      } else if (directionMatch && Math.abs(sp) <= Math.abs(tw.spread)) {
+        const underdogTeam = modelFavorHome ? awayS : homeS;
+        if (absEdgePts >= 5) {
+          stars = '⭐⭐⭐';
+          starText = '強力推薦';
+          headerCls = 'strong';
+          verdictCls = 'buy';
+          verdictText = `✅ <b>強力推薦</b> — 盤口讓分太多！模型只贏 ${Math.abs(sp).toFixed(1)} 但盤口讓 ${Math.abs(tw.spread)}（買 ${underdogTeam} 受讓 Edge +${absEdgePts.toFixed(1)} 分）`;
+        } else if (absEdgePts >= 3) {
+          stars = '⭐⭐';
+          starText = '推薦';
+          headerCls = 'good';
+          verdictCls = 'buy';
+          verdictText = `👍 <b>推薦</b> — 買 ${underdogTeam} 受讓（Edge +${absEdgePts.toFixed(1)} 分）`;
+        } else {
+          stars = '⭐';
+          starText = '可考慮';
+          headerCls = 'good';
+          verdictCls = 'caution';
+          verdictText = `🤔 <b>可考慮</b> — 方向一致但 Edge 小（${absEdgePts.toFixed(1)} 分）`;
+        }
+      } else if (!directionMatch) {
+        const modelPick = modelFavorHome ? homeS : awayS;
+        if (winnerProb >= 65 && absEdgePts >= 3) {
+          stars = '⭐⭐';
+          starText = '逆盤推薦';
+          headerCls = 'good';
+          verdictCls = 'caution';
+          verdictText = `⚠️ <b>逆盤</b> — 模型看好 ${modelPick}（${winnerProb.toFixed(0)}%）但盤口看反，謹慎操作`;
+        }
+      }
+    } else if (winnerProb >= 65) {
+      stars = '⭐';
+      starText = '可考慮';
+      headerCls = 'good';
+      verdictCls = 'caution';
+      verdictText = `🤔 <b>可考慮</b> — 勝率 ${winnerProb.toFixed(0)}%（無盤口資料）`;
     }
 
     const b2bHome = g.b2b_home ? ' <span style="color:var(--down);font-size:10px;">[B2B]</span>' : '';
     const b2bAway = g.b2b_away ? ' <span style="color:var(--down);font-size:10px;">[B2B]</span>' : '';
 
-    return `
-    <div class="tw-card">
+    return `<div class="tw-card">
       <div class="tw-card-header ${headerCls}">
         <div>
           <div class="tw-matchup">${g.away}${b2bAway} @ ${g.home}${b2bHome}</div>
-          <div style="font-family:'Share Tech Mono';font-size:10px;color:var(--muted);margin-top:2px;">
-            ${g.away_record} vs ${g.home_record}
-          </div>
+          <div style="font-family:'Share Tech Mono';font-size:10px;color:var(--muted);margin-top:2px;">${g.away_record || ''} vs ${g.home_record || ''}</div>
         </div>
         <div style="text-align:right;">
           <div class="tw-stars">${stars}</div>
@@ -1094,68 +1225,188 @@ function renderTWLottery(games) {
       </div>
       <div class="tw-card-body">
         <div class="tw-model-bar">
-          <div class="tw-bar-away" style="width:${awayProb}%">${g.away.split(' ').pop()} ${awayProb.toFixed(0)}%</div>
-          <div class="tw-bar-home" style="width:${homeProb}%">${g.home.split(' ').pop()} ${homeProb.toFixed(0)}%</div>
+          <div class="tw-bar-away" style="width:${ap}%">${awayS} ${ap.toFixed(0)}%</div>
+          <div class="tw-bar-home" style="width:${hp}%">${homeS} ${hp.toFixed(0)}%</div>
         </div>
-
-        <div class="tw-row">
-          <span class="tw-label">運彩讓分</span>
-          <span class="tw-val">${spreadText}</span>
-        </div>
-        <div class="tw-row">
-          <span class="tw-label">運彩大小</span>
-          <span class="tw-val">O/U ${ouText}</span>
-        </div>
-        <div class="tw-row">
-          <span class="tw-label">模型預測總分</span>
-          <span class="tw-val" style="font-weight:900; color:var(--accent);">
-            ${g.pred_total ? g.pred_total.toFixed(1) : 'N/A'}
-            ${g.pred_total && tw && tw.ou ? (g.pred_total > tw.ou
-              ? ' <span style=\"color:var(--up);font-size:10px;\">▲ 看大</span>'
-              : ' <span style=\"color:var(--down);font-size:10px;\">▼ 看小</span>') : ''}
-          </span>
-        </div>
-        <div class="tw-row" style="font-size:10px;color:var(--muted);">
-          <span class="tw-label">預測比分</span>
-          <span class="tw-val" style="font-size:11px;">
-            ${g.away_expected ? g.away.split(' ').pop() + ' ' + g.away_expected.toFixed(0) + ' — ' + g.home.split(' ').pop() + ' ' + g.home_expected.toFixed(0) : 'N/A'}
-          </span>
-        </div>
-        <div class="tw-row">
-          <span class="tw-label">模型勝率</span>
-          <span class="tw-val" style="color:var(--up);">${winner} <b>${winnerProb.toFixed(1)}%</b></span>
-        </div>
-        <div class="tw-row">
-          <span class="tw-label">模型預測分差</span>
-          <span class="tw-val" style="color:${g.pred_spread > 0 ? 'var(--up)' : 'var(--down)'}; font-weight:900;">
-            ${g.pred_spread != null ? '預測 ' + (g.pred_spread > 0 ? g.home.split(' ').pop() : g.away.split(' ').pop()) + ' 勝出 +' + Math.abs(g.pred_spread).toFixed(1) + ' pts' : 'N/A'}
-          </span>
-        </div>
-        <div class="tw-row">
-          <span class="tw-label">運彩隱含勝率</span>
-          <span class="tw-val">${spreadImplied.toFixed(0)}%</span>
-        </div>
-        <div class="tw-row">
-          <span class="tw-label">Elo 評分</span>
-          <span class="tw-val">${g.away.split(' ').pop()} ${g.away_elo} vs ${g.home.split(' ').pop()} ${g.home_elo}</span>
-        </div>
-        <div class="tw-row">
-          <span class="tw-label">Edge</span>
-          <span class="tw-val">${modelEdge.toFixed(1)}% <span class="tw-edge-badge ${edgeCls}">${edgeLabel}</span></span>
-        </div>
-
+        <div class="tw-row"><span class="tw-label">運彩讓分</span><span class="tw-val">${spreadText}</span></div>
+        <div class="tw-row"><span class="tw-label">運彩大小</span><span class="tw-val">O/U ${ouText}</span></div>
+        <div class="tw-row"><span class="tw-label">模型預測總分</span><span class="tw-val" style="color:var(--accent);">${g.pred_total ? g.pred_total.toFixed(1) : 'N/A'}${g.pred_total && tw && tw.ou ? (g.pred_total > tw.ou ? ' <span style="color:var(--up);font-size:10px;">▲ 看大</span>' : ' <span style="color:var(--down);font-size:10px;">▼ 看小</span>') : ''}</span></div>
+        <div class="tw-row"><span class="tw-label">預測比分</span><span class="tw-val" style="font-size:11px;">${g.away_expected ? `${awayS} ${g.away_expected.toFixed(0)} — ${homeS} ${g.home_expected.toFixed(0)}` : 'N/A'}</span></div>
+        <div class="tw-row"><span class="tw-label">模型勝率</span><span class="tw-val" style="color:var(--up);">${winner} <b>${winnerProb.toFixed(1)}%</b></span></div>
+        <div class="tw-row"><span class="tw-label">模型預測分差</span><span class="tw-val" style="color:${sp > 0 ? 'var(--up)' : 'var(--down)'};font-weight:900;">${g.pred_spread != null ? `預測 ${(sp > 0 ? homeS : awayS)} 勝出 +${Math.abs(sp).toFixed(1)} pts` : 'N/A'}</span></div>
+        <div class="tw-row"><span class="tw-label">運彩隱含勝率</span><span class="tw-val">${spreadImplied.toFixed(0)}%</span></div>
+        <div class="tw-row"><span class="tw-label">Elo 評分</span><span class="tw-val">${awayS} ${g.away_elo} vs ${homeS} ${g.home_elo}</span></div>
+        <div class="tw-row"><span class="tw-label">讓分 Edge</span><span class="tw-val">${absEdgePts.toFixed(1)} 分 <span class="tw-edge-badge ${edgeCls}">${edgeLabel}</span></span></div>
         <div class="tw-verdict ${verdictCls}">${verdictText}</div>
       </div>
     </div>`;
   }).join('');
 }
 
-// ─── Render: Backtest Results ──────────────────────────────────────
+function renderTopPicks(games, oddsMap, containerId) {
+  const container = document.getElementById(containerId);
+  if (!container) return;
+  if (!games || !games.length) {
+    container.innerHTML = '';
+    return;
+  }
+  const twOdds = oddsMap || {};
+  const picks = [];
+  games.forEach(g => {
+    const key = g.away + ' @ ' + g.home;
+    const tw = twOdds[key];
+    if (!tw || (tw.spread == null && !tw.ou)) return;
+
+    const bets = [];
+    const hp = g.home_prob;
+    const ap = g.away_prob;
+    const sp = g.pred_spread || 0;
+    const pt = g.pred_total || 0;
+    const homeS = abbrevTeam(g.home);
+    const awayS = abbrevTeam(g.away);
+
+    if (tw.spread != null) {
+      if (tw.spread < 0) {
+        const line = Math.abs(tw.spread);
+        if (sp < line - 2) {
+          bets.push({text: `買 ${awayS} 受讓 +${line}`, edge: line - sp, type: 'spread', target: 'away', line: tw.spread});
+        } else if (sp > line + 2) {
+          bets.push({text: `買 ${homeS} 讓分 ${tw.spread}`, edge: sp - line, type: 'spread', target: 'home', line: tw.spread});
+        }
+      } else {
+        const line = tw.spread;
+        if (sp > -line + 2) {
+          bets.push({text: `買 ${homeS} 受讓 +${line}`, edge: line + sp, type: 'spread', target: 'home', line: tw.spread});
+        } else if (sp < -line - 2) {
+          bets.push({text: `買 ${awayS} 讓分 -${line}`, edge: Math.abs(sp) - line, type: 'spread', target: 'away', line: tw.spread});
+        }
+      }
+    }
+    if (tw.ou && pt) {
+      const delta = pt - tw.ou;
+      if (delta > 5) {
+        bets.push({text: `看大 Over ${tw.ou}`, edge: delta, type: 'ou', target: 'over', line: tw.ou});
+      } else if (delta < -5) {
+        bets.push({text: `看小 Under ${tw.ou}`, edge: Math.abs(delta), type: 'ou', target: 'under', line: tw.ou});
+      }
+    }
+
+    if (bets.length >= 2) {
+      picks.push({
+        game: key,
+        game_date: g.game_date || '',
+        away: g.away,
+        home: g.home,
+        away_s: awayS,
+        home_s: homeS,
+        bets,
+        maxEdge: Math.max(...bets.map(b => b.edge)),
+        conf: Math.max(hp, ap),
+        tw,
+        modelSpread: g.pred_spread || 0,
+        modelTotal: g.pred_total || 0,
+      });
+    }
+  });
+
+  picks.sort((a, b) => b.maxEdge - a.maxEdge);
+  const top = picks.slice(0, 6);
+  if (!top.length) {
+    container.innerHTML = '';
+    return;
+  }
+
+  let html = `<div class="section-title">🔥 最強推薦 — 模型 vs 運彩 Edge 最大的 ${top.length} 場</div><div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:12px;margin-bottom:24px;">`;
+  top.forEach((p, i) => {
+    const bc = i < 2 ? 'var(--up)' : i < 4 ? 'var(--warn)' : 'var(--accent)';
+    html += `<div style="background:var(--surface);border:1px solid var(--border);border-left:4px solid ${bc};border-radius:8px;padding:14px;font-family:'Share Tech Mono';">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;"><span style="font-size:13px;font-weight:900;color:var(--text);">#${i + 1} ${p.away_s} @ ${p.home_s}</span><span style="font-size:11px;color:${bc};font-weight:700;">Edge +${p.maxEdge.toFixed(1)}分</span></div>
+      <div style="font-size:11px;color:var(--muted);margin-bottom:8px;">Game ${formatYmdLabel(p.game_date)} · 勝率 ${p.conf.toFixed(1)}% · 讓分 ${p.tw.spread != null ? p.tw.spread : 'N/A'} · O/U ${p.tw.ou || 'N/A'}</div>
+      ${p.bets.map((b, idx) => `<div style="display:flex;justify-content:space-between;align-items:center;padding:5px 8px;margin-bottom:4px;border-radius:4px;background:${idx === 0 ? '#ecfdf5' : '#f8fafc'};border:1px solid ${idx === 0 ? '#6ee7b7' : '#e2e8f0'};"><span style="font-size:11px;font-weight:700;color:var(--text);">${b.text}</span><span style="font-size:11px;color:${bc};font-weight:700;">+${b.edge.toFixed(1)}</span></div>`).join('')}
+    </div>`;
+  });
+  html += `</div>`;
+  container.innerHTML = html;
+
+  const pickDate = new Date();
+  const pickDateStr = pickDate.getFullYear().toString() + String(pickDate.getMonth() + 1).padStart(2, '0') + String(pickDate.getDate()).padStart(2, '0');
+  const picksToSave = [];
+  top.forEach(p => {
+    p.bets.forEach(b => {
+      picksToSave.push({
+        pick_date: pickDateStr,
+        game_date: p.game_date,
+        game_key: p.game,
+        away: p.away,
+        home: p.home,
+        pick_type: b.type,
+        pick_target: b.target,
+        pick_line: b.line,
+        pick_detail: b.text,
+        edge: b.edge,
+        confidence: p.conf,
+        tw_spread: p.tw.spread,
+        tw_ou: p.tw.ou,
+        model_spread: p.modelSpread,
+        model_total: p.modelTotal,
+      });
+    });
+  });
+
+  if (picksToSave.length) {
+    fetch('/api/nba/picks/save', {
+      method: 'POST',
+      headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify({picks: picksToSave})
+    }).catch(() => {});
+  }
+
+  if (containerId === 'today-top-picks-container') {
+    loadPicksStats(container);
+  }
+}
+
+async function loadPicksStats(container) {
+  try {
+    await fetch('/api/nba/picks/verify', {method: 'POST'}).catch(() => {});
+    const r = await fetch('/api/nba/picks/stats');
+    if (!r.ok) return;
+    const stats = await r.json();
+    if (!stats || stats.total === 0) return;
+
+    const wrColor = stats.wr >= 65 ? 'var(--up)' : stats.wr >= 55 ? 'var(--accent)' : 'var(--down)';
+    const spreadColor = stats.spread_wr >= 65 ? 'var(--up)' : stats.spread_wr >= 55 ? 'var(--accent)' : 'var(--down)';
+    const ouColor = stats.ou_wr >= 65 ? 'var(--up)' : stats.ou_wr >= 55 ? 'var(--accent)' : 'var(--down)';
+
+    let html = `<div style="background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:16px;margin-bottom:16px;">
+      <div style="font-family:'Share Tech Mono';font-size:12px;font-weight:700;color:var(--accent);letter-spacing:2px;margin-bottom:12px;">📊 推薦下注歷史驗證</div>
+      <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:12px;">
+        <div style="text-align:center;"><div style="font-family:'Share Tech Mono';font-size:10px;color:var(--muted);">總勝率</div><div style="font-family:'Share Tech Mono';font-size:28px;font-weight:900;color:${wrColor};">${stats.wr}%</div><div style="font-family:'Share Tech Mono';font-size:10px;color:var(--muted);">${stats.wins}/${stats.total}</div></div>
+        <div style="text-align:center;"><div style="font-family:'Share Tech Mono';font-size:10px;color:var(--muted);">讓分勝率</div><div style="font-family:'Share Tech Mono';font-size:28px;font-weight:900;color:${spreadColor};">${stats.spread_wr}%</div><div style="font-family:'Share Tech Mono';font-size:10px;color:var(--muted);">${stats.spread_wins}/${stats.spread_total}</div></div>
+        <div style="text-align:center;"><div style="font-family:'Share Tech Mono';font-size:10px;color:var(--muted);">大小球勝率</div><div style="font-family:'Share Tech Mono';font-size:28px;font-weight:900;color:${ouColor};">${stats.ou_wr}%</div><div style="font-family:'Share Tech Mono';font-size:10px;color:var(--muted);">${stats.ou_wins}/${stats.ou_total}</div></div>
+        <div style="text-align:center;"><div style="font-family:'Share Tech Mono';font-size:10px;color:var(--muted);">驗證場次</div><div style="font-family:'Share Tech Mono';font-size:28px;font-weight:900;color:var(--accent);">${stats.total}</div><div style="font-family:'Share Tech Mono';font-size:10px;color:var(--muted);">picks</div></div>
+      </div>`;
+    if (stats.daily && stats.daily.length) {
+      html += `<div style="display:flex;gap:6px;flex-wrap:wrap;">`;
+      stats.daily.forEach(d => {
+        const c = d.wr >= 65 ? 'var(--up)' : d.wr >= 50 ? 'var(--accent)' : 'var(--down)';
+        html += `<div style="background:#f8fafc;border-radius:4px;padding:4px 8px;font-family:'Share Tech Mono';font-size:10px;text-align:center;"><div style="color:var(--muted);">${formatYmdLabel(d.date)}</div><div style="color:${c};font-weight:700;">${d.wr}%</div><div style="color:var(--muted);">${d.wins}/${d.total}</div></div>`;
+      });
+      html += `</div>`;
+    }
+    html += `</div>`;
+    container.insertAdjacentHTML('beforeend', html);
+  } catch (e) {
+    console.warn('loadPicksStats failed', e);
+  }
+}
+
 function renderBacktest(bt) {
   if (!bt) return;
-
-  // KPI cards
-  const setKpi = (id, val) => { const el = document.getElementById(id); if(el) el.textContent = val; };
+  const setKpi = (id, val) => {
+    const el = document.getElementById(id);
+    if (el) el.textContent = val;
+  };
   setKpi('bt-all-wr', bt.all_wr + '%');
   setKpi('bt-all-count', bt.games_tested + ' games');
   setKpi('bt-strong-wr', bt.strong_wr + '%');
@@ -1165,54 +1416,45 @@ function renderBacktest(bt) {
   setKpi('bt-star3-wr', bt.star3_wr + '%');
   setKpi('bt-star3-count', bt.star3_count + ' games');
 
-  // Color KPIs
-  const colorKpi = (id, val) => {
+  function colorKpi(id, val) {
     const el = document.getElementById(id);
     if (!el) return;
     if (val >= 95) el.style.color = '#059669';
     else if (val >= 85) el.style.color = '#0066cc';
     else if (val >= 70) el.style.color = '#d97706';
     else el.style.color = '#dc2626';
-  };
+  }
   colorKpi('bt-all-wr', bt.all_wr);
   colorKpi('bt-strong-wr', bt.strong_wr);
   colorKpi('bt-vstrong-wr', bt.vstrong_wr);
   colorKpi('bt-star3-wr', bt.star3_wr);
 
   setKpi('bt-last-update', 'Last ' + (bt.recent ? bt.recent.length : 0) + ' predictions');
-
-  // Recent results table
   const tbody = document.getElementById('bt-body');
   if (!tbody || !bt.recent) return;
-
-  // Show newest first
   const recent = [...bt.recent].reverse();
-
   tbody.innerHTML = recent.map(r => {
     const mark = r.correct ? '✅' : '❌';
     const rowBg = r.correct ? '' : 'background:rgba(220,38,38,.04);';
     const confColor = r.conf >= 90 ? '#059669' : r.conf >= 70 ? '#0066cc' : '#64748b';
     const confBar = `<div style="width:${r.conf}%;height:4px;border-radius:2px;background:${confColor};margin-top:2px;"></div>`;
-    const date = r.date ? r.date.substring(4,6) + '/' + r.date.substring(6,8) : '';
-    const away_short = r.away.split(' ').pop();
-    const home_short = r.home.split(' ').pop();
-    const pick_short = r.pick.split(' ').pop();
-    const winner_short = r.winner.split(' ').pop();
-
+    const date = r.date ? formatYmdLabel(r.date) : '';
+    const awayShort = abbrevTeam(r.away);
+    const homeShort = abbrevTeam(r.home);
+    const pickShort = abbrevTeam(r.pick);
+    const winnerShort = abbrevTeam(r.winner);
     return `<tr style="font-family:'Share Tech Mono';font-size:11px;${rowBg}">
       <td style="padding:6px 12px;color:var(--muted);">${date}</td>
-      <td style="padding:6px 12px;">${away_short} @ ${home_short}</td>
-      <td style="padding:6px 12px;text-align:center;">
-        <span style="color:${confColor};font-weight:700;">${r.conf}%</span>${confBar}</td>
-      <td style="padding:6px 12px;font-weight:700;">${pick_short}</td>
-      <td style="padding:6px 12px;">${winner_short}</td>
+      <td style="padding:6px 12px;">${awayShort} @ ${homeShort}</td>
+      <td style="padding:6px 12px;text-align:center;"><span style="color:${confColor};font-weight:700;">${r.conf}%</span>${confBar}</td>
+      <td style="padding:6px 12px;font-weight:700;">${pickShort}</td>
+      <td style="padding:6px 12px;">${winnerShort}</td>
       <td style="padding:6px 12px;text-align:center;color:var(--muted);">${r.score}</td>
       <td style="padding:6px 12px;text-align:center;font-size:14px;">${mark}</td>
     </tr>`;
   }).join('');
 }
 
-// ─── Render: Live Scoreboard ──────────────────────────────────────
 async function fetchLiveScores() {
   try {
     let data;
@@ -1220,21 +1462,19 @@ async function fetchLiveScores() {
       const r = await fetch('/api/nba/scoreboard');
       if (r.ok) data = await r.json();
       else throw new Error('proxy');
-    } catch(e) {
+    } catch (e) {
       const r2 = await fetch('https://site.api.espn.com/apis/site/v2/sports/basketball/nba/scoreboard');
       data = await r2.json();
     }
 
-    // Update score map for game cards
     updateLiveScoreMap(data);
-    // Re-render game cards with updated scores (if loadedGames available)
     if (window._loadedGames) renderGames(window._loadedGames);
 
     const container = document.getElementById('live-scores');
     const statusEl = document.getElementById('score-status');
-    if (!data || !data.events || data.events.length === 0) {
+    if (!data || !data.events || !data.events.length) {
       container.innerHTML = '<div style="color:var(--muted);font-family:Share Tech Mono;font-size:11px;padding:12px;">No games today</div>';
-      return;
+      return false;
     }
 
     let liveCount = 0;
@@ -1243,10 +1483,8 @@ async function fetchLiveScores() {
       const teams = comp.competitors || [];
       const status = ev.status?.type || {};
       const state = status.name || 'STATUS_SCHEDULED';
-      const detail = status.detail || status.shortDetail || '';
       const clock = ev.status?.displayClock || '';
       const period = ev.status?.period || 0;
-
       const away = teams.find(t => t.homeAway === 'away') || teams[0] || {};
       const home = teams.find(t => t.homeAway === 'home') || teams[1] || {};
       const awayScore = parseInt(away.score) || 0;
@@ -1258,7 +1496,7 @@ async function fetchLiveScores() {
 
       let cardClass = 'scheduled';
       let statusClass = 'sched-status';
-      let statusText = detail;
+      let statusText = status.detail || status.shortDetail || '';
       let awayScoreClass = '';
       let homeScoreClass = '';
 
@@ -1279,41 +1517,28 @@ async function fetchLiveScores() {
 
       const awayDisplay = state === 'STATUS_SCHEDULED' ? '-' : awayScore;
       const homeDisplay = state === 'STATUS_SCHEDULED' ? '-' : homeScore;
-
-      return `
-      <div class="score-card ${cardClass}">
+      return `<div class="score-card ${cardClass}">
         <div class="score-teams">
-          <div class="score-team">
-            <div class="score-team-name">${awayName}</div>
-            <div class="score-record">${awayRecord}</div>
-            <div class="score-team-score ${awayScoreClass}">${awayDisplay}</div>
-          </div>
+          <div class="score-team"><div class="score-team-name">${awayName}</div><div class="score-record">${awayRecord}</div><div class="score-team-score ${awayScoreClass}">${awayDisplay}</div></div>
           <div class="score-vs">@</div>
-          <div class="score-team">
-            <div class="score-team-name">${homeName}</div>
-            <div class="score-record">${homeRecord}</div>
-            <div class="score-team-score ${homeScoreClass}">${homeDisplay}</div>
-          </div>
+          <div class="score-team"><div class="score-team-name">${homeName}</div><div class="score-record">${homeRecord}</div><div class="score-team-score ${homeScoreClass}">${homeDisplay}</div></div>
         </div>
         <div class="score-status ${statusClass}">${statusText}</div>
       </div>`;
     }).join('');
 
     if (statusEl) {
-      if (liveCount > 0) statusEl.innerHTML = '<span style="color:#dc2626;font-weight:700;">' + liveCount + ' LIVE</span> · Updated ' + new Date().toLocaleTimeString();
-      else statusEl.textContent = 'Updated ' + new Date().toLocaleTimeString();
+      statusEl.innerHTML = liveCount > 0
+        ? `<span style="color:#dc2626;font-weight:700;">${liveCount} LIVE</span> · Updated ${fmtTime()}`
+        : `Updated ${fmtTime()}`;
     }
-
-    // If any game is live, refresh faster (30s)
     return liveCount > 0;
-  } catch(err) {
+  } catch (err) {
     console.warn('[Scores] Error:', err);
     return false;
   }
 }
 
-// Auto-refresh scores: 30s when live, 60s otherwise
-let scoreInterval = null;
 async function startScoreRefresh() {
   const hasLive = await fetchLiveScores();
   clearInterval(scoreInterval);
@@ -1321,52 +1546,142 @@ async function startScoreRefresh() {
     const live = await fetchLiveScores();
     if (live && scoreInterval) {
       clearInterval(scoreInterval);
-      scoreInterval = setInterval(fetchLiveScores, 30000); // 30s when live
+      scoreInterval = setInterval(fetchLiveScores, 30000);
     }
   }, hasLive ? 30000 : 60000);
 }
 
+function populateOddsGameSelect(todayGames, nextGames) {
+  const sel = document.getElementById('odds-game');
+  if (!sel) return;
+  const all = [...(todayGames || []), ...(nextGames || [])];
+  sel.innerHTML = '<option value="">— 選擇比賽 —</option>' +
+    all.map(g => {
+      const label = g.away + ' @ ' + g.home;
+      return `<option value="${label}">${label}</option>`;
+    }).join('');
+}
+
+async function submitOdds() {
+  const game = document.getElementById('odds-game').value;
+  const spread = document.getElementById('odds-spread').value;
+  const ou = document.getElementById('odds-ou').value;
+  const status = document.getElementById('odds-status');
+  if (!game) {
+    status.textContent = '請先選擇比賽';
+    status.style.color = 'var(--down)';
+    return;
+  }
+  try {
+    const res = await fetch('/api/nba/odds', {
+      method: 'POST',
+      headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify({
+        game,
+        spread: spread ? parseFloat(spread) : null,
+        ou: ou ? parseFloat(ou) : null
+      })
+    });
+    const data = await res.json();
+    if (!res.ok) throw new Error(data.error || 'save failed');
+    status.textContent = '✅ 儲存成功';
+    status.style.color = 'var(--up)';
+    await loadNBA();
+  } catch (e) {
+    status.textContent = '儲存失敗：' + e.message;
+    status.style.color = 'var(--down)';
+  }
+}
+
+async function loadOddsList() {
+  try {
+    const res = await fetch('/api/nba/odds');
+    if (!res.ok) return;
+    const data = await res.json();
+    const entries = data.entries || [];
+    const el = document.getElementById('odds-list');
+    window._twOddsMap = data.odds || {};
+    if (!el) return;
+    if (!entries.length) {
+      el.innerHTML = '';
+      return;
+    }
+    el.innerHTML = '<div style="margin-top:6px;font-weight:700;color:var(--text);margin-bottom:4px;">已儲存盤口：</div>' +
+      entries.map(o => `<div style="display:flex;gap:12px;align-items:center;padding:4px 0;border-bottom:1px solid var(--border);font-size:11px;"><span style="flex:1;color:var(--text);">${o.game}</span><span style="color:var(--accent);">讓分: ${o.spread != null ? o.spread : '—'}</span><span style="color:var(--up);">O/U: ${o.ou != null ? o.ou : '—'}</span></div>`).join('');
+  } catch (e) {
+    console.warn('loadOddsList failed', e);
+  }
+}
+
 function showError(msg) {
-  const grids = ['games-grid', 'edges-grid'];
-  grids.forEach(id => {
+  ['games-grid', 'next-games-grid', 'edges-grid', 'tw-lottery-grid', 'next-tw-lottery-grid'].forEach(id => {
     const el = document.getElementById(id);
     if (el) el.innerHTML = `<div class="error-state">API ERROR: ${msg} — Check /api/nba/predictions</div>`;
   });
   const elo = document.getElementById('elo-rankings');
-  if (elo) elo.innerHTML = `<div style="font-family:'Share Tech Mono';font-size:11px;color:var(--down);padding:12px;">
-    Failed to load Elo data: ${msg}</div>`;
+  if (elo) elo.innerHTML = `<div style="font-family:'Share Tech Mono';font-size:11px;color:var(--down);padding:12px;">Failed to load Elo data: ${msg}</div>`;
 }
 
-// ─── Main load ────────────────────────────────────────────────────
 async function loadNBA() {
   try {
     let data;
+    let performanceSummary = null;
     try {
       const r = await fetch('/api/nba/predictions');
       if (r.ok) data = await r.json();
       else throw new Error('api');
-    } catch(e) {
+    } catch (e) {
       const r2 = await fetch('/nba_data.json');
       if (!r2.ok) throw new Error('No data source');
       data = await r2.json();
     }
+
+    let oddsMap = {};
+    try {
+      const oddsRes = await fetch('/api/nba/odds');
+      if (oddsRes.ok) {
+        const oddsData = await oddsRes.json();
+        oddsMap = oddsData.odds || {};
+      }
+    } catch (e) {
+      console.warn('odds fetch failed', e);
+    }
+
+    try {
+      const perfRes = await fetch('/api/nba/performance-summary');
+      if (perfRes.ok) performanceSummary = await perfRes.json();
+    } catch (e) {
+      console.warn('performance summary failed', e);
+    }
+
+    window._twOddsMap = oddsMap;
     window._loadedGames = data.games || [];
+    window._nextGames = data.next_games || [];
+
+    renderPerformanceSummary(performanceSummary);
     renderGames(window._loadedGames);
+    renderNextGames(window._nextGames, data.next_games_date || '');
     renderEloRankings(data.elo_teams || {});
     renderBracket(data.playoff_bracket || null);
-    renderTWLottery(window._loadedGames);
-    renderBacktest(data.backtest);
+    renderTWLotteryInto('tw-lottery-grid', window._loadedGames.length ? window._loadedGames : window._nextGames, oddsMap);
     renderEdges(data.edges || []);
+    renderBacktest(data.backtest);
+
+    const scheduledToday = (window._loadedGames || []).filter(g => !String(g.status || '').toLowerCase().includes('final'));
+    renderTopPicks(scheduledToday.length ? scheduledToday : window._nextGames, oddsMap, 'today-top-picks-container');
+    renderTopPicks(window._nextGames, oddsMap, 'top-picks-container');
+
+    populateOddsGameSelect(window._loadedGames, window._nextGames);
+    await loadOddsList();
+
     updateTimestamp();
     startCountdown();
   } catch (err) {
     showError(err.message);
-    // Still restart the countdown so it retries
     startCountdown();
   }
 }
 
-// ─── Boot ─────────────────────────────────────────────────────────
 document.addEventListener('DOMContentLoaded', () => {
   loadNBA();
   startScoreRefresh();
