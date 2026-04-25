@@ -110,6 +110,7 @@ bash run_nba_betting_pipeline.sh
 ```
 
 這支腳本會先刷新 `nba_data.json`，再同步 `tw_odds.json`、`sportbook_report.json`、`pick_stats.json`，並把每日 top picks 寫進 `nba.db` 的 `recommended_picks`，方便之後做真實下注回測。
+如果 `.env` 已設定 `NBA_TG_TOKEN` 與 `NBA_TG_CHAT_ID`，pipeline 跑完後也會自動 Telegram 發送「今日推薦賭局 Top N、edge、盤口、模型信心」。
 
 常用指令：
 

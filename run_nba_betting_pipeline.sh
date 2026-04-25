@@ -137,6 +137,18 @@ sync_sportbook_artifacts() {
     run_in_dir "$NBA_DIR" "$NBA_PY" sync_sportweb_data.py
     run_in_dir "$NBA_DIR" "$NBA_PY" -m json.tool tw_odds.json >/dev/null
     run_in_dir "$NBA_DIR" "$NBA_PY" -m json.tool sportbook_report.json >/dev/null
+    run_in_dir "$NBA_DIR" "$NBA_PY" -m json.tool pick_stats.json >/dev/null
+}
+
+send_betting_alert() {
+    if [ -f "$NBA_DIR/telegram_push.py" ] && grep -q '^NBA_TG_CHAT_ID=.' "$NBA_DIR/.env" 2>/dev/null; then
+        log "Sending Telegram betting alert..."
+        if ! run_in_dir "$NBA_DIR" "$NBA_PY" telegram_push.py --betting-alert --topn 5; then
+            log "Telegram betting alert failed; continue without stopping pipeline"
+        fi
+    else
+        log "Skip Telegram betting alert (chat_id not configured)"
+    fi
 }
 
 deploy_site() {
@@ -168,6 +180,8 @@ main() {
     else
         log "Skip deploy"
     fi
+
+    send_betting_alert
 
     log "Pipeline complete"
 }
