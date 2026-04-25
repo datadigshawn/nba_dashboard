@@ -49,6 +49,7 @@ DEPLOY_STATE_FILES=(
 OPTIONAL_SYNC_FILES=(
     "tw_odds.json"
     "sportbook_report.json"
+    "pick_stats.json"
 )
 
 usage() {

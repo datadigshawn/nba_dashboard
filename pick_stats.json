@@ -1,0 +1,65 @@
+{
+  "synced_at": "2026-04-25T17:15:31",
+  "pick_date": "20260425",
+  "saved": 0,
+  "verified": {
+    "verified": 0,
+    "wins": 0,
+    "losses": 0,
+    "pushes": 0
+  },
+  "stats": {
+    "total": 0,
+    "wins": 0,
+    "wr": 0.0,
+    "spread_total": 0,
+    "spread_wins": 0,
+    "spread_wr": 0.0,
+    "ou_total": 0,
+    "ou_wins": 0,
+    "ou_wr": 0.0,
+    "daily": []
+  },
+  "meta": {
+    "today_candidates": 11,
+    "today_top_count": 2,
+    "next_candidates": 11,
+    "next_top_count": 2
+  },
+  "current_picks": [
+    {
+      "pick_date": "20260425",
+      "game_date": "20260428",
+      "game_key": "Detroit Pistons @ Orlando Magic",
+      "away": "Detroit Pistons",
+      "home": "Orlando Magic",
+      "pick_type": "spread",
+      "pick_target": "home",
+      "pick_line": 2.5,
+      "pick_detail": "買 Magic 受讓 +2.5",
+      "edge": 7.0,
+      "confidence": 52.4,
+      "tw_spread": 2.5,
+      "tw_ou": 213.5,
+      "model_spread": 4.5,
+      "model_total": 215.1
+    },
+    {
+      "pick_date": "20260425",
+      "game_date": "20260428",
+      "game_key": "Oklahoma City Thunder @ Phoenix Suns",
+      "away": "Oklahoma City Thunder",
+      "home": "Phoenix Suns",
+      "pick_type": "spread",
+      "pick_target": "home",
+      "pick_line": 8.5,
+      "pick_detail": "買 Suns 受讓 +8.5",
+      "edge": 2.0999999999999996,
+      "confidence": 83.4,
+      "tw_spread": 8.5,
+      "tw_ou": 214.5,
+      "model_spread": -6.4,
+      "model_total": 212.8
+    }
+  ]
+}

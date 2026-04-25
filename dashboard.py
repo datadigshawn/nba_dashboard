@@ -41,6 +41,7 @@ app = Flask(__name__)
 init_db(DB_PATH)
 SYNCED_TW_ODDS = BASE_DIR / "tw_odds.json"
 SPORTBOOK_REPORT = BASE_DIR / "sportbook_report.json"
+PICK_STATS_FILE = BASE_DIR / "pick_stats.json"
 
 
 def _run_predictor(*args: str, timeout: int = 60) -> Response:
@@ -130,6 +131,13 @@ def sportbook_report_json():
     if SPORTBOOK_REPORT.exists():
         return send_file(str(SPORTBOOK_REPORT), mimetype="application/json")
     return jsonify({"error": "sportbook_report.json not found"}), 404
+
+
+@app.route("/pick_stats.json")
+def pick_stats_json():
+    if PICK_STATS_FILE.exists():
+        return send_file(str(PICK_STATS_FILE), mimetype="application/json")
+    return jsonify({"error": "pick_stats.json not found"}), 404
 
 
 @app.route("/api/nba/predictions")
@@ -252,7 +260,12 @@ def nba_picks_verify():
 @app.route("/api/nba/picks/stats")
 def nba_picks_stats():
     try:
-        return jsonify(get_pick_stats(DB_PATH))
+        live_stats = get_pick_stats(DB_PATH)
+        fallback_payload = _load_json_file(PICK_STATS_FILE)
+        fallback_stats = fallback_payload.get("stats") if isinstance(fallback_payload, dict) else {}
+        if (fallback_stats or {}).get("total", 0) > live_stats.get("total", 0):
+            return jsonify(fallback_stats)
+        return jsonify(live_stats)
     except Exception as e:
         return jsonify({"error": str(e)}), 500
 

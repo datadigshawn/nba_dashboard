@@ -1377,7 +1377,7 @@ function renderTopPicks(games, oddsMap, containerId) {
       }
     }
 
-    if (bets.length >= 2) {
+    if (bets.length) {
       picks.push({
         game: key,
         game_date: g.game_date || '',
@@ -1396,7 +1396,9 @@ function renderTopPicks(games, oddsMap, containerId) {
   });
 
   picks.sort((a, b) => b.maxEdge - a.maxEdge);
-  const top = picks.slice(0, 6);
+  const preferred = picks.filter(p => p.bets.length >= 2);
+  const backup = picks.filter(p => p.bets.length === 1);
+  const top = preferred.slice(0, 6).concat(backup.slice(0, Math.max(0, 6 - preferred.length)));
   if (!top.length) {
     container.innerHTML = '';
     return;

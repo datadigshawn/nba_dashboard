@@ -76,6 +76,9 @@ bash nba_daily_update.sh
 # 只更新預測，不重訓
 bash nba_daily_update.sh --predict-only
 
+# 一鍵跑完整 betting pipeline（預測 + 運彩盤口 + picks 歷史 + deploy）
+bash run_nba_betting_pipeline.sh
+
 # 一鍵部署到 nba.shawny-project42.com
 bash deploy_nba_site.sh -m "Deploy NBA dashboard update"
 
@@ -99,6 +102,14 @@ $VENV dashboard.py
 前提是假設 `origin/main` 已經綁定到線上的自動部署服務（目前 `https://nba.shawny-project42.com/` 的行為就是這種模式）。
 
 這樣做的目的是讓線上的 `/api/nba/predictions` 在 redeploy 後也直接吃到和本地相同的 Elo、spread model 與 calibration，而不是只同步頁面和 `nba_data.json`。
+
+如果你是要更新整條「預測 + sportWeb 運彩盤口 + recommended picks 歷史 + 網站」流程，優先使用：
+
+```bash
+bash run_nba_betting_pipeline.sh
+```
+
+這支腳本會先刷新 `nba_data.json`，再同步 `tw_odds.json`、`sportbook_report.json`、`pick_stats.json`，並把每日 top picks 寫進 `nba.db` 的 `recommended_picks`，方便之後做真實下注回測。
 
 常用指令：
 
