@@ -46,6 +46,10 @@ DEPLOY_STATE_FILES=(
     "state/nba_spread_model.xgb"
     "state/nba_calibration.json"
 )
+OPTIONAL_SYNC_FILES=(
+    "tw_odds.json"
+    "sportbook_report.json"
+)
 
 usage() {
     cat <<EOF
@@ -194,6 +198,7 @@ run_checks() {
         nba_backfill.py \
         streamlit_app/app.py \
         streamlit_app/sync_data.py \
+        sync_sportweb_data.py \
         telegram_push.py \
         setup_chat_id.py
     run bash -n nba_daily_update.sh
@@ -208,6 +213,11 @@ stage_deploy_state() {
     run git add nba_data.json
     for path in "${DEPLOY_STATE_FILES[@]}"; do
         run git add "$path"
+    done
+    for path in "${OPTIONAL_SYNC_FILES[@]}"; do
+        if [[ -f "$path" ]]; then
+            run git add "$path"
+        fi
     done
 }
 

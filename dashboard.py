@@ -39,6 +39,8 @@ if not PYTHON.exists():
 
 app = Flask(__name__)
 init_db(DB_PATH)
+SYNCED_TW_ODDS = BASE_DIR / "tw_odds.json"
+SPORTBOOK_REPORT = BASE_DIR / "sportbook_report.json"
 
 
 def _run_predictor(*args: str, timeout: int = 60) -> Response:
@@ -58,6 +60,48 @@ def _parse_float(value):
     return float(value)
 
 
+def _load_json_file(path: Path) -> dict:
+    if not path.exists():
+        return {}
+    try:
+        return json.loads(path.read_text(encoding="utf-8"))
+    except Exception:
+        return {}
+
+
+def _load_synced_tw_odds() -> dict:
+    payload = _load_json_file(SYNCED_TW_ODDS)
+    entries = payload.get("entries") or []
+    odds_map = {}
+    normalized_entries = []
+    for row in entries:
+        game = row.get("game")
+        if not game:
+            continue
+        normalized = {
+            "game": game,
+            "spread": row.get("spread"),
+            "ou": row.get("ou"),
+            "updated_at": row.get("updated_at"),
+            "source": row.get("source", "sportWeb"),
+            "start_time": row.get("start_time"),
+            "sportweb_game_id": row.get("sportweb_game_id"),
+        }
+        normalized_entries.append(normalized)
+        odds_map[game] = {
+            "spread": normalized["spread"],
+            "ou": normalized["ou"],
+            "updated_at": normalized["updated_at"],
+            "source": normalized["source"],
+        }
+    return {
+        "entries": normalized_entries,
+        "odds": odds_map,
+        "synced_at": payload.get("synced_at"),
+        "source": payload.get("source") or {},
+    }
+
+
 @app.route("/")
 def index():
     path = BASE_DIR / "nba.html"
@@ -72,6 +116,20 @@ def nba_data_json():
     if path.exists():
         return send_file(str(path), mimetype="application/json")
     return jsonify({"error": "nba_data.json not found"}), 404
+
+
+@app.route("/tw_odds.json")
+def tw_odds_json():
+    if SYNCED_TW_ODDS.exists():
+        return send_file(str(SYNCED_TW_ODDS), mimetype="application/json")
+    return jsonify({"error": "tw_odds.json not found"}), 404
+
+
+@app.route("/sportbook_report.json")
+def sportbook_report_json():
+    if SPORTBOOK_REPORT.exists():
+        return send_file(str(SPORTBOOK_REPORT), mimetype="application/json")
+    return jsonify({"error": "sportbook_report.json not found"}), 404
 
 
 @app.route("/api/nba/predictions")
@@ -126,16 +184,46 @@ def nba_odds():
             return jsonify({"error": str(e)}), 500
 
     try:
-        entries = list_odds(DB_PATH)
-        odds_map = {
-            row["game"]: {
+        synced = _load_synced_tw_odds()
+        merged = {row["game"]: dict(row) for row in synced.get("entries", [])}
+        for row in list_odds(DB_PATH):
+            base = merged.get(row["game"], {})
+            merged[row["game"]] = {
+                **base,
+                "game": row["game"],
                 "spread": row["spread"],
                 "ou": row["ou"],
                 "updated_at": row["updated_at"],
+                "source": "manual" if base else "manual",
+            }
+
+        entries = sorted(merged.values(), key=lambda row: row["game"])
+        odds_map = {
+            row["game"]: {
+                "spread": row.get("spread"),
+                "ou": row.get("ou"),
+                "updated_at": row.get("updated_at"),
+                "source": row.get("source", "manual"),
             }
             for row in entries
         }
-        return jsonify({"odds": odds_map, "entries": entries})
+        return jsonify({
+            "odds": odds_map,
+            "entries": entries,
+            "synced_at": synced.get("synced_at"),
+            "source": synced.get("source"),
+        })
+    except Exception as e:
+        return jsonify({"error": str(e)}), 500
+
+
+@app.route("/api/nba/sportbook-report")
+def nba_sportbook_report():
+    try:
+        payload = _load_json_file(SPORTBOOK_REPORT)
+        if payload:
+            return jsonify(payload)
+        return jsonify({"error": "sportbook_report.json not found"}), 404
     except Exception as e:
         return jsonify({"error": str(e)}), 500
 

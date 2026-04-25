@@ -437,6 +437,7 @@
 
   <div id="performance-summary"></div>
   <div id="today-top-picks-container"></div>
+  <div id="sportbook-report-container"></div>
 
   <!-- SECTION 1: TODAY'S GAMES -->
   <section>
@@ -965,6 +966,91 @@ function renderPerformanceSummary(summary) {
         </div>`;
       }).join('')}
     </div>
+  </section>`;
+}
+
+function renderSportbookReport(report) {
+  const container = document.getElementById('sportbook-report-container');
+  if (!container) return;
+  if (!report || !report.current || !report.current.count) {
+    container.innerHTML = '';
+    return;
+  }
+
+  const current = report.current || {};
+  const backtest = report.backtest || {};
+  const byType = current.by_type || {};
+  const clv = backtest.clv || {};
+  const source = report.source || {};
+  const topEdges = (current.top_edges || []).slice(0, 6);
+
+  const typePills = [
+    `ML ${byType.moneyline || 0}`,
+    `Spread ${byType.spread || 0}`,
+    `Total ${byType.total || 0}`,
+  ].map(text => `<span style="display:inline-block;padding:4px 8px;border:1px solid var(--border);border-radius:999px;font-family:'Share Tech Mono';font-size:10px;color:var(--muted);">${text}</span>`).join('');
+
+  const edgeCards = topEdges.map(edge => {
+    const tier = edge.edge >= 0.20 ? 'strong' : edge.edge >= 0.10 ? 'moderate' : 'small';
+    const icon = edge.edge_type === 'moneyline' ? '🎰' : edge.edge_type === 'spread' ? '📐' : '📊';
+    const edgePct = (edge.edge * 100).toFixed(1);
+    const roiPct = (edge.expected_roi * 100).toFixed(1);
+    const modelPct = (edge.model_prob * 100).toFixed(1);
+    const marketPct = (edge.market_prob * 100).toFixed(1);
+    const lineText = edge.edge_type === 'moneyline' ? '' : ` · Line ${edge.line}`;
+    return `<div class="edge-card ${tier}">
+      <div class="edge-header">
+        <div class="edge-question">${icon} ${edge.away} @ ${edge.home}</div>
+        <span class="edge-badge ${tier}">${edge.edge_type.toUpperCase()}</span>
+      </div>
+      <div style="font-size:12px;font-weight:700;color:var(--text);margin-bottom:8px;">${edge.picked_team}${lineText}</div>
+      <div class="edge-probs">
+        <div class="edge-prob-item"><div class="edge-prob-label">Model</div><div class="edge-prob-val model">${modelPct}%</div></div>
+        <div class="edge-prob-item"><div class="edge-prob-label">Market</div><div class="edge-prob-val poly">${marketPct}%</div></div>
+      </div>
+      <div class="edge-footer">
+        <div><div class="edge-amount"><span class="pct">${edgePct}%</span><span class="lbl"> EDGE</span></div><div class="vol-label">ROI ${roiPct}% · ${edge.match_quality || 'matched'}</div></div>
+        <div style="font-family:'Share Tech Mono';font-size:11px;color:var(--muted);">Odds ${edge.odds}</div>
+      </div>
+    </div>`;
+  }).join('');
+
+  const tracked = clv.tracked || 0;
+  const clvLine = clv.avg_clv_line != null ? clv.avg_clv_line : '—';
+  const clvOdds = clv.avg_clv_odds != null ? clv.avg_clv_odds : '—';
+  const clvWr = clv.clv_win_rate != null ? `${clv.clv_win_rate}%` : '—';
+  const sourceLine = source.sportweb_fetched_at || report.synced_at || '—';
+  const detectedLine = source.sportweb_detected_at || '—';
+  const totalProfit = typeof backtest.total_profit === 'number' ? backtest.total_profit.toFixed(2) : '0.00';
+  const avgRoi = typeof backtest.avg_roi === 'number' ? backtest.avg_roi.toFixed(3) : '0.000';
+
+  container.innerHTML = `<section>
+    <div class="section-title">📚 Sportbook Scan
+      <span style="font-size:10px;color:var(--muted);font-weight:400;margin-left:12px;">odds ${sourceLine} · edges ${detectedLine}</span>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:14px;">
+      <div style="background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:14px;text-align:center;">
+        <div style="font-family:'Share Tech Mono';font-size:10px;color:var(--muted);">當前可下注市場</div>
+        <div style="font-family:'Share Tech Mono';font-size:28px;font-weight:900;color:var(--accent);">${current.count || 0}</div>
+        <div style="display:flex;gap:6px;justify-content:center;flex-wrap:wrap;margin-top:8px;">${typePills}</div>
+      </div>
+      <div style="background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:14px;text-align:center;">
+        <div style="font-family:'Share Tech Mono';font-size:10px;color:var(--muted);">去重後真實回測</div>
+        <div style="font-family:'Share Tech Mono';font-size:28px;font-weight:900;color:${(backtest.win_rate || 0) >= 55 ? 'var(--up)' : 'var(--down)'};">${backtest.win_rate || 0}%</div>
+        <div style="font-family:'Share Tech Mono';font-size:10px;color:var(--muted);">${backtest.won || 0}/${backtest.resolved || 0} · ROI ${avgRoi}</div>
+      </div>
+      <div style="background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:14px;text-align:center;">
+        <div style="font-family:'Share Tech Mono';font-size:10px;color:var(--muted);">總損益</div>
+        <div style="font-family:'Share Tech Mono';font-size:28px;font-weight:900;color:${(backtest.total_profit || 0) >= 0 ? 'var(--up)' : 'var(--down)'};">${totalProfit}</div>
+        <div style="font-family:'Share Tech Mono';font-size:10px;color:var(--muted);">Raw ${backtest.raw_resolved || 0} / Canonical ${backtest.resolved || 0}</div>
+      </div>
+      <div style="background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:14px;text-align:center;">
+        <div style="font-family:'Share Tech Mono';font-size:10px;color:var(--muted);">CLV</div>
+        <div style="font-family:'Share Tech Mono';font-size:20px;font-weight:900;color:var(--warn);">Line ${clvLine}</div>
+        <div style="font-family:'Share Tech Mono';font-size:10px;color:var(--muted);">Odds ${clvOdds} · Win ${clvWr} · ${tracked} tracked</div>
+      </div>
+    </div>
+    <div class="edge-grid">${edgeCards}</div>
   </section>`;
 }
 
@@ -1626,6 +1712,7 @@ async function loadNBA() {
   try {
     let data;
     let performanceSummary = null;
+    let sportbookReport = null;
     try {
       const r = await fetch('/api/nba/predictions');
       if (r.ok) data = await r.json();
@@ -1654,11 +1741,19 @@ async function loadNBA() {
       console.warn('performance summary failed', e);
     }
 
+    try {
+      const sportbookRes = await fetch('/api/nba/sportbook-report');
+      if (sportbookRes.ok) sportbookReport = await sportbookRes.json();
+    } catch (e) {
+      console.warn('sportbook report failed', e);
+    }
+
     window._twOddsMap = oddsMap;
     window._loadedGames = data.games || [];
     window._nextGames = data.next_games || [];
 
     renderPerformanceSummary(performanceSummary);
+    renderSportbookReport(sportbookReport);
     renderGames(window._loadedGames);
     renderNextGames(window._nextGames, data.next_games_date || '');
     renderEloRankings(data.elo_teams || {});
