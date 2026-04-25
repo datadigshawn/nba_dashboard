@@ -1,14 +1,14 @@
 {
-  "synced_at": "2026-04-25T16:49:52",
+  "synced_at": "2026-04-25T16:52:22",
   "source": {
-    "sportweb_fetched_at": "2026-04-25T16:49:33",
-    "sportweb_detected_at": "2026-04-25T16:49:52",
+    "sportweb_fetched_at": "2026-04-25T16:52:05",
+    "sportweb_detected_at": "2026-04-25T16:52:22",
     "game_count": 4
   },
   "current": {
-    "count": 14,
+    "count": 13,
     "by_type": {
-      "spread": 12,
+      "spread": 11,
       "moneyline": 2
     },
     "top_edges": [
@@ -20,26 +20,11 @@
         "side": "away",
         "picked_team": "Denver Nuggets -1.5",
         "line": 1.5,
-        "edge": 0.24652706703670085,
-        "model_prob": 0.7421538891941353,
+        "edge": 0.2492111961796994,
+        "model_prob": 0.7448380183371338,
         "market_prob": 0.4956268221574344,
         "odds": 1.73,
-        "expected_roi": 0.283926228305854,
-        "match_quality": ""
-      },
-      {
-        "game_date": "20260429",
-        "away": "New York Knicks",
-        "home": "Atlanta Hawks",
-        "edge_type": "spread",
-        "side": "away",
-        "picked_team": "New York Knicks -1.5",
-        "line": 1.5,
-        "edge": 0.23995803589556985,
-        "model_prob": 0.7501621175282229,
-        "market_prob": 0.5102040816326531,
-        "odds": 1.68,
-        "expected_roi": 0.2602723574474145,
+        "expected_roi": 0.2885697717232415,
         "match_quality": ""
       },
       {
@@ -50,26 +35,11 @@
         "side": "away",
         "picked_team": "Denver Nuggets -2.5",
         "line": 2.5,
-        "edge": 0.23931100520642773,
-        "model_prob": 0.714529664098556,
+        "edge": 0.24213569261067108,
+        "model_prob": 0.7173543515027994,
         "market_prob": 0.4752186588921283,
         "odds": 1.8,
-        "expected_roi": 0.2861533953774008,
-        "match_quality": ""
-      },
-      {
-        "game_date": "20260429",
-        "away": "New York Knicks",
-        "home": "Atlanta Hawks",
-        "edge_type": "spread",
-        "side": "away",
-        "picked_team": "New York Knicks -2.5",
-        "line": 2.5,
-        "edge": 0.23758297209624185,
-        "model_prob": 0.7229630890553062,
-        "market_prob": 0.4853801169590643,
-        "odds": 1.76,
-        "expected_roi": 0.2724150367373388,
+        "expected_roi": 0.2912378327050389,
         "match_quality": ""
       },
       {
@@ -80,11 +50,11 @@
         "side": "away",
         "picked_team": "Denver Nuggets -3.5",
         "line": 3.5,
-        "edge": 0.23629509981998187,
-        "model_prob": 0.6855704621388224,
+        "edge": 0.23924713455165614,
+        "model_prob": 0.6885224968704967,
         "market_prob": 0.4492753623188406,
         "odds": 1.9,
-        "expected_roi": 0.30258387806376263,
+        "expected_roi": 0.3081927440539437,
         "match_quality": ""
       },
       {
@@ -93,13 +63,28 @@
         "home": "Atlanta Hawks",
         "edge_type": "spread",
         "side": "away",
-        "picked_team": "New York Knicks -3.5",
-        "line": 3.5,
-        "edge": 0.23508787580016421,
-        "model_prob": 0.6943902013815596,
-        "market_prob": 0.4593023255813954,
-        "odds": 1.86,
-        "expected_roi": 0.2915657745697009,
+        "picked_team": "New York Knicks -1.5",
+        "line": 1.5,
+        "edge": 0.2319498075614822,
+        "model_prob": 0.7421538891941353,
+        "market_prob": 0.5102040816326531,
+        "odds": 1.68,
+        "expected_roi": 0.24681853384614727,
+        "match_quality": ""
+      },
+      {
+        "game_date": "20260429",
+        "away": "New York Knicks",
+        "home": "Atlanta Hawks",
+        "edge_type": "spread",
+        "side": "away",
+        "picked_team": "New York Knicks -2.5",
+        "line": 2.5,
+        "edge": 0.2291495471394917,
+        "model_prob": 0.714529664098556,
+        "market_prob": 0.4853801169590643,
+        "odds": 1.76,
+        "expected_roi": 0.25757220881345855,
         "match_quality": ""
       },
       {
@@ -110,11 +95,11 @@
         "side": "home",
         "picked_team": "Orlando Magic +3.5",
         "line": 3.5,
-        "edge": 0.21506403363351512,
-        "model_prob": 0.7340144709512995,
+        "edge": 0.22855702513529275,
+        "model_prob": 0.7475074624530771,
         "market_prob": 0.5189504373177843,
         "odds": 1.65,
-        "expected_roi": 0.21112387706964403,
+        "expected_roi": 0.23338731304757715,
         "match_quality": ""
       },
       {
@@ -125,11 +110,26 @@
         "side": "home",
         "picked_team": "Orlando Magic +1.5",
         "line": 1.5,
-        "edge": 0.21287539425002094,
-        "model_prob": 0.6766435101920499,
+        "edge": 0.22769434533198402,
+        "model_prob": 0.691462461274013,
         "market_prob": 0.463768115942029,
         "odds": 1.85,
-        "expected_roi": 0.2517904938552924,
+        "expected_roi": 0.2792055533569241,
+        "match_quality": ""
+      },
+      {
+        "game_date": "20260429",
+        "away": "New York Knicks",
+        "home": "Atlanta Hawks",
+        "edge_type": "spread",
+        "side": "away",
+        "picked_team": "New York Knicks -3.5",
+        "line": 3.5,
+        "edge": 0.22626813655742706,
+        "model_prob": 0.6855704621388224,
+        "market_prob": 0.4593023255813954,
+        "odds": 1.86,
+        "expected_roi": 0.2751610595782098,
         "match_quality": ""
       },
       {
@@ -140,11 +140,11 @@
         "side": "home",
         "picked_team": "Orlando Magic +2.5",
         "line": 2.5,
-        "edge": 0.210349099494115,
-        "model_prob": 0.7059759216515494,
+        "edge": 0.22453871424285982,
+        "model_prob": 0.7201655364002942,
         "market_prob": 0.4956268221574344,
         "odds": 1.73,
-        "expected_roi": 0.22133834445718048,
+        "expected_roi": 0.245886377972509,
         "match_quality": ""
       },
       {
@@ -155,11 +155,11 @@
         "side": "away",
         "picked_team": "Denver Nuggets",
         "line": 0.0,
-        "edge": 0.1924561403508771,
-        "model_prob": 0.71,
+        "edge": 0.1914561403508772,
+        "model_prob": 0.7090000000000001,
         "market_prob": 0.5175438596491229,
         "odds": 1.65,
-        "expected_roi": 0.17149999999999987,
+        "expected_roi": 0.16985000000000006,
         "match_quality": ""
       },
       {
@@ -170,11 +170,11 @@
         "side": "away",
         "picked_team": "New York Knicks",
         "line": 0.0,
-        "edge": 0.17738775510204075,
-        "model_prob": 0.708,
+        "edge": 0.17638775510204086,
+        "model_prob": 0.7070000000000001,
         "market_prob": 0.5306122448979592,
         "odds": 1.61,
-        "expected_roi": 0.13988,
+        "expected_roi": 0.13827000000000017,
         "match_quality": ""
       },
       {
@@ -185,17 +185,17 @@
         "side": "home",
         "picked_team": "Phoenix Suns +8.5",
         "line": 8.5,
-        "edge": 0.0906182240431243,
-        "model_prob": 0.5759983410021886,
+        "edge": 0.08408006624860936,
+        "model_prob": 0.5694601832076737,
         "market_prob": 0.4853801169590643,
         "odds": 1.76,
-        "expected_roi": 0.013757080163851965,
+        "expected_roi": 0.0022499224455056477,
         "match_quality": ""
       }
     ]
   },
   "backtest": {
-    "raw_total": 4188,
+    "raw_total": 4201,
     "raw_resolved": 4124,
     "total": 227,
     "resolved": 222,
