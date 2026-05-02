@@ -13,6 +13,7 @@
 #   4. Stage code + deploy-critical model state
 #   5. git commit
 #   6. git push origin HEAD:main
+#   7. restart local dashboard service if available
 #
 # Usage:
 #   bash deploy_nba_site.sh
@@ -38,6 +39,8 @@ REFRESH_DATA=1
 SYNC_RELEASE=0
 RUN_CHECKS=1
 PUSH_CHANGES=1
+RESTART_DASHBOARD=1
+DASHBOARD_SERVICE="${DASHBOARD_SERVICE:-com.nba.dashboard}"
 COMMIT_MESSAGE=""
 DEPLOY_STATE_FILES=(
     "state/nba_model.json"
@@ -63,6 +66,8 @@ Options:
   --sync-release       Also upload nba_data.json to GitHub Release.
   --skip-checks        Skip py_compile / shell / JS syntax checks.
   --no-push            Commit locally but do not push to ${REMOTE}/${DEPLOY_BRANCH}.
+  --no-restart-dashboard
+                       Do not restart local launchd dashboard service after push.
   --remote NAME        Git remote to push. Default: ${REMOTE}
   --branch NAME        Remote branch to push. Default: ${DEPLOY_BRANCH}
   -h, --help           Show this help.
@@ -94,6 +99,10 @@ while [[ $# -gt 0 ]]; do
             ;;
         --no-push)
             PUSH_CHANGES=0
+            shift
+            ;;
+        --no-restart-dashboard)
+            RESTART_DASHBOARD=0
             shift
             ;;
         --remote)
@@ -198,6 +207,8 @@ run_checks() {
         nba_db.py \
         nba_resolve.py \
         nba_backfill.py \
+        pick_history.py \
+        pick_results_cli.py \
         streamlit_app/app.py \
         streamlit_app/sync_data.py \
         sync_sportweb_data.py \
@@ -255,6 +266,27 @@ push_deploy() {
     log "Push complete. Hosting platform should auto-redeploy: ${SITE_URL}"
 }
 
+restart_dashboard_service() {
+    if [[ "$RESTART_DASHBOARD" -ne 1 ]]; then
+        log "Skip dashboard service restart"
+        return 0
+    fi
+    if ! command -v launchctl >/dev/null 2>&1; then
+        log "launchctl not found; skip dashboard service restart"
+        return 0
+    fi
+
+    local service_target
+    service_target="gui/$(id -u)/${DASHBOARD_SERVICE}"
+    if ! launchctl print "$service_target" >/dev/null 2>&1; then
+        log "launchd service ${service_target} not registered; skip restart"
+        return 0
+    fi
+
+    log "Restarting dashboard service ${service_target}"
+    run launchctl kickstart -k "$service_target"
+}
+
 main() {
     require_cmd git
 
@@ -290,6 +322,7 @@ main() {
     if stage_and_commit; then
         if [[ "$PUSH_CHANGES" -eq 1 ]]; then
             push_deploy
+            restart_dashboard_service
         else
             log "Skip push. Commit created locally only."
         fi

@@ -180,6 +180,8 @@ main() {
     if [[ -f "$NBA_DIR/nba_tracker.py" ]]; then
         log "Resolving & placing tracker bets..."
         run_in_dir "$NBA_DIR" "$NBA_PY" nba_tracker.py --resolve --place
+        run_in_dir "$NBA_DIR" "$NBA_PY" export_static_reports.py
+        run_in_dir "$NBA_DIR" "$NBA_PY" validate_nba_data.py
     fi
 
     if [[ "$RUN_DEPLOY" -eq 1 ]]; then

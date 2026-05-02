@@ -386,6 +386,115 @@ def save_recommended_picks(db_path: Path | str, picks: list[dict]) -> int:
     return saved
 
 
+def _pick_date_from_ts(ts: str | None, fallback: str) -> str:
+    if ts and len(ts) >= 10:
+        return ts[:10].replace("-", "")
+    return fallback
+
+
+def _short_team(name: str) -> str:
+    parts = (name or "").split()
+    return parts[-1] if parts else ""
+
+
+def _bet_pick_detail(row: sqlite3.Row) -> str:
+    bet_type = row["bet_type"]
+    side = row["bet_side"]
+    line = row["bet_line"]
+    if bet_type == "ou":
+        label = "看大 Over" if side == "over" else "看小 Under"
+        return f"{label} {line:g}" if line is not None else label
+    if bet_type == "spread":
+        team = row["home"] if side == "home" else row["away"]
+        display_line = line
+        if line is not None and side == "away":
+            display_line = -float(line)
+        line_label = f" {display_line:+g}" if display_line is not None else ""
+        return f"買 {_short_team(team)}{line_label}"
+    return f"{bet_type} {side}"
+
+
+def import_recommended_picks_from_bets(db_path: Path | str = DB_PATH) -> dict:
+    """Backfill recommended_picks from the tracker bet ledger when no pick row exists.
+
+    The bet ledger stores probability edge, not point edge, so imported rows keep
+    `edge` empty to avoid polluting point-edge bucket stats.
+    """
+    stats = {"candidates": 0, "imported": 0, "skipped_existing": 0}
+    with _connect(db_path) as conn:
+        rows = conn.execute("""
+            SELECT *
+            FROM bets
+            WHERE bet_type IN ('spread', 'ou')
+            ORDER BY id
+        """).fetchall()
+        stats["candidates"] = len(rows)
+
+        for row in rows:
+            line = row["bet_line"]
+            existing = conn.execute("""
+                SELECT id
+                FROM recommended_picks
+                WHERE game_date = ?
+                  AND home = ?
+                  AND away = ?
+                  AND pick_type = ?
+                  AND pick_target = ?
+                  AND (
+                    (pick_line IS NULL AND ? IS NULL)
+                    OR ABS(COALESCE(pick_line, 0) - COALESCE(?, 0)) < 0.0001
+                  )
+                LIMIT 1
+            """, (
+                row["game_date"],
+                row["home"],
+                row["away"],
+                row["bet_type"],
+                row["bet_side"],
+                line,
+                line,
+            )).fetchone()
+            if existing:
+                stats["skipped_existing"] += 1
+                continue
+
+            result = row["result"]
+            correct = None
+            if result == "win":
+                correct = 1
+            elif result == "loss":
+                correct = 0
+            confidence = row["model_prob"]
+            if confidence is not None and confidence <= 1:
+                confidence = confidence * 100
+
+            conn.execute("""
+                INSERT INTO recommended_picks
+                (pick_date, game_date, game_key, away, home,
+                 pick_type, pick_target, pick_line, pick_detail,
+                 edge, confidence, result, correct, verified_at)
+                VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+            """, (
+                _pick_date_from_ts(row["created_at"], row["game_date"]),
+                row["game_date"],
+                f"{row['away']} @ {row['home']}",
+                row["away"],
+                row["home"],
+                row["bet_type"],
+                row["bet_side"],
+                line,
+                _bet_pick_detail(row),
+                None,
+                confidence,
+                result,
+                correct,
+                row["resolved_at"],
+            ))
+            stats["imported"] += 1
+
+    return stats
+
+
 def _evaluate_pick_result(row: sqlite3.Row, home_score: int, away_score: int) -> tuple[str, int | None]:
     pick_type = row["pick_type"]
     pick_target = row["pick_target"]
@@ -565,6 +674,7 @@ def get_pick_stats(db_path: Path | str = DB_PATH) -> dict:
                 COALESCE(SUM(CASE WHEN correct = 1 THEN 1 ELSE 0 END), 0) AS wins
             FROM recommended_picks
             WHERE correct IN (0, 1)
+              AND edge IS NOT NULL
             GROUP BY bucket
         """).fetchall()
 
@@ -596,6 +706,7 @@ def get_pick_stats(db_path: Path | str = DB_PATH) -> dict:
                 COALESCE(SUM(CASE WHEN correct = 1 THEN 1 ELSE 0 END), 0) AS wins
             FROM recommended_picks
             WHERE correct IN (0, 1)
+              AND edge IS NOT NULL
             GROUP BY pick_type, bucket
             ORDER BY pick_type, bucket
         """).fetchall()

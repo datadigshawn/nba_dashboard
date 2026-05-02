@@ -17,8 +17,8 @@ from nba_db import (
     get_unresolved_dates,
     init_db,
     resolve_outcomes,
-    resolve_recommended_picks,
 )
+from pick_history import sync_pick_history
 
 
 def main():
@@ -26,12 +26,13 @@ def main():
     dates = sorted(set(get_unresolved_dates(DB_PATH) + get_pending_pick_dates(DB_PATH)))
     if not dates:
         print("[resolve] 無未解析的比賽")
-        pick_stats = resolve_recommended_picks(DB_PATH)
-        if pick_stats["verified"]:
+        pick_history = sync_pick_history(DB_PATH)
+        resolved = pick_history["resolved"]
+        if resolved["verified"]:
             print(
                 "[resolve] 正式推薦結算 "
-                f"{pick_stats['verified']} 筆 "
-                f"(W{pick_stats['wins']} L{pick_stats['losses']} P{pick_stats['pushes']})"
+                f"{resolved['verified']} 筆 "
+                f"(W{resolved['wins']} L{resolved['losses']} P{resolved['pushes']})"
             )
         return
 
@@ -58,7 +59,8 @@ def main():
     if resolve_list:
         resolve_outcomes(DB_PATH, resolve_list)
         print(f"[resolve] 處理 {len(resolve_list)} 場 ESPN 結果")
-        pick_stats = resolve_recommended_picks(DB_PATH, resolve_list)
+        pick_history = sync_pick_history(DB_PATH, resolve_list)
+        pick_stats = pick_history["resolved"]
         print(
             "[resolve] 正式推薦結算 "
             f"{pick_stats['verified']} 筆 "

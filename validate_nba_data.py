@@ -65,6 +65,25 @@ def _failures_for_json(path: Path) -> list[str]:
     return []
 
 
+def _failures_for_result_overrides(path: Path) -> list[str]:
+    failures = _failures_for_json(path)
+    if failures:
+        return failures
+    payload = json.loads(path.read_text(encoding="utf-8"))
+    rows = payload.get("results") if isinstance(payload, dict) else payload
+    if not isinstance(rows, list):
+        return [f"{path.name} must be a list or an object with a results list"]
+    for i, row in enumerate(rows):
+        if not isinstance(row, dict):
+            failures.append(f"{path.name} result #{i + 1} must be an object")
+            continue
+        for key in ("game_date", "home", "away", "home_score", "away_score"):
+            if key not in row and not (key == "game_date" and "date" in row):
+                failures.append(f"{path.name} result #{i + 1} missing {key}")
+                break
+    return failures
+
+
 def main() -> int:
     parser = argparse.ArgumentParser(description="Validate NBA dashboard deploy data")
     parser.add_argument("--base-dir", default=Path(__file__).resolve().parent)
@@ -91,6 +110,10 @@ def main() -> int:
         path = base / name
         if path.exists():
             failures.extend(_failures_for_json(path))
+
+    overrides = base / "pick_result_overrides.json"
+    if overrides.exists():
+        failures.extend(_failures_for_result_overrides(overrides))
 
     if failures:
         for failure in failures:

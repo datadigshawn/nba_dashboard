@@ -20,12 +20,11 @@ from pathlib import Path
 
 from nba_db import (
     DB_PATH,
-    get_pick_stats,
     init_db,
     save_recommended_picks,
     upsert_odds,
-    verify_pending_picks,
 )
+from pick_history import sync_pick_history
 
 BASE_DIR = Path(__file__).resolve().parent
 AUTOBOT_ROOT = BASE_DIR.parent
@@ -413,8 +412,14 @@ def sync_recommended_picks(nba_data: dict, tw_odds_payload: dict) -> tuple[dict,
     init_db(DB_PATH)
     selection = build_recommended_picks_payload(nba_data, tw_odds_payload)
     saved = save_recommended_picks(DB_PATH, selection.get("picks") or [])
-    verified = verify_pending_picks(DB_PATH)
-    stats = get_pick_stats(DB_PATH)
+    pick_history = sync_pick_history(DB_PATH)
+    verified = pick_history["resolved"]
+    stats = pick_history["stats"]
+    stats["history_sync"] = {
+        "imported_from_bets": pick_history.get("imported_from_bets") or {},
+        "manual_results": pick_history.get("manual_results", 0),
+        "resolved": verified,
+    }
     return selection, saved, verified, stats
 
 

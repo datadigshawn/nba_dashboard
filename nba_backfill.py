@@ -15,7 +15,8 @@ BASE_DIR = Path(__file__).parent
 sys.path.insert(0, str(BASE_DIR))
 
 from nba_db import DB_PATH, init_db, insert_predictions, insert_elo_snapshot
-from nba_db import insert_daily_performance, insert_backtest_results, db_summary, resolve_recommended_picks
+from nba_db import insert_daily_performance, insert_backtest_results, db_summary
+from pick_history import sync_pick_history
 
 
 def main():
@@ -68,7 +69,8 @@ def main():
         if resolve_list:
             resolve_outcomes(DB_PATH, resolve_list)
             print(f"  resolve: {len(resolve_list)} 場歷史結果")
-            pick_stats = resolve_recommended_picks(DB_PATH, resolve_list)
+            pick_history = sync_pick_history(DB_PATH, resolve_list)
+            pick_stats = pick_history["resolved"]
             print(
                 "  recommended_picks: "
                 f"{pick_stats['verified']} 筆正式推薦已結算 "

@@ -218,6 +218,23 @@
   ],
   "pending": 3,
   "stale_pending": 2,
-  "generated_at": "2026-05-02T14:51:49",
-  "synced_at": "2026-05-02T14:51:49"
+  "history_sync": {
+    "imported_from_bets": {
+      "candidates": 3,
+      "imported": 0,
+      "skipped_existing": 3
+    },
+    "manual_results": 0,
+    "resolved": {
+      "candidates": 3,
+      "verified": 0,
+      "wins": 0,
+      "losses": 0,
+      "pushes": 0,
+      "missing_results": 3,
+      "ungraded": 0
+    }
+  },
+  "generated_at": "2026-05-02T15:57:21",
+  "synced_at": "2026-05-02T15:57:21"
 }
