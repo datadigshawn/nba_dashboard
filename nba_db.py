@@ -109,6 +109,45 @@ CREATE TABLE IF NOT EXISTS recommended_picks (
 );
 CREATE INDEX IF NOT EXISTS idx_picks_game_date ON recommended_picks(game_date);
 CREATE INDEX IF NOT EXISTS idx_picks_pick_date ON recommended_picks(pick_date);
+
+CREATE TABLE IF NOT EXISTS bets (
+    id              INTEGER PRIMARY KEY AUTOINCREMENT,
+    game_date       TEXT NOT NULL,
+    home            TEXT NOT NULL,
+    away            TEXT NOT NULL,
+    bet_type        TEXT NOT NULL,          -- moneyline / spread / ou
+    bet_side        TEXT NOT NULL,          -- home / away / over / under
+    bet_line        REAL,                   -- spread or total line
+    market_odds     REAL NOT NULL DEFAULT 1.91,
+    implied_prob    REAL,
+    model_prob      REAL,
+    edge            REAL,
+    kelly_full      REAL,
+    kelly_fraction  REAL,
+    stake           REAL NOT NULL DEFAULT 0,
+    result          TEXT,                   -- win / loss / push / pending
+    pnl             REAL,
+    home_score      INTEGER,
+    away_score      INTEGER,
+    source          TEXT DEFAULT 'paper',   -- paper / live
+    created_at      TEXT NOT NULL,
+    resolved_at     TEXT,
+    UNIQUE(game_date, home, away, bet_type, bet_side, bet_line)
+);
+CREATE INDEX IF NOT EXISTS idx_bets_game_date ON bets(game_date);
+CREATE INDEX IF NOT EXISTS idx_bets_result ON bets(result);
+
+CREATE TABLE IF NOT EXISTS bankroll_log (
+    id          INTEGER PRIMARY KEY AUTOINCREMENT,
+    ts          TEXT NOT NULL,
+    event       TEXT NOT NULL,             -- init / bet_placed / bet_resolved / adjustment
+    bet_id      INTEGER,
+    amount      REAL NOT NULL,
+    balance     REAL NOT NULL,
+    note        TEXT,
+    FOREIGN KEY (bet_id) REFERENCES bets(id)
+);
+CREATE INDEX IF NOT EXISTS idx_bankroll_ts ON bankroll_log(ts);
 """
 
 
@@ -457,6 +496,62 @@ def get_pick_stats(db_path: Path | str = DB_PATH) -> dict:
             LIMIT 12
         """).fetchall()
 
+        edge_rows = conn.execute("""
+            SELECT
+                CASE
+                    WHEN ABS(COALESCE(edge, 0)) < 3 THEN '0-3'
+                    WHEN ABS(COALESCE(edge, 0)) < 5 THEN '3-5'
+                    WHEN ABS(COALESCE(edge, 0)) < 8 THEN '5-8'
+                    ELSE '8+'
+                END AS bucket,
+                COUNT(*) AS total,
+                COALESCE(SUM(CASE WHEN correct = 1 THEN 1 ELSE 0 END), 0) AS wins
+            FROM recommended_picks
+            WHERE correct IN (0, 1)
+            GROUP BY bucket
+        """).fetchall()
+
+        confidence_rows = conn.execute("""
+            SELECT
+                CASE
+                    WHEN COALESCE(confidence, 0) < 60 THEN '<60'
+                    WHEN COALESCE(confidence, 0) < 70 THEN '60-70'
+                    WHEN COALESCE(confidence, 0) < 80 THEN '70-80'
+                    ELSE '80+'
+                END AS bucket,
+                COUNT(*) AS total,
+                COALESCE(SUM(CASE WHEN correct = 1 THEN 1 ELSE 0 END), 0) AS wins
+            FROM recommended_picks
+            WHERE correct IN (0, 1)
+            GROUP BY bucket
+        """).fetchall()
+
+        type_edge_rows = conn.execute("""
+            SELECT
+                pick_type,
+                CASE
+                    WHEN ABS(COALESCE(edge, 0)) < 3 THEN '0-3'
+                    WHEN ABS(COALESCE(edge, 0)) < 5 THEN '3-5'
+                    WHEN ABS(COALESCE(edge, 0)) < 8 THEN '5-8'
+                    ELSE '8+'
+                END AS bucket,
+                COUNT(*) AS total,
+                COALESCE(SUM(CASE WHEN correct = 1 THEN 1 ELSE 0 END), 0) AS wins
+            FROM recommended_picks
+            WHERE correct IN (0, 1)
+            GROUP BY pick_type, bucket
+            ORDER BY pick_type, bucket
+        """).fetchall()
+
+        recent_rows = conn.execute("""
+            SELECT pick_date, game_date, away, home, pick_type, pick_detail,
+                   edge, confidence, result, correct
+            FROM recommended_picks
+            WHERE correct IN (0, 1)
+            ORDER BY game_date DESC, id DESC
+            LIMIT 20
+        """).fetchall()
+
     def _wr(w: int, t: int) -> float:
         return round(w / t * 100, 1) if t else 0.0
 
@@ -469,6 +564,26 @@ def get_pick_stats(db_path: Path | str = DB_PATH) -> dict:
             "wr": _wr(row["wins"], row["total"]),
         })
 
+    bucket_order = {
+        "edge": ["0-3", "3-5", "5-8", "8+"],
+        "confidence": ["<60", "60-70", "70-80", "80+"],
+    }
+
+    def _bucket_payload(rows: list[sqlite3.Row], order: list[str]) -> list[dict]:
+        by_key = {row["bucket"]: row for row in rows}
+        result = []
+        for key in order:
+            row = by_key.get(key)
+            wins_v = int(row["wins"]) if row else 0
+            total_v = int(row["total"]) if row else 0
+            result.append({"bucket": key, "wins": wins_v, "total": total_v, "wr": _wr(wins_v, total_v)})
+        return result
+
+    by_type_edge: dict[str, list[dict]] = {}
+    for pick_type in ("spread", "ou"):
+        rows = [row for row in type_edge_rows if row["pick_type"] == pick_type]
+        by_type_edge[pick_type] = _bucket_payload(rows, bucket_order["edge"])
+
     return {
         "total": total or 0,
         "wins": wins or 0,
@@ -480,7 +595,28 @@ def get_pick_stats(db_path: Path | str = DB_PATH) -> dict:
         "ou_wins": ou_wins or 0,
         "ou_wr": _wr(ou_wins or 0, ou_total or 0),
         "daily": list(reversed(daily)),
+        "edge_buckets": _bucket_payload(edge_rows, bucket_order["edge"]),
+        "confidence_buckets": _bucket_payload(confidence_rows, bucket_order["confidence"]),
+        "by_type_edge": by_type_edge,
+        "recent": [dict(r) for r in recent_rows],
     }
+
+
+def get_latest_bankroll_balance(db_path: Path | str = DB_PATH) -> float | None:
+    with _connect(db_path) as conn:
+        row = conn.execute(
+            "SELECT balance FROM bankroll_log ORDER BY id DESC LIMIT 1"
+        ).fetchone()
+    return float(row["balance"]) if row else None
+
+
+def get_pending_bets(db_path: Path | str = DB_PATH) -> list[dict]:
+    with _connect(db_path) as conn:
+        rows = conn.execute("""
+            SELECT * FROM bets WHERE result IS NULL OR result = 'pending'
+            ORDER BY game_date, id
+        """).fetchall()
+    return [dict(r) for r in rows]
 
 
 def _prediction_window_stats(conn: sqlite3.Connection, start_date: str, end_date: str) -> dict:

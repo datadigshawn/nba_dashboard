@@ -31,6 +31,7 @@ STATE_DIR = Path(__file__).parent / "state"
 MODEL_PATH = STATE_DIR / "nba_model.json"
 CALIBRATION_PATH = STATE_DIR / "nba_calibration.json"
 SPREAD_MODEL_PATH = STATE_DIR / "nba_spread_model.xgb"
+TW_ODDS_PATH = Path(__file__).parent / "tw_odds.json"
 
 ESPN_BASE = "https://site.api.espn.com/apis/site/v2/sports/basketball/nba"
 GAMMA = "https://gamma-api.polymarket.com"
@@ -551,6 +552,179 @@ def project_total_points(
         "home_expected": home_expected_raw * scale,
         "bias_adjustment": bias_adj,
     }
+
+
+def is_known_team(team: str, standings: dict[str, dict] | None = None) -> bool:
+    if not team or "/" in team:
+        return False
+    if standings:
+        return team in standings
+    return team in TEAM_ABBREV or team in TEAM_STARS or team in NAME_TO_ALIAS
+
+
+def load_tw_odds_map(path: Path | None = None) -> dict[str, dict]:
+    path = path or TW_ODDS_PATH
+    if not path.exists():
+        return {}
+    try:
+        payload = json.loads(path.read_text(encoding="utf-8"))
+    except Exception:
+        return {}
+    odds_map: dict[str, dict] = {}
+    for row in payload.get("entries") or []:
+        game = row.get("game")
+        if not game:
+            continue
+        odds_map[game] = {
+            "spread": row.get("spread"),
+            "ou": row.get("ou"),
+            "updated_at": row.get("updated_at"),
+            "source": row.get("source", "sportWeb"),
+        }
+    return odds_map
+
+
+def _edge_bucket(edge: float) -> str:
+    edge = abs(float(edge or 0.0))
+    if edge < 3:
+        return "0-3"
+    if edge < 5:
+        return "3-5"
+    if edge < 8:
+        return "5-8"
+    return "8+"
+
+
+def _lookup_pick_history(pick_stats: dict, pick_type: str, edge: float) -> dict:
+    bucket = _edge_bucket(edge)
+    by_type = (pick_stats or {}).get("by_type_edge") or {}
+    rows = by_type.get(pick_type) or (pick_stats or {}).get("edge_buckets") or []
+    for row in rows:
+        if row.get("bucket") == bucket:
+            return {
+                "bucket": bucket,
+                "wins": int(row.get("wins") or 0),
+                "total": int(row.get("total") or 0),
+                "wr": float(row.get("wr") or 0.0),
+            }
+    return {"bucket": bucket, "wins": 0, "total": 0, "wr": 0.0}
+
+
+def _cover_prob(edge_points: float, sigma: float) -> float:
+    import math
+    if sigma <= 0:
+        sigma = 12.0
+    z = edge_points / sigma
+    return 0.5 * (1 + math.erf(z / math.sqrt(2)))
+
+
+def build_official_recommendations(
+    games: list[dict],
+    odds_map: dict[str, dict],
+    pick_stats: dict | None = None,
+    *,
+    rmse: float = 12.0,
+    max_picks: int = 8,
+) -> list[dict]:
+    """Build concrete sportsbook picks from model lines and Taiwan odds.
+
+    `pred_spread` is home margin. `spread` is Taiwan's home spread.
+    Home covers when pred_spread + spread is positive.
+    """
+    recommendations: list[dict] = []
+    today = datetime.now().strftime("%Y%m%d")
+
+    for g in games:
+        game_key = f"{g.get('away')} @ {g.get('home')}"
+        tw = odds_map.get(game_key) or {}
+        if not tw:
+            continue
+
+        home = g.get("home", "")
+        away = g.get("away", "")
+        home_short = TEAM_ABBREV.get(home, home.split()[-1] if home else "")
+        away_short = TEAM_ABBREV.get(away, away.split()[-1] if away else "")
+        confidence = max(float(g.get("home_prob") or 0.0), float(g.get("away_prob") or 0.0))
+        pred_spread = g.get("pred_spread")
+        pred_total = g.get("pred_total")
+
+        candidates: list[dict] = []
+        if pred_spread is not None and tw.get("spread") is not None:
+            home_line = float(tw["spread"])
+            cover_edge = float(pred_spread) + home_line
+            home_covers = cover_edge >= 0
+            side = "home" if home_covers else "away"
+            edge_pts = abs(cover_edge)
+            if edge_pts >= 2.0:
+                if side == "home":
+                    line_label = f"{home_line:+g}"
+                    detail = f"買 {home_short} {line_label}"
+                else:
+                    away_line = -home_line
+                    detail = f"買 {away_short} {away_line:+g}"
+                model_prob = _cover_prob(edge_pts, rmse)
+                candidates.append({
+                    "pick_type": "spread",
+                    "pick_target": side,
+                    "pick_line": home_line,
+                    "pick_detail": detail,
+                    "edge": round(edge_pts, 1),
+                    "model_prob": round(model_prob * 100, 1),
+                    "market_line": home_line,
+                    "model_line": round(float(pred_spread), 1),
+                })
+
+        if pred_total is not None and tw.get("ou") is not None:
+            total_line = float(tw["ou"])
+            total_edge = float(pred_total) - total_line
+            if abs(total_edge) >= 5.0:
+                target = "over" if total_edge > 0 else "under"
+                detail = f"{'看大 Over' if target == 'over' else '看小 Under'} {total_line:g}"
+                model_prob = _cover_prob(abs(total_edge), max(rmse * 1.15, 13.0))
+                candidates.append({
+                    "pick_type": "ou",
+                    "pick_target": target,
+                    "pick_line": total_line,
+                    "pick_detail": detail,
+                    "edge": round(abs(total_edge), 1),
+                    "model_prob": round(model_prob * 100, 1),
+                    "market_line": total_line,
+                    "model_line": round(float(pred_total), 1),
+                })
+
+        for c in candidates:
+            hist = _lookup_pick_history(pick_stats or {}, c["pick_type"], c["edge"])
+            hist_bonus = (hist["wr"] - 52.4) / 10 if hist["total"] >= 5 else 0
+            score = c["edge"] + max(0.0, confidence - 55.0) / 10 + hist_bonus
+            if c["edge"] >= 8 and c["model_prob"] >= 68:
+                tier = "強推"
+                stake = "標準注"
+            elif c["edge"] >= 5:
+                tier = "推薦"
+                stake = "小到標準注"
+            else:
+                tier = "觀察"
+                stake = "小注"
+            recommendations.append({
+                "pick_date": today,
+                "game_date": g.get("game_date", ""),
+                "game_key": game_key,
+                "away": away,
+                "home": home,
+                "matchup": f"{away_short} @ {home_short}",
+                "confidence": round(confidence, 1),
+                "tier": tier,
+                "stake_label": stake,
+                "score": round(score, 2),
+                "history": hist,
+                "tw_spread": tw.get("spread"),
+                "tw_ou": tw.get("ou"),
+                "model_spread": g.get("pred_spread"),
+                "model_total": g.get("pred_total"),
+                **c,
+            })
+
+    return sorted(recommendations, key=lambda x: (x["tier"] != "強推", -x["score"], -x["edge"]))[:max_picks]
 
 
 def _elo_game_prob(elo_a: float, elo_b: float, hca: float = 48.0) -> float:
@@ -1680,6 +1854,7 @@ def main():
             "games": [],
             "next_games": [],
             "next_games_date": None,
+            "official_picks": [],
             "edges": [],
             "elo_teams": {},
             "calibration": {},
@@ -1716,6 +1891,10 @@ def main():
         for g in today_games:
             home, away = g["home"], g["away"]
             game_date = normalize_game_date(g, today_ymd)
+            if not is_known_team(home, standings) or not is_known_team(away, standings):
+                continue
+            if game_date < today_ymd:
+                continue
 
             # B2B Detection -- only flag if team played exactly yesterday
             b2b_home = (home in last_game and last_game[home] == yesterday_str)
@@ -1760,7 +1939,7 @@ def main():
 
             if game_date == today_ymd:
                 output["games"].append(game_entry)
-            else:
+            elif game_date > today_ymd:
                 output["next_games"].append(game_entry)
                 if first_future_ymd is None:
                     first_future_ymd = game_date
@@ -1769,6 +1948,22 @@ def main():
             output["next_games_date"] = (
                 f"{first_future_ymd[:4]}-{first_future_ymd[4:6]}-{first_future_ymd[6:8]}"
             )
+
+        try:
+            from nba_db import get_pick_stats as _get_pick_stats, DB_PATH as _db_path
+            _pick_stats = _get_pick_stats(_db_path)
+        except Exception:
+            _pick_stats = {}
+        _recommendation_pool = [
+            g for g in (output["games"] + output["next_games"])
+            if "final" not in str(g.get("status", "")).lower()
+        ]
+        output["official_picks"] = build_official_recommendations(
+            _recommendation_pool,
+            load_tw_odds_map(),
+            _pick_stats,
+            rmse=predictor.rmse or 12.0,
+        )
 
         # Edge detection
         nba_markets = fetch_polymarket_nba()
@@ -1792,8 +1987,12 @@ def main():
 
         # Top Elo teams
         sorted_elo = sorted(predictor.elo.ratings.items(), key=lambda x: x[1], reverse=True)
-        for name, rating in sorted_elo[:15]:
+        for name, rating in sorted_elo:
+            if not is_known_team(name, standings):
+                continue
             output["elo_teams"][name] = round(rating)
+            if len(output["elo_teams"]) >= 15:
+                break
 
         # Backtest results (walk-forward on recent games)
         elo_before_backtest = predictor.elo.ratings.copy()

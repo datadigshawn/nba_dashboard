@@ -699,6 +699,26 @@ function formatRangeLabel(startDate, endDate) {
   return `${formatYmdLabel(startDate)} - ${formatYmdLabel(endDate)}`;
 }
 
+function normalizePickStats(payload) {
+  if (!payload) return null;
+  return payload.stats || payload;
+}
+
+async function fetchFirstJSON(urls, options) {
+  for (const url of urls) {
+    try {
+      const res = await fetch(url, options || {});
+      if (!res.ok) continue;
+      const contentType = res.headers.get('content-type') || '';
+      if (contentType && contentType.includes('html')) continue;
+      return await res.json();
+    } catch (e) {
+      console.warn('fetch failed', url, e);
+    }
+  }
+  return null;
+}
+
 function startCountdown() {
   if (countdownTimer) clearInterval(countdownTimer);
   countdownSec = 300;
@@ -1329,6 +1349,71 @@ function renderTWLotteryInto(gridId, games, oddsMap) {
   }).join('');
 }
 
+function renderOfficialPicks(picks, stats) {
+  const container = document.getElementById('today-top-picks-container');
+  if (!container) return false;
+  if (!picks || !picks.length) {
+    container.innerHTML = '';
+    return false;
+  }
+
+  const top = picks.slice(0, 8);
+  const statCards = stats && stats.total ? `
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px;margin:0 0 14px;">
+      <div class="kpi"><div class="kpi-label">正式推薦勝率</div><div class="kpi-val" style="color:${stats.wr >= 55 ? 'var(--up)' : 'var(--down)'};">${stats.wr}%</div><div style="font-family:'Share Tech Mono';font-size:10px;color:var(--muted);">${stats.wins}/${stats.total} picks</div></div>
+      <div class="kpi"><div class="kpi-label">讓分盤</div><div class="kpi-val" style="color:${stats.spread_wr >= 55 ? 'var(--up)' : 'var(--down)'};">${stats.spread_wr}%</div><div style="font-family:'Share Tech Mono';font-size:10px;color:var(--muted);">${stats.spread_wins}/${stats.spread_total}</div></div>
+      <div class="kpi"><div class="kpi-label">大小分</div><div class="kpi-val" style="color:${stats.ou_wr >= 55 ? 'var(--up)' : 'var(--down)'};">${stats.ou_wr}%</div><div style="font-family:'Share Tech Mono';font-size:10px;color:var(--muted);">${stats.ou_wins}/${stats.ou_total}</div></div>
+      <div class="kpi"><div class="kpi-label">Edge 5+ 歷史</div><div class="kpi-val" style="color:var(--accent);">${edgeBucketSummary(stats)}</div><div style="font-family:'Share Tech Mono';font-size:10px;color:var(--muted);">同級樣本</div></div>
+    </div>` : '';
+
+  container.innerHTML = `<section>
+    <div class="section-title">✅ 今日正式推薦
+      <span style="font-size:10px;color:var(--muted);font-weight:400;margin-left:12px;">模型線 vs 運彩盤口 · 含同類歷史</span>
+    </div>
+    ${statCards}
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:12px;margin-bottom:24px;">
+      ${top.map((p, i) => officialPickCard(p, i)).join('')}
+    </div>
+  </section>`;
+  return true;
+}
+
+function edgeBucketSummary(stats) {
+  const rows = (stats.edge_buckets || []).filter(r => r.bucket === '5-8' || r.bucket === '8+');
+  const wins = rows.reduce((sum, r) => sum + (r.wins || 0), 0);
+  const total = rows.reduce((sum, r) => sum + (r.total || 0), 0);
+  return total ? `${(wins / total * 100).toFixed(1)}%` : '—';
+}
+
+function officialPickCard(p, index) {
+  const strong = p.tier === '強推';
+  const bc = strong ? 'var(--up)' : p.tier === '推薦' ? 'var(--warn)' : 'var(--accent)';
+  const hist = p.history || {};
+  const histText = hist.total ? `${hist.bucket}分: ${hist.wins}/${hist.total} · ${hist.wr}%` : `${hist.bucket || '同級'}: 樣本不足`;
+  const lineLabel = p.pick_type === 'spread'
+    ? `市場 ${p.tw_spread != null ? p.tw_spread : '—'} · 模型 ${p.model_spread != null ? Number(p.model_spread).toFixed(1) : '—'}`
+    : `市場 O/U ${p.tw_ou != null ? p.tw_ou : '—'} · 模型 ${p.model_total != null ? Number(p.model_total).toFixed(1) : '—'}`;
+  return `<div style="background:var(--surface);border:1px solid var(--border);border-left:4px solid ${bc};border-radius:8px;padding:15px;font-family:'Share Tech Mono';">
+    <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:10px;margin-bottom:10px;">
+      <div>
+        <div style="font-size:13px;font-weight:900;color:var(--text);">#${index + 1} ${p.matchup}</div>
+        <div style="font-size:10px;color:var(--muted);margin-top:3px;">${formatYmdLabel(p.game_date)} · ${lineLabel}</div>
+      </div>
+      <span style="font-size:10px;font-weight:900;color:${bc};border:1px solid ${bc};border-radius:999px;padding:3px 8px;white-space:nowrap;">${p.tier}</span>
+    </div>
+    <div style="padding:9px 10px;border-radius:6px;background:${strong ? '#ecfdf5' : '#eff6ff'};border:1px solid ${strong ? '#6ee7b7' : '#93c5fd'};font-size:14px;font-weight:900;color:var(--text);margin-bottom:10px;">${p.pick_detail}</div>
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:8px;text-align:center;">
+      <div><div style="font-size:9px;color:var(--muted);">EDGE</div><div style="font-size:18px;font-weight:900;color:${bc};">+${Number(p.edge).toFixed(1)}</div></div>
+      <div><div style="font-size:9px;color:var(--muted);">COVER</div><div style="font-size:18px;font-weight:900;color:var(--accent);">${p.model_prob}%</div></div>
+      <div><div style="font-size:9px;color:var(--muted);">STAKE</div><div style="font-size:12px;font-weight:900;color:var(--text);margin-top:4px;">${p.stake_label}</div></div>
+    </div>
+    <div style="display:flex;justify-content:space-between;gap:10px;border-top:1px solid var(--border);margin-top:10px;padding-top:8px;font-size:10px;color:var(--muted);">
+      <span>${histText}</span>
+      <span>信心 ${Number(p.confidence).toFixed(1)}%</span>
+    </div>
+  </div>`;
+}
+
 function renderTopPicks(games, oddsMap, containerId) {
   const container = document.getElementById(containerId);
   if (!container) return;
@@ -1457,9 +1542,7 @@ function renderTopPicks(games, oddsMap, containerId) {
 async function loadPicksStats(container) {
   try {
     await fetch('/api/nba/picks/verify', {method: 'POST'}).catch(() => {});
-    const r = await fetch('/api/nba/picks/stats');
-    if (!r.ok) return;
-    const stats = await r.json();
+    const stats = normalizePickStats(await fetchFirstJSON(['/api/nba/picks/stats', '/pick_stats.json']));
     if (!stats || stats.total === 0) return;
 
     const wrColor = stats.wr >= 65 ? 'var(--up)' : stats.wr >= 55 ? 'var(--accent)' : 'var(--down)';
@@ -1683,9 +1766,8 @@ async function submitOdds() {
 
 async function loadOddsList() {
   try {
-    const res = await fetch('/api/nba/odds');
-    if (!res.ok) return;
-    const data = await res.json();
+    const data = await fetchFirstJSON(['/api/nba/odds', '/tw_odds.json']);
+    if (!data) return;
     const entries = data.entries || [];
     const el = document.getElementById('odds-list');
     window._twOddsMap = data.odds || {};
@@ -1715,6 +1797,7 @@ async function loadNBA() {
     let data;
     let performanceSummary = null;
     let sportbookReport = null;
+    let pickStats = null;
     try {
       const r = await fetch('/api/nba/predictions');
       if (r.ok) data = await r.json();
@@ -1726,29 +1809,12 @@ async function loadNBA() {
     }
 
     let oddsMap = {};
-    try {
-      const oddsRes = await fetch('/api/nba/odds');
-      if (oddsRes.ok) {
-        const oddsData = await oddsRes.json();
-        oddsMap = oddsData.odds || {};
-      }
-    } catch (e) {
-      console.warn('odds fetch failed', e);
-    }
+    const oddsData = await fetchFirstJSON(['/api/nba/odds', '/tw_odds.json']);
+    if (oddsData) oddsMap = oddsData.odds || {};
 
-    try {
-      const perfRes = await fetch('/api/nba/performance-summary');
-      if (perfRes.ok) performanceSummary = await perfRes.json();
-    } catch (e) {
-      console.warn('performance summary failed', e);
-    }
-
-    try {
-      const sportbookRes = await fetch('/api/nba/sportbook-report');
-      if (sportbookRes.ok) sportbookReport = await sportbookRes.json();
-    } catch (e) {
-      console.warn('sportbook report failed', e);
-    }
+    performanceSummary = await fetchFirstJSON(['/api/nba/performance-summary', '/performance_summary.json']);
+    sportbookReport = await fetchFirstJSON(['/api/nba/sportbook-report', '/sportbook_report.json']);
+    pickStats = normalizePickStats(await fetchFirstJSON(['/api/nba/picks/stats', '/pick_stats.json']));
 
     window._twOddsMap = oddsMap;
     window._loadedGames = data.games || [];
@@ -1756,6 +1822,7 @@ async function loadNBA() {
 
     renderPerformanceSummary(performanceSummary);
     renderSportbookReport(sportbookReport);
+    const renderedOfficial = renderOfficialPicks(data.official_picks || [], pickStats);
     renderGames(window._loadedGames);
     renderNextGames(window._nextGames, data.next_games_date || '');
     renderEloRankings(data.elo_teams || {});
@@ -1765,7 +1832,9 @@ async function loadNBA() {
     renderBacktest(data.backtest);
 
     const scheduledToday = (window._loadedGames || []).filter(g => !String(g.status || '').toLowerCase().includes('final'));
-    renderTopPicks(scheduledToday.length ? scheduledToday : window._nextGames, oddsMap, 'today-top-picks-container');
+    if (!renderedOfficial) {
+      renderTopPicks(scheduledToday.length ? scheduledToday : window._nextGames, oddsMap, 'today-top-picks-container');
+    }
     renderTopPicks(window._nextGames, oddsMap, 'top-picks-container');
 
     populateOddsGameSelect(window._loadedGames, window._nextGames);

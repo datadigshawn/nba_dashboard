@@ -1,79 +1,45 @@
 {
-  "synced_at": "2026-04-25T17:15:31",
+  "synced_at": "2026-05-02T08:44:25",
   "source": {
-    "sportweb_fetched_at": "2026-04-25T17:15:12",
+    "sportweb_fetched_at": "2026-05-02T08:44:12",
     "source_url": "https://www.sportslottery.com.tw/sportsbook/sport",
-    "game_count": 4
+    "game_count": 2
   },
   "entries": [
     {
-      "game": "Denver Nuggets @ Minnesota Timberwolves",
-      "away": "Denver Nuggets",
-      "home": "Minnesota Timberwolves",
-      "spread": 1.5,
-      "ou": 229.5,
-      "updated_at": "2026-04-25T17:15:12",
+      "game": "Los Angeles Lakers @ Houston Rockets",
+      "away": "Los Angeles Lakers",
+      "home": "Houston Rockets",
+      "spread": -2.5,
+      "ou": 204.5,
+      "updated_at": "2026-05-02T08:44:12",
       "source": "sportWeb",
-      "sportweb_game_id": "3463587.1",
-      "start_time": "2026-04-26T08:30:00.000+08:00"
+      "sportweb_game_id": "3465078.1",
+      "start_time": "2026-05-02T09:30:00.000+08:00"
     },
     {
-      "game": "Detroit Pistons @ Orlando Magic",
-      "away": "Detroit Pistons",
-      "home": "Orlando Magic",
-      "spread": 2.5,
-      "ou": 213.5,
-      "updated_at": "2026-04-25T17:15:12",
+      "game": "Philadelphia 76ers @ Boston Celtics",
+      "away": "Philadelphia 76ers",
+      "home": "Boston Celtics",
+      "spread": -7.5,
+      "ou": 206.5,
+      "updated_at": "2026-05-02T08:44:12",
       "source": "sportWeb",
-      "sportweb_game_id": "3463584.1",
-      "start_time": "2026-04-26T01:00:00.000+08:00"
-    },
-    {
-      "game": "New York Knicks @ Atlanta Hawks",
-      "away": "New York Knicks",
-      "home": "Atlanta Hawks",
-      "spread": 1.5,
-      "ou": 214.5,
-      "updated_at": "2026-04-25T17:15:12",
-      "source": "sportWeb",
-      "sportweb_game_id": "3463586.1",
-      "start_time": "2026-04-26T06:00:00.000+08:00"
-    },
-    {
-      "game": "Oklahoma City Thunder @ Phoenix Suns",
-      "away": "Oklahoma City Thunder",
-      "home": "Phoenix Suns",
-      "spread": 8.5,
-      "ou": 214.5,
-      "updated_at": "2026-04-25T17:15:12",
-      "source": "sportWeb",
-      "sportweb_game_id": "3463585.1",
-      "start_time": "2026-04-26T03:30:00.000+08:00"
+      "sportweb_game_id": "3465349.1",
+      "start_time": "2026-05-03T07:30:00.000+08:00"
     }
   ],
   "odds": {
-    "Detroit Pistons @ Orlando Magic": {
-      "spread": 2.5,
-      "ou": 213.5,
-      "updated_at": "2026-04-25T17:15:12",
+    "Los Angeles Lakers @ Houston Rockets": {
+      "spread": -2.5,
+      "ou": 204.5,
+      "updated_at": "2026-05-02T08:44:12",
       "source": "sportWeb"
     },
-    "Oklahoma City Thunder @ Phoenix Suns": {
-      "spread": 8.5,
-      "ou": 214.5,
-      "updated_at": "2026-04-25T17:15:12",
-      "source": "sportWeb"
-    },
-    "New York Knicks @ Atlanta Hawks": {
-      "spread": 1.5,
-      "ou": 214.5,
-      "updated_at": "2026-04-25T17:15:12",
-      "source": "sportWeb"
-    },
-    "Denver Nuggets @ Minnesota Timberwolves": {
-      "spread": 1.5,
-      "ou": 229.5,
-      "updated_at": "2026-04-25T17:15:12",
+    "Philadelphia 76ers @ Boston Celtics": {
+      "spread": -7.5,
+      "ou": 206.5,
+      "updated_at": "2026-05-02T08:44:12",
       "source": "sportWeb"
     }
   }

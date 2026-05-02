@@ -42,6 +42,7 @@ init_db(DB_PATH)
 SYNCED_TW_ODDS = BASE_DIR / "tw_odds.json"
 SPORTBOOK_REPORT = BASE_DIR / "sportbook_report.json"
 PICK_STATS_FILE = BASE_DIR / "pick_stats.json"
+PERFORMANCE_SUMMARY_FILE = BASE_DIR / "performance_summary.json"
 
 
 def _run_predictor(*args: str, timeout: int = 60) -> Response:
@@ -138,6 +139,13 @@ def pick_stats_json():
     if PICK_STATS_FILE.exists():
         return send_file(str(PICK_STATS_FILE), mimetype="application/json")
     return jsonify({"error": "pick_stats.json not found"}), 404
+
+
+@app.route("/performance_summary.json")
+def performance_summary_json():
+    if PERFORMANCE_SUMMARY_FILE.exists():
+        return send_file(str(PERFORMANCE_SUMMARY_FILE), mimetype="application/json")
+    return jsonify({"error": "performance_summary.json not found"}), 404
 
 
 @app.route("/api/nba/predictions")
@@ -262,7 +270,7 @@ def nba_picks_stats():
     try:
         live_stats = get_pick_stats(DB_PATH)
         fallback_payload = _load_json_file(PICK_STATS_FILE)
-        fallback_stats = fallback_payload.get("stats") if isinstance(fallback_payload, dict) else {}
+        fallback_stats = fallback_payload.get("stats") if isinstance(fallback_payload, dict) and "stats" in fallback_payload else fallback_payload
         if (fallback_stats or {}).get("total", 0) > live_stats.get("total", 0):
             return jsonify(fallback_stats)
         return jsonify(live_stats)

@@ -175,6 +175,12 @@ main() {
     refresh_sportbook
     sync_sportbook_artifacts
 
+    # Resolve & place tracker bets after sportbook sync
+    if [[ -f "$NBA_DIR/nba_tracker.py" ]]; then
+        log "Resolving & placing tracker bets..."
+        run_in_dir "$NBA_DIR" "$NBA_PY" nba_tracker.py --resolve --place
+    fi
+
     if [[ "$RUN_DEPLOY" -eq 1 ]]; then
         deploy_site
     else

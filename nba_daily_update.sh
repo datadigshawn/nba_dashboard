@@ -41,6 +41,12 @@ fi
 echo "[$(date '+%H:%M:%S')] Resolving past game outcomes..." | tee -a "$LOG"
 "$PYTHON" nba_resolve.py 2>&1 | tee -a "$LOG"
 
+# ── 2b. Resolve tracker bets & place new paper bets ──
+if [ -f "$NBA_DIR/nba_tracker.py" ]; then
+    echo "[$(date '+%H:%M:%S')] Resolving & placing tracker bets..." | tee -a "$LOG"
+    "$PYTHON" nba_tracker.py --resolve --place 2>&1 | tee -a "$LOG"
+fi
+
 # ── 3. 生成今日預測 JSON ──────────────────────────
 echo "[$(date '+%H:%M:%S')] 生成今日預測..." | tee -a "$LOG"
 "$PYTHON" nba_predictor.py --days-ahead 3 --json > "$DATA_OUT" 2>>"$LOG"
@@ -48,6 +54,10 @@ echo "[$(date '+%H:%M:%S')] 生成今日預測..." | tee -a "$LOG"
 GAMES=$("$PYTHON" -c "import json; d=json.load(open('$DATA_OUT')); print(len(d.get('games',[])) + len(d.get('next_games',[])))" 2>/dev/null || echo "?")
 EDGES=$("$PYTHON" -c "import json; d=json.load(open('$DATA_OUT')); print(len(d.get('edges',[])))" 2>/dev/null || echo "?")
 echo "[$(date '+%H:%M:%S')] ✅ $GAMES 場比賽 | $EDGES 個邊際機會 → $DATA_OUT" | tee -a "$LOG"
+
+# ── 3b. 匯出靜態站可讀的 DB 報表 ──────────────────
+echo "[$(date '+%H:%M:%S')] 匯出績效與推薦統計 JSON..." | tee -a "$LOG"
+"$PYTHON" export_static_reports.py 2>&1 | tee -a "$LOG"
 
 # ── 4. 印出今日預測摘要 ────────────────────────────
 echo "" | tee -a "$LOG"

@@ -14,6 +14,12 @@ from pathlib import Path
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 DATA_FILE = BASE_DIR / "nba_data.json"
+EXTRA_FILES = [
+    BASE_DIR / "tw_odds.json",
+    BASE_DIR / "sportbook_report.json",
+    BASE_DIR / "performance_summary.json",
+    BASE_DIR / "pick_stats.json",
+]
 
 
 def gh_release_upload(repo: str, tag: str, path: Path, *, release_name: str = "NBA predictions snapshot"):
@@ -59,6 +65,9 @@ def main():
     print(f"[sync] 準備上傳 {DATA_FILE} ({size_kb:.1f} KB)")
 
     ok = gh_release_upload(args.repo, args.tag, DATA_FILE)
+    for path in EXTRA_FILES:
+        if path.exists():
+            ok = gh_release_upload(args.repo, args.tag, path) and ok
     sys.exit(0 if ok else 1)
 
 

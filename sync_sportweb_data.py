@@ -418,6 +418,26 @@ def sync_recommended_picks(nba_data: dict, tw_odds_payload: dict) -> tuple[dict,
     return selection, saved, verified, stats
 
 
+def enrich_nba_data_with_official_picks(nba_data: dict, tw_odds_payload: dict, pick_stats: dict) -> dict:
+    try:
+        from nba_predictor import build_official_recommendations
+    except Exception as exc:
+        print(f"[sync] official picks enrichment skipped: {exc}", file=sys.stderr)
+        return nba_data
+
+    games = [
+        game for game in (nba_data.get("games") or []) + (nba_data.get("next_games") or [])
+        if "final" not in str(game.get("status", "")).lower()
+    ]
+    nba_data["official_picks"] = build_official_recommendations(
+        games,
+        tw_odds_payload.get("odds") or {},
+        pick_stats,
+    )
+    nba_data["official_picks_updated_at"] = datetime.now().isoformat(timespec="seconds")
+    return nba_data
+
+
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--skip-db-sync", action="store_true",
@@ -437,10 +457,12 @@ def main():
     report_payload = build_sportbook_report(snapshot, SPORTWEB_DB)
     pick_selection, picks_saved, verified, pick_stats = sync_recommended_picks(nba_data, tw_odds_payload)
     pick_stats_payload = build_pick_stats_payload(pick_selection, picks_saved, verified, pick_stats)
+    nba_data = enrich_nba_data_with_official_picks(nba_data, tw_odds_payload, pick_stats)
 
     write_json(TW_ODDS_FILE, tw_odds_payload)
     write_json(SPORTBOOK_REPORT_FILE, report_payload)
     write_json(PICK_STATS_FILE, pick_stats_payload)
+    write_json(NBA_DATA_FILE, nba_data)
 
     db_saved = 0
     if not args.skip_db_sync:
