@@ -11,14 +11,28 @@ from pathlib import Path
 BASE_DIR = Path(__file__).parent
 sys.path.insert(0, str(BASE_DIR))
 
-from nba_db import DB_PATH, init_db, get_unresolved_dates, resolve_outcomes
+from nba_db import (
+    DB_PATH,
+    get_pending_pick_dates,
+    get_unresolved_dates,
+    init_db,
+    resolve_outcomes,
+    resolve_recommended_picks,
+)
 
 
 def main():
     init_db(DB_PATH)
-    dates = get_unresolved_dates(DB_PATH)
+    dates = sorted(set(get_unresolved_dates(DB_PATH) + get_pending_pick_dates(DB_PATH)))
     if not dates:
         print("[resolve] 無未解析的比賽")
+        pick_stats = resolve_recommended_picks(DB_PATH)
+        if pick_stats["verified"]:
+            print(
+                "[resolve] 正式推薦結算 "
+                f"{pick_stats['verified']} 筆 "
+                f"(W{pick_stats['wins']} L{pick_stats['losses']} P{pick_stats['pushes']})"
+            )
         return
 
     print(f"[resolve] 需解析 {len(dates)} 個日期: {dates}")
@@ -44,6 +58,13 @@ def main():
     if resolve_list:
         resolve_outcomes(DB_PATH, resolve_list)
         print(f"[resolve] 處理 {len(resolve_list)} 場 ESPN 結果")
+        pick_stats = resolve_recommended_picks(DB_PATH, resolve_list)
+        print(
+            "[resolve] 正式推薦結算 "
+            f"{pick_stats['verified']} 筆 "
+            f"(W{pick_stats['wins']} L{pick_stats['losses']} P{pick_stats['pushes']}, "
+            f"missing {pick_stats['missing_results']})"
+        )
     else:
         print("[resolve] ESPN 無結果可用")
 

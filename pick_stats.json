@@ -1,32 +1,75 @@
 {
-  "synced_at": "2026-05-02T08:44:25",
-  "pick_date": "20260502",
-  "saved": 1,
-  "verified": {
-    "verified": 0,
-    "wins": 0,
-    "losses": 0,
-    "pushes": 0
-  },
-  "stats": {
-    "total": 2,
-    "wins": 1,
-    "wr": 50.0,
-    "spread_total": 2,
-    "spread_wins": 1,
-    "spread_wr": 50.0,
-    "ou_total": 0,
-    "ou_wins": 0,
-    "ou_wr": 0.0,
-    "daily": [
-      {
-        "date": "20260427",
-        "wins": 1,
-        "total": 2,
-        "wr": 50.0
-      }
-    ],
-    "edge_buckets": [
+  "total": 2,
+  "wins": 1,
+  "wr": 50.0,
+  "spread_total": 2,
+  "spread_wins": 1,
+  "spread_wr": 50.0,
+  "ou_total": 0,
+  "ou_wins": 0,
+  "ou_wr": 0.0,
+  "daily": [
+    {
+      "date": "20260427",
+      "wins": 1,
+      "total": 2,
+      "wr": 50.0
+    }
+  ],
+  "edge_buckets": [
+    {
+      "bucket": "0-3",
+      "wins": 0,
+      "total": 0,
+      "wr": 0.0
+    },
+    {
+      "bucket": "3-5",
+      "wins": 0,
+      "total": 0,
+      "wr": 0.0
+    },
+    {
+      "bucket": "5-8",
+      "wins": 0,
+      "total": 0,
+      "wr": 0.0
+    },
+    {
+      "bucket": "8+",
+      "wins": 1,
+      "total": 2,
+      "wr": 50.0
+    }
+  ],
+  "confidence_buckets": [
+    {
+      "bucket": "<60",
+      "wins": 0,
+      "total": 1,
+      "wr": 0.0
+    },
+    {
+      "bucket": "60-70",
+      "wins": 1,
+      "total": 1,
+      "wr": 100.0
+    },
+    {
+      "bucket": "70-80",
+      "wins": 0,
+      "total": 0,
+      "wr": 0.0
+    },
+    {
+      "bucket": "80+",
+      "wins": 0,
+      "total": 0,
+      "wr": 0.0
+    }
+  ],
+  "by_type_edge": {
+    "spread": [
       {
         "bucket": "0-3",
         "wins": 0,
@@ -52,124 +95,111 @@
         "wr": 50.0
       }
     ],
-    "confidence_buckets": [
+    "ou": [
       {
-        "bucket": "<60",
-        "wins": 0,
-        "total": 1,
-        "wr": 0.0
-      },
-      {
-        "bucket": "60-70",
-        "wins": 1,
-        "total": 1,
-        "wr": 100.0
-      },
-      {
-        "bucket": "70-80",
+        "bucket": "0-3",
         "wins": 0,
         "total": 0,
         "wr": 0.0
       },
       {
-        "bucket": "80+",
+        "bucket": "3-5",
         "wins": 0,
         "total": 0,
         "wr": 0.0
-      }
-    ],
-    "by_type_edge": {
-      "spread": [
-        {
-          "bucket": "0-3",
-          "wins": 0,
-          "total": 0,
-          "wr": 0.0
-        },
-        {
-          "bucket": "3-5",
-          "wins": 0,
-          "total": 0,
-          "wr": 0.0
-        },
-        {
-          "bucket": "5-8",
-          "wins": 0,
-          "total": 0,
-          "wr": 0.0
-        },
-        {
-          "bucket": "8+",
-          "wins": 1,
-          "total": 2,
-          "wr": 50.0
-        }
-      ],
-      "ou": [
-        {
-          "bucket": "0-3",
-          "wins": 0,
-          "total": 0,
-          "wr": 0.0
-        },
-        {
-          "bucket": "3-5",
-          "wins": 0,
-          "total": 0,
-          "wr": 0.0
-        },
-        {
-          "bucket": "5-8",
-          "wins": 0,
-          "total": 0,
-          "wr": 0.0
-        },
-        {
-          "bucket": "8+",
-          "wins": 0,
-          "total": 0,
-          "wr": 0.0
-        }
-      ]
-    },
-    "recent": [
-      {
-        "pick_date": "20260427",
-        "game_date": "20260430",
-        "away": "New York Knicks",
-        "home": "Atlanta Hawks",
-        "pick_type": "spread",
-        "pick_detail": "買 Hawks 受讓 +1.5",
-        "edge": 8.2,
-        "confidence": 59.4,
-        "result": "loss",
-        "correct": 0
       },
       {
-        "pick_date": "20260427",
-        "game_date": "20260430",
-        "away": "Denver Nuggets",
-        "home": "Minnesota Timberwolves",
-        "pick_type": "spread",
-        "pick_detail": "買 Timberwolves 受讓 +1.5",
-        "edge": 14.2,
-        "confidence": 64.2,
-        "result": "win",
-        "correct": 1
+        "bucket": "5-8",
+        "wins": 0,
+        "total": 0,
+        "wr": 0.0
+      },
+      {
+        "bucket": "8+",
+        "wins": 0,
+        "total": 0,
+        "wr": 0.0
       }
     ]
   },
-  "meta": {
-    "today_candidates": 1,
-    "today_top_count": 1,
-    "next_candidates": 4,
-    "next_top_count": 0
-  },
+  "recent": [
+    {
+      "pick_date": "20260427",
+      "game_date": "20260430",
+      "away": "New York Knicks",
+      "home": "Atlanta Hawks",
+      "pick_type": "spread",
+      "pick_target": "home",
+      "pick_line": 1.5,
+      "pick_detail": "買 Hawks 受讓 +1.5",
+      "edge": 8.2,
+      "confidence": 59.4,
+      "result": "loss",
+      "correct": 0,
+      "tw_spread": 1.5,
+      "tw_ou": 214.5,
+      "model_spread": 6.7,
+      "model_total": 216.1
+    },
+    {
+      "pick_date": "20260427",
+      "game_date": "20260430",
+      "away": "Denver Nuggets",
+      "home": "Minnesota Timberwolves",
+      "pick_type": "spread",
+      "pick_target": "home",
+      "pick_line": 1.5,
+      "pick_detail": "買 Timberwolves 受讓 +1.5",
+      "edge": 14.2,
+      "confidence": 64.2,
+      "result": "win",
+      "correct": 1,
+      "tw_spread": 1.5,
+      "tw_ou": 229.5,
+      "model_spread": 12.7,
+      "model_total": 224.7
+    }
+  ],
   "current_picks": [
+    {
+      "pick_date": "20260425",
+      "game_date": "20260428",
+      "away": "Detroit Pistons",
+      "home": "Orlando Magic",
+      "pick_type": "spread",
+      "pick_target": "home",
+      "pick_line": 2.5,
+      "pick_detail": "買 Magic 受讓 +2.5",
+      "edge": 7.0,
+      "confidence": 52.4,
+      "result": "pending",
+      "correct": null,
+      "tw_spread": 2.5,
+      "tw_ou": 213.5,
+      "model_spread": 4.5,
+      "model_total": 215.1
+    },
+    {
+      "pick_date": "20260425",
+      "game_date": "20260428",
+      "away": "Oklahoma City Thunder",
+      "home": "Phoenix Suns",
+      "pick_type": "spread",
+      "pick_target": "home",
+      "pick_line": 8.5,
+      "pick_detail": "買 Suns 受讓 +8.5",
+      "edge": 2.0999999999999996,
+      "confidence": 83.4,
+      "result": "pending",
+      "correct": null,
+      "tw_spread": 8.5,
+      "tw_ou": 214.5,
+      "model_spread": -6.4,
+      "model_total": 212.8
+    },
     {
       "pick_date": "20260502",
       "game_date": "20260502",
-      "game_key": "Los Angeles Lakers @ Houston Rockets",
       "away": "Los Angeles Lakers",
       "home": "Houston Rockets",
       "pick_type": "ou",
@@ -178,10 +208,16 @@
       "pick_detail": "看大 Over 204.5",
       "edge": 7.199999999999989,
       "confidence": 61.4,
+      "result": "pending",
+      "correct": null,
       "tw_spread": -2.5,
       "tw_ou": 204.5,
       "model_spread": 3.1,
       "model_total": 211.7
     }
-  ]
+  ],
+  "pending": 3,
+  "stale_pending": 2,
+  "generated_at": "2026-05-02T14:51:49",
+  "synced_at": "2026-05-02T14:51:49"
 }

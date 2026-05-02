@@ -168,6 +168,7 @@ refresh_data() {
     log "$PYTHON nba_predictor.py --days-ahead 3 --json > nba_data.json"
     "$PYTHON" nba_predictor.py --days-ahead 3 --json > nba_data.json
     run "$PYTHON" -m json.tool nba_data.json >/dev/null
+    run "$PYTHON" validate_nba_data.py
 
     if [[ "$SYNC_RELEASE" -eq 1 ]]; then
         require_cmd gh
@@ -200,10 +201,12 @@ run_checks() {
         streamlit_app/app.py \
         streamlit_app/sync_data.py \
         sync_sportweb_data.py \
+        validate_nba_data.py \
         telegram_push.py \
         setup_chat_id.py
     run bash -n nba_daily_update.sh
     run bash -n deploy_nba_site.sh
+    run "$PYTHON" validate_nba_data.py
     run_js_check
 }
 

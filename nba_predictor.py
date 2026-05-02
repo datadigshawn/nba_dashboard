@@ -1828,9 +1828,13 @@ def main():
 
     predictor = NBAPredictor()
 
-    # Suppress prints in JSON mode
+    json_stdout = None
+    # Suppress all incidental prints in JSON mode. Only the final JSON payload
+    # is written to real stdout; warnings/status lines must stay out of
+    # nba_data.json when stdout is redirected by deploy scripts.
     if args.json:
         import io as _io
+        json_stdout = sys.__stdout__
         sys.stdout = _io.StringIO()
 
     if predictor.load():
@@ -1845,10 +1849,8 @@ def main():
     else:
         _build_elo_from_recent(predictor, args.days)
 
-    # JSON mode: restore stdout and output structured data
+    # JSON mode: build structured data with stdout still suppressed.
     if args.json:
-        sys.stdout = sys.__stdout__
-        sys.stdout.reconfigure(encoding="utf-8")
         import json as _json
         output = {
             "games": [],
@@ -2079,7 +2081,14 @@ def main():
         except Exception as _be:
             output["playoff_bracket"] = {"error": str(_be)}
 
-        print(_json.dumps(output))
+        try:
+            json_stdout.reconfigure(encoding="utf-8")
+        except Exception:
+            pass
+        json_stdout.write(_json.dumps(output))
+        json_stdout.write("\n")
+        json_stdout.flush()
+        sys.stdout = json_stdout
 
         # Write to SQLite (alongside JSON, never blocks JSON pipeline)
         try:

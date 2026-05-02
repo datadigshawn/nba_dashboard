@@ -298,6 +298,18 @@ def get_unresolved_dates(db_path: Path | str) -> list[str]:
     return [r[0] for r in rows]
 
 
+def get_pending_pick_dates(db_path: Path | str) -> list[str]:
+    with sqlite3.connect(str(db_path), timeout=10) as conn:
+        rows = conn.execute("""
+            SELECT DISTINCT game_date FROM recommended_picks
+            WHERE correct IS NULL
+              AND (result IS NULL OR result = 'pending')
+              AND game_date < ?
+            ORDER BY game_date
+        """, (datetime.now().strftime("%Y%m%d"),)).fetchall()
+    return [r[0] for r in rows]
+
+
 def db_summary(db_path: Path | str = DB_PATH) -> dict:
     with sqlite3.connect(str(db_path), timeout=10) as conn:
         pred_total = conn.execute("SELECT COUNT(*) FROM predictions").fetchone()[0]
@@ -407,57 +419,102 @@ def _evaluate_pick_result(row: sqlite3.Row, home_score: int, away_score: int) ->
     return "invalid_type", None
 
 
-def verify_pending_picks(db_path: Path | str = DB_PATH) -> dict:
+def _result_key(game_date: str, home: str, away: str) -> tuple[str, str, str]:
+    return (str(game_date or ""), str(home or "").strip().lower(), str(away or "").strip().lower())
+
+
+def _build_result_index(results: list[dict] | None) -> dict[tuple[str, str, str], dict]:
+    index: dict[tuple[str, str, str], dict] = {}
+    for r in results or []:
+        game_date = r.get("date") or r.get("game_date") or ""
+        home = r.get("home") or r.get("home_team") or r.get("team_a") or ""
+        away = r.get("away") or r.get("away_team") or r.get("team_b") or ""
+        home_score = r.get("home_score")
+        away_score = r.get("away_score")
+        if not (game_date and home and away):
+            continue
+        if home_score is None or away_score is None:
+            continue
+        index[_result_key(game_date, home, away)] = {
+            "home_score": home_score,
+            "away_score": away_score,
+            "winner": r.get("winner", ""),
+        }
+    return index
+
+
+def resolve_recommended_picks(
+    db_path: Path | str = DB_PATH,
+    results: list[dict] | None = None,
+) -> dict:
     today = datetime.now().strftime("%Y%m%d")
     now = datetime.now().isoformat(timespec="seconds")
-    verified = 0
-    wins = 0
-    losses = 0
-    pushes = 0
+    stats = {
+        "candidates": 0,
+        "verified": 0,
+        "wins": 0,
+        "losses": 0,
+        "pushes": 0,
+        "missing_results": 0,
+        "ungraded": 0,
+    }
+    result_index = _build_result_index(results)
 
     with _connect(db_path) as conn:
         rows = conn.execute("""
             SELECT *
             FROM recommended_picks
             WHERE correct IS NULL
+              AND (result IS NULL OR result = 'pending')
               AND game_date <= ?
             ORDER BY game_date, id
         """, (today,)).fetchall()
+        stats["candidates"] = len(rows)
+
+        db_results = conn.execute("""
+            SELECT game_date, home, away, home_score, away_score, winner
+            FROM predictions
+            WHERE resolved_at IS NOT NULL
+              AND home_score IS NOT NULL
+              AND away_score IS NOT NULL
+              AND game_date <= ?
+            ORDER BY prediction_date DESC
+        """, (today,)).fetchall()
+        for r in db_results:
+            key = _result_key(r["game_date"], r["home"], r["away"])
+            result_index.setdefault(key, dict(r))
 
         for row in rows:
-            pred = conn.execute("""
-                SELECT home_score, away_score
-                FROM predictions
-                WHERE game_date = ?
-                  AND home = ?
-                  AND away = ?
-                  AND resolved_at IS NOT NULL
-                ORDER BY prediction_date DESC
-                LIMIT 1
-            """, (row["game_date"], row["home"], row["away"])).fetchone()
-            if not pred:
+            result_row = result_index.get(_result_key(row["game_date"], row["home"], row["away"]))
+            if not result_row:
+                stats["missing_results"] += 1
                 continue
 
-            result, correct = _evaluate_pick_result(row, pred["home_score"], pred["away_score"])
+            result, correct = _evaluate_pick_result(
+                row,
+                int(result_row["home_score"]),
+                int(result_row["away_score"]),
+            )
             conn.execute("""
                 UPDATE recommended_picks
                 SET result = ?, correct = ?, verified_at = ?
                 WHERE id = ?
             """, (result, correct, now, row["id"]))
-            verified += 1
+            stats["verified"] += 1
             if correct == 1:
-                wins += 1
+                stats["wins"] += 1
             elif correct == 0:
-                losses += 1
+                stats["losses"] += 1
             elif result == "push":
-                pushes += 1
+                stats["pushes"] += 1
+            else:
+                stats["ungraded"] += 1
 
-    return {
-        "verified": verified,
-        "wins": wins,
-        "losses": losses,
-        "pushes": pushes,
-    }
+    return stats
+
+
+def verify_pending_picks(db_path: Path | str = DB_PATH) -> dict:
+    return resolve_recommended_picks(db_path)
 
 
 def get_pick_stats(db_path: Path | str = DB_PATH) -> dict:
@@ -544,13 +601,41 @@ def get_pick_stats(db_path: Path | str = DB_PATH) -> dict:
         """).fetchall()
 
         recent_rows = conn.execute("""
-            SELECT pick_date, game_date, away, home, pick_type, pick_detail,
-                   edge, confidence, result, correct
+            SELECT pick_date, game_date, away, home, pick_type, pick_target,
+                   pick_line, pick_detail, edge, confidence, result, correct,
+                   tw_spread, tw_ou, model_spread, model_total
             FROM recommended_picks
             WHERE correct IN (0, 1)
             ORDER BY game_date DESC, id DESC
             LIMIT 20
         """).fetchall()
+
+        pending_rows = conn.execute("""
+            SELECT pick_date, game_date, away, home, pick_type, pick_target,
+                   pick_line, pick_detail, edge, confidence,
+                   COALESCE(result, 'pending') AS result, correct,
+                   tw_spread, tw_ou, model_spread, model_total
+            FROM recommended_picks
+            WHERE correct IS NULL
+              AND (result IS NULL OR result = 'pending')
+            ORDER BY game_date ASC, edge DESC, id DESC
+            LIMIT 20
+        """).fetchall()
+
+        pending_total = conn.execute("""
+            SELECT COUNT(*)
+            FROM recommended_picks
+            WHERE correct IS NULL
+              AND (result IS NULL OR result = 'pending')
+        """).fetchone()[0]
+
+        stale_pending = conn.execute("""
+            SELECT COUNT(*)
+            FROM recommended_picks
+            WHERE correct IS NULL
+              AND (result IS NULL OR result = 'pending')
+              AND game_date < ?
+        """, (datetime.now().strftime("%Y%m%d"),)).fetchone()[0]
 
     def _wr(w: int, t: int) -> float:
         return round(w / t * 100, 1) if t else 0.0
@@ -599,6 +684,9 @@ def get_pick_stats(db_path: Path | str = DB_PATH) -> dict:
         "confidence_buckets": _bucket_payload(confidence_rows, bucket_order["confidence"]),
         "by_type_edge": by_type_edge,
         "recent": [dict(r) for r in recent_rows],
+        "current_picks": [dict(r) for r in pending_rows],
+        "pending": pending_total or 0,
+        "stale_pending": stale_pending or 0,
     }
 
 

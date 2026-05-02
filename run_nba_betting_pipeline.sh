@@ -138,6 +138,7 @@ sync_sportbook_artifacts() {
     run_in_dir "$NBA_DIR" "$NBA_PY" -m json.tool tw_odds.json >/dev/null
     run_in_dir "$NBA_DIR" "$NBA_PY" -m json.tool sportbook_report.json >/dev/null
     run_in_dir "$NBA_DIR" "$NBA_PY" -m json.tool pick_stats.json >/dev/null
+    run_in_dir "$NBA_DIR" "$NBA_PY" validate_nba_data.py
 }
 
 send_betting_alert() {

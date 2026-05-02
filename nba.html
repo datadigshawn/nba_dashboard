@@ -436,7 +436,9 @@
   </section>
 
   <div id="performance-summary"></div>
+  <div id="pick-performance-container"></div>
   <div id="today-top-picks-container"></div>
+  <div id="pick-history-container"></div>
   <div id="sportbook-report-container"></div>
 
   <!-- SECTION 1: TODAY'S GAMES -->
@@ -702,6 +704,15 @@ function formatRangeLabel(startDate, endDate) {
 function normalizePickStats(payload) {
   if (!payload) return null;
   return payload.stats || payload;
+}
+
+function isUsableNBAData(data) {
+  if (!data || typeof data !== 'object') return false;
+  const games = Array.isArray(data.games) ? data.games.length : 0;
+  const nextGames = Array.isArray(data.next_games) ? data.next_games.length : 0;
+  const officialPicks = Array.isArray(data.official_picks) ? data.official_picks.length : 0;
+  const edges = Array.isArray(data.edges) ? data.edges.length : 0;
+  return (games + nextGames + officialPicks + edges) > 0;
 }
 
 async function fetchFirstJSON(urls, options) {
@@ -1385,6 +1396,105 @@ function edgeBucketSummary(stats) {
   return total ? `${(wins / total * 100).toFixed(1)}%` : '—';
 }
 
+function statRate(wins, total) {
+  return total ? `${(wins / total * 100).toFixed(1)}%` : '—';
+}
+
+function rateColor(rate, total) {
+  if (!total) return 'var(--muted)';
+  if (rate >= 60) return 'var(--up)';
+  if (rate >= 52.4) return 'var(--accent)';
+  return 'var(--down)';
+}
+
+function statCard(label, value, sub, color) {
+  return `<div class="kpi">
+    <div class="kpi-label">${label}</div>
+    <div class="kpi-val" style="color:${color || 'var(--accent)'};">${value}</div>
+    <div style="font-family:'Share Tech Mono';font-size:10px;color:var(--muted);margin-top:6px;">${sub}</div>
+  </div>`;
+}
+
+function compactBucketRow(row) {
+  const wins = Number(row?.wins || 0);
+  const total = Number(row?.total || 0);
+  const wr = total ? Number(row?.wr || (wins / total * 100)) : 0;
+  const bar = Math.max(4, Math.min(100, total ? wr : 4));
+  const color = rateColor(wr, total);
+  return `<div style="padding:8px 0;border-top:1px solid #f1f5f9;">
+    <div style="display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:5px;">
+      <span style="font-family:'Share Tech Mono';font-size:10px;font-weight:900;color:var(--text);">${row?.bucket || '—'}</span>
+      <span style="font-family:'Share Tech Mono';font-size:10px;color:var(--muted);">${wins}/${total} · ${total ? wr.toFixed(1) + '%' : '—'}</span>
+    </div>
+    <div style="height:7px;background:#f1f5f9;border-radius:999px;overflow:hidden;">
+      <div style="height:100%;width:${bar}%;background:${total ? color : '#cbd5e1'};"></div>
+    </div>
+  </div>`;
+}
+
+function compactBucketPanel(title, rows) {
+  const list = Array.isArray(rows) ? rows : [];
+  return `<div style="background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:14px;">
+    <div style="font-family:'Share Tech Mono';font-size:11px;font-weight:900;color:var(--accent);letter-spacing:2px;margin-bottom:6px;">${title}</div>
+    ${list.length ? list.map(compactBucketRow).join('') : '<div style="font-family:Share Tech Mono;font-size:11px;color:var(--muted);padding:10px 0;">No samples</div>'}
+  </div>`;
+}
+
+function renderPickPerformance(payload, stats) {
+  const container = document.getElementById('pick-performance-container');
+  if (!container) return;
+  if (!stats) {
+    container.innerHTML = '';
+    return;
+  }
+
+  const current = Array.isArray(payload?.current_picks) ? payload.current_picks : (stats.current_picks || []);
+  const total = Number(stats.total || 0);
+  const wins = Number(stats.wins || 0);
+  const wr = total ? Number(stats.wr || (wins / total * 100)) : 0;
+  const spreadTotal = Number(stats.spread_total || 0);
+  const spreadWins = Number(stats.spread_wins || 0);
+  const spreadWr = spreadTotal ? Number(stats.spread_wr || (spreadWins / spreadTotal * 100)) : 0;
+  const ouTotal = Number(stats.ou_total || 0);
+  const ouWins = Number(stats.ou_wins || 0);
+  const ouWr = ouTotal ? Number(stats.ou_wr || (ouWins / ouTotal * 100)) : 0;
+  const pending = Number(stats.pending ?? current.length ?? 0);
+  const stale = Number(stats.stale_pending || 0);
+  const sampleLabel = total >= 30 ? '樣本可觀察' : total >= 10 ? '樣本累積中' : '樣本偏少';
+  const lastRun = payload?.synced_at || stats.synced_at || stats.generated_at || payload?.generated_at || '';
+
+  if (!total && !pending && !current.length) {
+    container.innerHTML = '';
+    return;
+  }
+
+  const cards = [
+    statCard('正式推薦勝率', statRate(wins, total), `${wins}/${total} settled · ${sampleLabel}`, rateColor(wr, total)),
+    statCard('讓分盤 ATS', statRate(spreadWins, spreadTotal), `${spreadWins}/${spreadTotal} spread picks`, rateColor(spreadWr, spreadTotal)),
+    statCard('大小分 O/U', statRate(ouWins, ouTotal), `${ouWins}/${ouTotal} total picks`, rateColor(ouWr, ouTotal)),
+    statCard('待結算', String(pending), stale ? `${stale} stale pending` : `${current.length} active picks`, stale ? 'var(--warn)' : 'var(--accent)'),
+  ].join('');
+
+  const typeRows = stats.by_type_edge || {};
+  container.innerHTML = `<section>
+    <div class="section-title">推薦績效總覽
+      <span style="font-size:10px;color:var(--muted);font-weight:400;margin-left:12px;">ATS / O-U · confidence · edge buckets</span>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:10px;margin-bottom:12px;">
+      ${cards}
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:12px;margin-bottom:18px;">
+      ${compactBucketPanel('EDGE BUCKETS', stats.edge_buckets || [])}
+      ${compactBucketPanel('CONFIDENCE', stats.confidence_buckets || [])}
+      ${compactBucketPanel('ATS BY EDGE', typeRows.spread || [])}
+      ${compactBucketPanel('O/U BY EDGE', typeRows.ou || [])}
+    </div>
+    <div style="font-family:'Share Tech Mono';font-size:10px;color:var(--muted);margin-top:-8px;margin-bottom:16px;">
+      ${lastRun ? `Updated ${String(lastRun).replace('T', ' ')}` : ''}
+    </div>
+  </section>`;
+}
+
 function officialPickCard(p, index) {
   const strong = p.tier === '強推';
   const bc = strong ? 'var(--up)' : p.tier === '推薦' ? 'var(--warn)' : 'var(--accent)';
@@ -1412,6 +1522,114 @@ function officialPickCard(p, index) {
       <span>信心 ${Number(p.confidence).toFixed(1)}%</span>
     </div>
   </div>`;
+}
+
+function renderPickHistory(payload, stats, officialPicks) {
+  const container = document.getElementById('pick-history-container');
+  if (!container) return;
+
+  const current = Array.isArray(payload?.current_picks) && payload.current_picks.length
+    ? payload.current_picks
+    : (officialPicks || []).map(p => ({
+        game_date: p.game_date,
+        away: p.away,
+        home: p.home,
+        pick_type: p.pick_type,
+        pick_detail: p.pick_detail,
+        edge: p.edge,
+        confidence: p.confidence,
+        result: 'pending',
+        correct: null,
+      }));
+  const recent = (stats?.recent || []).slice(0, 12);
+
+  if (!current.length && !recent.length) {
+    container.innerHTML = '';
+    return;
+  }
+
+  const currentHtml = current.length ? `
+    <div style="background:var(--surface);border:1px solid var(--border);border-radius:8px;overflow:hidden;">
+      <div style="padding:11px 14px;border-bottom:1px solid var(--border);display:flex;justify-content:space-between;gap:12px;">
+        <span style="font-family:'Share Tech Mono';font-size:11px;font-weight:900;color:var(--accent);letter-spacing:2px;">PENDING PICKS</span>
+        <span style="font-family:'Share Tech Mono';font-size:10px;color:var(--muted);">${current.length} active</span>
+      </div>
+      ${pickRows(current, true)}
+    </div>` : '';
+
+  const recentHtml = recent.length ? `
+    <div style="background:var(--surface);border:1px solid var(--border);border-radius:8px;overflow:hidden;">
+      <div style="padding:11px 14px;border-bottom:1px solid var(--border);display:flex;justify-content:space-between;gap:12px;">
+        <span style="font-family:'Share Tech Mono';font-size:11px;font-weight:900;color:var(--accent);letter-spacing:2px;">RECENT OFFICIAL PICKS</span>
+        <span style="font-family:'Share Tech Mono';font-size:10px;color:var(--muted);">${stats?.wins || 0}/${stats?.total || 0} · ${stats?.wr || 0}%</span>
+      </div>
+      ${pickRows(recent, false)}
+    </div>` : '';
+
+  container.innerHTML = `<section>
+    <div class="section-title">📋 正式推薦追蹤
+      <span style="font-size:10px;color:var(--muted);font-weight:400;margin-left:12px;">待結算與近期結果</span>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(360px,1fr));gap:14px;margin-bottom:20px;">
+      ${currentHtml}${recentHtml}
+    </div>
+  </section>`;
+}
+
+function pickRows(rows, pendingMode) {
+  return `<div style="overflow-x:auto;">
+    <table style="width:100%;border-collapse:collapse;font-family:'Share Tech Mono';font-size:11px;">
+      <thead>
+        <tr style="color:var(--muted);letter-spacing:1px;text-transform:uppercase;">
+          <th style="padding:8px 12px;text-align:left;">Date</th>
+          <th style="padding:8px 12px;text-align:left;">Matchup</th>
+          <th style="padding:8px 12px;text-align:left;">Pick</th>
+          <th style="padding:8px 12px;text-align:center;">Edge</th>
+          <th style="padding:8px 12px;text-align:center;">Result</th>
+        </tr>
+      </thead>
+      <tbody>
+        ${rows.map(row => pickRow(row, pendingMode)).join('')}
+      </tbody>
+    </table>
+  </div>`;
+}
+
+function pickRow(row, pendingMode) {
+  const away = abbrevTeam(row.away || '');
+  const home = abbrevTeam(row.home || '');
+  const result = pendingMode ? 'pending' : (row.result || (row.correct === 1 ? 'win' : row.correct === 0 ? 'loss' : 'pending'));
+  const badge = resultBadge(result);
+  const edge = row.edge != null ? `+${Number(row.edge).toFixed(1)}` : '—';
+  const type = row.pick_type === 'ou' ? 'O/U' : (row.pick_type || '').toUpperCase();
+  return `<tr style="border-top:1px solid #f1f5f9;">
+    <td style="padding:8px 12px;color:var(--muted);white-space:nowrap;">${formatYmdLabel(row.game_date || row.pick_date || '')}</td>
+    <td style="padding:8px 12px;white-space:nowrap;">${away} @ ${home}</td>
+    <td style="padding:8px 12px;min-width:160px;"><span style="color:var(--muted);font-size:9px;">${type}</span> ${row.pick_detail || '—'}</td>
+    <td style="padding:8px 12px;text-align:center;color:var(--accent);font-weight:900;">${edge}</td>
+    <td style="padding:8px 12px;text-align:center;">${badge}</td>
+  </tr>`;
+}
+
+function resultBadge(result) {
+  const r = String(result || 'pending').toLowerCase();
+  let color = 'var(--muted)';
+  let bg = '#f8fafc';
+  let label = 'PENDING';
+  if (r === 'win') {
+    color = '#065f46';
+    bg = '#ecfdf5';
+    label = 'WIN';
+  } else if (r === 'loss') {
+    color = '#991b1b';
+    bg = '#fef2f2';
+    label = 'LOSS';
+  } else if (r === 'push') {
+    color = '#854d0e';
+    bg = '#fefce8';
+    label = 'PUSH';
+  }
+  return `<span style="display:inline-block;padding:3px 8px;border-radius:999px;background:${bg};color:${color};font-size:9px;font-weight:900;border:1px solid currentColor;">${label}</span>`;
 }
 
 function renderTopPicks(games, oddsMap, containerId) {
@@ -1798,15 +2016,13 @@ async function loadNBA() {
     let performanceSummary = null;
     let sportbookReport = null;
     let pickStats = null;
-    try {
-      const r = await fetch('/api/nba/predictions');
-      if (r.ok) data = await r.json();
-      else throw new Error('api');
-    } catch (e) {
-      const r2 = await fetch('/nba_data.json');
-      if (!r2.ok) throw new Error('No data source');
-      data = await r2.json();
+    let pickStatsPayload = null;
+    data = await fetchFirstJSON(['/nba_data.json']);
+    if (!isUsableNBAData(data)) {
+      console.warn('Static NBA data unusable; falling back to live API');
+      data = await fetchFirstJSON(['/api/nba/predictions']);
     }
+    if (!isUsableNBAData(data)) throw new Error('No usable NBA data source');
 
     let oddsMap = {};
     const oddsData = await fetchFirstJSON(['/api/nba/odds', '/tw_odds.json']);
@@ -1814,7 +2030,8 @@ async function loadNBA() {
 
     performanceSummary = await fetchFirstJSON(['/api/nba/performance-summary', '/performance_summary.json']);
     sportbookReport = await fetchFirstJSON(['/api/nba/sportbook-report', '/sportbook_report.json']);
-    pickStats = normalizePickStats(await fetchFirstJSON(['/api/nba/picks/stats', '/pick_stats.json']));
+    pickStatsPayload = await fetchFirstJSON(['/api/nba/picks/stats', '/pick_stats.json']);
+    pickStats = normalizePickStats(pickStatsPayload);
 
     window._twOddsMap = oddsMap;
     window._loadedGames = data.games || [];
@@ -1822,7 +2039,9 @@ async function loadNBA() {
 
     renderPerformanceSummary(performanceSummary);
     renderSportbookReport(sportbookReport);
+    renderPickPerformance(pickStatsPayload, pickStats);
     const renderedOfficial = renderOfficialPicks(data.official_picks || [], pickStats);
+    renderPickHistory(pickStatsPayload, pickStats, data.official_picks || []);
     renderGames(window._loadedGames);
     renderNextGames(window._nextGames, data.next_games_date || '');
     renderEloRankings(data.elo_teams || {});

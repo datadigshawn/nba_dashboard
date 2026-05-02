@@ -6,7 +6,7 @@ import json
 from datetime import datetime
 from pathlib import Path
 
-from nba_db import DB_PATH, get_pick_stats, get_prediction_summary, init_db, verify_pending_picks
+from nba_db import DB_PATH, get_pick_stats, get_prediction_summary, init_db, resolve_recommended_picks
 
 BASE_DIR = Path(__file__).resolve().parent
 
@@ -18,7 +18,7 @@ def _write_json(path: Path, payload: dict) -> None:
 def main() -> None:
     init_db(DB_PATH)
     try:
-        verify_pending_picks(DB_PATH)
+        resolve_recommended_picks(DB_PATH)
     except Exception as exc:
         print(f"[warn] pick verification skipped: {exc}")
 
@@ -30,6 +30,7 @@ def main() -> None:
 
     pick_stats = get_pick_stats(DB_PATH)
     pick_stats["generated_at"] = generated_at
+    pick_stats["synced_at"] = generated_at
     _write_json(BASE_DIR / "pick_stats.json", pick_stats)
 
     print("[static] wrote performance_summary.json and pick_stats.json")
