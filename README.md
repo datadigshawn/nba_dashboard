@@ -196,6 +196,8 @@ cd /Users/shawnclaw/autobot/autobots_NBA
 | launchd 服務 | 時機 | 功能 |
 |-------------|------|------|
 | `com.nba.daily_update` | 每日 **09:00** | 訓練模型 + 生成預測 JSON |
+| `com.nba.betting_pipeline` | 每日 **09:20** | 更新推薦賭盤、追蹤結果與績效統計，不 deploy |
+| `com.nba.auto_deploy` | 每日 **09:45** | 通過檢查後，只 commit / push / deploy 生成資料與模型產物 |
 | `com.nba.dashboard` | 開機 & 常駐 | Flask 儀表板 port 8090 |
 
 ### 管理
