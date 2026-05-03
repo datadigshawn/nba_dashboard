@@ -385,16 +385,23 @@ health_check() {
         return 0
     fi
 
+    local attempt
     local tmp_html
     tmp_html="$(mktemp /tmp/nba_auto_deploy_health.XXXXXX.html)"
-    if curl -fsS "$LOCAL_DASHBOARD_URL" > "$tmp_html" && grep -q "NBA PREDICTIONS" "$tmp_html"; then
-        log "Local dashboard health check passed: $LOCAL_DASHBOARD_URL"
-    else
-        echo "[auto-deploy] Local dashboard health check failed: $LOCAL_DASHBOARD_URL" >&2
-        rm -f "$tmp_html"
-        exit 2
-    fi
+
+    for attempt in {1..15}; do
+        if curl -fsS "$LOCAL_DASHBOARD_URL" > "$tmp_html" && grep -q "NBA PREDICTIONS" "$tmp_html"; then
+            log "Local dashboard health check passed: $LOCAL_DASHBOARD_URL"
+            rm -f "$tmp_html"
+            return 0
+        fi
+        log "Dashboard not ready yet; retry health check ${attempt}/15"
+        sleep 2
+    done
+
+    echo "[auto-deploy] Local dashboard health check failed: $LOCAL_DASHBOARD_URL" >&2
     rm -f "$tmp_html"
+    exit 2
 }
 
 main() {
