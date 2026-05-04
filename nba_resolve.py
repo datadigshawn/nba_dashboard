@@ -6,6 +6,7 @@ Outcome Resolver — 查 ESPN 填入昨日比賽結果到 nba.db。
     .venv/bin/python nba_resolve.py
 """
 import sys
+from datetime import datetime
 from pathlib import Path
 
 BASE_DIR = Path(__file__).parent
@@ -23,7 +24,9 @@ from pick_history import sync_pick_history
 
 def main():
     init_db(DB_PATH)
-    dates = sorted(set(get_unresolved_dates(DB_PATH) + get_pending_pick_dates(DB_PATH)))
+    unresolved_dates = get_unresolved_dates(DB_PATH)
+    pending_pick_dates = get_pending_pick_dates(DB_PATH)
+    dates = sorted(set(unresolved_dates + pending_pick_dates))
     if not dates:
         print("[resolve] 無未解析的比賽")
         pick_history = sync_pick_history(DB_PATH)
@@ -36,6 +39,9 @@ def main():
             )
         return
 
+    stale_dates = [d for d in dates if d < datetime.now().strftime("%Y%m%d")]
+    if stale_dates:
+        print(f"[resolve] 逾期優先處理: {stale_dates}")
     print(f"[resolve] 需解析 {len(dates)} 個日期: {dates}")
 
     try:
@@ -44,7 +50,11 @@ def main():
         print("[resolve] 無法匯入 nba_predictor，跳過")
         return
 
-    results_raw = fetch_espn_results(30)
+    oldest = min(dates) if dates else datetime.now().strftime("%Y%m%d")
+    oldest_dt = datetime.strptime(oldest, "%Y%m%d")
+    days_back = max(60, (datetime.now() - oldest_dt).days + 7)
+    print(f"[resolve] ESPN 查詢視窗: 最近 {days_back} 天")
+    results_raw = fetch_espn_results(days_back)
     resolve_list = []
     for g in results_raw:
         resolve_list.append({
@@ -67,6 +77,13 @@ def main():
             f"(W{pick_stats['wins']} L{pick_stats['losses']} P{pick_stats['pushes']}, "
             f"missing {pick_stats['missing_results']})"
         )
+        if pick_stats.get("missing_details"):
+            print("[resolve] 缺漏原因:")
+            for row in pick_stats["missing_details"][:10]:
+                print(
+                    f"  - {row['game_date']} {row['away']} @ {row['home']} "
+                    f"[{row['pick_type']}] {row['reason']}"
+                )
     else:
         print("[resolve] ESPN 無結果可用")
 

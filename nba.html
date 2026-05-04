@@ -1542,6 +1542,10 @@ function renderPickHistory(payload, stats, officialPicks) {
         correct: null,
       }));
   const recent = (stats?.recent || []).slice(0, 12);
+  const todayYmd = new Date().toISOString().slice(0, 10).replace(/-/g, '');
+  const pendingFuture = current.filter(row => (row.game_date || '') >= todayYmd);
+  const pendingStale = current.filter(row => (row.game_date || '') < todayYmd);
+  const resolutionGaps = Array.isArray(stats?.resolution_gaps) ? stats.resolution_gaps : [];
 
   if (!current.length && !recent.length) {
     container.innerHTML = '';
@@ -1570,6 +1574,23 @@ function renderPickHistory(payload, stats, officialPicks) {
     <div class="section-title">📋 正式推薦追蹤
       <span style="font-size:10px;color:var(--muted);font-weight:400;margin-left:12px;">待結算與近期結果</span>
     </div>
+    <div style="font-family:'Share Tech Mono';font-size:10px;color:var(--muted);margin:-6px 0 10px 0;">
+      ${pendingFuture.length ? `未開打 ${pendingFuture.length} 場` : '未開打 0 場'}
+      ${pendingStale.length ? ` · 逾期未結算 ${pendingStale.length} 場` : ''}
+    </div>
+    ${resolutionGaps.length ? `
+      <div style="background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:12px 14px;margin-bottom:14px;">
+        <div style="font-family:'Share Tech Mono';font-size:11px;font-weight:900;color:var(--warn);letter-spacing:2px;margin-bottom:8px;">MISSING RESULT REASONS</div>
+        <div style="display:grid;gap:8px;font-family:'Share Tech Mono';font-size:10px;color:var(--muted);">
+          ${resolutionGaps.slice(0, 6).map(row => `
+            <div style="display:flex;justify-content:space-between;gap:12px;border-top:1px solid var(--border);padding-top:8px;">
+              <span>${formatYmdLabel(row.game_date)} · ${abbrevTeam(row.away)} @ ${abbrevTeam(row.home)} · ${row.pick_type?.toUpperCase?.() || ''}</span>
+              <span>${row.reason}</span>
+            </div>
+          `).join('')}
+        </div>
+      </div>
+    ` : ''}
     <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(360px,1fr));gap:14px;margin-bottom:20px;">
       ${currentHtml}${recentHtml}
     </div>

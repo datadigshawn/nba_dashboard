@@ -216,6 +216,60 @@
       "model_total": 211.7
     },
     {
+      "pick_date": "20260505",
+      "game_date": "20260505",
+      "away": "Minnesota Timberwolves",
+      "home": "San Antonio Spurs",
+      "pick_type": "spread",
+      "pick_target": "away",
+      "pick_line": -11.5,
+      "pick_detail": "買 Timberwolves 受讓 +11.5",
+      "edge": 5.7,
+      "confidence": 90.5,
+      "result": "pending",
+      "correct": null,
+      "tw_spread": -11.5,
+      "tw_ou": 217.5,
+      "model_spread": 5.8,
+      "model_total": 217.9
+    },
+    {
+      "pick_date": "20260505",
+      "game_date": "20260505",
+      "away": "Philadelphia 76ers",
+      "home": "New York Knicks",
+      "pick_type": "spread",
+      "pick_target": "home",
+      "pick_line": -7.5,
+      "pick_detail": "買 Knicks 讓分 -7.5",
+      "edge": 2.1999999999999993,
+      "confidence": 90.1,
+      "result": "pending",
+      "correct": null,
+      "tw_spread": -7.5,
+      "tw_ou": 212.5,
+      "model_spread": 9.7,
+      "model_total": 214.4
+    },
+    {
+      "pick_date": "20260505",
+      "game_date": "20260506",
+      "away": "Philadelphia 76ers",
+      "home": "New York Knicks",
+      "pick_type": "spread",
+      "pick_target": "home",
+      "pick_line": -6.5,
+      "pick_detail": "買 Knicks 讓分 -6.5",
+      "edge": 3.8000000000000007,
+      "confidence": 90.4,
+      "result": "pending",
+      "correct": null,
+      "tw_spread": -6.5,
+      "tw_ou": 212.5,
+      "model_spread": 10.3,
+      "model_total": 213.9
+    },
+    {
       "pick_date": "20260504",
       "game_date": "20260506",
       "away": "Philadelphia 76ers",
@@ -232,6 +286,60 @@
       "tw_ou": 212.5,
       "model_spread": 10.3,
       "model_total": 213.9
+    },
+    {
+      "pick_date": "20260505",
+      "game_date": "20260506",
+      "away": "Philadelphia 76ers",
+      "home": "New York Knicks",
+      "pick_type": "spread",
+      "pick_target": "home",
+      "pick_line": -7.5,
+      "pick_detail": "買 Knicks 讓分 -7.5",
+      "edge": 2.1999999999999993,
+      "confidence": 90.1,
+      "result": "pending",
+      "correct": null,
+      "tw_spread": -7.5,
+      "tw_ou": 212.5,
+      "model_spread": 9.7,
+      "model_total": 214.4
+    },
+    {
+      "pick_date": "20260505",
+      "game_date": "20260507",
+      "away": "Minnesota Timberwolves",
+      "home": "San Antonio Spurs",
+      "pick_type": "spread",
+      "pick_target": "away",
+      "pick_line": -11.5,
+      "pick_detail": "買 Timberwolves 受讓 +11.5",
+      "edge": 5.7,
+      "confidence": 90.5,
+      "result": "pending",
+      "correct": null,
+      "tw_spread": -11.5,
+      "tw_ou": 217.5,
+      "model_spread": 5.8,
+      "model_total": 217.9
+    },
+    {
+      "pick_date": "20260505",
+      "game_date": "20260507",
+      "away": "Minnesota Timberwolves",
+      "home": "San Antonio Spurs",
+      "pick_type": "spread",
+      "pick_target": "away",
+      "pick_line": -13.5,
+      "pick_detail": "買 Timberwolves 受讓 +13.5",
+      "edge": 4.699999999999999,
+      "confidence": 90.2,
+      "result": "pending",
+      "correct": null,
+      "tw_spread": -13.5,
+      "tw_ou": 216.5,
+      "model_spread": 8.8,
+      "model_total": 217.4
     },
     {
       "pick_date": "20260504",
@@ -252,25 +360,200 @@
       "model_total": 217.4
     }
   ],
-  "pending": 5,
+  "pending": 11,
   "stale_pending": 3,
+  "resolution_gaps": [
+    {
+      "pick_date": "20260425",
+      "game_date": "20260428",
+      "away": "Detroit Pistons",
+      "home": "Orlando Magic",
+      "pick_type": "spread",
+      "pick_detail": "買 Magic 受讓 +2.5",
+      "edge": 7.0,
+      "reason": "prediction exists, but scores missing",
+      "status": "stale_pending"
+    },
+    {
+      "pick_date": "20260425",
+      "game_date": "20260428",
+      "away": "Oklahoma City Thunder",
+      "home": "Phoenix Suns",
+      "pick_type": "spread",
+      "pick_detail": "買 Suns 受讓 +8.5",
+      "edge": 2.0999999999999996,
+      "reason": "prediction exists, but scores missing",
+      "status": "stale_pending"
+    },
+    {
+      "pick_date": "20260502",
+      "game_date": "20260502",
+      "away": "Los Angeles Lakers",
+      "home": "Houston Rockets",
+      "pick_type": "ou",
+      "pick_detail": "看大 Over 204.5",
+      "edge": 7.199999999999989,
+      "reason": "prediction exists, but scores missing",
+      "status": "stale_pending"
+    },
+    {
+      "pick_date": "20260505",
+      "game_date": "20260505",
+      "away": "Minnesota Timberwolves",
+      "home": "San Antonio Spurs",
+      "pick_type": "spread",
+      "pick_detail": "買 Timberwolves 受讓 +11.5",
+      "edge": 5.7,
+      "reason": "scheduled for future",
+      "status": "future_pending"
+    },
+    {
+      "pick_date": "20260505",
+      "game_date": "20260505",
+      "away": "Philadelphia 76ers",
+      "home": "New York Knicks",
+      "pick_type": "spread",
+      "pick_detail": "買 Knicks 讓分 -7.5",
+      "edge": 2.1999999999999993,
+      "reason": "scheduled for future",
+      "status": "future_pending"
+    },
+    {
+      "pick_date": "20260504",
+      "game_date": "20260506",
+      "away": "Philadelphia 76ers",
+      "home": "New York Knicks",
+      "pick_type": "spread",
+      "pick_detail": "買 Knicks 讓分 -6.5",
+      "edge": 3.8000000000000007,
+      "reason": "scheduled for future",
+      "status": "future_pending"
+    },
+    {
+      "pick_date": "20260505",
+      "game_date": "20260506",
+      "away": "Philadelphia 76ers",
+      "home": "New York Knicks",
+      "pick_type": "spread",
+      "pick_detail": "買 Knicks 讓分 -6.5",
+      "edge": 3.8000000000000007,
+      "reason": "scheduled for future",
+      "status": "future_pending"
+    },
+    {
+      "pick_date": "20260505",
+      "game_date": "20260506",
+      "away": "Philadelphia 76ers",
+      "home": "New York Knicks",
+      "pick_type": "spread",
+      "pick_detail": "買 Knicks 讓分 -7.5",
+      "edge": 2.1999999999999993,
+      "reason": "scheduled for future",
+      "status": "future_pending"
+    },
+    {
+      "pick_date": "20260504",
+      "game_date": "20260507",
+      "away": "Minnesota Timberwolves",
+      "home": "San Antonio Spurs",
+      "pick_type": "spread",
+      "pick_detail": "買 Timberwolves 受讓 +13.5",
+      "edge": 4.699999999999999,
+      "reason": "scheduled for future",
+      "status": "future_pending"
+    },
+    {
+      "pick_date": "20260505",
+      "game_date": "20260507",
+      "away": "Minnesota Timberwolves",
+      "home": "San Antonio Spurs",
+      "pick_type": "spread",
+      "pick_detail": "買 Timberwolves 受讓 +13.5",
+      "edge": 4.699999999999999,
+      "reason": "scheduled for future",
+      "status": "future_pending"
+    },
+    {
+      "pick_date": "20260505",
+      "game_date": "20260507",
+      "away": "Minnesota Timberwolves",
+      "home": "San Antonio Spurs",
+      "pick_type": "spread",
+      "pick_detail": "買 Timberwolves 受讓 +11.5",
+      "edge": 5.7,
+      "reason": "scheduled for future",
+      "status": "future_pending"
+    }
+  ],
   "history_sync": {
     "imported_from_bets": {
-      "candidates": 4,
+      "candidates": 6,
       "imported": 0,
-      "skipped_existing": 4
+      "skipped_existing": 6
     },
     "manual_results": 0,
     "resolved": {
-      "candidates": 3,
+      "candidates": 5,
       "verified": 0,
       "wins": 0,
       "losses": 0,
       "pushes": 0,
-      "missing_results": 3,
-      "ungraded": 0
+      "missing_results": 5,
+      "ungraded": 0,
+      "missing_details": [
+        {
+          "pick_date": "20260425",
+          "game_date": "20260428",
+          "away": "Detroit Pistons",
+          "home": "Orlando Magic",
+          "pick_type": "spread",
+          "pick_detail": "買 Magic 受讓 +2.5",
+          "reason": "ESPN result not found",
+          "status": "missing_result"
+        },
+        {
+          "pick_date": "20260425",
+          "game_date": "20260428",
+          "away": "Oklahoma City Thunder",
+          "home": "Phoenix Suns",
+          "pick_type": "spread",
+          "pick_detail": "買 Suns 受讓 +8.5",
+          "reason": "ESPN result not found",
+          "status": "missing_result"
+        },
+        {
+          "pick_date": "20260502",
+          "game_date": "20260502",
+          "away": "Los Angeles Lakers",
+          "home": "Houston Rockets",
+          "pick_type": "ou",
+          "pick_detail": "看大 Over 204.5",
+          "reason": "ESPN result not found",
+          "status": "missing_result"
+        },
+        {
+          "pick_date": "20260505",
+          "game_date": "20260505",
+          "away": "Minnesota Timberwolves",
+          "home": "San Antonio Spurs",
+          "pick_type": "spread",
+          "pick_detail": "買 Timberwolves 受讓 +11.5",
+          "reason": "ESPN result not found",
+          "status": "missing_result"
+        },
+        {
+          "pick_date": "20260505",
+          "game_date": "20260505",
+          "away": "Philadelphia 76ers",
+          "home": "New York Knicks",
+          "pick_type": "spread",
+          "pick_detail": "買 Knicks 讓分 -7.5",
+          "reason": "ESPN result not found",
+          "status": "missing_result"
+        }
+      ]
     }
   },
-  "generated_at": "2026-05-04T09:21:09",
-  "synced_at": "2026-05-04T09:21:09"
+  "generated_at": "2026-05-05T00:40:38",
+  "synced_at": "2026-05-05T00:40:38"
 }

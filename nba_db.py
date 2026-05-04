@@ -567,6 +567,7 @@ def resolve_recommended_picks(
         "missing_results": 0,
         "ungraded": 0,
     }
+    missing_details: list[dict] = []
     result_index = _build_result_index(results)
 
     with _connect(db_path) as conn:
@@ -594,9 +595,20 @@ def resolve_recommended_picks(
             result_index.setdefault(key, dict(r))
 
         for row in rows:
-            result_row = result_index.get(_result_key(row["game_date"], row["home"], row["away"]))
+            result_key = _result_key(row["game_date"], row["home"], row["away"])
+            result_row = result_index.get(result_key)
             if not result_row:
                 stats["missing_results"] += 1
+                missing_details.append({
+                    "pick_date": row["pick_date"],
+                    "game_date": row["game_date"],
+                    "away": row["away"],
+                    "home": row["home"],
+                    "pick_type": row["pick_type"],
+                    "pick_detail": row["pick_detail"],
+                    "reason": "ESPN result not found",
+                    "status": "missing_result",
+                })
                 continue
 
             result, correct = _evaluate_pick_result(
@@ -618,6 +630,8 @@ def resolve_recommended_picks(
                 stats["pushes"] += 1
             else:
                 stats["ungraded"] += 1
+
+    stats["missing_details"] = missing_details
 
     return stats
 
@@ -748,6 +762,22 @@ def get_pick_stats(db_path: Path | str = DB_PATH) -> dict:
               AND game_date < ?
         """, (datetime.now().strftime("%Y%m%d"),)).fetchone()[0]
 
+        pending_resolution_rows = conn.execute("""
+            SELECT rp.pick_date, rp.game_date, rp.away, rp.home, rp.pick_type,
+                   rp.pick_detail, rp.result, rp.correct, rp.edge,
+                   p.resolved_at, p.home_score, p.away_score, p.winner
+            FROM recommended_picks rp
+            LEFT JOIN predictions p
+              ON p.game_date = rp.game_date
+             AND p.home = rp.home
+             AND p.away = rp.away
+             AND p.resolved_at IS NOT NULL
+            WHERE rp.correct IS NULL
+              AND (rp.result IS NULL OR rp.result = 'pending')
+            ORDER BY rp.game_date ASC, rp.id ASC
+            LIMIT 50
+        """).fetchall()
+
     def _wr(w: int, t: int) -> float:
         return round(w / t * 100, 1) if t else 0.0
 
@@ -780,6 +810,32 @@ def get_pick_stats(db_path: Path | str = DB_PATH) -> dict:
         rows = [row for row in type_edge_rows if row["pick_type"] == pick_type]
         by_type_edge[pick_type] = _bucket_payload(rows, bucket_order["edge"])
 
+    resolution_gaps = []
+    today_ymd = datetime.now().strftime("%Y%m%d")
+    for row in pending_resolution_rows:
+        if row["game_date"] < today_ymd:
+            reason = "overdue but unresolved"
+            status = "stale_pending"
+        else:
+            reason = "scheduled for future"
+            status = "future_pending"
+        if row["resolved_at"] is None and row["game_date"] < today_ymd:
+            if row["home_score"] is None or row["away_score"] is None:
+                reason = "prediction exists, but scores missing"
+            else:
+                reason = "prediction resolved, pick sync missed"
+        resolution_gaps.append({
+            "pick_date": row["pick_date"],
+            "game_date": row["game_date"],
+            "away": row["away"],
+            "home": row["home"],
+            "pick_type": row["pick_type"],
+            "pick_detail": row["pick_detail"],
+            "edge": row["edge"],
+            "reason": reason,
+            "status": status,
+        })
+
     return {
         "total": total or 0,
         "wins": wins or 0,
@@ -798,6 +854,7 @@ def get_pick_stats(db_path: Path | str = DB_PATH) -> dict:
         "current_picks": [dict(r) for r in pending_rows],
         "pending": pending_total or 0,
         "stale_pending": stale_pending or 0,
+        "resolution_gaps": resolution_gaps,
     }
 
 
