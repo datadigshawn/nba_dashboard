@@ -1,45 +1,45 @@
 {
-  "synced_at": "2026-05-03T09:21:02",
+  "synced_at": "2026-05-04T09:21:08",
   "source": {
-    "sportweb_fetched_at": "2026-05-03T09:20:56",
+    "sportweb_fetched_at": "2026-05-04T09:20:55",
     "source_url": "https://www.sportslottery.com.tw/sportsbook/sport",
     "game_count": 2
   },
   "entries": [
     {
-      "game": "Orlando Magic @ Detroit Pistons",
-      "away": "Orlando Magic",
-      "home": "Detroit Pistons",
-      "spread": -8.5,
-      "ou": 202.5,
-      "updated_at": "2026-05-03T09:20:56",
+      "game": "Minnesota Timberwolves @ San Antonio Spurs",
+      "away": "Minnesota Timberwolves",
+      "home": "San Antonio Spurs",
+      "spread": -13.5,
+      "ou": 216.5,
+      "updated_at": "2026-05-04T09:20:55",
       "source": "sportWeb",
-      "sportweb_game_id": "3465705.1",
-      "start_time": "2026-05-04T03:30:00.000+08:00"
+      "sportweb_game_id": "3466033.1",
+      "start_time": "2026-05-05T09:30:00.000+08:00"
     },
     {
-      "game": "Toronto Raptors @ Cleveland Cavaliers",
-      "away": "Toronto Raptors",
-      "home": "Cleveland Cavaliers",
-      "spread": -7.5,
-      "ou": 211.5,
-      "updated_at": "2026-05-03T09:20:56",
+      "game": "Philadelphia 76ers @ New York Knicks",
+      "away": "Philadelphia 76ers",
+      "home": "New York Knicks",
+      "spread": -6.5,
+      "ou": 212.5,
+      "updated_at": "2026-05-04T09:20:55",
       "source": "sportWeb",
-      "sportweb_game_id": "3465708.1",
-      "start_time": "2026-05-04T07:30:00.000+08:00"
+      "sportweb_game_id": "3466032.1",
+      "start_time": "2026-05-05T08:00:00.000+08:00"
     }
   ],
   "odds": {
-    "Orlando Magic @ Detroit Pistons": {
-      "spread": -8.5,
-      "ou": 202.5,
-      "updated_at": "2026-05-03T09:20:56",
+    "Philadelphia 76ers @ New York Knicks": {
+      "spread": -6.5,
+      "ou": 212.5,
+      "updated_at": "2026-05-04T09:20:55",
       "source": "sportWeb"
     },
-    "Toronto Raptors @ Cleveland Cavaliers": {
-      "spread": -7.5,
-      "ou": 211.5,
-      "updated_at": "2026-05-03T09:20:56",
+    "Minnesota Timberwolves @ San Antonio Spurs": {
+      "spread": -13.5,
+      "ou": 216.5,
+      "updated_at": "2026-05-04T09:20:55",
       "source": "sportWeb"
     }
   }
