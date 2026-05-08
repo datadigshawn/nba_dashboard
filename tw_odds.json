@@ -1,62 +1,62 @@
 {
-  "synced_at": "2026-05-07T09:21:14",
+  "synced_at": "2026-05-08T09:21:11",
   "source": {
-    "sportweb_fetched_at": "2026-05-07T09:21:00",
+    "sportweb_fetched_at": "2026-05-08T09:20:58",
     "source_url": "https://www.sportslottery.com.tw/sportsbook/sport",
     "game_count": 3
   },
   "entries": [
     {
-      "game": "Cleveland Cavaliers @ Detroit Pistons",
-      "away": "Cleveland Cavaliers",
-      "home": "Detroit Pistons",
-      "spread": -2.5,
-      "ou": 215.5,
-      "updated_at": "2026-05-07T09:21:00",
-      "source": "sportWeb",
-      "sportweb_game_id": "3466593.1",
-      "start_time": "2026-05-08T07:00:00.000+08:00"
-    },
-    {
       "game": "Los Angeles Lakers @ Oklahoma City Thunder",
       "away": "Los Angeles Lakers",
       "home": "Oklahoma City Thunder",
-      "spread": -15.5,
-      "ou": 209.5,
-      "updated_at": "2026-05-07T09:21:00",
+      "spread": -14.5,
+      "ou": 211.5,
+      "updated_at": "2026-05-08T09:20:58",
       "source": "sportWeb",
       "sportweb_game_id": "3466594.1",
       "start_time": "2026-05-08T09:30:00.000+08:00"
     },
     {
-      "game": "Minnesota Timberwolves @ San Antonio Spurs",
-      "away": "Minnesota Timberwolves",
-      "home": "San Antonio Spurs",
-      "spread": -8.5,
-      "ou": 217.5,
-      "updated_at": "2026-05-07T09:21:00",
+      "game": "New York Knicks @ Philadelphia 76ers",
+      "away": "New York Knicks",
+      "home": "Philadelphia 76ers",
+      "spread": -1.5,
+      "ou": 213.5,
+      "updated_at": "2026-05-08T09:20:58",
       "source": "sportWeb",
-      "sportweb_game_id": "3466383.1",
-      "start_time": "2026-05-07T09:30:00.000+08:00"
+      "sportweb_game_id": "3466809.1",
+      "start_time": "2026-05-09T07:00:00.000+08:00"
+    },
+    {
+      "game": "San Antonio Spurs @ Minnesota Timberwolves",
+      "away": "San Antonio Spurs",
+      "home": "Minnesota Timberwolves",
+      "spread": 3.5,
+      "ou": 216.5,
+      "updated_at": "2026-05-08T09:20:58",
+      "source": "sportWeb",
+      "sportweb_game_id": "3466810.1",
+      "start_time": "2026-05-09T09:30:00.000+08:00"
     }
   ],
   "odds": {
-    "Minnesota Timberwolves @ San Antonio Spurs": {
-      "spread": -8.5,
-      "ou": 217.5,
-      "updated_at": "2026-05-07T09:21:00",
-      "source": "sportWeb"
-    },
-    "Cleveland Cavaliers @ Detroit Pistons": {
-      "spread": -2.5,
-      "ou": 215.5,
-      "updated_at": "2026-05-07T09:21:00",
-      "source": "sportWeb"
-    },
     "Los Angeles Lakers @ Oklahoma City Thunder": {
-      "spread": -15.5,
-      "ou": 209.5,
-      "updated_at": "2026-05-07T09:21:00",
+      "spread": -14.5,
+      "ou": 211.5,
+      "updated_at": "2026-05-08T09:20:58",
+      "source": "sportWeb"
+    },
+    "New York Knicks @ Philadelphia 76ers": {
+      "spread": -1.5,
+      "ou": 213.5,
+      "updated_at": "2026-05-08T09:20:58",
+      "source": "sportWeb"
+    },
+    "San Antonio Spurs @ Minnesota Timberwolves": {
+      "spread": 3.5,
+      "ou": 216.5,
+      "updated_at": "2026-05-08T09:20:58",
       "source": "sportWeb"
     }
   }

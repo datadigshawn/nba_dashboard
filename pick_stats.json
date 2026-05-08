@@ -1,10 +1,10 @@
 {
-  "total": 8,
+  "total": 18,
   "wins": 5,
-  "wr": 62.5,
-  "spread_total": 7,
+  "wr": 27.8,
+  "spread_total": 17,
   "spread_wins": 5,
-  "spread_wr": 71.4,
+  "spread_wr": 29.4,
   "ou_total": 1,
   "ou_wins": 0,
   "ou_wr": 0.0,
@@ -28,30 +28,48 @@
       "wr": 0.0
     },
     {
+      "date": "20260504",
+      "wins": 0,
+      "total": 2,
+      "wr": 0.0
+    },
+    {
       "date": "20260505",
       "wins": 3,
-      "total": 3,
-      "wr": 100.0
+      "total": 8,
+      "wr": 37.5
+    },
+    {
+      "date": "20260506",
+      "wins": 0,
+      "total": 2,
+      "wr": 0.0
+    },
+    {
+      "date": "20260507",
+      "wins": 0,
+      "total": 1,
+      "wr": 0.0
     }
   ],
   "edge_buckets": [
     {
       "bucket": "0-3",
       "wins": 2,
-      "total": 3,
-      "wr": 66.7
+      "total": 7,
+      "wr": 28.6
     },
     {
       "bucket": "3-5",
       "wins": 0,
-      "total": 0,
+      "total": 4,
       "wr": 0.0
     },
     {
       "bucket": "5-8",
       "wins": 2,
-      "total": 3,
-      "wr": 66.7
+      "total": 5,
+      "wr": 40.0
     },
     {
       "bucket": "8+",
@@ -82,8 +100,8 @@
     {
       "bucket": "80+",
       "wins": 3,
-      "total": 4,
-      "wr": 75.0
+      "total": 14,
+      "wr": 21.4
     }
   ],
   "by_type_edge": {
@@ -91,20 +109,20 @@
       {
         "bucket": "0-3",
         "wins": 2,
-        "total": 3,
-        "wr": 66.7
+        "total": 7,
+        "wr": 28.6
       },
       {
         "bucket": "3-5",
         "wins": 0,
-        "total": 0,
+        "total": 4,
         "wr": 0.0
       },
       {
         "bucket": "5-8",
         "wins": 2,
-        "total": 2,
-        "wr": 100.0
+        "total": 4,
+        "wr": 50.0
       },
       {
         "bucket": "8+",
@@ -141,6 +159,186 @@
     ]
   },
   "recent": [
+    {
+      "pick_date": "20260507",
+      "game_date": "20260507",
+      "away": "Minnesota Timberwolves",
+      "home": "San Antonio Spurs",
+      "pick_type": "spread",
+      "pick_target": "away",
+      "pick_line": -8.5,
+      "pick_detail": "買 Timberwolves 受讓 +8.5",
+      "edge": 7.0,
+      "confidence": 87.1,
+      "result": "loss",
+      "correct": 0,
+      "tw_spread": -8.5,
+      "tw_ou": 217.5,
+      "model_spread": 1.5,
+      "model_total": 216.8
+    },
+    {
+      "pick_date": "20260506",
+      "game_date": "20260507",
+      "away": "Minnesota Timberwolves",
+      "home": "San Antonio Spurs",
+      "pick_type": "spread",
+      "pick_target": "away",
+      "pick_line": -10.5,
+      "pick_detail": "買 Timberwolves 受讓 +10.5",
+      "edge": 2.3000000000000007,
+      "confidence": 90.7,
+      "result": "loss",
+      "correct": 0,
+      "tw_spread": -10.5,
+      "tw_ou": 217.5,
+      "model_spread": 8.2,
+      "model_total": 217.9
+    },
+    {
+      "pick_date": "20260505",
+      "game_date": "20260507",
+      "away": "Minnesota Timberwolves",
+      "home": "San Antonio Spurs",
+      "pick_type": "spread",
+      "pick_target": "away",
+      "pick_line": -10.5,
+      "pick_detail": "買 Timberwolves 受讓 +10.5",
+      "edge": 2.3000000000000007,
+      "confidence": 90.7,
+      "result": "loss",
+      "correct": 0,
+      "tw_spread": -10.5,
+      "tw_ou": 217.5,
+      "model_spread": 8.2,
+      "model_total": 217.9
+    },
+    {
+      "pick_date": "20260505",
+      "game_date": "20260507",
+      "away": "Minnesota Timberwolves",
+      "home": "San Antonio Spurs",
+      "pick_type": "spread",
+      "pick_target": "away",
+      "pick_line": -11.5,
+      "pick_detail": "買 Timberwolves 受讓 +11.5",
+      "edge": 5.7,
+      "confidence": 90.5,
+      "result": "loss",
+      "correct": 0,
+      "tw_spread": -11.5,
+      "tw_ou": 217.5,
+      "model_spread": 5.8,
+      "model_total": 217.9
+    },
+    {
+      "pick_date": "20260505",
+      "game_date": "20260507",
+      "away": "Minnesota Timberwolves",
+      "home": "San Antonio Spurs",
+      "pick_type": "spread",
+      "pick_target": "away",
+      "pick_line": -13.5,
+      "pick_detail": "買 Timberwolves 受讓 +13.5",
+      "edge": 4.699999999999999,
+      "confidence": 90.2,
+      "result": "loss",
+      "correct": 0,
+      "tw_spread": -13.5,
+      "tw_ou": 216.5,
+      "model_spread": 8.8,
+      "model_total": 217.4
+    },
+    {
+      "pick_date": "20260504",
+      "game_date": "20260507",
+      "away": "Minnesota Timberwolves",
+      "home": "San Antonio Spurs",
+      "pick_type": "spread",
+      "pick_target": "away",
+      "pick_line": -13.5,
+      "pick_detail": "買 Timberwolves 受讓 +13.5",
+      "edge": 4.699999999999999,
+      "confidence": 90.2,
+      "result": "loss",
+      "correct": 0,
+      "tw_spread": -13.5,
+      "tw_ou": 216.5,
+      "model_spread": 8.8,
+      "model_total": 217.4
+    },
+    {
+      "pick_date": "20260506",
+      "game_date": "20260506",
+      "away": "Philadelphia 76ers",
+      "home": "New York Knicks",
+      "pick_type": "spread",
+      "pick_target": "home",
+      "pick_line": -7.5,
+      "pick_detail": "買 Knicks 讓分 -7.5",
+      "edge": 2.6999999999999993,
+      "confidence": 90.1,
+      "result": "loss",
+      "correct": 0,
+      "tw_spread": -7.5,
+      "tw_ou": 212.5,
+      "model_spread": 10.2,
+      "model_total": 214.4
+    },
+    {
+      "pick_date": "20260505",
+      "game_date": "20260506",
+      "away": "Philadelphia 76ers",
+      "home": "New York Knicks",
+      "pick_type": "spread",
+      "pick_target": "home",
+      "pick_line": -7.5,
+      "pick_detail": "買 Knicks 讓分 -7.5",
+      "edge": 2.1999999999999993,
+      "confidence": 90.1,
+      "result": "loss",
+      "correct": 0,
+      "tw_spread": -7.5,
+      "tw_ou": 212.5,
+      "model_spread": 9.7,
+      "model_total": 214.4
+    },
+    {
+      "pick_date": "20260505",
+      "game_date": "20260506",
+      "away": "Philadelphia 76ers",
+      "home": "New York Knicks",
+      "pick_type": "spread",
+      "pick_target": "home",
+      "pick_line": -6.5,
+      "pick_detail": "買 Knicks 讓分 -6.5",
+      "edge": 3.8000000000000007,
+      "confidence": 90.4,
+      "result": "loss",
+      "correct": 0,
+      "tw_spread": -6.5,
+      "tw_ou": 212.5,
+      "model_spread": 10.3,
+      "model_total": 213.9
+    },
+    {
+      "pick_date": "20260504",
+      "game_date": "20260506",
+      "away": "Philadelphia 76ers",
+      "home": "New York Knicks",
+      "pick_type": "spread",
+      "pick_target": "home",
+      "pick_line": -6.5,
+      "pick_detail": "買 Knicks 讓分 -6.5",
+      "edge": 3.8000000000000007,
+      "confidence": 90.4,
+      "result": "loss",
+      "correct": 0,
+      "tw_spread": -6.5,
+      "tw_ou": 212.5,
+      "model_spread": 10.3,
+      "model_total": 213.9
+    },
     {
       "pick_date": "20260505",
       "game_date": "20260505",
@@ -288,296 +486,93 @@
   ],
   "current_picks": [
     {
-      "pick_date": "20260505",
-      "game_date": "20260506",
-      "away": "Philadelphia 76ers",
-      "home": "New York Knicks",
-      "pick_type": "spread",
-      "pick_target": "home",
-      "pick_line": -6.5,
-      "pick_detail": "買 Knicks 讓分 -6.5",
-      "edge": 3.8000000000000007,
-      "confidence": 90.4,
-      "result": "pending",
-      "correct": null,
-      "tw_spread": -6.5,
-      "tw_ou": 212.5,
-      "model_spread": 10.3,
-      "model_total": 213.9
-    },
-    {
-      "pick_date": "20260504",
-      "game_date": "20260506",
-      "away": "Philadelphia 76ers",
-      "home": "New York Knicks",
-      "pick_type": "spread",
-      "pick_target": "home",
-      "pick_line": -6.5,
-      "pick_detail": "買 Knicks 讓分 -6.5",
-      "edge": 3.8000000000000007,
-      "confidence": 90.4,
-      "result": "pending",
-      "correct": null,
-      "tw_spread": -6.5,
-      "tw_ou": 212.5,
-      "model_spread": 10.3,
-      "model_total": 213.9
-    },
-    {
-      "pick_date": "20260506",
-      "game_date": "20260506",
-      "away": "Philadelphia 76ers",
-      "home": "New York Knicks",
-      "pick_type": "spread",
-      "pick_target": "home",
-      "pick_line": -7.5,
-      "pick_detail": "買 Knicks 讓分 -7.5",
-      "edge": 2.6999999999999993,
-      "confidence": 90.1,
-      "result": "pending",
-      "correct": null,
-      "tw_spread": -7.5,
-      "tw_ou": 212.5,
-      "model_spread": 10.2,
-      "model_total": 214.4
-    },
-    {
-      "pick_date": "20260505",
-      "game_date": "20260506",
-      "away": "Philadelphia 76ers",
-      "home": "New York Knicks",
-      "pick_type": "spread",
-      "pick_target": "home",
-      "pick_line": -7.5,
-      "pick_detail": "買 Knicks 讓分 -7.5",
-      "edge": 2.1999999999999993,
-      "confidence": 90.1,
-      "result": "pending",
-      "correct": null,
-      "tw_spread": -7.5,
-      "tw_ou": 212.5,
-      "model_spread": 9.7,
-      "model_total": 214.4
-    },
-    {
-      "pick_date": "20260507",
-      "game_date": "20260507",
-      "away": "Minnesota Timberwolves",
-      "home": "San Antonio Spurs",
+      "pick_date": "20260508",
+      "game_date": "20260508",
+      "away": "Los Angeles Lakers",
+      "home": "Oklahoma City Thunder",
       "pick_type": "spread",
       "pick_target": "away",
-      "pick_line": -8.5,
-      "pick_detail": "買 Timberwolves 受讓 +8.5",
-      "edge": 7.0,
-      "confidence": 87.1,
+      "pick_line": -14.5,
+      "pick_detail": "買 Lakers 受讓 +14.5",
+      "edge": 3.3000000000000007,
+      "confidence": 90.2,
       "result": "pending",
       "correct": null,
-      "tw_spread": -8.5,
-      "tw_ou": 217.5,
-      "model_spread": 1.5,
+      "tw_spread": -14.5,
+      "tw_ou": 211.5,
+      "model_spread": 11.2,
+      "model_total": 213.7
+    },
+    {
+      "pick_date": "20260508",
+      "game_date": "20260510",
+      "away": "New York Knicks",
+      "home": "Philadelphia 76ers",
+      "pick_type": "spread",
+      "pick_target": "away",
+      "pick_line": -1.5,
+      "pick_detail": "買 Knicks 受讓 +1.5",
+      "edge": 21.4,
+      "confidence": 65.8,
+      "result": "pending",
+      "correct": null,
+      "tw_spread": -1.5,
+      "tw_ou": 213.5,
+      "model_spread": -19.9,
       "model_total": 216.8
     },
     {
-      "pick_date": "20260505",
-      "game_date": "20260507",
-      "away": "Minnesota Timberwolves",
-      "home": "San Antonio Spurs",
+      "pick_date": "20260508",
+      "game_date": "20260510",
+      "away": "San Antonio Spurs",
+      "home": "Minnesota Timberwolves",
       "pick_type": "spread",
       "pick_target": "away",
-      "pick_line": -11.5,
-      "pick_detail": "買 Timberwolves 受讓 +11.5",
-      "edge": 5.7,
-      "confidence": 90.5,
+      "pick_line": 3.5,
+      "pick_detail": "買 Spurs 讓分 -3.5",
+      "edge": 5.4,
+      "confidence": 56.4,
       "result": "pending",
       "correct": null,
-      "tw_spread": -11.5,
-      "tw_ou": 217.5,
-      "model_spread": 5.8,
-      "model_total": 217.9
-    },
-    {
-      "pick_date": "20260505",
-      "game_date": "20260507",
-      "away": "Minnesota Timberwolves",
-      "home": "San Antonio Spurs",
-      "pick_type": "spread",
-      "pick_target": "away",
-      "pick_line": -13.5,
-      "pick_detail": "買 Timberwolves 受讓 +13.5",
-      "edge": 4.699999999999999,
-      "confidence": 90.2,
-      "result": "pending",
-      "correct": null,
-      "tw_spread": -13.5,
+      "tw_spread": 3.5,
       "tw_ou": 216.5,
-      "model_spread": 8.8,
-      "model_total": 217.4
-    },
-    {
-      "pick_date": "20260504",
-      "game_date": "20260507",
-      "away": "Minnesota Timberwolves",
-      "home": "San Antonio Spurs",
-      "pick_type": "spread",
-      "pick_target": "away",
-      "pick_line": -13.5,
-      "pick_detail": "買 Timberwolves 受讓 +13.5",
-      "edge": 4.699999999999999,
-      "confidence": 90.2,
-      "result": "pending",
-      "correct": null,
-      "tw_spread": -13.5,
-      "tw_ou": 216.5,
-      "model_spread": 8.8,
-      "model_total": 217.4
-    },
-    {
-      "pick_date": "20260506",
-      "game_date": "20260507",
-      "away": "Minnesota Timberwolves",
-      "home": "San Antonio Spurs",
-      "pick_type": "spread",
-      "pick_target": "away",
-      "pick_line": -10.5,
-      "pick_detail": "買 Timberwolves 受讓 +10.5",
-      "edge": 2.3000000000000007,
-      "confidence": 90.7,
-      "result": "pending",
-      "correct": null,
-      "tw_spread": -10.5,
-      "tw_ou": 217.5,
-      "model_spread": 8.2,
-      "model_total": 217.9
-    },
-    {
-      "pick_date": "20260505",
-      "game_date": "20260507",
-      "away": "Minnesota Timberwolves",
-      "home": "San Antonio Spurs",
-      "pick_type": "spread",
-      "pick_target": "away",
-      "pick_line": -10.5,
-      "pick_detail": "買 Timberwolves 受讓 +10.5",
-      "edge": 2.3000000000000007,
-      "confidence": 90.7,
-      "result": "pending",
-      "correct": null,
-      "tw_spread": -10.5,
-      "tw_ou": 217.5,
-      "model_spread": 8.2,
+      "model_spread": -8.9,
       "model_total": 217.9
     }
   ],
-  "pending": 10,
-  "stale_pending": 4,
+  "pending": 3,
+  "stale_pending": 0,
   "resolution_gaps": [
     {
-      "pick_date": "20260504",
-      "game_date": "20260506",
-      "away": "Philadelphia 76ers",
-      "home": "New York Knicks",
+      "pick_date": "20260508",
+      "game_date": "20260508",
+      "away": "Los Angeles Lakers",
+      "home": "Oklahoma City Thunder",
       "pick_type": "spread",
-      "pick_detail": "買 Knicks 讓分 -6.5",
-      "edge": 3.8000000000000007,
-      "reason": "prediction exists, but scores missing",
-      "status": "stale_pending"
-    },
-    {
-      "pick_date": "20260505",
-      "game_date": "20260506",
-      "away": "Philadelphia 76ers",
-      "home": "New York Knicks",
-      "pick_type": "spread",
-      "pick_detail": "買 Knicks 讓分 -6.5",
-      "edge": 3.8000000000000007,
-      "reason": "prediction exists, but scores missing",
-      "status": "stale_pending"
-    },
-    {
-      "pick_date": "20260505",
-      "game_date": "20260506",
-      "away": "Philadelphia 76ers",
-      "home": "New York Knicks",
-      "pick_type": "spread",
-      "pick_detail": "買 Knicks 讓分 -7.5",
-      "edge": 2.1999999999999993,
-      "reason": "prediction exists, but scores missing",
-      "status": "stale_pending"
-    },
-    {
-      "pick_date": "20260506",
-      "game_date": "20260506",
-      "away": "Philadelphia 76ers",
-      "home": "New York Knicks",
-      "pick_type": "spread",
-      "pick_detail": "買 Knicks 讓分 -7.5",
-      "edge": 2.6999999999999993,
-      "reason": "prediction exists, but scores missing",
-      "status": "stale_pending"
-    },
-    {
-      "pick_date": "20260504",
-      "game_date": "20260507",
-      "away": "Minnesota Timberwolves",
-      "home": "San Antonio Spurs",
-      "pick_type": "spread",
-      "pick_detail": "買 Timberwolves 受讓 +13.5",
-      "edge": 4.699999999999999,
+      "pick_detail": "買 Lakers 受讓 +14.5",
+      "edge": 3.3000000000000007,
       "reason": "scheduled for future",
       "status": "future_pending"
     },
     {
-      "pick_date": "20260505",
-      "game_date": "20260507",
-      "away": "Minnesota Timberwolves",
-      "home": "San Antonio Spurs",
+      "pick_date": "20260508",
+      "game_date": "20260510",
+      "away": "New York Knicks",
+      "home": "Philadelphia 76ers",
       "pick_type": "spread",
-      "pick_detail": "買 Timberwolves 受讓 +13.5",
-      "edge": 4.699999999999999,
+      "pick_detail": "買 Knicks 受讓 +1.5",
+      "edge": 21.4,
       "reason": "scheduled for future",
       "status": "future_pending"
     },
     {
-      "pick_date": "20260505",
-      "game_date": "20260507",
-      "away": "Minnesota Timberwolves",
-      "home": "San Antonio Spurs",
+      "pick_date": "20260508",
+      "game_date": "20260510",
+      "away": "San Antonio Spurs",
+      "home": "Minnesota Timberwolves",
       "pick_type": "spread",
-      "pick_detail": "買 Timberwolves 受讓 +11.5",
-      "edge": 5.7,
-      "reason": "scheduled for future",
-      "status": "future_pending"
-    },
-    {
-      "pick_date": "20260505",
-      "game_date": "20260507",
-      "away": "Minnesota Timberwolves",
-      "home": "San Antonio Spurs",
-      "pick_type": "spread",
-      "pick_detail": "買 Timberwolves 受讓 +10.5",
-      "edge": 2.3000000000000007,
-      "reason": "scheduled for future",
-      "status": "future_pending"
-    },
-    {
-      "pick_date": "20260506",
-      "game_date": "20260507",
-      "away": "Minnesota Timberwolves",
-      "home": "San Antonio Spurs",
-      "pick_type": "spread",
-      "pick_detail": "買 Timberwolves 受讓 +10.5",
-      "edge": 2.3000000000000007,
-      "reason": "scheduled for future",
-      "status": "future_pending"
-    },
-    {
-      "pick_date": "20260507",
-      "game_date": "20260507",
-      "away": "Minnesota Timberwolves",
-      "home": "San Antonio Spurs",
-      "pick_type": "spread",
-      "pick_detail": "買 Timberwolves 受讓 +8.5",
-      "edge": 7.0,
+      "pick_detail": "買 Spurs 讓分 -3.5",
+      "edge": 5.4,
       "reason": "scheduled for future",
       "status": "future_pending"
     }
@@ -590,481 +585,52 @@
     },
     "manual_results": 0,
     "resolved": {
-      "candidates": 10,
+      "candidates": 1,
       "verified": 0,
       "wins": 0,
       "losses": 0,
       "pushes": 0,
-      "missing_results": 10,
+      "missing_results": 1,
       "ungraded": 0,
       "missing_details": [
         {
-          "pick_date": "20260504",
-          "game_date": "20260506",
-          "away": "Philadelphia 76ers",
-          "home": "New York Knicks",
+          "pick_date": "20260508",
+          "game_date": "20260508",
+          "away": "Los Angeles Lakers",
+          "home": "Oklahoma City Thunder",
           "pick_type": "spread",
-          "pick_target": "home",
-          "pick_detail": "買 Knicks 讓分 -6.5",
+          "pick_target": "away",
+          "pick_detail": "買 Lakers 受讓 +14.5",
           "candidate_keys": [
             {
-              "game_date": "20260506",
-              "home": "new york knicks",
-              "away": "philadelphia 76ers"
-            },
-            {
-              "game_date": "20260505",
-              "home": "new york knicks",
-              "away": "philadelphia 76ers"
-            },
-            {
-              "game_date": "20260505",
-              "home": "philadelphia 76ers",
-              "away": "new york knicks"
-            },
-            {
-              "game_date": "20260507",
-              "home": "new york knicks",
-              "away": "philadelphia 76ers"
-            },
-            {
-              "game_date": "20260507",
-              "home": "philadelphia 76ers",
-              "away": "new york knicks"
-            },
-            {
-              "game_date": "20260506",
-              "home": "philadelphia 76ers",
-              "away": "new york knicks"
-            }
-          ],
-          "candidate_hits": [],
-          "nearby_espn_games": [
-            {
-              "game_date": "20260505",
+              "game_date": "20260508",
               "home": "oklahoma city thunder",
               "away": "los angeles lakers"
-            }
-          ],
-          "reason": "ESPN has games on nearby dates, but team/date key mismatched",
-          "status": "missing_result"
-        },
-        {
-          "pick_date": "20260505",
-          "game_date": "20260506",
-          "away": "Philadelphia 76ers",
-          "home": "New York Knicks",
-          "pick_type": "spread",
-          "pick_target": "home",
-          "pick_detail": "買 Knicks 讓分 -6.5",
-          "candidate_keys": [
-            {
-              "game_date": "20260506",
-              "home": "new york knicks",
-              "away": "philadelphia 76ers"
-            },
-            {
-              "game_date": "20260505",
-              "home": "new york knicks",
-              "away": "philadelphia 76ers"
-            },
-            {
-              "game_date": "20260505",
-              "home": "philadelphia 76ers",
-              "away": "new york knicks"
             },
             {
               "game_date": "20260507",
-              "home": "new york knicks",
-              "away": "philadelphia 76ers"
-            },
-            {
-              "game_date": "20260507",
-              "home": "philadelphia 76ers",
-              "away": "new york knicks"
-            },
-            {
-              "game_date": "20260506",
-              "home": "philadelphia 76ers",
-              "away": "new york knicks"
-            }
-          ],
-          "candidate_hits": [],
-          "nearby_espn_games": [
-            {
-              "game_date": "20260505",
               "home": "oklahoma city thunder",
               "away": "los angeles lakers"
-            }
-          ],
-          "reason": "ESPN has games on nearby dates, but team/date key mismatched",
-          "status": "missing_result"
-        },
-        {
-          "pick_date": "20260505",
-          "game_date": "20260506",
-          "away": "Philadelphia 76ers",
-          "home": "New York Knicks",
-          "pick_type": "spread",
-          "pick_target": "home",
-          "pick_detail": "買 Knicks 讓分 -7.5",
-          "candidate_keys": [
-            {
-              "game_date": "20260506",
-              "home": "new york knicks",
-              "away": "philadelphia 76ers"
-            },
-            {
-              "game_date": "20260505",
-              "home": "new york knicks",
-              "away": "philadelphia 76ers"
-            },
-            {
-              "game_date": "20260505",
-              "home": "philadelphia 76ers",
-              "away": "new york knicks"
             },
             {
               "game_date": "20260507",
-              "home": "new york knicks",
-              "away": "philadelphia 76ers"
+              "home": "los angeles lakers",
+              "away": "oklahoma city thunder"
             },
             {
-              "game_date": "20260507",
-              "home": "philadelphia 76ers",
-              "away": "new york knicks"
-            },
-            {
-              "game_date": "20260506",
-              "home": "philadelphia 76ers",
-              "away": "new york knicks"
-            }
-          ],
-          "candidate_hits": [],
-          "nearby_espn_games": [
-            {
-              "game_date": "20260505",
+              "game_date": "20260509",
               "home": "oklahoma city thunder",
               "away": "los angeles lakers"
-            }
-          ],
-          "reason": "ESPN has games on nearby dates, but team/date key mismatched",
-          "status": "missing_result"
-        },
-        {
-          "pick_date": "20260506",
-          "game_date": "20260506",
-          "away": "Philadelphia 76ers",
-          "home": "New York Knicks",
-          "pick_type": "spread",
-          "pick_target": "home",
-          "pick_detail": "買 Knicks 讓分 -7.5",
-          "candidate_keys": [
-            {
-              "game_date": "20260506",
-              "home": "new york knicks",
-              "away": "philadelphia 76ers"
             },
             {
-              "game_date": "20260505",
-              "home": "new york knicks",
-              "away": "philadelphia 76ers"
-            },
-            {
-              "game_date": "20260505",
-              "home": "philadelphia 76ers",
-              "away": "new york knicks"
-            },
-            {
-              "game_date": "20260507",
-              "home": "new york knicks",
-              "away": "philadelphia 76ers"
-            },
-            {
-              "game_date": "20260507",
-              "home": "philadelphia 76ers",
-              "away": "new york knicks"
-            },
-            {
-              "game_date": "20260506",
-              "home": "philadelphia 76ers",
-              "away": "new york knicks"
-            }
-          ],
-          "candidate_hits": [],
-          "nearby_espn_games": [
-            {
-              "game_date": "20260505",
-              "home": "oklahoma city thunder",
-              "away": "los angeles lakers"
-            }
-          ],
-          "reason": "ESPN has games on nearby dates, but team/date key mismatched",
-          "status": "missing_result"
-        },
-        {
-          "pick_date": "20260504",
-          "game_date": "20260507",
-          "away": "Minnesota Timberwolves",
-          "home": "San Antonio Spurs",
-          "pick_type": "spread",
-          "pick_target": "away",
-          "pick_detail": "買 Timberwolves 受讓 +13.5",
-          "candidate_keys": [
-            {
-              "game_date": "20260507",
-              "home": "san antonio spurs",
-              "away": "minnesota timberwolves"
-            },
-            {
-              "game_date": "20260506",
-              "home": "san antonio spurs",
-              "away": "minnesota timberwolves"
-            },
-            {
-              "game_date": "20260506",
-              "home": "minnesota timberwolves",
-              "away": "san antonio spurs"
+              "game_date": "20260509",
+              "home": "los angeles lakers",
+              "away": "oklahoma city thunder"
             },
             {
               "game_date": "20260508",
-              "home": "san antonio spurs",
-              "away": "minnesota timberwolves"
-            },
-            {
-              "game_date": "20260508",
-              "home": "minnesota timberwolves",
-              "away": "san antonio spurs"
-            },
-            {
-              "game_date": "20260507",
-              "home": "minnesota timberwolves",
-              "away": "san antonio spurs"
-            }
-          ],
-          "candidate_hits": [],
-          "nearby_espn_games": [],
-          "reason": "ESPN result not found",
-          "status": "missing_result"
-        },
-        {
-          "pick_date": "20260505",
-          "game_date": "20260507",
-          "away": "Minnesota Timberwolves",
-          "home": "San Antonio Spurs",
-          "pick_type": "spread",
-          "pick_target": "away",
-          "pick_detail": "買 Timberwolves 受讓 +13.5",
-          "candidate_keys": [
-            {
-              "game_date": "20260507",
-              "home": "san antonio spurs",
-              "away": "minnesota timberwolves"
-            },
-            {
-              "game_date": "20260506",
-              "home": "san antonio spurs",
-              "away": "minnesota timberwolves"
-            },
-            {
-              "game_date": "20260506",
-              "home": "minnesota timberwolves",
-              "away": "san antonio spurs"
-            },
-            {
-              "game_date": "20260508",
-              "home": "san antonio spurs",
-              "away": "minnesota timberwolves"
-            },
-            {
-              "game_date": "20260508",
-              "home": "minnesota timberwolves",
-              "away": "san antonio spurs"
-            },
-            {
-              "game_date": "20260507",
-              "home": "minnesota timberwolves",
-              "away": "san antonio spurs"
-            }
-          ],
-          "candidate_hits": [],
-          "nearby_espn_games": [],
-          "reason": "ESPN result not found",
-          "status": "missing_result"
-        },
-        {
-          "pick_date": "20260505",
-          "game_date": "20260507",
-          "away": "Minnesota Timberwolves",
-          "home": "San Antonio Spurs",
-          "pick_type": "spread",
-          "pick_target": "away",
-          "pick_detail": "買 Timberwolves 受讓 +11.5",
-          "candidate_keys": [
-            {
-              "game_date": "20260507",
-              "home": "san antonio spurs",
-              "away": "minnesota timberwolves"
-            },
-            {
-              "game_date": "20260506",
-              "home": "san antonio spurs",
-              "away": "minnesota timberwolves"
-            },
-            {
-              "game_date": "20260506",
-              "home": "minnesota timberwolves",
-              "away": "san antonio spurs"
-            },
-            {
-              "game_date": "20260508",
-              "home": "san antonio spurs",
-              "away": "minnesota timberwolves"
-            },
-            {
-              "game_date": "20260508",
-              "home": "minnesota timberwolves",
-              "away": "san antonio spurs"
-            },
-            {
-              "game_date": "20260507",
-              "home": "minnesota timberwolves",
-              "away": "san antonio spurs"
-            }
-          ],
-          "candidate_hits": [],
-          "nearby_espn_games": [],
-          "reason": "ESPN result not found",
-          "status": "missing_result"
-        },
-        {
-          "pick_date": "20260505",
-          "game_date": "20260507",
-          "away": "Minnesota Timberwolves",
-          "home": "San Antonio Spurs",
-          "pick_type": "spread",
-          "pick_target": "away",
-          "pick_detail": "買 Timberwolves 受讓 +10.5",
-          "candidate_keys": [
-            {
-              "game_date": "20260507",
-              "home": "san antonio spurs",
-              "away": "minnesota timberwolves"
-            },
-            {
-              "game_date": "20260506",
-              "home": "san antonio spurs",
-              "away": "minnesota timberwolves"
-            },
-            {
-              "game_date": "20260506",
-              "home": "minnesota timberwolves",
-              "away": "san antonio spurs"
-            },
-            {
-              "game_date": "20260508",
-              "home": "san antonio spurs",
-              "away": "minnesota timberwolves"
-            },
-            {
-              "game_date": "20260508",
-              "home": "minnesota timberwolves",
-              "away": "san antonio spurs"
-            },
-            {
-              "game_date": "20260507",
-              "home": "minnesota timberwolves",
-              "away": "san antonio spurs"
-            }
-          ],
-          "candidate_hits": [],
-          "nearby_espn_games": [],
-          "reason": "ESPN result not found",
-          "status": "missing_result"
-        },
-        {
-          "pick_date": "20260506",
-          "game_date": "20260507",
-          "away": "Minnesota Timberwolves",
-          "home": "San Antonio Spurs",
-          "pick_type": "spread",
-          "pick_target": "away",
-          "pick_detail": "買 Timberwolves 受讓 +10.5",
-          "candidate_keys": [
-            {
-              "game_date": "20260507",
-              "home": "san antonio spurs",
-              "away": "minnesota timberwolves"
-            },
-            {
-              "game_date": "20260506",
-              "home": "san antonio spurs",
-              "away": "minnesota timberwolves"
-            },
-            {
-              "game_date": "20260506",
-              "home": "minnesota timberwolves",
-              "away": "san antonio spurs"
-            },
-            {
-              "game_date": "20260508",
-              "home": "san antonio spurs",
-              "away": "minnesota timberwolves"
-            },
-            {
-              "game_date": "20260508",
-              "home": "minnesota timberwolves",
-              "away": "san antonio spurs"
-            },
-            {
-              "game_date": "20260507",
-              "home": "minnesota timberwolves",
-              "away": "san antonio spurs"
-            }
-          ],
-          "candidate_hits": [],
-          "nearby_espn_games": [],
-          "reason": "ESPN result not found",
-          "status": "missing_result"
-        },
-        {
-          "pick_date": "20260507",
-          "game_date": "20260507",
-          "away": "Minnesota Timberwolves",
-          "home": "San Antonio Spurs",
-          "pick_type": "spread",
-          "pick_target": "away",
-          "pick_detail": "買 Timberwolves 受讓 +8.5",
-          "candidate_keys": [
-            {
-              "game_date": "20260507",
-              "home": "san antonio spurs",
-              "away": "minnesota timberwolves"
-            },
-            {
-              "game_date": "20260506",
-              "home": "san antonio spurs",
-              "away": "minnesota timberwolves"
-            },
-            {
-              "game_date": "20260506",
-              "home": "minnesota timberwolves",
-              "away": "san antonio spurs"
-            },
-            {
-              "game_date": "20260508",
-              "home": "san antonio spurs",
-              "away": "minnesota timberwolves"
-            },
-            {
-              "game_date": "20260508",
-              "home": "minnesota timberwolves",
-              "away": "san antonio spurs"
-            },
-            {
-              "game_date": "20260507",
-              "home": "minnesota timberwolves",
-              "away": "san antonio spurs"
+              "home": "los angeles lakers",
+              "away": "oklahoma city thunder"
             }
           ],
           "candidate_hits": [],
@@ -1075,6 +641,6 @@
       ]
     }
   },
-  "generated_at": "2026-05-07T09:21:15",
-  "synced_at": "2026-05-07T09:21:15"
+  "generated_at": "2026-05-08T09:21:11",
+  "synced_at": "2026-05-08T09:21:11"
 }
