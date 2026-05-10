@@ -1,0 +1,17 @@
+venv/
+.venv/
+__pycache__/
+*.pyc
+.DS_Store
+
+# CF storage state 含 cookies，不進 git
+data/cf_state.json
+
+# 探索階段的大 JSON，需要時再從 git 歷史找
+data/*.json
+data/poc/
+data/debug/
+!data/.gitkeep
+*.db
+data/*.log
+.env

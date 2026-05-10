@@ -20,7 +20,7 @@ set -euo pipefail
 
 NBA_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 AUTOBOT_ROOT="$(cd "$NBA_DIR/.." && pwd)"
-SPORTWEB_DIR="$AUTOBOT_ROOT/sportWeb"
+SPORTWEB_DIR="$NBA_DIR/sportweb"
 NBA_PY="$NBA_DIR/.venv/bin/python"
 SPORTWEB_PY="$SPORTWEB_DIR/.venv/bin/python"
 

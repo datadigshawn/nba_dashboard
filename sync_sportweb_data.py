@@ -27,8 +27,7 @@ from nba_db import (
 from pick_history import sync_pick_history
 
 BASE_DIR = Path(__file__).resolve().parent
-AUTOBOT_ROOT = BASE_DIR.parent
-SPORTWEB_DIR = AUTOBOT_ROOT / "sportWeb"
+SPORTWEB_DIR = BASE_DIR / "sportweb"
 SPORTWEB_ODDS = SPORTWEB_DIR / "data" / "latest_odds.json"
 SPORTWEB_DB = SPORTWEB_DIR / "sportWeb.db"
 NBA_DATA_FILE = BASE_DIR / "nba_data.json"

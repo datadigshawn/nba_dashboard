@@ -23,3 +23,10 @@ logs/
 
 # Secrets
 .env
+
+# Consolidated sportweb subfolder — generated/cache content
+sportweb/.git_archived/
+sportweb/data/
+sportweb/.venv/
+sportweb/src/__pycache__/
+sportweb/*.jpeg
