@@ -552,6 +552,93 @@ def _build_result_index(results: list[dict] | None) -> dict[tuple[str, str, str]
     return index
 
 
+def _result_key_dates(game_date: str) -> list[str]:
+    dates = [str(game_date or "")]
+    try:
+        base = datetime.strptime(game_date, "%Y%m%d")
+    except ValueError:
+        return [d for d in dates if d]
+    for delta in (-1, 1):
+        dates.append((base + timedelta(days=delta)).strftime("%Y%m%d"))
+    seen = set()
+    ordered: list[str] = []
+    for d in dates:
+        if d and d not in seen:
+            ordered.append(d)
+            seen.add(d)
+    return ordered
+
+
+def _result_candidates(game_date: str, home: str, away: str) -> list[tuple[str, str, str]]:
+    candidates = [_result_key(game_date, home, away)]
+    for alt_date in _result_key_dates(game_date)[1:]:
+        if alt_date:
+            candidates.append(_result_key(alt_date, home, away))
+            candidates.append(_result_key(alt_date, away, home))
+    candidates.append(_result_key(game_date, away, home))
+    seen = set()
+    ordered = []
+    for key in candidates:
+        if key not in seen:
+            ordered.append(key)
+            seen.add(key)
+    return ordered
+
+
+def _diagnose_missing_result(
+    row: sqlite3.Row,
+    result_index: dict[tuple[str, str, str], dict],
+) -> dict:
+    game_date = str(row["game_date"] or "")
+    home = str(row["home"] or "")
+    away = str(row["away"] or "")
+    candidate_keys = _result_candidates(game_date, home, away)
+    candidate_hits = []
+    for key in candidate_keys:
+        hit = result_index.get(key)
+        if not hit:
+            continue
+        candidate_hits.append({
+            "game_date": key[0],
+            "home": key[1],
+            "away": key[2],
+            "home_score": hit.get("home_score"),
+            "away_score": hit.get("away_score"),
+        })
+
+    nearby_keys = sorted({
+        key for key in result_index.keys()
+        if key[0] in _result_key_dates(game_date)
+    })
+
+    reason = "ESPN result not found"
+    if candidate_hits:
+        reason = "candidate key exists, but result row was not linked"
+    elif nearby_keys:
+        reason = "ESPN has games on nearby dates, but team/date key mismatched"
+
+    return {
+        "pick_date": row["pick_date"],
+        "game_date": game_date,
+        "away": away,
+        "home": home,
+        "pick_type": row["pick_type"],
+        "pick_target": row["pick_target"],
+        "pick_detail": row["pick_detail"],
+        "candidate_keys": [
+            {"game_date": key[0], "home": key[1], "away": key[2]}
+            for key in candidate_keys
+        ],
+        "candidate_hits": candidate_hits,
+        "nearby_espn_games": [
+            {"game_date": key[0], "home": key[1], "away": key[2]}
+            for key in nearby_keys
+        ],
+        "reason": reason,
+        "status": "missing_result",
+    }
+
+
 def resolve_recommended_picks(
     db_path: Path | str = DB_PATH,
     results: list[dict] | None = None,
@@ -595,20 +682,14 @@ def resolve_recommended_picks(
             result_index.setdefault(key, dict(r))
 
         for row in rows:
-            result_key = _result_key(row["game_date"], row["home"], row["away"])
-            result_row = result_index.get(result_key)
+            result_row = None
+            for key in _result_candidates(row["game_date"], row["home"], row["away"]):
+                result_row = result_index.get(key)
+                if result_row:
+                    break
             if not result_row:
                 stats["missing_results"] += 1
-                missing_details.append({
-                    "pick_date": row["pick_date"],
-                    "game_date": row["game_date"],
-                    "away": row["away"],
-                    "home": row["home"],
-                    "pick_type": row["pick_type"],
-                    "pick_detail": row["pick_detail"],
-                    "reason": "ESPN result not found",
-                    "status": "missing_result",
-                })
+                missing_details.append(_diagnose_missing_result(row, result_index))
                 continue
 
             result, correct = _evaluate_pick_result(

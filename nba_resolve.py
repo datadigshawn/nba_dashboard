@@ -80,10 +80,20 @@ def main():
         if pick_stats.get("missing_details"):
             print("[resolve] 缺漏原因:")
             for row in pick_stats["missing_details"][:10]:
+                candidate_keys = row.get("candidate_keys") or []
+                nearby = row.get("nearby_espn_games") or []
+                candidate_text = ", ".join(
+                    f"{c['game_date']} {c['away']}@{c['home']}" for c in candidate_keys[:4]
+                ) or "none"
+                nearby_text = ", ".join(
+                    f"{g['game_date']} {g['away']}@{g['home']}" for g in nearby[:4]
+                ) or "none"
                 print(
                     f"  - {row['game_date']} {row['away']} @ {row['home']} "
                     f"[{row['pick_type']}] {row['reason']}"
                 )
+                print(f"    candidates: {candidate_text}")
+                print(f"    espn nearby: {nearby_text}")
     else:
         print("[resolve] ESPN 無結果可用")
 

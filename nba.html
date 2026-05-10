@@ -1581,11 +1581,21 @@ function renderPickHistory(payload, stats, officialPicks) {
     ${resolutionGaps.length ? `
       <div style="background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:12px 14px;margin-bottom:14px;">
         <div style="font-family:'Share Tech Mono';font-size:11px;font-weight:900;color:var(--warn);letter-spacing:2px;margin-bottom:8px;">MISSING RESULT REASONS</div>
-        <div style="display:grid;gap:8px;font-family:'Share Tech Mono';font-size:10px;color:var(--muted);">
+        <div style="display:grid;gap:10px;font-family:'Share Tech Mono';font-size:10px;color:var(--muted);">
           ${resolutionGaps.slice(0, 6).map(row => `
-            <div style="display:flex;justify-content:space-between;gap:12px;border-top:1px solid var(--border);padding-top:8px;">
-              <span>${formatYmdLabel(row.game_date)} · ${abbrevTeam(row.away)} @ ${abbrevTeam(row.home)} · ${row.pick_type?.toUpperCase?.() || ''}</span>
-              <span>${row.reason}</span>
+            <div style="border-top:1px solid var(--border);padding-top:8px;">
+              <div style="display:flex;justify-content:space-between;gap:12px;margin-bottom:6px;">
+                <span>${formatYmdLabel(row.game_date)} · ${abbrevTeam(row.away)} @ ${abbrevTeam(row.home)} · ${row.pick_type?.toUpperCase?.() || ''}</span>
+                <span>${row.reason}</span>
+              </div>
+              <div style="color:var(--muted);line-height:1.45;">
+                <div>candidates: ${Array.isArray(row.candidate_keys) && row.candidate_keys.length
+                  ? row.candidate_keys.slice(0, 4).map(c => `${c.game_date} ${abbrevTeam(c.away)}@${abbrevTeam(c.home)}`).join(' | ')
+                  : 'none'}</div>
+                <div>espn nearby: ${Array.isArray(row.nearby_espn_games) && row.nearby_espn_games.length
+                  ? row.nearby_espn_games.slice(0, 4).map(g => `${g.game_date} ${abbrevTeam(g.away)}@${abbrevTeam(g.home)}`).join(' | ')
+                  : 'none'}</div>
+              </div>
             </div>
           `).join('')}
         </div>
