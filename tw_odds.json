@@ -1,46 +1,10 @@
 {
-  "synced_at": "2026-05-10T18:01:56",
+  "synced_at": "2026-05-11T09:24:28",
   "source": {
-    "sportweb_fetched_at": "2026-05-10T17:20:05",
+    "sportweb_fetched_at": "2026-05-11T09:21:10",
     "source_url": "https://www.sportslottery.com.tw/sportsbook/sport",
-    "game_count": 2
+    "game_count": 0
   },
-  "entries": [
-    {
-      "game": "New York Knicks @ Philadelphia 76ers",
-      "away": "New York Knicks",
-      "home": "Philadelphia 76ers",
-      "spread": 1.5,
-      "ou": 213.5,
-      "updated_at": "2026-05-10T17:20:05",
-      "source": "sportWeb",
-      "sportweb_game_id": "3467443.1",
-      "start_time": "2026-05-11T03:30:00.000+08:00"
-    },
-    {
-      "game": "San Antonio Spurs @ Minnesota Timberwolves",
-      "away": "San Antonio Spurs",
-      "home": "Minnesota Timberwolves",
-      "spread": 4.5,
-      "ou": 218.5,
-      "updated_at": "2026-05-10T17:20:05",
-      "source": "sportWeb",
-      "sportweb_game_id": "3467479.1",
-      "start_time": "2026-05-11T07:30:00.000+08:00"
-    }
-  ],
-  "odds": {
-    "New York Knicks @ Philadelphia 76ers": {
-      "spread": 1.5,
-      "ou": 213.5,
-      "updated_at": "2026-05-10T17:20:05",
-      "source": "sportWeb"
-    },
-    "San Antonio Spurs @ Minnesota Timberwolves": {
-      "spread": 4.5,
-      "ou": 218.5,
-      "updated_at": "2026-05-10T17:20:05",
-      "source": "sportWeb"
-    }
-  }
+  "entries": [],
+  "odds": {}
 }
