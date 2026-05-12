@@ -1,10 +1,46 @@
 {
-  "synced_at": "2026-05-11T09:24:28",
+  "synced_at": "2026-05-12T09:21:14",
   "source": {
-    "sportweb_fetched_at": "2026-05-11T09:21:10",
+    "sportweb_fetched_at": "2026-05-12T09:21:00",
     "source_url": "https://www.sportslottery.com.tw/sportsbook/sport",
-    "game_count": 0
+    "game_count": 2
   },
-  "entries": [],
-  "odds": {}
+  "entries": [
+    {
+      "game": "Minnesota Timberwolves @ San Antonio Spurs",
+      "away": "Minnesota Timberwolves",
+      "home": "San Antonio Spurs",
+      "spread": -10.5,
+      "ou": 217.5,
+      "updated_at": "2026-05-12T09:21:00",
+      "source": "sportWeb",
+      "sportweb_game_id": "3467943.1",
+      "start_time": "2026-05-13T08:00:00.000+08:00"
+    },
+    {
+      "game": "Oklahoma City Thunder @ Los Angeles Lakers",
+      "away": "Oklahoma City Thunder",
+      "home": "Los Angeles Lakers",
+      "spread": 12.5,
+      "ou": 214.5,
+      "updated_at": "2026-05-12T09:21:00",
+      "source": "sportWeb",
+      "sportweb_game_id": "3467776.1",
+      "start_time": "2026-05-12T10:30:00.000+08:00"
+    }
+  ],
+  "odds": {
+    "Oklahoma City Thunder @ Los Angeles Lakers": {
+      "spread": 12.5,
+      "ou": 214.5,
+      "updated_at": "2026-05-12T09:21:00",
+      "source": "sportWeb"
+    },
+    "Minnesota Timberwolves @ San Antonio Spurs": {
+      "spread": -10.5,
+      "ou": 217.5,
+      "updated_at": "2026-05-12T09:21:00",
+      "source": "sportWeb"
+    }
+  }
 }

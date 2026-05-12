@@ -1,9 +1,9 @@
 {
-  "synced_at": "2026-05-11T09:24:28",
+  "synced_at": "2026-05-12T09:21:14",
   "source": {
-    "sportweb_fetched_at": "2026-05-11T09:21:10",
+    "sportweb_fetched_at": "2026-05-12T09:21:00",
     "sportweb_detected_at": "2026-05-10T20:35:13",
-    "game_count": 0
+    "game_count": 2
   },
   "current": {
     "count": 15,
@@ -197,26 +197,26 @@
   },
   "backtest": {
     "raw_total": 7006,
-    "raw_resolved": 6976,
+    "raw_resolved": 7006,
     "total": 404,
-    "resolved": 403,
+    "resolved": 404,
     "won": 237,
-    "lost": 166,
+    "lost": 167,
     "pushes": 0,
-    "win_rate": 58.8,
-    "total_profit": 2.89,
-    "avg_roi": 0.0072,
+    "win_rate": 58.7,
+    "total_profit": 1.89,
+    "avg_roi": 0.0047,
     "by_type": {
       "moneyline": {
-        "count": 66,
+        "count": 67,
         "wins": 37,
         "pushes": 0,
-        "win_rate": 56.1,
-        "total_profit": -4.07,
-        "avg_profit": -0.0617,
+        "win_rate": 55.2,
+        "total_profit": -5.07,
+        "avg_profit": -0.0757,
         "avg_clv_line": null,
-        "avg_clv_odds": 0.033,
-        "clv_win_rate": 70.6
+        "avg_clv_odds": 0.034,
+        "clv_win_rate": 71.4
       },
       "spread": {
         "count": 267,
@@ -268,11 +268,11 @@
       },
       {
         "label": "20%+",
-        "count": 230,
+        "count": 231,
         "wins": 150,
         "pushes": 0,
-        "win_rate": 65.2,
-        "profit": 27.51
+        "win_rate": 64.9,
+        "profit": 26.51
       }
     ],
     "calibration": [
@@ -306,19 +306,40 @@
       },
       {
         "label": "80%+",
-        "count": 130,
+        "count": 131,
         "wins": 100,
-        "actual_wr": 76.9,
+        "actual_wr": 76.3,
         "avg_model_prob": 90.0
       }
     ],
     "clv": {
-      "tracked": 394,
+      "tracked": 395,
       "avg_clv_line": 0.226,
       "avg_clv_odds": 0.02,
-      "clv_win_rate": 59.4
+      "clv_win_rate": 59.5
     },
     "recent": [
+      {
+        "edge_type": "moneyline",
+        "side": "away",
+        "picked_team": "San Antonio Spurs",
+        "away": "San Antonio Spurs",
+        "home": "Minnesota Timberwolves",
+        "edge_pct": 25.9,
+        "model_prob": 85.6,
+        "market_prob": 59.7,
+        "odds": 1.43,
+        "bet_won": 0,
+        "actual_profit": -1.0,
+        "line": 0.0,
+        "bet_line": 0.0,
+        "closing_line": null,
+        "closing_odds": 1.37,
+        "clv_line": null,
+        "clv_odds": 0.06,
+        "clv_win": 1,
+        "resolved_at": "2026-05-12T09:21:13"
+      },
       {
         "edge_type": "moneyline",
         "side": "away",
@@ -714,27 +735,6 @@
         "closing_line": null,
         "closing_odds": 1.65,
         "clv_line": null,
-        "clv_odds": 0.0,
-        "clv_win": null,
-        "resolved_at": "2026-05-09T17:35:04"
-      },
-      {
-        "edge_type": "spread",
-        "side": "away",
-        "picked_team": "New York Knicks -1.5",
-        "away": "New York Knicks",
-        "home": "Philadelphia 76ers",
-        "edge_pct": 40.6,
-        "model_prob": 90.2,
-        "market_prob": 49.6,
-        "odds": 1.73,
-        "bet_won": 1,
-        "actual_profit": 0.73,
-        "line": 1.5,
-        "bet_line": -1.5,
-        "closing_line": -1.5,
-        "closing_odds": 1.73,
-        "clv_line": 0.0,
         "clv_odds": 0.0,
         "clv_win": null,
         "resolved_at": "2026-05-09T17:35:04"

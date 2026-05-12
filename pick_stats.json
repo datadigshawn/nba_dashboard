@@ -1,10 +1,10 @@
 {
-  "total": 25,
+  "total": 28,
   "wins": 11,
-  "wr": 44.0,
-  "spread_total": 23,
+  "wr": 39.3,
+  "spread_total": 26,
   "spread_wins": 10,
-  "spread_wr": 43.5,
+  "spread_wr": 38.5,
   "ou_total": 2,
   "ou_wins": 1,
   "ou_wr": 50.0,
@@ -54,14 +54,14 @@
     {
       "date": "20260508",
       "wins": 1,
-      "total": 2,
-      "wr": 50.0
+      "total": 3,
+      "wr": 33.3
     },
     {
       "date": "20260509",
       "wins": 2,
-      "total": 2,
-      "wr": 100.0
+      "total": 4,
+      "wr": 50.0
     },
     {
       "date": "20260510",
@@ -74,8 +74,8 @@
     {
       "bucket": "0-3",
       "wins": 3,
-      "total": 8,
-      "wr": 37.5
+      "total": 9,
+      "wr": 33.3
     },
     {
       "bucket": "3-5",
@@ -86,8 +86,8 @@
     {
       "bucket": "5-8",
       "wins": 3,
-      "total": 6,
-      "wr": 50.0
+      "total": 8,
+      "wr": 37.5
     },
     {
       "bucket": "8+",
@@ -100,8 +100,8 @@
     {
       "bucket": "<60",
       "wins": 2,
-      "total": 3,
-      "wr": 66.7
+      "total": 6,
+      "wr": 33.3
     },
     {
       "bucket": "60-70",
@@ -127,8 +127,8 @@
       {
         "bucket": "0-3",
         "wins": 3,
-        "total": 8,
-        "wr": 37.5
+        "total": 9,
+        "wr": 33.3
       },
       {
         "bucket": "3-5",
@@ -139,8 +139,8 @@
       {
         "bucket": "5-8",
         "wins": 2,
-        "total": 4,
-        "wr": 50.0
+        "total": 6,
+        "wr": 33.3
       },
       {
         "bucket": "8+",
@@ -234,6 +234,42 @@
     {
       "pick_date": "20260509",
       "game_date": "20260510",
+      "away": "San Antonio Spurs",
+      "home": "Minnesota Timberwolves",
+      "pick_type": "spread",
+      "pick_target": "away",
+      "pick_line": 4.5,
+      "pick_detail": "買 Spurs 讓分 -4.5",
+      "edge": 2.4000000000000004,
+      "confidence": 54.5,
+      "result": "loss",
+      "correct": 0,
+      "tw_spread": 4.5,
+      "tw_ou": 216.5,
+      "model_spread": -6.9,
+      "model_total": 218.1
+    },
+    {
+      "pick_date": "20260509",
+      "game_date": "20260510",
+      "away": "San Antonio Spurs",
+      "home": "Minnesota Timberwolves",
+      "pick_type": "spread",
+      "pick_target": "away",
+      "pick_line": 3.5,
+      "pick_detail": "買 Spurs 讓分 -3.5",
+      "edge": 5.4,
+      "confidence": 56.4,
+      "result": "loss",
+      "correct": 0,
+      "tw_spread": 3.5,
+      "tw_ou": 216.5,
+      "model_spread": -8.9,
+      "model_total": 217.9
+    },
+    {
+      "pick_date": "20260509",
+      "game_date": "20260510",
       "away": "New York Knicks",
       "home": "Philadelphia 76ers",
       "pick_type": "spread",
@@ -248,6 +284,24 @@
       "tw_ou": 213.5,
       "model_spread": -19.9,
       "model_total": 216.8
+    },
+    {
+      "pick_date": "20260508",
+      "game_date": "20260510",
+      "away": "San Antonio Spurs",
+      "home": "Minnesota Timberwolves",
+      "pick_type": "spread",
+      "pick_target": "away",
+      "pick_line": 3.5,
+      "pick_detail": "買 Spurs 讓分 -3.5",
+      "edge": 5.4,
+      "confidence": 56.4,
+      "result": "loss",
+      "correct": 0,
+      "tw_spread": 3.5,
+      "tw_ou": 216.5,
+      "model_spread": -8.9,
+      "model_total": 217.9
     },
     {
       "pick_date": "20260508",
@@ -482,117 +536,9 @@
       "tw_ou": 212.5,
       "model_spread": 10.3,
       "model_total": 213.9
-    },
-    {
-      "pick_date": "20260505",
-      "game_date": "20260505",
-      "away": "Minnesota Timberwolves",
-      "home": "San Antonio Spurs",
-      "pick_type": "spread",
-      "pick_target": "away",
-      "pick_line": -10.5,
-      "pick_detail": "買 Timberwolves 受讓 +10.5",
-      "edge": 2.3000000000000007,
-      "confidence": 90.7,
-      "result": "win",
-      "correct": 1,
-      "tw_spread": -10.5,
-      "tw_ou": 217.5,
-      "model_spread": 8.2,
-      "model_total": 217.9
-    },
-    {
-      "pick_date": "20260505",
-      "game_date": "20260505",
-      "away": "Philadelphia 76ers",
-      "home": "New York Knicks",
-      "pick_type": "spread",
-      "pick_target": "home",
-      "pick_line": -7.5,
-      "pick_detail": "買 Knicks 讓分 -7.5",
-      "edge": 2.1999999999999993,
-      "confidence": 90.1,
-      "result": "win",
-      "correct": 1,
-      "tw_spread": -7.5,
-      "tw_ou": 212.5,
-      "model_spread": 9.7,
-      "model_total": 214.4
-    },
-    {
-      "pick_date": "20260505",
-      "game_date": "20260505",
-      "away": "Minnesota Timberwolves",
-      "home": "San Antonio Spurs",
-      "pick_type": "spread",
-      "pick_target": "away",
-      "pick_line": -11.5,
-      "pick_detail": "買 Timberwolves 受讓 +11.5",
-      "edge": 5.7,
-      "confidence": 90.5,
-      "result": "win",
-      "correct": 1,
-      "tw_spread": -11.5,
-      "tw_ou": 217.5,
-      "model_spread": 5.8,
-      "model_total": 217.9
     }
   ],
   "current_picks": [
-    {
-      "pick_date": "20260509",
-      "game_date": "20260510",
-      "away": "San Antonio Spurs",
-      "home": "Minnesota Timberwolves",
-      "pick_type": "spread",
-      "pick_target": "away",
-      "pick_line": 3.5,
-      "pick_detail": "買 Spurs 讓分 -3.5",
-      "edge": 5.4,
-      "confidence": 56.4,
-      "result": "pending",
-      "correct": null,
-      "tw_spread": 3.5,
-      "tw_ou": 216.5,
-      "model_spread": -8.9,
-      "model_total": 217.9
-    },
-    {
-      "pick_date": "20260508",
-      "game_date": "20260510",
-      "away": "San Antonio Spurs",
-      "home": "Minnesota Timberwolves",
-      "pick_type": "spread",
-      "pick_target": "away",
-      "pick_line": 3.5,
-      "pick_detail": "買 Spurs 讓分 -3.5",
-      "edge": 5.4,
-      "confidence": 56.4,
-      "result": "pending",
-      "correct": null,
-      "tw_spread": 3.5,
-      "tw_ou": 216.5,
-      "model_spread": -8.9,
-      "model_total": 217.9
-    },
-    {
-      "pick_date": "20260509",
-      "game_date": "20260510",
-      "away": "San Antonio Spurs",
-      "home": "Minnesota Timberwolves",
-      "pick_type": "spread",
-      "pick_target": "away",
-      "pick_line": 4.5,
-      "pick_detail": "買 Spurs 讓分 -4.5",
-      "edge": 2.4000000000000004,
-      "confidence": 54.5,
-      "result": "pending",
-      "correct": null,
-      "tw_spread": 4.5,
-      "tw_ou": 216.5,
-      "model_spread": -6.9,
-      "model_total": 218.1
-    },
     {
       "pick_date": "20260510",
       "game_date": "20260512",
@@ -702,6 +648,24 @@
       "model_total": 218.2
     },
     {
+      "pick_date": "20260512",
+      "game_date": "20260512",
+      "away": "Oklahoma City Thunder",
+      "home": "Los Angeles Lakers",
+      "pick_type": "ou",
+      "pick_target": "over",
+      "pick_line": 214.5,
+      "pick_detail": "看大 Over 214.5",
+      "edge": 6.400000000000006,
+      "confidence": 68.7,
+      "result": "pending",
+      "correct": null,
+      "tw_spread": 12.5,
+      "tw_ou": 214.5,
+      "model_spread": -16.5,
+      "model_total": 220.9
+    },
+    {
       "pick_date": "20260510",
       "game_date": "20260512",
       "away": "Oklahoma City Thunder",
@@ -736,6 +700,24 @@
       "tw_ou": 212.5,
       "model_spread": -5.9,
       "model_total": 218.2
+    },
+    {
+      "pick_date": "20260512",
+      "game_date": "20260512",
+      "away": "Oklahoma City Thunder",
+      "home": "Los Angeles Lakers",
+      "pick_type": "spread",
+      "pick_target": "away",
+      "pick_line": 12.5,
+      "pick_detail": "買 Thunder 讓分 -12.5",
+      "edge": 4.0,
+      "confidence": 68.7,
+      "result": "pending",
+      "correct": null,
+      "tw_spread": 12.5,
+      "tw_ou": 214.5,
+      "model_spread": -16.5,
+      "model_total": 220.9
     },
     {
       "pick_date": "20260510",
@@ -774,42 +756,9 @@
       "model_total": 217.3
     }
   ],
-  "pending": 13,
-  "stale_pending": 3,
+  "pending": 12,
+  "stale_pending": 0,
   "resolution_gaps": [
-    {
-      "pick_date": "20260508",
-      "game_date": "20260510",
-      "away": "San Antonio Spurs",
-      "home": "Minnesota Timberwolves",
-      "pick_type": "spread",
-      "pick_detail": "買 Spurs 讓分 -3.5",
-      "edge": 5.4,
-      "reason": "prediction exists, but scores missing",
-      "status": "stale_pending"
-    },
-    {
-      "pick_date": "20260509",
-      "game_date": "20260510",
-      "away": "San Antonio Spurs",
-      "home": "Minnesota Timberwolves",
-      "pick_type": "spread",
-      "pick_detail": "買 Spurs 讓分 -3.5",
-      "edge": 5.4,
-      "reason": "prediction exists, but scores missing",
-      "status": "stale_pending"
-    },
-    {
-      "pick_date": "20260509",
-      "game_date": "20260510",
-      "away": "San Antonio Spurs",
-      "home": "Minnesota Timberwolves",
-      "pick_type": "spread",
-      "pick_detail": "買 Spurs 讓分 -4.5",
-      "edge": 2.4000000000000004,
-      "reason": "prediction exists, but scores missing",
-      "status": "stale_pending"
-    },
     {
       "pick_date": "20260509",
       "game_date": "20260512",
@@ -899,6 +848,28 @@
       "status": "future_pending"
     },
     {
+      "pick_date": "20260512",
+      "game_date": "20260512",
+      "away": "Oklahoma City Thunder",
+      "home": "Los Angeles Lakers",
+      "pick_type": "spread",
+      "pick_detail": "買 Thunder 讓分 -12.5",
+      "edge": 4.0,
+      "reason": "scheduled for future",
+      "status": "future_pending"
+    },
+    {
+      "pick_date": "20260512",
+      "game_date": "20260512",
+      "away": "Oklahoma City Thunder",
+      "home": "Los Angeles Lakers",
+      "pick_type": "ou",
+      "pick_detail": "看大 Over 214.5",
+      "edge": 6.400000000000006,
+      "reason": "scheduled for future",
+      "status": "future_pending"
+    },
+    {
       "pick_date": "20260510",
       "game_date": "20260513",
       "away": "Los Angeles Lakers",
@@ -923,191 +894,473 @@
   ],
   "history_sync": {
     "imported_from_bets": {
-      "candidates": 10,
+      "candidates": 11,
       "imported": 0,
-      "skipped_existing": 10
+      "skipped_existing": 11
     },
     "manual_results": 0,
     "resolved": {
-      "candidates": 3,
+      "candidates": 10,
       "verified": 0,
       "wins": 0,
       "losses": 0,
       "pushes": 0,
-      "missing_results": 3,
+      "missing_results": 10,
       "ungraded": 0,
       "missing_details": [
         {
-          "pick_date": "20260508",
-          "game_date": "20260510",
-          "away": "San Antonio Spurs",
-          "home": "Minnesota Timberwolves",
+          "pick_date": "20260509",
+          "game_date": "20260512",
+          "away": "Oklahoma City Thunder",
+          "home": "Los Angeles Lakers",
           "pick_type": "spread",
           "pick_target": "away",
-          "pick_detail": "買 Spurs 讓分 -3.5",
+          "pick_detail": "買 Thunder 讓分 -8.5",
           "candidate_keys": [
             {
-              "game_date": "20260510",
-              "home": "minnesota timberwolves",
-              "away": "san antonio spurs"
-            },
-            {
-              "game_date": "20260509",
-              "home": "minnesota timberwolves",
-              "away": "san antonio spurs"
-            },
-            {
-              "game_date": "20260509",
-              "home": "san antonio spurs",
-              "away": "minnesota timberwolves"
+              "game_date": "20260512",
+              "home": "los angeles lakers",
+              "away": "oklahoma city thunder"
             },
             {
               "game_date": "20260511",
-              "home": "minnesota timberwolves",
-              "away": "san antonio spurs"
+              "home": "los angeles lakers",
+              "away": "oklahoma city thunder"
             },
             {
               "game_date": "20260511",
-              "home": "san antonio spurs",
-              "away": "minnesota timberwolves"
+              "home": "oklahoma city thunder",
+              "away": "los angeles lakers"
             },
             {
-              "game_date": "20260510",
-              "home": "san antonio spurs",
-              "away": "minnesota timberwolves"
+              "game_date": "20260513",
+              "home": "los angeles lakers",
+              "away": "oklahoma city thunder"
+            },
+            {
+              "game_date": "20260513",
+              "home": "oklahoma city thunder",
+              "away": "los angeles lakers"
+            },
+            {
+              "game_date": "20260512",
+              "home": "oklahoma city thunder",
+              "away": "los angeles lakers"
             }
           ],
           "candidate_hits": [],
-          "nearby_espn_games": [
-            {
-              "game_date": "20260509",
-              "home": "cleveland cavaliers",
-              "away": "detroit pistons"
-            },
-            {
-              "game_date": "20260510",
-              "home": "philadelphia 76ers",
-              "away": "new york knicks"
-            }
-          ],
-          "reason": "ESPN has games on nearby dates, but team/date key mismatched",
+          "nearby_espn_games": [],
+          "reason": "ESPN result not found",
           "status": "missing_result"
         },
         {
           "pick_date": "20260509",
-          "game_date": "20260510",
-          "away": "San Antonio Spurs",
-          "home": "Minnesota Timberwolves",
+          "game_date": "20260512",
+          "away": "Detroit Pistons",
+          "home": "Cleveland Cavaliers",
           "pick_type": "spread",
           "pick_target": "away",
-          "pick_detail": "買 Spurs 讓分 -3.5",
+          "pick_detail": "買 Pistons 受讓 +3.5",
           "candidate_keys": [
             {
-              "game_date": "20260510",
-              "home": "minnesota timberwolves",
-              "away": "san antonio spurs"
-            },
-            {
-              "game_date": "20260509",
-              "home": "minnesota timberwolves",
-              "away": "san antonio spurs"
-            },
-            {
-              "game_date": "20260509",
-              "home": "san antonio spurs",
-              "away": "minnesota timberwolves"
-            },
-            {
-              "game_date": "20260511",
-              "home": "minnesota timberwolves",
-              "away": "san antonio spurs"
-            },
-            {
-              "game_date": "20260511",
-              "home": "san antonio spurs",
-              "away": "minnesota timberwolves"
-            },
-            {
-              "game_date": "20260510",
-              "home": "san antonio spurs",
-              "away": "minnesota timberwolves"
-            }
-          ],
-          "candidate_hits": [],
-          "nearby_espn_games": [
-            {
-              "game_date": "20260509",
+              "game_date": "20260512",
               "home": "cleveland cavaliers",
               "away": "detroit pistons"
             },
             {
-              "game_date": "20260510",
-              "home": "philadelphia 76ers",
-              "away": "new york knicks"
+              "game_date": "20260511",
+              "home": "cleveland cavaliers",
+              "away": "detroit pistons"
+            },
+            {
+              "game_date": "20260511",
+              "home": "detroit pistons",
+              "away": "cleveland cavaliers"
+            },
+            {
+              "game_date": "20260513",
+              "home": "cleveland cavaliers",
+              "away": "detroit pistons"
+            },
+            {
+              "game_date": "20260513",
+              "home": "detroit pistons",
+              "away": "cleveland cavaliers"
+            },
+            {
+              "game_date": "20260512",
+              "home": "detroit pistons",
+              "away": "cleveland cavaliers"
             }
           ],
-          "reason": "ESPN has games on nearby dates, but team/date key mismatched",
+          "candidate_hits": [],
+          "nearby_espn_games": [],
+          "reason": "ESPN result not found",
           "status": "missing_result"
         },
         {
-          "pick_date": "20260509",
-          "game_date": "20260510",
-          "away": "San Antonio Spurs",
-          "home": "Minnesota Timberwolves",
+          "pick_date": "20260510",
+          "game_date": "20260512",
+          "away": "Oklahoma City Thunder",
+          "home": "Los Angeles Lakers",
           "pick_type": "spread",
           "pick_target": "away",
-          "pick_detail": "買 Spurs 讓分 -4.5",
+          "pick_detail": "買 Thunder 讓分 -8.5",
           "candidate_keys": [
             {
-              "game_date": "20260510",
-              "home": "minnesota timberwolves",
-              "away": "san antonio spurs"
-            },
-            {
-              "game_date": "20260509",
-              "home": "minnesota timberwolves",
-              "away": "san antonio spurs"
-            },
-            {
-              "game_date": "20260509",
-              "home": "san antonio spurs",
-              "away": "minnesota timberwolves"
+              "game_date": "20260512",
+              "home": "los angeles lakers",
+              "away": "oklahoma city thunder"
             },
             {
               "game_date": "20260511",
-              "home": "minnesota timberwolves",
-              "away": "san antonio spurs"
+              "home": "los angeles lakers",
+              "away": "oklahoma city thunder"
             },
             {
               "game_date": "20260511",
-              "home": "san antonio spurs",
-              "away": "minnesota timberwolves"
+              "home": "oklahoma city thunder",
+              "away": "los angeles lakers"
             },
             {
-              "game_date": "20260510",
-              "home": "san antonio spurs",
-              "away": "minnesota timberwolves"
+              "game_date": "20260513",
+              "home": "los angeles lakers",
+              "away": "oklahoma city thunder"
+            },
+            {
+              "game_date": "20260513",
+              "home": "oklahoma city thunder",
+              "away": "los angeles lakers"
+            },
+            {
+              "game_date": "20260512",
+              "home": "oklahoma city thunder",
+              "away": "los angeles lakers"
             }
           ],
           "candidate_hits": [],
-          "nearby_espn_games": [
+          "nearby_espn_games": [],
+          "reason": "ESPN result not found",
+          "status": "missing_result"
+        },
+        {
+          "pick_date": "20260510",
+          "game_date": "20260512",
+          "away": "Oklahoma City Thunder",
+          "home": "Los Angeles Lakers",
+          "pick_type": "ou",
+          "pick_target": "over",
+          "pick_detail": "看大 Over 211.5",
+          "candidate_keys": [
             {
-              "game_date": "20260509",
+              "game_date": "20260512",
+              "home": "los angeles lakers",
+              "away": "oklahoma city thunder"
+            },
+            {
+              "game_date": "20260511",
+              "home": "los angeles lakers",
+              "away": "oklahoma city thunder"
+            },
+            {
+              "game_date": "20260511",
+              "home": "oklahoma city thunder",
+              "away": "los angeles lakers"
+            },
+            {
+              "game_date": "20260513",
+              "home": "los angeles lakers",
+              "away": "oklahoma city thunder"
+            },
+            {
+              "game_date": "20260513",
+              "home": "oklahoma city thunder",
+              "away": "los angeles lakers"
+            },
+            {
+              "game_date": "20260512",
+              "home": "oklahoma city thunder",
+              "away": "los angeles lakers"
+            }
+          ],
+          "candidate_hits": [],
+          "nearby_espn_games": [],
+          "reason": "ESPN result not found",
+          "status": "missing_result"
+        },
+        {
+          "pick_date": "20260510",
+          "game_date": "20260512",
+          "away": "Detroit Pistons",
+          "home": "Cleveland Cavaliers",
+          "pick_type": "spread",
+          "pick_target": "away",
+          "pick_detail": "買 Pistons 受讓 +3.5",
+          "candidate_keys": [
+            {
+              "game_date": "20260512",
               "home": "cleveland cavaliers",
               "away": "detroit pistons"
             },
             {
-              "game_date": "20260510",
-              "home": "philadelphia 76ers",
-              "away": "new york knicks"
+              "game_date": "20260511",
+              "home": "cleveland cavaliers",
+              "away": "detroit pistons"
+            },
+            {
+              "game_date": "20260511",
+              "home": "detroit pistons",
+              "away": "cleveland cavaliers"
+            },
+            {
+              "game_date": "20260513",
+              "home": "cleveland cavaliers",
+              "away": "detroit pistons"
+            },
+            {
+              "game_date": "20260513",
+              "home": "detroit pistons",
+              "away": "cleveland cavaliers"
+            },
+            {
+              "game_date": "20260512",
+              "home": "detroit pistons",
+              "away": "cleveland cavaliers"
             }
           ],
-          "reason": "ESPN has games on nearby dates, but team/date key mismatched",
+          "candidate_hits": [],
+          "nearby_espn_games": [],
+          "reason": "ESPN result not found",
+          "status": "missing_result"
+        },
+        {
+          "pick_date": "20260510",
+          "game_date": "20260512",
+          "away": "Detroit Pistons",
+          "home": "Cleveland Cavaliers",
+          "pick_type": "ou",
+          "pick_target": "over",
+          "pick_detail": "看大 Over 211.5",
+          "candidate_keys": [
+            {
+              "game_date": "20260512",
+              "home": "cleveland cavaliers",
+              "away": "detroit pistons"
+            },
+            {
+              "game_date": "20260511",
+              "home": "cleveland cavaliers",
+              "away": "detroit pistons"
+            },
+            {
+              "game_date": "20260511",
+              "home": "detroit pistons",
+              "away": "cleveland cavaliers"
+            },
+            {
+              "game_date": "20260513",
+              "home": "cleveland cavaliers",
+              "away": "detroit pistons"
+            },
+            {
+              "game_date": "20260513",
+              "home": "detroit pistons",
+              "away": "cleveland cavaliers"
+            },
+            {
+              "game_date": "20260512",
+              "home": "detroit pistons",
+              "away": "cleveland cavaliers"
+            }
+          ],
+          "candidate_hits": [],
+          "nearby_espn_games": [],
+          "reason": "ESPN result not found",
+          "status": "missing_result"
+        },
+        {
+          "pick_date": "20260510",
+          "game_date": "20260512",
+          "away": "Detroit Pistons",
+          "home": "Cleveland Cavaliers",
+          "pick_type": "ou",
+          "pick_target": "over",
+          "pick_detail": "看大 Over 212.5",
+          "candidate_keys": [
+            {
+              "game_date": "20260512",
+              "home": "cleveland cavaliers",
+              "away": "detroit pistons"
+            },
+            {
+              "game_date": "20260511",
+              "home": "cleveland cavaliers",
+              "away": "detroit pistons"
+            },
+            {
+              "game_date": "20260511",
+              "home": "detroit pistons",
+              "away": "cleveland cavaliers"
+            },
+            {
+              "game_date": "20260513",
+              "home": "cleveland cavaliers",
+              "away": "detroit pistons"
+            },
+            {
+              "game_date": "20260513",
+              "home": "detroit pistons",
+              "away": "cleveland cavaliers"
+            },
+            {
+              "game_date": "20260512",
+              "home": "detroit pistons",
+              "away": "cleveland cavaliers"
+            }
+          ],
+          "candidate_hits": [],
+          "nearby_espn_games": [],
+          "reason": "ESPN result not found",
+          "status": "missing_result"
+        },
+        {
+          "pick_date": "20260510",
+          "game_date": "20260512",
+          "away": "Oklahoma City Thunder",
+          "home": "Los Angeles Lakers",
+          "pick_type": "spread",
+          "pick_target": "away",
+          "pick_detail": "買 Thunder 讓分 -10.5",
+          "candidate_keys": [
+            {
+              "game_date": "20260512",
+              "home": "los angeles lakers",
+              "away": "oklahoma city thunder"
+            },
+            {
+              "game_date": "20260511",
+              "home": "los angeles lakers",
+              "away": "oklahoma city thunder"
+            },
+            {
+              "game_date": "20260511",
+              "home": "oklahoma city thunder",
+              "away": "los angeles lakers"
+            },
+            {
+              "game_date": "20260513",
+              "home": "los angeles lakers",
+              "away": "oklahoma city thunder"
+            },
+            {
+              "game_date": "20260513",
+              "home": "oklahoma city thunder",
+              "away": "los angeles lakers"
+            },
+            {
+              "game_date": "20260512",
+              "home": "oklahoma city thunder",
+              "away": "los angeles lakers"
+            }
+          ],
+          "candidate_hits": [],
+          "nearby_espn_games": [],
+          "reason": "ESPN result not found",
+          "status": "missing_result"
+        },
+        {
+          "pick_date": "20260512",
+          "game_date": "20260512",
+          "away": "Oklahoma City Thunder",
+          "home": "Los Angeles Lakers",
+          "pick_type": "spread",
+          "pick_target": "away",
+          "pick_detail": "買 Thunder 讓分 -12.5",
+          "candidate_keys": [
+            {
+              "game_date": "20260512",
+              "home": "los angeles lakers",
+              "away": "oklahoma city thunder"
+            },
+            {
+              "game_date": "20260511",
+              "home": "los angeles lakers",
+              "away": "oklahoma city thunder"
+            },
+            {
+              "game_date": "20260511",
+              "home": "oklahoma city thunder",
+              "away": "los angeles lakers"
+            },
+            {
+              "game_date": "20260513",
+              "home": "los angeles lakers",
+              "away": "oklahoma city thunder"
+            },
+            {
+              "game_date": "20260513",
+              "home": "oklahoma city thunder",
+              "away": "los angeles lakers"
+            },
+            {
+              "game_date": "20260512",
+              "home": "oklahoma city thunder",
+              "away": "los angeles lakers"
+            }
+          ],
+          "candidate_hits": [],
+          "nearby_espn_games": [],
+          "reason": "ESPN result not found",
+          "status": "missing_result"
+        },
+        {
+          "pick_date": "20260512",
+          "game_date": "20260512",
+          "away": "Oklahoma City Thunder",
+          "home": "Los Angeles Lakers",
+          "pick_type": "ou",
+          "pick_target": "over",
+          "pick_detail": "看大 Over 214.5",
+          "candidate_keys": [
+            {
+              "game_date": "20260512",
+              "home": "los angeles lakers",
+              "away": "oklahoma city thunder"
+            },
+            {
+              "game_date": "20260511",
+              "home": "los angeles lakers",
+              "away": "oklahoma city thunder"
+            },
+            {
+              "game_date": "20260511",
+              "home": "oklahoma city thunder",
+              "away": "los angeles lakers"
+            },
+            {
+              "game_date": "20260513",
+              "home": "los angeles lakers",
+              "away": "oklahoma city thunder"
+            },
+            {
+              "game_date": "20260513",
+              "home": "oklahoma city thunder",
+              "away": "los angeles lakers"
+            },
+            {
+              "game_date": "20260512",
+              "home": "oklahoma city thunder",
+              "away": "los angeles lakers"
+            }
+          ],
+          "candidate_hits": [],
+          "nearby_espn_games": [],
+          "reason": "ESPN result not found",
           "status": "missing_result"
         }
       ]
     }
   },
-  "generated_at": "2026-05-11T09:24:28",
-  "synced_at": "2026-05-11T09:24:28"
+  "generated_at": "2026-05-12T09:21:14",
+  "synced_at": "2026-05-12T09:21:14"
 }
