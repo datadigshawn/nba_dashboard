@@ -1,29 +1,10 @@
 {
-  "synced_at": "2026-05-13T09:21:05",
+  "synced_at": "2026-05-14T09:24:27",
   "source": {
-    "sportweb_fetched_at": "2026-05-13T09:20:57",
+    "sportweb_fetched_at": "2026-05-14T09:21:25",
     "source_url": "https://www.sportslottery.com.tw/sportsbook/sport",
-    "game_count": 1
+    "game_count": 0
   },
-  "entries": [
-    {
-      "game": "Cleveland Cavaliers @ Detroit Pistons",
-      "away": "Cleveland Cavaliers",
-      "home": "Detroit Pistons",
-      "spread": -3.5,
-      "ou": 212.5,
-      "updated_at": "2026-05-13T09:20:57",
-      "source": "sportWeb",
-      "sportweb_game_id": "3468115.1",
-      "start_time": "2026-05-14T08:00:00.000+08:00"
-    }
-  ],
-  "odds": {
-    "Cleveland Cavaliers @ Detroit Pistons": {
-      "spread": -3.5,
-      "ou": 212.5,
-      "updated_at": "2026-05-13T09:20:57",
-      "source": "sportWeb"
-    }
-  }
+  "entries": [],
+  "odds": {}
 }
