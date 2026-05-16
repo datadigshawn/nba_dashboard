@@ -844,6 +844,24 @@
       "game_date": "20260516",
       "away": "San Antonio Spurs",
       "home": "Minnesota Timberwolves",
+      "pick_type": "ou",
+      "pick_target": "over",
+      "pick_line": 218.5,
+      "pick_detail": "看大 Over 218.5",
+      "edge": 5.400000000000006,
+      "confidence": 52.8,
+      "result": "pending",
+      "correct": null,
+      "tw_spread": 4.5,
+      "tw_ou": 218.5,
+      "model_spread": -6.1,
+      "model_total": 223.9
+    },
+    {
+      "pick_date": "20260515",
+      "game_date": "20260516",
+      "away": "San Antonio Spurs",
+      "home": "Minnesota Timberwolves",
       "pick_type": "spread",
       "pick_target": "away",
       "pick_line": 4.5,
@@ -892,28 +910,10 @@
       "tw_ou": 212.5,
       "model_spread": 2.2,
       "model_total": 219.6
-    },
-    {
-      "pick_date": "20260514",
-      "game_date": "20260517",
-      "away": "Cleveland Cavaliers",
-      "home": "Detroit Pistons",
-      "pick_type": "ou",
-      "pick_target": "over",
-      "pick_line": 212.5,
-      "pick_detail": "看大 Over 212.5",
-      "edge": 7.099999999999994,
-      "confidence": 80.1,
-      "result": "pending",
-      "correct": null,
-      "tw_spread": -3.5,
-      "tw_ou": 212.5,
-      "model_spread": 2.2,
-      "model_total": 219.6
     }
   ],
-  "pending": 24,
-  "stale_pending": 6,
+  "pending": 26,
+  "stale_pending": 16,
   "resolution_gaps": [
     {
       "pick_date": "20260510",
@@ -989,8 +989,8 @@
       "pick_type": "spread",
       "pick_detail": "買 Pistons 受讓 +3.5",
       "edge": 7.4,
-      "reason": "scheduled for future",
-      "status": "future_pending"
+      "reason": "prediction exists, but scores missing",
+      "status": "stale_pending"
     },
     {
       "pick_date": "20260512",
@@ -1000,8 +1000,8 @@
       "pick_type": "ou",
       "pick_detail": "看大 Over 212.5",
       "edge": 8.199999999999989,
-      "reason": "scheduled for future",
-      "status": "future_pending"
+      "reason": "prediction exists, but scores missing",
+      "status": "stale_pending"
     },
     {
       "pick_date": "20260512",
@@ -1011,8 +1011,8 @@
       "pick_type": "spread",
       "pick_detail": "買 Spurs 讓分 -4.5",
       "edge": 2.5999999999999996,
-      "reason": "scheduled for future",
-      "status": "future_pending"
+      "reason": "prediction exists, but scores missing",
+      "status": "stale_pending"
     },
     {
       "pick_date": "20260513",
@@ -1022,8 +1022,8 @@
       "pick_type": "spread",
       "pick_detail": "買 Pistons 受讓 +3.5",
       "edge": 7.4,
-      "reason": "scheduled for future",
-      "status": "future_pending"
+      "reason": "prediction exists, but scores missing",
+      "status": "stale_pending"
     },
     {
       "pick_date": "20260513",
@@ -1033,8 +1033,8 @@
       "pick_type": "ou",
       "pick_detail": "看大 Over 212.5",
       "edge": 8.199999999999989,
-      "reason": "scheduled for future",
-      "status": "future_pending"
+      "reason": "prediction exists, but scores missing",
+      "status": "stale_pending"
     },
     {
       "pick_date": "20260513",
@@ -1044,8 +1044,8 @@
       "pick_type": "spread",
       "pick_detail": "買 Spurs 讓分 -4.5",
       "edge": 2.5999999999999996,
-      "reason": "scheduled for future",
-      "status": "future_pending"
+      "reason": "prediction exists, but scores missing",
+      "status": "stale_pending"
     },
     {
       "pick_date": "20260514",
@@ -1055,8 +1055,8 @@
       "pick_type": "spread",
       "pick_detail": "買 Pistons 受讓 +3.5",
       "edge": 6.0,
-      "reason": "scheduled for future",
-      "status": "future_pending"
+      "reason": "prediction exists, but scores missing",
+      "status": "stale_pending"
     },
     {
       "pick_date": "20260514",
@@ -1066,8 +1066,8 @@
       "pick_type": "ou",
       "pick_detail": "看大 Over 212.5",
       "edge": 6.800000000000011,
-      "reason": "scheduled for future",
-      "status": "future_pending"
+      "reason": "prediction exists, but scores missing",
+      "status": "stale_pending"
     },
     {
       "pick_date": "20260515",
@@ -1077,8 +1077,8 @@
       "pick_type": "spread",
       "pick_detail": "買 Pistons 受讓 +3.5",
       "edge": 6.7,
-      "reason": "scheduled for future",
-      "status": "future_pending"
+      "reason": "prediction exists, but scores missing",
+      "status": "stale_pending"
     },
     {
       "pick_date": "20260515",
@@ -1088,8 +1088,8 @@
       "pick_type": "ou",
       "pick_detail": "看大 Over 212.5",
       "edge": 7.099999999999994,
-      "reason": "scheduled for future",
-      "status": "future_pending"
+      "reason": "prediction exists, but scores missing",
+      "status": "stale_pending"
     },
     {
       "pick_date": "20260514",
@@ -1110,6 +1110,17 @@
       "pick_type": "spread",
       "pick_detail": "買 Spurs 讓分 -4.5",
       "edge": 3.2,
+      "reason": "scheduled for future",
+      "status": "future_pending"
+    },
+    {
+      "pick_date": "20260515",
+      "game_date": "20260516",
+      "away": "San Antonio Spurs",
+      "home": "Minnesota Timberwolves",
+      "pick_type": "ou",
+      "pick_detail": "看大 Over 218.5",
+      "edge": 5.400000000000006,
       "reason": "scheduled for future",
       "status": "future_pending"
     },
@@ -1176,24 +1187,35 @@
       "pick_type": "ou",
       "pick_detail": "看大 Over 212.5",
       "edge": 7.099999999999994,
+      "reason": "scheduled for future",
+      "status": "future_pending"
+    },
+    {
+      "pick_date": "20260515",
+      "game_date": "20260517",
+      "away": "Cleveland Cavaliers",
+      "home": "Detroit Pistons",
+      "pick_type": "spread",
+      "pick_detail": "買 Cavaliers 受讓 +3.5",
+      "edge": 4.4,
       "reason": "scheduled for future",
       "status": "future_pending"
     }
   ],
   "history_sync": {
     "imported_from_bets": {
-      "candidates": 15,
+      "candidates": 16,
       "imported": 0,
-      "skipped_existing": 15
+      "skipped_existing": 16
     },
     "manual_results": 0,
     "resolved": {
-      "candidates": 16,
+      "candidates": 19,
       "verified": 0,
       "wins": 0,
       "losses": 0,
       "pushes": 0,
-      "missing_results": 16,
+      "missing_results": 19,
       "ungraded": 0,
       "missing_details": [
         {
@@ -1981,10 +2003,145 @@
           "nearby_espn_games": [],
           "reason": "ESPN result not found",
           "status": "missing_result"
+        },
+        {
+          "pick_date": "20260514",
+          "game_date": "20260516",
+          "away": "San Antonio Spurs",
+          "home": "Minnesota Timberwolves",
+          "pick_type": "spread",
+          "pick_target": "away",
+          "pick_detail": "買 Spurs 讓分 -4.5",
+          "candidate_keys": [
+            {
+              "game_date": "20260516",
+              "home": "minnesota timberwolves",
+              "away": "san antonio spurs"
+            },
+            {
+              "game_date": "20260515",
+              "home": "minnesota timberwolves",
+              "away": "san antonio spurs"
+            },
+            {
+              "game_date": "20260515",
+              "home": "san antonio spurs",
+              "away": "minnesota timberwolves"
+            },
+            {
+              "game_date": "20260517",
+              "home": "minnesota timberwolves",
+              "away": "san antonio spurs"
+            },
+            {
+              "game_date": "20260517",
+              "home": "san antonio spurs",
+              "away": "minnesota timberwolves"
+            },
+            {
+              "game_date": "20260516",
+              "home": "san antonio spurs",
+              "away": "minnesota timberwolves"
+            }
+          ],
+          "candidate_hits": [],
+          "nearby_espn_games": [],
+          "reason": "ESPN result not found",
+          "status": "missing_result"
+        },
+        {
+          "pick_date": "20260515",
+          "game_date": "20260516",
+          "away": "San Antonio Spurs",
+          "home": "Minnesota Timberwolves",
+          "pick_type": "spread",
+          "pick_target": "away",
+          "pick_detail": "買 Spurs 讓分 -4.5",
+          "candidate_keys": [
+            {
+              "game_date": "20260516",
+              "home": "minnesota timberwolves",
+              "away": "san antonio spurs"
+            },
+            {
+              "game_date": "20260515",
+              "home": "minnesota timberwolves",
+              "away": "san antonio spurs"
+            },
+            {
+              "game_date": "20260515",
+              "home": "san antonio spurs",
+              "away": "minnesota timberwolves"
+            },
+            {
+              "game_date": "20260517",
+              "home": "minnesota timberwolves",
+              "away": "san antonio spurs"
+            },
+            {
+              "game_date": "20260517",
+              "home": "san antonio spurs",
+              "away": "minnesota timberwolves"
+            },
+            {
+              "game_date": "20260516",
+              "home": "san antonio spurs",
+              "away": "minnesota timberwolves"
+            }
+          ],
+          "candidate_hits": [],
+          "nearby_espn_games": [],
+          "reason": "ESPN result not found",
+          "status": "missing_result"
+        },
+        {
+          "pick_date": "20260515",
+          "game_date": "20260516",
+          "away": "San Antonio Spurs",
+          "home": "Minnesota Timberwolves",
+          "pick_type": "ou",
+          "pick_target": "over",
+          "pick_detail": "看大 Over 218.5",
+          "candidate_keys": [
+            {
+              "game_date": "20260516",
+              "home": "minnesota timberwolves",
+              "away": "san antonio spurs"
+            },
+            {
+              "game_date": "20260515",
+              "home": "minnesota timberwolves",
+              "away": "san antonio spurs"
+            },
+            {
+              "game_date": "20260515",
+              "home": "san antonio spurs",
+              "away": "minnesota timberwolves"
+            },
+            {
+              "game_date": "20260517",
+              "home": "minnesota timberwolves",
+              "away": "san antonio spurs"
+            },
+            {
+              "game_date": "20260517",
+              "home": "san antonio spurs",
+              "away": "minnesota timberwolves"
+            },
+            {
+              "game_date": "20260516",
+              "home": "san antonio spurs",
+              "away": "minnesota timberwolves"
+            }
+          ],
+          "candidate_hits": [],
+          "nearby_espn_games": [],
+          "reason": "ESPN result not found",
+          "status": "missing_result"
         }
       ]
     }
   },
-  "generated_at": "2026-05-15T09:24:38",
-  "synced_at": "2026-05-15T09:24:38"
+  "generated_at": "2026-05-16T09:24:11",
+  "synced_at": "2026-05-16T09:24:11"
 }
