@@ -1,20 +1,14 @@
 {
-  "total": 61,
-  "wins": 32,
-  "wr": 52.5,
-  "spread_total": 42,
-  "spread_wins": 18,
-  "spread_wr": 42.9,
-  "ou_total": 19,
-  "ou_wins": 14,
-  "ou_wr": 73.7,
+  "total": 70,
+  "wins": 41,
+  "wr": 58.6,
+  "spread_total": 45,
+  "spread_wins": 21,
+  "spread_wr": 46.7,
+  "ou_total": 25,
+  "ou_wins": 20,
+  "ou_wr": 80.0,
   "daily": [
-    {
-      "date": "20260505",
-      "wins": 3,
-      "total": 8,
-      "wr": 37.5
-    },
     {
       "date": "20260506",
       "wins": 0,
@@ -59,26 +53,32 @@
     },
     {
       "date": "20260514",
-      "wins": 4,
-      "total": 6,
-      "wr": 66.7
+      "wins": 5,
+      "total": 7,
+      "wr": 71.4
     },
     {
       "date": "20260515",
-      "wins": 4,
-      "total": 5,
-      "wr": 80.0
+      "wins": 6,
+      "total": 7,
+      "wr": 85.7
     },
     {
       "date": "20260516",
-      "wins": 1,
-      "total": 1,
+      "wins": 2,
+      "total": 2,
       "wr": 100.0
     },
     {
       "date": "20260517",
-      "wins": 1,
-      "total": 1,
+      "wins": 4,
+      "total": 4,
+      "wr": 100.0
+    },
+    {
+      "date": "20260518",
+      "wins": 2,
+      "total": 2,
       "wr": 100.0
     }
   ],
@@ -91,21 +91,21 @@
     },
     {
       "bucket": "3-5",
-      "wins": 2,
-      "total": 8,
-      "wr": 25.0
-    },
-    {
-      "bucket": "5-8",
-      "wins": 20,
-      "total": 31,
-      "wr": 64.5
-    },
-    {
-      "bucket": "8+",
       "wins": 5,
       "total": 11,
       "wr": 45.5
+    },
+    {
+      "bucket": "5-8",
+      "wins": 22,
+      "total": 33,
+      "wr": 66.7
+    },
+    {
+      "bucket": "8+",
+      "wins": 9,
+      "total": 15,
+      "wr": 60.0
     }
   ],
   "confidence_buckets": [
@@ -123,15 +123,15 @@
     },
     {
       "bucket": "70-80",
-      "wins": 0,
-      "total": 0,
-      "wr": 0.0
+      "wins": 7,
+      "total": 7,
+      "wr": 100.0
     },
     {
       "bucket": "80+",
-      "wins": 9,
-      "total": 23,
-      "wr": 39.1
+      "wins": 11,
+      "total": 25,
+      "wr": 44.0
     }
   ],
   "by_type_edge": {
@@ -144,9 +144,9 @@
       },
       {
         "bucket": "3-5",
-        "wins": 2,
-        "total": 8,
-        "wr": 25.0
+        "wins": 5,
+        "total": 11,
+        "wr": 45.5
       },
       {
         "bucket": "5-8",
@@ -176,19 +176,181 @@
       },
       {
         "bucket": "5-8",
-        "wins": 14,
-        "total": 17,
-        "wr": 82.4
+        "wins": 16,
+        "total": 19,
+        "wr": 84.2
       },
       {
         "bucket": "8+",
-        "wins": 0,
-        "total": 2,
-        "wr": 0.0
+        "wins": 4,
+        "total": 6,
+        "wr": 66.7
       }
     ]
   },
   "recent": [
+    {
+      "pick_date": "20260518",
+      "game_date": "20260518",
+      "away": "Cleveland Cavaliers",
+      "home": "Detroit Pistons",
+      "pick_type": "ou",
+      "pick_target": "over",
+      "pick_line": 212.5,
+      "pick_detail": "看大 Over 212.5",
+      "edge": 9.5,
+      "confidence": 77.5,
+      "result": "win",
+      "correct": 1,
+      "tw_spread": -3.5,
+      "tw_ou": 212.5,
+      "model_spread": -1.0,
+      "model_total": 222.0
+    },
+    {
+      "pick_date": "20260518",
+      "game_date": "20260518",
+      "away": "Cleveland Cavaliers",
+      "home": "Detroit Pistons",
+      "pick_type": "spread",
+      "pick_target": "away",
+      "pick_line": -3.5,
+      "pick_detail": "買 Cavaliers 受讓 +3.5",
+      "edge": 4.5,
+      "confidence": 77.5,
+      "result": "win",
+      "correct": 1,
+      "tw_spread": -3.5,
+      "tw_ou": 212.5,
+      "model_spread": -1.0,
+      "model_total": 222.0
+    },
+    {
+      "pick_date": "20260517",
+      "game_date": "20260518",
+      "away": "Cleveland Cavaliers",
+      "home": "Detroit Pistons",
+      "pick_type": "ou",
+      "pick_target": "over",
+      "pick_line": 212.5,
+      "pick_detail": "看大 Over 212.5",
+      "edge": 9.5,
+      "confidence": 77.5,
+      "result": "win",
+      "correct": 1,
+      "tw_spread": -3.5,
+      "tw_ou": 212.5,
+      "model_spread": -1.0,
+      "model_total": 222.0
+    },
+    {
+      "pick_date": "20260517",
+      "game_date": "20260518",
+      "away": "Cleveland Cavaliers",
+      "home": "Detroit Pistons",
+      "pick_type": "spread",
+      "pick_target": "away",
+      "pick_line": -3.5,
+      "pick_detail": "買 Cavaliers 受讓 +3.5",
+      "edge": 4.5,
+      "confidence": 77.5,
+      "result": "win",
+      "correct": 1,
+      "tw_spread": -3.5,
+      "tw_ou": 212.5,
+      "model_spread": -1.0,
+      "model_total": 222.0
+    },
+    {
+      "pick_date": "20260517",
+      "game_date": "20260517",
+      "away": "Cleveland Cavaliers",
+      "home": "Detroit Pistons",
+      "pick_type": "ou",
+      "pick_target": "over",
+      "pick_line": 212.5,
+      "pick_detail": "看大 Over 212.5",
+      "edge": 10.099999999999994,
+      "confidence": 76.2,
+      "result": "win",
+      "correct": 1,
+      "tw_spread": -3.5,
+      "tw_ou": 212.5,
+      "model_spread": 1.8,
+      "model_total": 222.6
+    },
+    {
+      "pick_date": "20260516",
+      "game_date": "20260517",
+      "away": "Cleveland Cavaliers",
+      "home": "Detroit Pistons",
+      "pick_type": "ou",
+      "pick_target": "over",
+      "pick_line": 212.5,
+      "pick_detail": "看大 Over 212.5",
+      "edge": 10.099999999999994,
+      "confidence": 76.2,
+      "result": "win",
+      "correct": 1,
+      "tw_spread": -3.5,
+      "tw_ou": 212.5,
+      "model_spread": 1.8,
+      "model_total": 222.6
+    },
+    {
+      "pick_date": "20260515",
+      "game_date": "20260517",
+      "away": "Cleveland Cavaliers",
+      "home": "Detroit Pistons",
+      "pick_type": "spread",
+      "pick_target": "away",
+      "pick_line": -3.5,
+      "pick_detail": "買 Cavaliers 受讓 +3.5",
+      "edge": 4.4,
+      "confidence": 77.3,
+      "result": "win",
+      "correct": 1,
+      "tw_spread": -3.5,
+      "tw_ou": 212.5,
+      "model_spread": -0.9,
+      "model_total": 222.5
+    },
+    {
+      "pick_date": "20260515",
+      "game_date": "20260517",
+      "away": "Cleveland Cavaliers",
+      "home": "Detroit Pistons",
+      "pick_type": "ou",
+      "pick_target": "over",
+      "pick_line": 212.5,
+      "pick_detail": "看大 Over 212.5",
+      "edge": 7.099999999999994,
+      "confidence": 80.1,
+      "result": "win",
+      "correct": 1,
+      "tw_spread": -3.5,
+      "tw_ou": 212.5,
+      "model_spread": 2.2,
+      "model_total": 219.6
+    },
+    {
+      "pick_date": "20260514",
+      "game_date": "20260517",
+      "away": "Cleveland Cavaliers",
+      "home": "Detroit Pistons",
+      "pick_type": "ou",
+      "pick_target": "over",
+      "pick_line": 212.5,
+      "pick_detail": "看大 Over 212.5",
+      "edge": 7.099999999999994,
+      "confidence": 80.1,
+      "result": "win",
+      "correct": 1,
+      "tw_spread": -3.5,
+      "tw_ou": 212.5,
+      "model_spread": 2.2,
+      "model_total": 219.6
+    },
     {
       "pick_date": "20260517",
       "game_date": "20260516",
@@ -386,246 +548,12 @@
       "tw_ou": 212.5,
       "model_spread": -3.9,
       "model_total": 220.7
-    },
-    {
-      "pick_date": "20260513",
-      "game_date": "20260515",
-      "away": "Detroit Pistons",
-      "home": "Cleveland Cavaliers",
-      "pick_type": "spread",
-      "pick_target": "away",
-      "pick_line": -3.5,
-      "pick_detail": "買 Pistons 受讓 +3.5",
-      "edge": 7.4,
-      "confidence": 50.8,
-      "result": "win",
-      "correct": 1,
-      "tw_spread": -3.5,
-      "tw_ou": 212.5,
-      "model_spread": -3.9,
-      "model_total": 220.7
-    },
-    {
-      "pick_date": "20260512",
-      "game_date": "20260515",
-      "away": "San Antonio Spurs",
-      "home": "Minnesota Timberwolves",
-      "pick_type": "spread",
-      "pick_target": "away",
-      "pick_line": 4.5,
-      "pick_detail": "買 Spurs 讓分 -4.5",
-      "edge": 2.5999999999999996,
-      "confidence": 54.2,
-      "result": "win",
-      "correct": 1,
-      "tw_spread": 4.5,
-      "tw_ou": 218.5,
-      "model_spread": -7.1,
-      "model_total": 223.0
-    },
-    {
-      "pick_date": "20260512",
-      "game_date": "20260515",
-      "away": "Detroit Pistons",
-      "home": "Cleveland Cavaliers",
-      "pick_type": "ou",
-      "pick_target": "over",
-      "pick_line": 212.5,
-      "pick_detail": "看大 Over 212.5",
-      "edge": 8.199999999999989,
-      "confidence": 50.8,
-      "result": "loss",
-      "correct": 0,
-      "tw_spread": -3.5,
-      "tw_ou": 212.5,
-      "model_spread": -3.9,
-      "model_total": 220.7
-    },
-    {
-      "pick_date": "20260512",
-      "game_date": "20260515",
-      "away": "Detroit Pistons",
-      "home": "Cleveland Cavaliers",
-      "pick_type": "spread",
-      "pick_target": "away",
-      "pick_line": -3.5,
-      "pick_detail": "買 Pistons 受讓 +3.5",
-      "edge": 7.4,
-      "confidence": 50.8,
-      "result": "win",
-      "correct": 1,
-      "tw_spread": -3.5,
-      "tw_ou": 212.5,
-      "model_spread": -3.9,
-      "model_total": 220.7
-    },
-    {
-      "pick_date": "20260515",
-      "game_date": "20260514",
-      "away": "Cleveland Cavaliers",
-      "home": "Detroit Pistons",
-      "pick_type": "ou",
-      "pick_target": "over",
-      "pick_line": 212.5,
-      "pick_detail": "看大 Over 212.5",
-      "edge": 7.099999999999994,
-      "confidence": 80.1,
-      "result": "win",
-      "correct": 1,
-      "tw_spread": -3.5,
-      "tw_ou": 212.5,
-      "model_spread": 2.2,
-      "model_total": 219.6
-    },
-    {
-      "pick_date": "20260514",
-      "game_date": "20260514",
-      "away": "Cleveland Cavaliers",
-      "home": "Detroit Pistons",
-      "pick_type": "ou",
-      "pick_target": "over",
-      "pick_line": 212.5,
-      "pick_detail": "看大 Over 212.5",
-      "edge": 7.099999999999994,
-      "confidence": 80.1,
-      "result": "win",
-      "correct": 1,
-      "tw_spread": -3.5,
-      "tw_ou": 212.5,
-      "model_spread": 2.2,
-      "model_total": 219.6
-    },
-    {
-      "pick_date": "20260514",
-      "game_date": "20260513",
-      "away": "Minnesota Timberwolves",
-      "home": "San Antonio Spurs",
-      "pick_type": "ou",
-      "pick_target": "over",
-      "pick_line": 217.5,
-      "pick_detail": "看大 Over 217.5",
-      "edge": 5.5,
-      "confidence": 84.9,
-      "result": "win",
-      "correct": 1,
-      "tw_spread": -10.5,
-      "tw_ou": 217.5,
-      "model_spread": 4.7,
-      "model_total": 223.0
-    },
-    {
-      "pick_date": "20260514",
-      "game_date": "20260513",
-      "away": "Minnesota Timberwolves",
-      "home": "San Antonio Spurs",
-      "pick_type": "spread",
-      "pick_target": "away",
-      "pick_line": -10.5,
-      "pick_detail": "買 Timberwolves 受讓 +10.5",
-      "edge": 5.8,
-      "confidence": 84.9,
-      "result": "loss",
-      "correct": 0,
-      "tw_spread": -10.5,
-      "tw_ou": 217.5,
-      "model_spread": 4.7,
-      "model_total": 223.0
-    },
-    {
-      "pick_date": "20260513",
-      "game_date": "20260513",
-      "away": "Minnesota Timberwolves",
-      "home": "San Antonio Spurs",
-      "pick_type": "ou",
-      "pick_target": "over",
-      "pick_line": 217.5,
-      "pick_detail": "看大 Over 217.5",
-      "edge": 5.5,
-      "confidence": 84.9,
-      "result": "win",
-      "correct": 1,
-      "tw_spread": -10.5,
-      "tw_ou": 217.5,
-      "model_spread": 4.7,
-      "model_total": 223.0
     }
   ],
   "current_picks": [
     {
       "pick_date": "20260517",
       "game_date": "20260517",
-      "away": "Cleveland Cavaliers",
-      "home": "Detroit Pistons",
-      "pick_type": "ou",
-      "pick_target": "over",
-      "pick_line": 212.5,
-      "pick_detail": "看大 Over 212.5",
-      "edge": 10.099999999999994,
-      "confidence": 76.2,
-      "result": "pending",
-      "correct": null,
-      "tw_spread": -3.5,
-      "tw_ou": 212.5,
-      "model_spread": 1.8,
-      "model_total": 222.6
-    },
-    {
-      "pick_date": "20260516",
-      "game_date": "20260517",
-      "away": "Cleveland Cavaliers",
-      "home": "Detroit Pistons",
-      "pick_type": "ou",
-      "pick_target": "over",
-      "pick_line": 212.5,
-      "pick_detail": "看大 Over 212.5",
-      "edge": 10.099999999999994,
-      "confidence": 76.2,
-      "result": "pending",
-      "correct": null,
-      "tw_spread": -3.5,
-      "tw_ou": 212.5,
-      "model_spread": 1.8,
-      "model_total": 222.6
-    },
-    {
-      "pick_date": "20260515",
-      "game_date": "20260517",
-      "away": "Cleveland Cavaliers",
-      "home": "Detroit Pistons",
-      "pick_type": "ou",
-      "pick_target": "over",
-      "pick_line": 212.5,
-      "pick_detail": "看大 Over 212.5",
-      "edge": 7.099999999999994,
-      "confidence": 80.1,
-      "result": "pending",
-      "correct": null,
-      "tw_spread": -3.5,
-      "tw_ou": 212.5,
-      "model_spread": 2.2,
-      "model_total": 219.6
-    },
-    {
-      "pick_date": "20260514",
-      "game_date": "20260517",
-      "away": "Cleveland Cavaliers",
-      "home": "Detroit Pistons",
-      "pick_type": "ou",
-      "pick_target": "over",
-      "pick_line": 212.5,
-      "pick_detail": "看大 Over 212.5",
-      "edge": 7.099999999999994,
-      "confidence": 80.1,
-      "result": "pending",
-      "correct": null,
-      "tw_spread": -3.5,
-      "tw_ou": 212.5,
-      "model_spread": 2.2,
-      "model_total": 219.6
-    },
-    {
-      "pick_date": "20260517",
-      "game_date": "20260517",
       "away": "Minnesota Timberwolves",
       "home": "San Antonio Spurs",
       "pick_type": "ou",
@@ -734,24 +662,6 @@
     {
       "pick_date": "20260515",
       "game_date": "20260517",
-      "away": "Cleveland Cavaliers",
-      "home": "Detroit Pistons",
-      "pick_type": "spread",
-      "pick_target": "away",
-      "pick_line": -3.5,
-      "pick_detail": "買 Cavaliers 受讓 +3.5",
-      "edge": 4.4,
-      "confidence": 77.3,
-      "result": "pending",
-      "correct": null,
-      "tw_spread": -3.5,
-      "tw_ou": 212.5,
-      "model_spread": -0.9,
-      "model_total": 222.5
-    },
-    {
-      "pick_date": "20260515",
-      "game_date": "20260517",
       "away": "Minnesota Timberwolves",
       "home": "San Antonio Spurs",
       "pick_type": "spread",
@@ -784,82 +694,10 @@
       "tw_ou": 217.5,
       "model_spread": 7.9,
       "model_total": 223.3
-    },
-    {
-      "pick_date": "20260518",
-      "game_date": "20260518",
-      "away": "Cleveland Cavaliers",
-      "home": "Detroit Pistons",
-      "pick_type": "ou",
-      "pick_target": "over",
-      "pick_line": 212.5,
-      "pick_detail": "看大 Over 212.5",
-      "edge": 9.5,
-      "confidence": 77.5,
-      "result": "pending",
-      "correct": null,
-      "tw_spread": -3.5,
-      "tw_ou": 212.5,
-      "model_spread": -1.0,
-      "model_total": 222.0
-    },
-    {
-      "pick_date": "20260517",
-      "game_date": "20260518",
-      "away": "Cleveland Cavaliers",
-      "home": "Detroit Pistons",
-      "pick_type": "ou",
-      "pick_target": "over",
-      "pick_line": 212.5,
-      "pick_detail": "看大 Over 212.5",
-      "edge": 9.5,
-      "confidence": 77.5,
-      "result": "pending",
-      "correct": null,
-      "tw_spread": -3.5,
-      "tw_ou": 212.5,
-      "model_spread": -1.0,
-      "model_total": 222.0
-    },
-    {
-      "pick_date": "20260518",
-      "game_date": "20260518",
-      "away": "Cleveland Cavaliers",
-      "home": "Detroit Pistons",
-      "pick_type": "spread",
-      "pick_target": "away",
-      "pick_line": -3.5,
-      "pick_detail": "買 Cavaliers 受讓 +3.5",
-      "edge": 4.5,
-      "confidence": 77.5,
-      "result": "pending",
-      "correct": null,
-      "tw_spread": -3.5,
-      "tw_ou": 212.5,
-      "model_spread": -1.0,
-      "model_total": 222.0
-    },
-    {
-      "pick_date": "20260517",
-      "game_date": "20260518",
-      "away": "Cleveland Cavaliers",
-      "home": "Detroit Pistons",
-      "pick_type": "spread",
-      "pick_target": "away",
-      "pick_line": -3.5,
-      "pick_detail": "買 Cavaliers 受讓 +3.5",
-      "edge": 4.5,
-      "confidence": 77.5,
-      "result": "pending",
-      "correct": null,
-      "tw_spread": -3.5,
-      "tw_ou": 212.5,
-      "model_spread": -1.0,
-      "model_total": 222.0
     }
   ],
-  "pending": 17,
-  "stale_pending": 13,
+  "pending": 8,
+  "stale_pending": 8,
   "resolution_gaps": [
     {
       "pick_date": "20260514",
@@ -884,17 +722,6 @@
       "status": "stale_pending"
     },
     {
-      "pick_date": "20260514",
-      "game_date": "20260517",
-      "away": "Cleveland Cavaliers",
-      "home": "Detroit Pistons",
-      "pick_type": "ou",
-      "pick_detail": "看大 Over 212.5",
-      "edge": 7.099999999999994,
-      "reason": "prediction exists, but scores missing",
-      "status": "stale_pending"
-    },
-    {
       "pick_date": "20260515",
       "game_date": "20260517",
       "away": "Minnesota Timberwolves",
@@ -917,28 +744,6 @@
       "status": "stale_pending"
     },
     {
-      "pick_date": "20260515",
-      "game_date": "20260517",
-      "away": "Cleveland Cavaliers",
-      "home": "Detroit Pistons",
-      "pick_type": "ou",
-      "pick_detail": "看大 Over 212.5",
-      "edge": 7.099999999999994,
-      "reason": "prediction exists, but scores missing",
-      "status": "stale_pending"
-    },
-    {
-      "pick_date": "20260515",
-      "game_date": "20260517",
-      "away": "Cleveland Cavaliers",
-      "home": "Detroit Pistons",
-      "pick_type": "spread",
-      "pick_detail": "買 Cavaliers 受讓 +3.5",
-      "edge": 4.4,
-      "reason": "prediction exists, but scores missing",
-      "status": "stale_pending"
-    },
-    {
       "pick_date": "20260516",
       "game_date": "20260517",
       "away": "Minnesota Timberwolves",
@@ -957,17 +762,6 @@
       "pick_type": "ou",
       "pick_detail": "看大 Over 217.5",
       "edge": 6.5,
-      "reason": "prediction exists, but scores missing",
-      "status": "stale_pending"
-    },
-    {
-      "pick_date": "20260516",
-      "game_date": "20260517",
-      "away": "Cleveland Cavaliers",
-      "home": "Detroit Pistons",
-      "pick_type": "ou",
-      "pick_detail": "看大 Over 212.5",
-      "edge": 10.099999999999994,
       "reason": "prediction exists, but scores missing",
       "status": "stale_pending"
     },
@@ -992,61 +786,6 @@
       "edge": 6.5,
       "reason": "prediction exists, but scores missing",
       "status": "stale_pending"
-    },
-    {
-      "pick_date": "20260517",
-      "game_date": "20260517",
-      "away": "Cleveland Cavaliers",
-      "home": "Detroit Pistons",
-      "pick_type": "ou",
-      "pick_detail": "看大 Over 212.5",
-      "edge": 10.099999999999994,
-      "reason": "prediction exists, but scores missing",
-      "status": "stale_pending"
-    },
-    {
-      "pick_date": "20260517",
-      "game_date": "20260518",
-      "away": "Cleveland Cavaliers",
-      "home": "Detroit Pistons",
-      "pick_type": "spread",
-      "pick_detail": "買 Cavaliers 受讓 +3.5",
-      "edge": 4.5,
-      "reason": "scheduled for future",
-      "status": "future_pending"
-    },
-    {
-      "pick_date": "20260517",
-      "game_date": "20260518",
-      "away": "Cleveland Cavaliers",
-      "home": "Detroit Pistons",
-      "pick_type": "ou",
-      "pick_detail": "看大 Over 212.5",
-      "edge": 9.5,
-      "reason": "scheduled for future",
-      "status": "future_pending"
-    },
-    {
-      "pick_date": "20260518",
-      "game_date": "20260518",
-      "away": "Cleveland Cavaliers",
-      "home": "Detroit Pistons",
-      "pick_type": "spread",
-      "pick_detail": "買 Cavaliers 受讓 +3.5",
-      "edge": 4.5,
-      "reason": "scheduled for future",
-      "status": "future_pending"
-    },
-    {
-      "pick_date": "20260518",
-      "game_date": "20260518",
-      "away": "Cleveland Cavaliers",
-      "home": "Detroit Pistons",
-      "pick_type": "ou",
-      "pick_detail": "看大 Over 212.5",
-      "edge": 9.5,
-      "reason": "scheduled for future",
-      "status": "future_pending"
     }
   ],
   "history_sync": {
@@ -1057,12 +796,12 @@
     },
     "manual_results": 0,
     "resolved": {
-      "candidates": 17,
+      "candidates": 8,
       "verified": 0,
       "wins": 0,
       "losses": 0,
       "pushes": 0,
-      "missing_results": 17,
+      "missing_results": 8,
       "ungraded": 0,
       "missing_details": [
         {
@@ -1106,8 +845,14 @@
             }
           ],
           "candidate_hits": [],
-          "nearby_espn_games": [],
-          "reason": "ESPN result not found",
+          "nearby_espn_games": [
+            {
+              "game_date": "20260517",
+              "home": "detroit pistons",
+              "away": "cleveland cavaliers"
+            }
+          ],
+          "reason": "ESPN has games on nearby dates, but team/date key mismatched",
           "status": "missing_result"
         },
         {
@@ -1151,53 +896,14 @@
             }
           ],
           "candidate_hits": [],
-          "nearby_espn_games": [],
-          "reason": "ESPN result not found",
-          "status": "missing_result"
-        },
-        {
-          "pick_date": "20260514",
-          "game_date": "20260517",
-          "away": "Cleveland Cavaliers",
-          "home": "Detroit Pistons",
-          "pick_type": "ou",
-          "pick_target": "over",
-          "pick_detail": "看大 Over 212.5",
-          "candidate_keys": [
+          "nearby_espn_games": [
             {
               "game_date": "20260517",
               "home": "detroit pistons",
               "away": "cleveland cavaliers"
-            },
-            {
-              "game_date": "20260516",
-              "home": "detroit pistons",
-              "away": "cleveland cavaliers"
-            },
-            {
-              "game_date": "20260516",
-              "home": "cleveland cavaliers",
-              "away": "detroit pistons"
-            },
-            {
-              "game_date": "20260518",
-              "home": "detroit pistons",
-              "away": "cleveland cavaliers"
-            },
-            {
-              "game_date": "20260518",
-              "home": "cleveland cavaliers",
-              "away": "detroit pistons"
-            },
-            {
-              "game_date": "20260517",
-              "home": "cleveland cavaliers",
-              "away": "detroit pistons"
             }
           ],
-          "candidate_hits": [],
-          "nearby_espn_games": [],
-          "reason": "ESPN result not found",
+          "reason": "ESPN has games on nearby dates, but team/date key mismatched",
           "status": "missing_result"
         },
         {
@@ -1241,8 +947,14 @@
             }
           ],
           "candidate_hits": [],
-          "nearby_espn_games": [],
-          "reason": "ESPN result not found",
+          "nearby_espn_games": [
+            {
+              "game_date": "20260517",
+              "home": "detroit pistons",
+              "away": "cleveland cavaliers"
+            }
+          ],
+          "reason": "ESPN has games on nearby dates, but team/date key mismatched",
           "status": "missing_result"
         },
         {
@@ -1286,98 +998,14 @@
             }
           ],
           "candidate_hits": [],
-          "nearby_espn_games": [],
-          "reason": "ESPN result not found",
-          "status": "missing_result"
-        },
-        {
-          "pick_date": "20260515",
-          "game_date": "20260517",
-          "away": "Cleveland Cavaliers",
-          "home": "Detroit Pistons",
-          "pick_type": "ou",
-          "pick_target": "over",
-          "pick_detail": "看大 Over 212.5",
-          "candidate_keys": [
+          "nearby_espn_games": [
             {
               "game_date": "20260517",
               "home": "detroit pistons",
               "away": "cleveland cavaliers"
-            },
-            {
-              "game_date": "20260516",
-              "home": "detroit pistons",
-              "away": "cleveland cavaliers"
-            },
-            {
-              "game_date": "20260516",
-              "home": "cleveland cavaliers",
-              "away": "detroit pistons"
-            },
-            {
-              "game_date": "20260518",
-              "home": "detroit pistons",
-              "away": "cleveland cavaliers"
-            },
-            {
-              "game_date": "20260518",
-              "home": "cleveland cavaliers",
-              "away": "detroit pistons"
-            },
-            {
-              "game_date": "20260517",
-              "home": "cleveland cavaliers",
-              "away": "detroit pistons"
             }
           ],
-          "candidate_hits": [],
-          "nearby_espn_games": [],
-          "reason": "ESPN result not found",
-          "status": "missing_result"
-        },
-        {
-          "pick_date": "20260515",
-          "game_date": "20260517",
-          "away": "Cleveland Cavaliers",
-          "home": "Detroit Pistons",
-          "pick_type": "spread",
-          "pick_target": "away",
-          "pick_detail": "買 Cavaliers 受讓 +3.5",
-          "candidate_keys": [
-            {
-              "game_date": "20260517",
-              "home": "detroit pistons",
-              "away": "cleveland cavaliers"
-            },
-            {
-              "game_date": "20260516",
-              "home": "detroit pistons",
-              "away": "cleveland cavaliers"
-            },
-            {
-              "game_date": "20260516",
-              "home": "cleveland cavaliers",
-              "away": "detroit pistons"
-            },
-            {
-              "game_date": "20260518",
-              "home": "detroit pistons",
-              "away": "cleveland cavaliers"
-            },
-            {
-              "game_date": "20260518",
-              "home": "cleveland cavaliers",
-              "away": "detroit pistons"
-            },
-            {
-              "game_date": "20260517",
-              "home": "cleveland cavaliers",
-              "away": "detroit pistons"
-            }
-          ],
-          "candidate_hits": [],
-          "nearby_espn_games": [],
-          "reason": "ESPN result not found",
+          "reason": "ESPN has games on nearby dates, but team/date key mismatched",
           "status": "missing_result"
         },
         {
@@ -1421,8 +1049,14 @@
             }
           ],
           "candidate_hits": [],
-          "nearby_espn_games": [],
-          "reason": "ESPN result not found",
+          "nearby_espn_games": [
+            {
+              "game_date": "20260517",
+              "home": "detroit pistons",
+              "away": "cleveland cavaliers"
+            }
+          ],
+          "reason": "ESPN has games on nearby dates, but team/date key mismatched",
           "status": "missing_result"
         },
         {
@@ -1466,53 +1100,14 @@
             }
           ],
           "candidate_hits": [],
-          "nearby_espn_games": [],
-          "reason": "ESPN result not found",
-          "status": "missing_result"
-        },
-        {
-          "pick_date": "20260516",
-          "game_date": "20260517",
-          "away": "Cleveland Cavaliers",
-          "home": "Detroit Pistons",
-          "pick_type": "ou",
-          "pick_target": "over",
-          "pick_detail": "看大 Over 212.5",
-          "candidate_keys": [
+          "nearby_espn_games": [
             {
               "game_date": "20260517",
               "home": "detroit pistons",
               "away": "cleveland cavaliers"
-            },
-            {
-              "game_date": "20260516",
-              "home": "detroit pistons",
-              "away": "cleveland cavaliers"
-            },
-            {
-              "game_date": "20260516",
-              "home": "cleveland cavaliers",
-              "away": "detroit pistons"
-            },
-            {
-              "game_date": "20260518",
-              "home": "detroit pistons",
-              "away": "cleveland cavaliers"
-            },
-            {
-              "game_date": "20260518",
-              "home": "cleveland cavaliers",
-              "away": "detroit pistons"
-            },
-            {
-              "game_date": "20260517",
-              "home": "cleveland cavaliers",
-              "away": "detroit pistons"
             }
           ],
-          "candidate_hits": [],
-          "nearby_espn_games": [],
-          "reason": "ESPN result not found",
+          "reason": "ESPN has games on nearby dates, but team/date key mismatched",
           "status": "missing_result"
         },
         {
@@ -1556,8 +1151,14 @@
             }
           ],
           "candidate_hits": [],
-          "nearby_espn_games": [],
-          "reason": "ESPN result not found",
+          "nearby_espn_games": [
+            {
+              "game_date": "20260517",
+              "home": "detroit pistons",
+              "away": "cleveland cavaliers"
+            }
+          ],
+          "reason": "ESPN has games on nearby dates, but team/date key mismatched",
           "status": "missing_result"
         },
         {
@@ -1601,238 +1202,19 @@
             }
           ],
           "candidate_hits": [],
-          "nearby_espn_games": [],
-          "reason": "ESPN result not found",
-          "status": "missing_result"
-        },
-        {
-          "pick_date": "20260517",
-          "game_date": "20260517",
-          "away": "Cleveland Cavaliers",
-          "home": "Detroit Pistons",
-          "pick_type": "ou",
-          "pick_target": "over",
-          "pick_detail": "看大 Over 212.5",
-          "candidate_keys": [
+          "nearby_espn_games": [
             {
               "game_date": "20260517",
               "home": "detroit pistons",
               "away": "cleveland cavaliers"
-            },
-            {
-              "game_date": "20260516",
-              "home": "detroit pistons",
-              "away": "cleveland cavaliers"
-            },
-            {
-              "game_date": "20260516",
-              "home": "cleveland cavaliers",
-              "away": "detroit pistons"
-            },
-            {
-              "game_date": "20260518",
-              "home": "detroit pistons",
-              "away": "cleveland cavaliers"
-            },
-            {
-              "game_date": "20260518",
-              "home": "cleveland cavaliers",
-              "away": "detroit pistons"
-            },
-            {
-              "game_date": "20260517",
-              "home": "cleveland cavaliers",
-              "away": "detroit pistons"
             }
           ],
-          "candidate_hits": [],
-          "nearby_espn_games": [],
-          "reason": "ESPN result not found",
-          "status": "missing_result"
-        },
-        {
-          "pick_date": "20260517",
-          "game_date": "20260518",
-          "away": "Cleveland Cavaliers",
-          "home": "Detroit Pistons",
-          "pick_type": "spread",
-          "pick_target": "away",
-          "pick_detail": "買 Cavaliers 受讓 +3.5",
-          "candidate_keys": [
-            {
-              "game_date": "20260518",
-              "home": "detroit pistons",
-              "away": "cleveland cavaliers"
-            },
-            {
-              "game_date": "20260517",
-              "home": "detroit pistons",
-              "away": "cleveland cavaliers"
-            },
-            {
-              "game_date": "20260517",
-              "home": "cleveland cavaliers",
-              "away": "detroit pistons"
-            },
-            {
-              "game_date": "20260519",
-              "home": "detroit pistons",
-              "away": "cleveland cavaliers"
-            },
-            {
-              "game_date": "20260519",
-              "home": "cleveland cavaliers",
-              "away": "detroit pistons"
-            },
-            {
-              "game_date": "20260518",
-              "home": "cleveland cavaliers",
-              "away": "detroit pistons"
-            }
-          ],
-          "candidate_hits": [],
-          "nearby_espn_games": [],
-          "reason": "ESPN result not found",
-          "status": "missing_result"
-        },
-        {
-          "pick_date": "20260517",
-          "game_date": "20260518",
-          "away": "Cleveland Cavaliers",
-          "home": "Detroit Pistons",
-          "pick_type": "ou",
-          "pick_target": "over",
-          "pick_detail": "看大 Over 212.5",
-          "candidate_keys": [
-            {
-              "game_date": "20260518",
-              "home": "detroit pistons",
-              "away": "cleveland cavaliers"
-            },
-            {
-              "game_date": "20260517",
-              "home": "detroit pistons",
-              "away": "cleveland cavaliers"
-            },
-            {
-              "game_date": "20260517",
-              "home": "cleveland cavaliers",
-              "away": "detroit pistons"
-            },
-            {
-              "game_date": "20260519",
-              "home": "detroit pistons",
-              "away": "cleveland cavaliers"
-            },
-            {
-              "game_date": "20260519",
-              "home": "cleveland cavaliers",
-              "away": "detroit pistons"
-            },
-            {
-              "game_date": "20260518",
-              "home": "cleveland cavaliers",
-              "away": "detroit pistons"
-            }
-          ],
-          "candidate_hits": [],
-          "nearby_espn_games": [],
-          "reason": "ESPN result not found",
-          "status": "missing_result"
-        },
-        {
-          "pick_date": "20260518",
-          "game_date": "20260518",
-          "away": "Cleveland Cavaliers",
-          "home": "Detroit Pistons",
-          "pick_type": "spread",
-          "pick_target": "away",
-          "pick_detail": "買 Cavaliers 受讓 +3.5",
-          "candidate_keys": [
-            {
-              "game_date": "20260518",
-              "home": "detroit pistons",
-              "away": "cleveland cavaliers"
-            },
-            {
-              "game_date": "20260517",
-              "home": "detroit pistons",
-              "away": "cleveland cavaliers"
-            },
-            {
-              "game_date": "20260517",
-              "home": "cleveland cavaliers",
-              "away": "detroit pistons"
-            },
-            {
-              "game_date": "20260519",
-              "home": "detroit pistons",
-              "away": "cleveland cavaliers"
-            },
-            {
-              "game_date": "20260519",
-              "home": "cleveland cavaliers",
-              "away": "detroit pistons"
-            },
-            {
-              "game_date": "20260518",
-              "home": "cleveland cavaliers",
-              "away": "detroit pistons"
-            }
-          ],
-          "candidate_hits": [],
-          "nearby_espn_games": [],
-          "reason": "ESPN result not found",
-          "status": "missing_result"
-        },
-        {
-          "pick_date": "20260518",
-          "game_date": "20260518",
-          "away": "Cleveland Cavaliers",
-          "home": "Detroit Pistons",
-          "pick_type": "ou",
-          "pick_target": "over",
-          "pick_detail": "看大 Over 212.5",
-          "candidate_keys": [
-            {
-              "game_date": "20260518",
-              "home": "detroit pistons",
-              "away": "cleveland cavaliers"
-            },
-            {
-              "game_date": "20260517",
-              "home": "detroit pistons",
-              "away": "cleveland cavaliers"
-            },
-            {
-              "game_date": "20260517",
-              "home": "cleveland cavaliers",
-              "away": "detroit pistons"
-            },
-            {
-              "game_date": "20260519",
-              "home": "detroit pistons",
-              "away": "cleveland cavaliers"
-            },
-            {
-              "game_date": "20260519",
-              "home": "cleveland cavaliers",
-              "away": "detroit pistons"
-            },
-            {
-              "game_date": "20260518",
-              "home": "cleveland cavaliers",
-              "away": "detroit pistons"
-            }
-          ],
-          "candidate_hits": [],
-          "nearby_espn_games": [],
-          "reason": "ESPN result not found",
+          "reason": "ESPN has games on nearby dates, but team/date key mismatched",
           "status": "missing_result"
         }
       ]
     }
   },
-  "generated_at": "2026-05-18T09:24:22",
-  "synced_at": "2026-05-18T09:24:22"
+  "generated_at": "2026-05-19T09:24:25",
+  "synced_at": "2026-05-19T09:24:25"
 }
