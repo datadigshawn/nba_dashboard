@@ -550,15 +550,46 @@
       "model_total": 220.7
     }
   ],
-  "current_picks": [],
-  "pending": 0,
+  "current_picks": [
+    {
+      "pick_date": "20260522",
+      "game_date": "20260525",
+      "away": "Oklahoma City Thunder",
+      "home": "San Antonio Spurs",
+      "pick_type": "ou",
+      "pick_target": "over",
+      "pick_line": 217.5,
+      "pick_detail": "看大 Over 217.5",
+      "edge": 9.599999999999994,
+      "confidence": 55.5,
+      "result": "pending",
+      "correct": null,
+      "tw_spread": -1.5,
+      "tw_ou": 217.5,
+      "model_spread": 2.4,
+      "model_total": 227.1
+    }
+  ],
+  "pending": 1,
   "stale_pending": 0,
-  "resolution_gaps": [],
+  "resolution_gaps": [
+    {
+      "pick_date": "20260522",
+      "game_date": "20260525",
+      "away": "Oklahoma City Thunder",
+      "home": "San Antonio Spurs",
+      "pick_type": "ou",
+      "pick_detail": "看大 Over 217.5",
+      "edge": 9.599999999999994,
+      "reason": "scheduled for future",
+      "status": "future_pending"
+    }
+  ],
   "history_sync": {
     "imported_from_bets": {
-      "candidates": 17,
+      "candidates": 18,
       "imported": 0,
-      "skipped_existing": 17
+      "skipped_existing": 18
     },
     "manual_results": 0,
     "resolved": {
@@ -572,6 +603,6 @@
       "missing_details": []
     }
   },
-  "generated_at": "2026-05-21T09:20:59",
-  "synced_at": "2026-05-21T09:20:59"
+  "generated_at": "2026-05-22T09:21:41",
+  "synced_at": "2026-05-22T09:21:41"
 }
