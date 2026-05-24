@@ -552,6 +552,24 @@
   ],
   "current_picks": [
     {
+      "pick_date": "20260524",
+      "game_date": "20260525",
+      "away": "Oklahoma City Thunder",
+      "home": "San Antonio Spurs",
+      "pick_type": "ou",
+      "pick_target": "over",
+      "pick_line": 217.5,
+      "pick_detail": "看大 Over 217.5",
+      "edge": 12.699999999999989,
+      "confidence": 56.3,
+      "result": "pending",
+      "correct": null,
+      "tw_spread": -1.5,
+      "tw_ou": 217.5,
+      "model_spread": 2.7,
+      "model_total": 230.2
+    },
+    {
       "pick_date": "20260523",
       "game_date": "20260525",
       "away": "Oklahoma City Thunder",
@@ -588,6 +606,24 @@
       "model_total": 227.1
     },
     {
+      "pick_date": "20260524",
+      "game_date": "20260526",
+      "away": "New York Knicks",
+      "home": "Cleveland Cavaliers",
+      "pick_type": "ou",
+      "pick_target": "over",
+      "pick_line": 213.5,
+      "pick_detail": "看大 Over 213.5",
+      "edge": 13.400000000000006,
+      "confidence": 56.0,
+      "result": "pending",
+      "correct": null,
+      "tw_spread": -2.5,
+      "tw_ou": 213.5,
+      "model_spread": -2.8,
+      "model_total": 226.9
+    },
+    {
       "pick_date": "20260523",
       "game_date": "20260526",
       "away": "New York Knicks",
@@ -597,6 +633,24 @@
       "pick_line": 213.5,
       "pick_detail": "看大 Over 213.5",
       "edge": 13.400000000000006,
+      "confidence": 56.0,
+      "result": "pending",
+      "correct": null,
+      "tw_spread": -2.5,
+      "tw_ou": 213.5,
+      "model_spread": -2.8,
+      "model_total": 226.9
+    },
+    {
+      "pick_date": "20260524",
+      "game_date": "20260526",
+      "away": "New York Knicks",
+      "home": "Cleveland Cavaliers",
+      "pick_type": "spread",
+      "pick_target": "away",
+      "pick_line": -2.5,
+      "pick_detail": "買 Knicks 受讓 +2.5",
+      "edge": 5.3,
       "confidence": 56.0,
       "result": "pending",
       "correct": null,
@@ -624,7 +678,7 @@
       "model_total": 226.9
     }
   ],
-  "pending": 4,
+  "pending": 7,
   "stale_pending": 0,
   "resolution_gaps": [
     {
@@ -650,6 +704,17 @@
       "status": "future_pending"
     },
     {
+      "pick_date": "20260524",
+      "game_date": "20260525",
+      "away": "Oklahoma City Thunder",
+      "home": "San Antonio Spurs",
+      "pick_type": "ou",
+      "pick_detail": "看大 Over 217.5",
+      "edge": 12.699999999999989,
+      "reason": "scheduled for future",
+      "status": "future_pending"
+    },
+    {
       "pick_date": "20260523",
       "game_date": "20260526",
       "away": "New York Knicks",
@@ -662,6 +727,28 @@
     },
     {
       "pick_date": "20260523",
+      "game_date": "20260526",
+      "away": "New York Knicks",
+      "home": "Cleveland Cavaliers",
+      "pick_type": "ou",
+      "pick_detail": "看大 Over 213.5",
+      "edge": 13.400000000000006,
+      "reason": "scheduled for future",
+      "status": "future_pending"
+    },
+    {
+      "pick_date": "20260524",
+      "game_date": "20260526",
+      "away": "New York Knicks",
+      "home": "Cleveland Cavaliers",
+      "pick_type": "spread",
+      "pick_detail": "買 Knicks 受讓 +2.5",
+      "edge": 5.3,
+      "reason": "scheduled for future",
+      "status": "future_pending"
+    },
+    {
+      "pick_date": "20260524",
       "game_date": "20260526",
       "away": "New York Knicks",
       "home": "Cleveland Cavaliers",
@@ -690,6 +777,6 @@
       "missing_details": []
     }
   },
-  "generated_at": "2026-05-23T09:21:47",
-  "synced_at": "2026-05-23T09:21:47"
+  "generated_at": "2026-05-24T09:20:58",
+  "synced_at": "2026-05-24T09:20:58"
 }
