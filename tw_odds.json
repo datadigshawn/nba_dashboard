@@ -1,28 +1,28 @@
 {
-  "synced_at": "2026-05-25T09:21:40",
+  "synced_at": "2026-05-26T09:20:55",
   "source": {
-    "sportweb_fetched_at": "2026-05-25T09:21:36",
+    "sportweb_fetched_at": "2026-05-26T09:20:53",
     "source_url": "https://www.sportslottery.com.tw/sportsbook/sport",
     "game_count": 1
   },
   "entries": [
     {
-      "game": "New York Knicks @ Cleveland Cavaliers",
-      "away": "New York Knicks",
-      "home": "Cleveland Cavaliers",
-      "spread": 1.5,
-      "ou": 217.5,
-      "updated_at": "2026-05-25T09:21:36",
+      "game": "San Antonio Spurs @ Oklahoma City Thunder",
+      "away": "San Antonio Spurs",
+      "home": "Oklahoma City Thunder",
+      "spread": null,
+      "ou": null,
+      "updated_at": "2026-05-26T09:20:53",
       "source": "sportWeb",
-      "sportweb_game_id": "3470811.1",
-      "start_time": "2026-05-26T08:00:00.000+08:00"
+      "sportweb_game_id": "3470887.1",
+      "start_time": "2026-05-27T08:30:00.000+08:00"
     }
   ],
   "odds": {
-    "New York Knicks @ Cleveland Cavaliers": {
-      "spread": 1.5,
-      "ou": 217.5,
-      "updated_at": "2026-05-25T09:21:36",
+    "San Antonio Spurs @ Oklahoma City Thunder": {
+      "spread": null,
+      "ou": null,
+      "updated_at": "2026-05-26T09:20:53",
       "source": "sportWeb"
     }
   }
