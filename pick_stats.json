@@ -1,13 +1,13 @@
 {
-  "total": 74,
-  "wins": 41,
-  "wr": 55.4,
-  "spread_total": 45,
-  "spread_wins": 21,
-  "spread_wr": 46.7,
-  "ou_total": 29,
-  "ou_wins": 20,
-  "ou_wr": 69.0,
+  "total": 80,
+  "wins": 47,
+  "wr": 58.8,
+  "spread_total": 48,
+  "spread_wins": 24,
+  "spread_wr": 50.0,
+  "ou_total": 32,
+  "ou_wins": 23,
+  "ou_wr": 71.9,
   "daily": [
     {
       "date": "20260510",
@@ -65,21 +65,21 @@
     },
     {
       "date": "20260523",
-      "wins": 0,
-      "total": 1,
-      "wr": 0.0
+      "wins": 2,
+      "total": 3,
+      "wr": 66.7
     },
     {
       "date": "20260524",
-      "wins": 0,
-      "total": 1,
-      "wr": 0.0
+      "wins": 2,
+      "total": 3,
+      "wr": 66.7
     },
     {
       "date": "20260526",
-      "wins": 0,
-      "total": 1,
-      "wr": 0.0
+      "wins": 2,
+      "total": 3,
+      "wr": 66.7
     }
   ],
   "edge_buckets": [
@@ -97,23 +97,23 @@
     },
     {
       "bucket": "5-8",
-      "wins": 22,
-      "total": 33,
-      "wr": 66.7
+      "wins": 25,
+      "total": 36,
+      "wr": 69.4
     },
     {
       "bucket": "8+",
-      "wins": 9,
-      "total": 19,
-      "wr": 47.4
+      "wins": 12,
+      "total": 22,
+      "wr": 54.5
     }
   ],
   "confidence_buckets": [
     {
       "bucket": "<60",
-      "wins": 15,
-      "total": 29,
-      "wr": 51.7
+      "wins": 21,
+      "total": 35,
+      "wr": 60.0
     },
     {
       "bucket": "60-70",
@@ -150,9 +150,9 @@
       },
       {
         "bucket": "5-8",
-        "wins": 6,
-        "total": 14,
-        "wr": 42.9
+        "wins": 9,
+        "total": 17,
+        "wr": 52.9
       },
       {
         "bucket": "8+",
@@ -182,13 +182,121 @@
       },
       {
         "bucket": "8+",
-        "wins": 4,
-        "total": 10,
-        "wr": 40.0
+        "wins": 7,
+        "total": 13,
+        "wr": 53.8
       }
     ]
   },
   "recent": [
+    {
+      "pick_date": "20260526",
+      "game_date": "20260526",
+      "away": "New York Knicks",
+      "home": "Cleveland Cavaliers",
+      "pick_type": "ou",
+      "pick_target": "over",
+      "pick_line": 213.5,
+      "pick_detail": "看大 Over 213.5",
+      "edge": 13.400000000000006,
+      "confidence": 56.0,
+      "result": "win",
+      "correct": 1,
+      "tw_spread": -2.5,
+      "tw_ou": 213.5,
+      "model_spread": -2.8,
+      "model_total": 226.9
+    },
+    {
+      "pick_date": "20260526",
+      "game_date": "20260526",
+      "away": "New York Knicks",
+      "home": "Cleveland Cavaliers",
+      "pick_type": "spread",
+      "pick_target": "away",
+      "pick_line": -2.5,
+      "pick_detail": "買 Knicks 受讓 +2.5",
+      "edge": 5.3,
+      "confidence": 56.0,
+      "result": "win",
+      "correct": 1,
+      "tw_spread": -2.5,
+      "tw_ou": 213.5,
+      "model_spread": -2.8,
+      "model_total": 226.9
+    },
+    {
+      "pick_date": "20260524",
+      "game_date": "20260526",
+      "away": "New York Knicks",
+      "home": "Cleveland Cavaliers",
+      "pick_type": "ou",
+      "pick_target": "over",
+      "pick_line": 213.5,
+      "pick_detail": "看大 Over 213.5",
+      "edge": 13.400000000000006,
+      "confidence": 56.0,
+      "result": "win",
+      "correct": 1,
+      "tw_spread": -2.5,
+      "tw_ou": 213.5,
+      "model_spread": -2.8,
+      "model_total": 226.9
+    },
+    {
+      "pick_date": "20260524",
+      "game_date": "20260526",
+      "away": "New York Knicks",
+      "home": "Cleveland Cavaliers",
+      "pick_type": "spread",
+      "pick_target": "away",
+      "pick_line": -2.5,
+      "pick_detail": "買 Knicks 受讓 +2.5",
+      "edge": 5.3,
+      "confidence": 56.0,
+      "result": "win",
+      "correct": 1,
+      "tw_spread": -2.5,
+      "tw_ou": 213.5,
+      "model_spread": -2.8,
+      "model_total": 226.9
+    },
+    {
+      "pick_date": "20260523",
+      "game_date": "20260526",
+      "away": "New York Knicks",
+      "home": "Cleveland Cavaliers",
+      "pick_type": "ou",
+      "pick_target": "over",
+      "pick_line": 213.5,
+      "pick_detail": "看大 Over 213.5",
+      "edge": 13.400000000000006,
+      "confidence": 56.0,
+      "result": "win",
+      "correct": 1,
+      "tw_spread": -2.5,
+      "tw_ou": 213.5,
+      "model_spread": -2.8,
+      "model_total": 226.9
+    },
+    {
+      "pick_date": "20260523",
+      "game_date": "20260526",
+      "away": "New York Knicks",
+      "home": "Cleveland Cavaliers",
+      "pick_type": "spread",
+      "pick_target": "away",
+      "pick_line": -2.5,
+      "pick_detail": "買 Knicks 受讓 +2.5",
+      "edge": 5.3,
+      "confidence": 56.0,
+      "result": "win",
+      "correct": 1,
+      "tw_spread": -2.5,
+      "tw_ou": 213.5,
+      "model_spread": -2.8,
+      "model_total": 226.9
+    },
     {
       "pick_date": "20260526",
       "game_date": "20260525",
@@ -440,296 +548,12 @@
       "tw_ou": 218.5,
       "model_spread": -6.0,
       "model_total": 224.0
-    },
-    {
-      "pick_date": "20260516",
-      "game_date": "20260516",
-      "away": "San Antonio Spurs",
-      "home": "Minnesota Timberwolves",
-      "pick_type": "ou",
-      "pick_target": "over",
-      "pick_line": 218.5,
-      "pick_detail": "看大 Over 218.5",
-      "edge": 5.5,
-      "confidence": 52.7,
-      "result": "win",
-      "correct": 1,
-      "tw_spread": 4.5,
-      "tw_ou": 218.5,
-      "model_spread": -6.0,
-      "model_total": 224.0
-    },
-    {
-      "pick_date": "20260515",
-      "game_date": "20260516",
-      "away": "San Antonio Spurs",
-      "home": "Minnesota Timberwolves",
-      "pick_type": "ou",
-      "pick_target": "over",
-      "pick_line": 218.5,
-      "pick_detail": "看大 Over 218.5",
-      "edge": 5.400000000000006,
-      "confidence": 52.8,
-      "result": "win",
-      "correct": 1,
-      "tw_spread": 4.5,
-      "tw_ou": 218.5,
-      "model_spread": -6.1,
-      "model_total": 223.9
-    },
-    {
-      "pick_date": "20260515",
-      "game_date": "20260516",
-      "away": "San Antonio Spurs",
-      "home": "Minnesota Timberwolves",
-      "pick_type": "spread",
-      "pick_target": "away",
-      "pick_line": 4.5,
-      "pick_detail": "買 Spurs 讓分 -4.5",
-      "edge": 3.2,
-      "confidence": 52.9,
-      "result": "win",
-      "correct": 1,
-      "tw_spread": 4.5,
-      "tw_ou": 218.5,
-      "model_spread": -7.7,
-      "model_total": 223.3
-    },
-    {
-      "pick_date": "20260514",
-      "game_date": "20260516",
-      "away": "San Antonio Spurs",
-      "home": "Minnesota Timberwolves",
-      "pick_type": "spread",
-      "pick_target": "away",
-      "pick_line": 4.5,
-      "pick_detail": "買 Spurs 讓分 -4.5",
-      "edge": 3.2,
-      "confidence": 52.9,
-      "result": "win",
-      "correct": 1,
-      "tw_spread": 4.5,
-      "tw_ou": 218.5,
-      "model_spread": -7.7,
-      "model_total": 223.3
-    },
-    {
-      "pick_date": "20260515",
-      "game_date": "20260515",
-      "away": "Detroit Pistons",
-      "home": "Cleveland Cavaliers",
-      "pick_type": "ou",
-      "pick_target": "over",
-      "pick_line": 212.5,
-      "pick_detail": "看大 Over 212.5",
-      "edge": 7.099999999999994,
-      "confidence": 53.5,
-      "result": "loss",
-      "correct": 0,
-      "tw_spread": -3.5,
-      "tw_ou": 212.5,
-      "model_spread": -3.2,
-      "model_total": 219.6
-    },
-    {
-      "pick_date": "20260515",
-      "game_date": "20260515",
-      "away": "Detroit Pistons",
-      "home": "Cleveland Cavaliers",
-      "pick_type": "spread",
-      "pick_target": "away",
-      "pick_line": -3.5,
-      "pick_detail": "買 Pistons 受讓 +3.5",
-      "edge": 6.7,
-      "confidence": 53.5,
-      "result": "win",
-      "correct": 1,
-      "tw_spread": -3.5,
-      "tw_ou": 212.5,
-      "model_spread": -3.2,
-      "model_total": 219.6
     }
   ],
-  "current_picks": [
-    {
-      "pick_date": "20260526",
-      "game_date": "20260526",
-      "away": "New York Knicks",
-      "home": "Cleveland Cavaliers",
-      "pick_type": "ou",
-      "pick_target": "over",
-      "pick_line": 213.5,
-      "pick_detail": "看大 Over 213.5",
-      "edge": 13.400000000000006,
-      "confidence": 56.0,
-      "result": "pending",
-      "correct": null,
-      "tw_spread": -2.5,
-      "tw_ou": 213.5,
-      "model_spread": -2.8,
-      "model_total": 226.9
-    },
-    {
-      "pick_date": "20260524",
-      "game_date": "20260526",
-      "away": "New York Knicks",
-      "home": "Cleveland Cavaliers",
-      "pick_type": "ou",
-      "pick_target": "over",
-      "pick_line": 213.5,
-      "pick_detail": "看大 Over 213.5",
-      "edge": 13.400000000000006,
-      "confidence": 56.0,
-      "result": "pending",
-      "correct": null,
-      "tw_spread": -2.5,
-      "tw_ou": 213.5,
-      "model_spread": -2.8,
-      "model_total": 226.9
-    },
-    {
-      "pick_date": "20260523",
-      "game_date": "20260526",
-      "away": "New York Knicks",
-      "home": "Cleveland Cavaliers",
-      "pick_type": "ou",
-      "pick_target": "over",
-      "pick_line": 213.5,
-      "pick_detail": "看大 Over 213.5",
-      "edge": 13.400000000000006,
-      "confidence": 56.0,
-      "result": "pending",
-      "correct": null,
-      "tw_spread": -2.5,
-      "tw_ou": 213.5,
-      "model_spread": -2.8,
-      "model_total": 226.9
-    },
-    {
-      "pick_date": "20260526",
-      "game_date": "20260526",
-      "away": "New York Knicks",
-      "home": "Cleveland Cavaliers",
-      "pick_type": "spread",
-      "pick_target": "away",
-      "pick_line": -2.5,
-      "pick_detail": "買 Knicks 受讓 +2.5",
-      "edge": 5.3,
-      "confidence": 56.0,
-      "result": "pending",
-      "correct": null,
-      "tw_spread": -2.5,
-      "tw_ou": 213.5,
-      "model_spread": -2.8,
-      "model_total": 226.9
-    },
-    {
-      "pick_date": "20260524",
-      "game_date": "20260526",
-      "away": "New York Knicks",
-      "home": "Cleveland Cavaliers",
-      "pick_type": "spread",
-      "pick_target": "away",
-      "pick_line": -2.5,
-      "pick_detail": "買 Knicks 受讓 +2.5",
-      "edge": 5.3,
-      "confidence": 56.0,
-      "result": "pending",
-      "correct": null,
-      "tw_spread": -2.5,
-      "tw_ou": 213.5,
-      "model_spread": -2.8,
-      "model_total": 226.9
-    },
-    {
-      "pick_date": "20260523",
-      "game_date": "20260526",
-      "away": "New York Knicks",
-      "home": "Cleveland Cavaliers",
-      "pick_type": "spread",
-      "pick_target": "away",
-      "pick_line": -2.5,
-      "pick_detail": "買 Knicks 受讓 +2.5",
-      "edge": 5.3,
-      "confidence": 56.0,
-      "result": "pending",
-      "correct": null,
-      "tw_spread": -2.5,
-      "tw_ou": 213.5,
-      "model_spread": -2.8,
-      "model_total": 226.9
-    }
-  ],
-  "pending": 6,
+  "current_picks": [],
+  "pending": 0,
   "stale_pending": 0,
-  "resolution_gaps": [
-    {
-      "pick_date": "20260523",
-      "game_date": "20260526",
-      "away": "New York Knicks",
-      "home": "Cleveland Cavaliers",
-      "pick_type": "spread",
-      "pick_detail": "買 Knicks 受讓 +2.5",
-      "edge": 5.3,
-      "reason": "scheduled for future",
-      "status": "future_pending"
-    },
-    {
-      "pick_date": "20260523",
-      "game_date": "20260526",
-      "away": "New York Knicks",
-      "home": "Cleveland Cavaliers",
-      "pick_type": "ou",
-      "pick_detail": "看大 Over 213.5",
-      "edge": 13.400000000000006,
-      "reason": "scheduled for future",
-      "status": "future_pending"
-    },
-    {
-      "pick_date": "20260524",
-      "game_date": "20260526",
-      "away": "New York Knicks",
-      "home": "Cleveland Cavaliers",
-      "pick_type": "spread",
-      "pick_detail": "買 Knicks 受讓 +2.5",
-      "edge": 5.3,
-      "reason": "scheduled for future",
-      "status": "future_pending"
-    },
-    {
-      "pick_date": "20260524",
-      "game_date": "20260526",
-      "away": "New York Knicks",
-      "home": "Cleveland Cavaliers",
-      "pick_type": "ou",
-      "pick_detail": "看大 Over 213.5",
-      "edge": 13.400000000000006,
-      "reason": "scheduled for future",
-      "status": "future_pending"
-    },
-    {
-      "pick_date": "20260526",
-      "game_date": "20260526",
-      "away": "New York Knicks",
-      "home": "Cleveland Cavaliers",
-      "pick_type": "spread",
-      "pick_detail": "買 Knicks 受讓 +2.5",
-      "edge": 5.3,
-      "reason": "scheduled for future",
-      "status": "future_pending"
-    },
-    {
-      "pick_date": "20260526",
-      "game_date": "20260526",
-      "away": "New York Knicks",
-      "home": "Cleveland Cavaliers",
-      "pick_type": "ou",
-      "pick_detail": "看大 Over 213.5",
-      "edge": 13.400000000000006,
-      "reason": "scheduled for future",
-      "status": "future_pending"
-    }
-  ],
+  "resolution_gaps": [],
   "history_sync": {
     "imported_from_bets": {
       "candidates": 19,
@@ -738,287 +562,16 @@
     },
     "manual_results": 0,
     "resolved": {
-      "candidates": 6,
+      "candidates": 0,
       "verified": 0,
       "wins": 0,
       "losses": 0,
       "pushes": 0,
-      "missing_results": 6,
+      "missing_results": 0,
       "ungraded": 0,
-      "missing_details": [
-        {
-          "pick_date": "20260523",
-          "game_date": "20260526",
-          "away": "New York Knicks",
-          "home": "Cleveland Cavaliers",
-          "pick_type": "spread",
-          "pick_target": "away",
-          "pick_detail": "買 Knicks 受讓 +2.5",
-          "candidate_keys": [
-            {
-              "game_date": "20260526",
-              "home": "cleveland cavaliers",
-              "away": "new york knicks"
-            },
-            {
-              "game_date": "20260525",
-              "home": "cleveland cavaliers",
-              "away": "new york knicks"
-            },
-            {
-              "game_date": "20260525",
-              "home": "new york knicks",
-              "away": "cleveland cavaliers"
-            },
-            {
-              "game_date": "20260527",
-              "home": "cleveland cavaliers",
-              "away": "new york knicks"
-            },
-            {
-              "game_date": "20260527",
-              "home": "new york knicks",
-              "away": "cleveland cavaliers"
-            },
-            {
-              "game_date": "20260526",
-              "home": "new york knicks",
-              "away": "cleveland cavaliers"
-            }
-          ],
-          "candidate_hits": [],
-          "nearby_espn_games": [],
-          "reason": "ESPN result not found",
-          "status": "missing_result"
-        },
-        {
-          "pick_date": "20260523",
-          "game_date": "20260526",
-          "away": "New York Knicks",
-          "home": "Cleveland Cavaliers",
-          "pick_type": "ou",
-          "pick_target": "over",
-          "pick_detail": "看大 Over 213.5",
-          "candidate_keys": [
-            {
-              "game_date": "20260526",
-              "home": "cleveland cavaliers",
-              "away": "new york knicks"
-            },
-            {
-              "game_date": "20260525",
-              "home": "cleveland cavaliers",
-              "away": "new york knicks"
-            },
-            {
-              "game_date": "20260525",
-              "home": "new york knicks",
-              "away": "cleveland cavaliers"
-            },
-            {
-              "game_date": "20260527",
-              "home": "cleveland cavaliers",
-              "away": "new york knicks"
-            },
-            {
-              "game_date": "20260527",
-              "home": "new york knicks",
-              "away": "cleveland cavaliers"
-            },
-            {
-              "game_date": "20260526",
-              "home": "new york knicks",
-              "away": "cleveland cavaliers"
-            }
-          ],
-          "candidate_hits": [],
-          "nearby_espn_games": [],
-          "reason": "ESPN result not found",
-          "status": "missing_result"
-        },
-        {
-          "pick_date": "20260524",
-          "game_date": "20260526",
-          "away": "New York Knicks",
-          "home": "Cleveland Cavaliers",
-          "pick_type": "spread",
-          "pick_target": "away",
-          "pick_detail": "買 Knicks 受讓 +2.5",
-          "candidate_keys": [
-            {
-              "game_date": "20260526",
-              "home": "cleveland cavaliers",
-              "away": "new york knicks"
-            },
-            {
-              "game_date": "20260525",
-              "home": "cleveland cavaliers",
-              "away": "new york knicks"
-            },
-            {
-              "game_date": "20260525",
-              "home": "new york knicks",
-              "away": "cleveland cavaliers"
-            },
-            {
-              "game_date": "20260527",
-              "home": "cleveland cavaliers",
-              "away": "new york knicks"
-            },
-            {
-              "game_date": "20260527",
-              "home": "new york knicks",
-              "away": "cleveland cavaliers"
-            },
-            {
-              "game_date": "20260526",
-              "home": "new york knicks",
-              "away": "cleveland cavaliers"
-            }
-          ],
-          "candidate_hits": [],
-          "nearby_espn_games": [],
-          "reason": "ESPN result not found",
-          "status": "missing_result"
-        },
-        {
-          "pick_date": "20260524",
-          "game_date": "20260526",
-          "away": "New York Knicks",
-          "home": "Cleveland Cavaliers",
-          "pick_type": "ou",
-          "pick_target": "over",
-          "pick_detail": "看大 Over 213.5",
-          "candidate_keys": [
-            {
-              "game_date": "20260526",
-              "home": "cleveland cavaliers",
-              "away": "new york knicks"
-            },
-            {
-              "game_date": "20260525",
-              "home": "cleveland cavaliers",
-              "away": "new york knicks"
-            },
-            {
-              "game_date": "20260525",
-              "home": "new york knicks",
-              "away": "cleveland cavaliers"
-            },
-            {
-              "game_date": "20260527",
-              "home": "cleveland cavaliers",
-              "away": "new york knicks"
-            },
-            {
-              "game_date": "20260527",
-              "home": "new york knicks",
-              "away": "cleveland cavaliers"
-            },
-            {
-              "game_date": "20260526",
-              "home": "new york knicks",
-              "away": "cleveland cavaliers"
-            }
-          ],
-          "candidate_hits": [],
-          "nearby_espn_games": [],
-          "reason": "ESPN result not found",
-          "status": "missing_result"
-        },
-        {
-          "pick_date": "20260526",
-          "game_date": "20260526",
-          "away": "New York Knicks",
-          "home": "Cleveland Cavaliers",
-          "pick_type": "spread",
-          "pick_target": "away",
-          "pick_detail": "買 Knicks 受讓 +2.5",
-          "candidate_keys": [
-            {
-              "game_date": "20260526",
-              "home": "cleveland cavaliers",
-              "away": "new york knicks"
-            },
-            {
-              "game_date": "20260525",
-              "home": "cleveland cavaliers",
-              "away": "new york knicks"
-            },
-            {
-              "game_date": "20260525",
-              "home": "new york knicks",
-              "away": "cleveland cavaliers"
-            },
-            {
-              "game_date": "20260527",
-              "home": "cleveland cavaliers",
-              "away": "new york knicks"
-            },
-            {
-              "game_date": "20260527",
-              "home": "new york knicks",
-              "away": "cleveland cavaliers"
-            },
-            {
-              "game_date": "20260526",
-              "home": "new york knicks",
-              "away": "cleveland cavaliers"
-            }
-          ],
-          "candidate_hits": [],
-          "nearby_espn_games": [],
-          "reason": "ESPN result not found",
-          "status": "missing_result"
-        },
-        {
-          "pick_date": "20260526",
-          "game_date": "20260526",
-          "away": "New York Knicks",
-          "home": "Cleveland Cavaliers",
-          "pick_type": "ou",
-          "pick_target": "over",
-          "pick_detail": "看大 Over 213.5",
-          "candidate_keys": [
-            {
-              "game_date": "20260526",
-              "home": "cleveland cavaliers",
-              "away": "new york knicks"
-            },
-            {
-              "game_date": "20260525",
-              "home": "cleveland cavaliers",
-              "away": "new york knicks"
-            },
-            {
-              "game_date": "20260525",
-              "home": "new york knicks",
-              "away": "cleveland cavaliers"
-            },
-            {
-              "game_date": "20260527",
-              "home": "cleveland cavaliers",
-              "away": "new york knicks"
-            },
-            {
-              "game_date": "20260527",
-              "home": "new york knicks",
-              "away": "cleveland cavaliers"
-            },
-            {
-              "game_date": "20260526",
-              "home": "new york knicks",
-              "away": "cleveland cavaliers"
-            }
-          ],
-          "candidate_hits": [],
-          "nearby_espn_games": [],
-          "reason": "ESPN result not found",
-          "status": "missing_result"
-        }
-      ]
+      "missing_details": []
     }
   },
-  "generated_at": "2026-05-26T09:20:56",
-  "synced_at": "2026-05-26T09:20:56"
+  "generated_at": "2026-05-27T09:21:55",
+  "synced_at": "2026-05-27T09:21:55"
 }
