@@ -550,15 +550,75 @@
       "model_total": 224.0
     }
   ],
-  "current_picks": [],
-  "pending": 0,
+  "current_picks": [
+    {
+      "pick_date": "20260528",
+      "game_date": "20260529",
+      "away": "Oklahoma City Thunder",
+      "home": "San Antonio Spurs",
+      "pick_type": "ou",
+      "pick_target": "over",
+      "pick_line": 219.5,
+      "pick_detail": "看大 Over 219.5",
+      "edge": 11.599999999999994,
+      "confidence": 50.3,
+      "result": "pending",
+      "correct": null,
+      "tw_spread": -3.5,
+      "tw_ou": 219.5,
+      "model_spread": -1.2,
+      "model_total": 231.1
+    },
+    {
+      "pick_date": "20260528",
+      "game_date": "20260529",
+      "away": "Oklahoma City Thunder",
+      "home": "San Antonio Spurs",
+      "pick_type": "spread",
+      "pick_target": "away",
+      "pick_line": -3.5,
+      "pick_detail": "買 Thunder 受讓 +3.5",
+      "edge": 4.7,
+      "confidence": 50.3,
+      "result": "pending",
+      "correct": null,
+      "tw_spread": -3.5,
+      "tw_ou": 219.5,
+      "model_spread": -1.2,
+      "model_total": 231.1
+    }
+  ],
+  "pending": 2,
   "stale_pending": 0,
-  "resolution_gaps": [],
+  "resolution_gaps": [
+    {
+      "pick_date": "20260528",
+      "game_date": "20260529",
+      "away": "Oklahoma City Thunder",
+      "home": "San Antonio Spurs",
+      "pick_type": "spread",
+      "pick_detail": "買 Thunder 受讓 +3.5",
+      "edge": 4.7,
+      "reason": "scheduled for future",
+      "status": "future_pending"
+    },
+    {
+      "pick_date": "20260528",
+      "game_date": "20260529",
+      "away": "Oklahoma City Thunder",
+      "home": "San Antonio Spurs",
+      "pick_type": "ou",
+      "pick_detail": "看大 Over 219.5",
+      "edge": 11.599999999999994,
+      "reason": "scheduled for future",
+      "status": "future_pending"
+    }
+  ],
   "history_sync": {
     "imported_from_bets": {
-      "candidates": 19,
+      "candidates": 20,
       "imported": 0,
-      "skipped_existing": 19
+      "skipped_existing": 20
     },
     "manual_results": 0,
     "resolved": {
@@ -572,6 +632,6 @@
       "missing_details": []
     }
   },
-  "generated_at": "2026-05-27T09:21:55",
-  "synced_at": "2026-05-27T09:21:55"
+  "generated_at": "2026-05-28T09:21:48",
+  "synced_at": "2026-05-28T09:21:48"
 }
