@@ -1,29 +1,10 @@
 {
-  "synced_at": "2026-05-28T09:21:48",
+  "synced_at": "2026-05-29T09:20:56",
   "source": {
-    "sportweb_fetched_at": "2026-05-28T09:21:44",
+    "sportweb_fetched_at": "2026-05-29T09:20:53",
     "source_url": "https://www.sportslottery.com.tw/sportsbook/sport",
-    "game_count": 1
+    "game_count": 0
   },
-  "entries": [
-    {
-      "game": "Oklahoma City Thunder @ San Antonio Spurs",
-      "away": "Oklahoma City Thunder",
-      "home": "San Antonio Spurs",
-      "spread": -3.5,
-      "ou": 219.5,
-      "updated_at": "2026-05-28T09:21:44",
-      "source": "sportWeb",
-      "sportweb_game_id": "3471210.1",
-      "start_time": "2026-05-29T08:30:00.000+08:00"
-    }
-  ],
-  "odds": {
-    "Oklahoma City Thunder @ San Antonio Spurs": {
-      "spread": -3.5,
-      "ou": 219.5,
-      "updated_at": "2026-05-28T09:21:44",
-      "source": "sportWeb"
-    }
-  }
+  "entries": [],
+  "odds": {}
 }
