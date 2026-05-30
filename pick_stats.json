@@ -1,20 +1,14 @@
 {
-  "total": 80,
+  "total": 82,
   "wins": 47,
-  "wr": 58.8,
-  "spread_total": 48,
+  "wr": 57.3,
+  "spread_total": 49,
   "spread_wins": 24,
-  "spread_wr": 50.0,
-  "ou_total": 32,
+  "spread_wr": 49.0,
+  "ou_total": 33,
   "ou_wins": 23,
-  "ou_wr": 71.9,
+  "ou_wr": 69.7,
   "daily": [
-    {
-      "date": "20260510",
-      "wins": 6,
-      "total": 9,
-      "wr": 66.7
-    },
     {
       "date": "20260512",
       "wins": 4,
@@ -80,6 +74,12 @@
       "wins": 2,
       "total": 3,
       "wr": 66.7
+    },
+    {
+      "date": "20260528",
+      "wins": 0,
+      "total": 2,
+      "wr": 0.0
     }
   ],
   "edge_buckets": [
@@ -92,8 +92,8 @@
     {
       "bucket": "3-5",
       "wins": 5,
-      "total": 11,
-      "wr": 45.5
+      "total": 12,
+      "wr": 41.7
     },
     {
       "bucket": "5-8",
@@ -104,16 +104,16 @@
     {
       "bucket": "8+",
       "wins": 12,
-      "total": 22,
-      "wr": 54.5
+      "total": 23,
+      "wr": 52.2
     }
   ],
   "confidence_buckets": [
     {
       "bucket": "<60",
       "wins": 21,
-      "total": 35,
-      "wr": 60.0
+      "total": 37,
+      "wr": 56.8
     },
     {
       "bucket": "60-70",
@@ -145,8 +145,8 @@
       {
         "bucket": "3-5",
         "wins": 5,
-        "total": 11,
-        "wr": 45.5
+        "total": 12,
+        "wr": 41.7
       },
       {
         "bucket": "5-8",
@@ -183,12 +183,48 @@
       {
         "bucket": "8+",
         "wins": 7,
-        "total": 13,
-        "wr": 53.8
+        "total": 14,
+        "wr": 50.0
       }
     ]
   },
   "recent": [
+    {
+      "pick_date": "20260528",
+      "game_date": "20260529",
+      "away": "Oklahoma City Thunder",
+      "home": "San Antonio Spurs",
+      "pick_type": "ou",
+      "pick_target": "over",
+      "pick_line": 219.5,
+      "pick_detail": "看大 Over 219.5",
+      "edge": 11.599999999999994,
+      "confidence": 50.3,
+      "result": "loss",
+      "correct": 0,
+      "tw_spread": -3.5,
+      "tw_ou": 219.5,
+      "model_spread": -1.2,
+      "model_total": 231.1
+    },
+    {
+      "pick_date": "20260528",
+      "game_date": "20260529",
+      "away": "Oklahoma City Thunder",
+      "home": "San Antonio Spurs",
+      "pick_type": "spread",
+      "pick_target": "away",
+      "pick_line": -3.5,
+      "pick_detail": "買 Thunder 受讓 +3.5",
+      "edge": 4.7,
+      "confidence": 50.3,
+      "result": "loss",
+      "correct": 0,
+      "tw_spread": -3.5,
+      "tw_ou": 219.5,
+      "model_spread": -1.2,
+      "model_total": 231.1
+    },
     {
       "pick_date": "20260526",
       "game_date": "20260526",
@@ -512,217 +548,61 @@
       "tw_ou": 212.5,
       "model_spread": 2.2,
       "model_total": 219.6
-    },
-    {
-      "pick_date": "20260514",
-      "game_date": "20260517",
-      "away": "Cleveland Cavaliers",
-      "home": "Detroit Pistons",
-      "pick_type": "ou",
-      "pick_target": "over",
-      "pick_line": 212.5,
-      "pick_detail": "看大 Over 212.5",
-      "edge": 7.099999999999994,
-      "confidence": 80.1,
-      "result": "win",
-      "correct": 1,
-      "tw_spread": -3.5,
-      "tw_ou": 212.5,
-      "model_spread": 2.2,
-      "model_total": 219.6
-    },
-    {
-      "pick_date": "20260517",
-      "game_date": "20260516",
-      "away": "San Antonio Spurs",
-      "home": "Minnesota Timberwolves",
-      "pick_type": "ou",
-      "pick_target": "over",
-      "pick_line": 218.5,
-      "pick_detail": "看大 Over 218.5",
-      "edge": 5.5,
-      "confidence": 52.7,
-      "result": "win",
-      "correct": 1,
-      "tw_spread": 4.5,
-      "tw_ou": 218.5,
-      "model_spread": -6.0,
-      "model_total": 224.0
     }
   ],
   "current_picks": [
     {
-      "pick_date": "20260528",
-      "game_date": "20260529",
-      "away": "Oklahoma City Thunder",
-      "home": "San Antonio Spurs",
+      "pick_date": "20260530",
+      "game_date": "20260531",
+      "away": "San Antonio Spurs",
+      "home": "Oklahoma City Thunder",
       "pick_type": "ou",
       "pick_target": "over",
-      "pick_line": 219.5,
-      "pick_detail": "看大 Over 219.5",
-      "edge": 11.599999999999994,
-      "confidence": 50.3,
+      "pick_line": 212.5,
+      "pick_detail": "看大 Over 212.5",
+      "edge": 17.80000000000001,
+      "confidence": 81.1,
       "result": "pending",
       "correct": null,
       "tw_spread": -3.5,
-      "tw_ou": 219.5,
-      "model_spread": -1.2,
-      "model_total": 231.1
-    },
-    {
-      "pick_date": "20260528",
-      "game_date": "20260529",
-      "away": "Oklahoma City Thunder",
-      "home": "San Antonio Spurs",
-      "pick_type": "spread",
-      "pick_target": "away",
-      "pick_line": -3.5,
-      "pick_detail": "買 Thunder 受讓 +3.5",
-      "edge": 4.7,
-      "confidence": 50.3,
-      "result": "pending",
-      "correct": null,
-      "tw_spread": -3.5,
-      "tw_ou": 219.5,
-      "model_spread": -1.2,
-      "model_total": 231.1
+      "tw_ou": 212.5,
+      "model_spread": 5.4,
+      "model_total": 230.3
     }
   ],
-  "pending": 2,
+  "pending": 1,
   "stale_pending": 0,
   "resolution_gaps": [
     {
-      "pick_date": "20260528",
-      "game_date": "20260529",
-      "away": "Oklahoma City Thunder",
-      "home": "San Antonio Spurs",
-      "pick_type": "spread",
-      "pick_detail": "買 Thunder 受讓 +3.5",
-      "edge": 4.7,
-      "reason": "scheduled for future",
-      "status": "future_pending"
-    },
-    {
-      "pick_date": "20260528",
-      "game_date": "20260529",
-      "away": "Oklahoma City Thunder",
-      "home": "San Antonio Spurs",
+      "pick_date": "20260530",
+      "game_date": "20260531",
+      "away": "San Antonio Spurs",
+      "home": "Oklahoma City Thunder",
       "pick_type": "ou",
-      "pick_detail": "看大 Over 219.5",
-      "edge": 11.599999999999994,
+      "pick_detail": "看大 Over 212.5",
+      "edge": 17.80000000000001,
       "reason": "scheduled for future",
       "status": "future_pending"
     }
   ],
   "history_sync": {
     "imported_from_bets": {
-      "candidates": 20,
+      "candidates": 21,
       "imported": 0,
-      "skipped_existing": 20
+      "skipped_existing": 21
     },
     "manual_results": 0,
     "resolved": {
-      "candidates": 2,
+      "candidates": 0,
       "verified": 0,
       "wins": 0,
       "losses": 0,
       "pushes": 0,
-      "missing_results": 2,
+      "missing_results": 0,
       "ungraded": 0,
-      "missing_details": [
-        {
-          "pick_date": "20260528",
-          "game_date": "20260529",
-          "away": "Oklahoma City Thunder",
-          "home": "San Antonio Spurs",
-          "pick_type": "spread",
-          "pick_target": "away",
-          "pick_detail": "買 Thunder 受讓 +3.5",
-          "candidate_keys": [
-            {
-              "game_date": "20260529",
-              "home": "san antonio spurs",
-              "away": "oklahoma city thunder"
-            },
-            {
-              "game_date": "20260528",
-              "home": "san antonio spurs",
-              "away": "oklahoma city thunder"
-            },
-            {
-              "game_date": "20260528",
-              "home": "oklahoma city thunder",
-              "away": "san antonio spurs"
-            },
-            {
-              "game_date": "20260530",
-              "home": "san antonio spurs",
-              "away": "oklahoma city thunder"
-            },
-            {
-              "game_date": "20260530",
-              "home": "oklahoma city thunder",
-              "away": "san antonio spurs"
-            },
-            {
-              "game_date": "20260529",
-              "home": "oklahoma city thunder",
-              "away": "san antonio spurs"
-            }
-          ],
-          "candidate_hits": [],
-          "nearby_espn_games": [],
-          "reason": "ESPN result not found",
-          "status": "missing_result"
-        },
-        {
-          "pick_date": "20260528",
-          "game_date": "20260529",
-          "away": "Oklahoma City Thunder",
-          "home": "San Antonio Spurs",
-          "pick_type": "ou",
-          "pick_target": "over",
-          "pick_detail": "看大 Over 219.5",
-          "candidate_keys": [
-            {
-              "game_date": "20260529",
-              "home": "san antonio spurs",
-              "away": "oklahoma city thunder"
-            },
-            {
-              "game_date": "20260528",
-              "home": "san antonio spurs",
-              "away": "oklahoma city thunder"
-            },
-            {
-              "game_date": "20260528",
-              "home": "oklahoma city thunder",
-              "away": "san antonio spurs"
-            },
-            {
-              "game_date": "20260530",
-              "home": "san antonio spurs",
-              "away": "oklahoma city thunder"
-            },
-            {
-              "game_date": "20260530",
-              "home": "oklahoma city thunder",
-              "away": "san antonio spurs"
-            },
-            {
-              "game_date": "20260529",
-              "home": "oklahoma city thunder",
-              "away": "san antonio spurs"
-            }
-          ],
-          "candidate_hits": [],
-          "nearby_espn_games": [],
-          "reason": "ESPN result not found",
-          "status": "missing_result"
-        }
-      ]
+      "missing_details": []
     }
   },
-  "generated_at": "2026-05-29T09:20:56",
-  "synced_at": "2026-05-29T09:20:56"
+  "generated_at": "2026-05-30T09:21:05",
+  "synced_at": "2026-05-30T09:21:05"
 }
