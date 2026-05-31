@@ -593,16 +593,62 @@
     },
     "manual_results": 0,
     "resolved": {
-      "candidates": 0,
+      "candidates": 1,
       "verified": 0,
       "wins": 0,
       "losses": 0,
       "pushes": 0,
-      "missing_results": 0,
+      "missing_results": 1,
       "ungraded": 0,
-      "missing_details": []
+      "missing_details": [
+        {
+          "pick_date": "20260530",
+          "game_date": "20260531",
+          "away": "San Antonio Spurs",
+          "home": "Oklahoma City Thunder",
+          "pick_type": "ou",
+          "pick_target": "over",
+          "pick_detail": "看大 Over 212.5",
+          "candidate_keys": [
+            {
+              "game_date": "20260531",
+              "home": "oklahoma city thunder",
+              "away": "san antonio spurs"
+            },
+            {
+              "game_date": "20260530",
+              "home": "oklahoma city thunder",
+              "away": "san antonio spurs"
+            },
+            {
+              "game_date": "20260530",
+              "home": "san antonio spurs",
+              "away": "oklahoma city thunder"
+            },
+            {
+              "game_date": "20260601",
+              "home": "oklahoma city thunder",
+              "away": "san antonio spurs"
+            },
+            {
+              "game_date": "20260601",
+              "home": "san antonio spurs",
+              "away": "oklahoma city thunder"
+            },
+            {
+              "game_date": "20260531",
+              "home": "san antonio spurs",
+              "away": "oklahoma city thunder"
+            }
+          ],
+          "candidate_hits": [],
+          "nearby_espn_games": [],
+          "reason": "ESPN result not found",
+          "status": "missing_result"
+        }
+      ]
     }
   },
-  "generated_at": "2026-05-30T09:21:05",
-  "synced_at": "2026-05-30T09:21:05"
+  "generated_at": "2026-05-31T09:21:02",
+  "synced_at": "2026-05-31T09:21:02"
 }
