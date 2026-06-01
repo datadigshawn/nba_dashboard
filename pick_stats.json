@@ -1,20 +1,14 @@
 {
-  "total": 82,
-  "wins": 47,
-  "wr": 57.3,
+  "total": 83,
+  "wins": 48,
+  "wr": 57.8,
   "spread_total": 49,
   "spread_wins": 24,
   "spread_wr": 49.0,
-  "ou_total": 33,
-  "ou_wins": 23,
-  "ou_wr": 69.7,
+  "ou_total": 34,
+  "ou_wins": 24,
+  "ou_wr": 70.6,
   "daily": [
-    {
-      "date": "20260512",
-      "wins": 4,
-      "total": 6,
-      "wr": 66.7
-    },
     {
       "date": "20260513",
       "wins": 4,
@@ -80,6 +74,12 @@
       "wins": 0,
       "total": 2,
       "wr": 0.0
+    },
+    {
+      "date": "20260530",
+      "wins": 1,
+      "total": 1,
+      "wr": 100.0
     }
   ],
   "edge_buckets": [
@@ -103,9 +103,9 @@
     },
     {
       "bucket": "8+",
-      "wins": 12,
-      "total": 23,
-      "wr": 52.2
+      "wins": 13,
+      "total": 24,
+      "wr": 54.2
     }
   ],
   "confidence_buckets": [
@@ -129,9 +129,9 @@
     },
     {
       "bucket": "80+",
-      "wins": 11,
-      "total": 25,
-      "wr": 44.0
+      "wins": 12,
+      "total": 26,
+      "wr": 46.2
     }
   ],
   "by_type_edge": {
@@ -182,13 +182,31 @@
       },
       {
         "bucket": "8+",
-        "wins": 7,
-        "total": 14,
-        "wr": 50.0
+        "wins": 8,
+        "total": 15,
+        "wr": 53.3
       }
     ]
   },
   "recent": [
+    {
+      "pick_date": "20260530",
+      "game_date": "20260531",
+      "away": "San Antonio Spurs",
+      "home": "Oklahoma City Thunder",
+      "pick_type": "ou",
+      "pick_target": "over",
+      "pick_line": 212.5,
+      "pick_detail": "看大 Over 212.5",
+      "edge": 17.80000000000001,
+      "confidence": 81.1,
+      "result": "win",
+      "correct": 1,
+      "tw_spread": -3.5,
+      "tw_ou": 212.5,
+      "model_spread": 5.4,
+      "model_total": 230.3
+    },
     {
       "pick_date": "20260528",
       "game_date": "20260529",
@@ -530,61 +548,12 @@
       "tw_ou": 212.5,
       "model_spread": -0.9,
       "model_total": 222.5
-    },
-    {
-      "pick_date": "20260515",
-      "game_date": "20260517",
-      "away": "Cleveland Cavaliers",
-      "home": "Detroit Pistons",
-      "pick_type": "ou",
-      "pick_target": "over",
-      "pick_line": 212.5,
-      "pick_detail": "看大 Over 212.5",
-      "edge": 7.099999999999994,
-      "confidence": 80.1,
-      "result": "win",
-      "correct": 1,
-      "tw_spread": -3.5,
-      "tw_ou": 212.5,
-      "model_spread": 2.2,
-      "model_total": 219.6
     }
   ],
-  "current_picks": [
-    {
-      "pick_date": "20260530",
-      "game_date": "20260531",
-      "away": "San Antonio Spurs",
-      "home": "Oklahoma City Thunder",
-      "pick_type": "ou",
-      "pick_target": "over",
-      "pick_line": 212.5,
-      "pick_detail": "看大 Over 212.5",
-      "edge": 17.80000000000001,
-      "confidence": 81.1,
-      "result": "pending",
-      "correct": null,
-      "tw_spread": -3.5,
-      "tw_ou": 212.5,
-      "model_spread": 5.4,
-      "model_total": 230.3
-    }
-  ],
-  "pending": 1,
+  "current_picks": [],
+  "pending": 0,
   "stale_pending": 0,
-  "resolution_gaps": [
-    {
-      "pick_date": "20260530",
-      "game_date": "20260531",
-      "away": "San Antonio Spurs",
-      "home": "Oklahoma City Thunder",
-      "pick_type": "ou",
-      "pick_detail": "看大 Over 212.5",
-      "edge": 17.80000000000001,
-      "reason": "scheduled for future",
-      "status": "future_pending"
-    }
-  ],
+  "resolution_gaps": [],
   "history_sync": {
     "imported_from_bets": {
       "candidates": 21,
@@ -593,62 +562,16 @@
     },
     "manual_results": 0,
     "resolved": {
-      "candidates": 1,
+      "candidates": 0,
       "verified": 0,
       "wins": 0,
       "losses": 0,
       "pushes": 0,
-      "missing_results": 1,
+      "missing_results": 0,
       "ungraded": 0,
-      "missing_details": [
-        {
-          "pick_date": "20260530",
-          "game_date": "20260531",
-          "away": "San Antonio Spurs",
-          "home": "Oklahoma City Thunder",
-          "pick_type": "ou",
-          "pick_target": "over",
-          "pick_detail": "看大 Over 212.5",
-          "candidate_keys": [
-            {
-              "game_date": "20260531",
-              "home": "oklahoma city thunder",
-              "away": "san antonio spurs"
-            },
-            {
-              "game_date": "20260530",
-              "home": "oklahoma city thunder",
-              "away": "san antonio spurs"
-            },
-            {
-              "game_date": "20260530",
-              "home": "san antonio spurs",
-              "away": "oklahoma city thunder"
-            },
-            {
-              "game_date": "20260601",
-              "home": "oklahoma city thunder",
-              "away": "san antonio spurs"
-            },
-            {
-              "game_date": "20260601",
-              "home": "san antonio spurs",
-              "away": "oklahoma city thunder"
-            },
-            {
-              "game_date": "20260531",
-              "home": "san antonio spurs",
-              "away": "oklahoma city thunder"
-            }
-          ],
-          "candidate_hits": [],
-          "nearby_espn_games": [],
-          "reason": "ESPN result not found",
-          "status": "missing_result"
-        }
-      ]
+      "missing_details": []
     }
   },
-  "generated_at": "2026-05-31T09:21:02",
-  "synced_at": "2026-05-31T09:21:02"
+  "generated_at": "2026-06-01T09:20:59",
+  "synced_at": "2026-06-01T09:20:59"
 }
