@@ -1,20 +1,14 @@
 {
-  "total": 83,
-  "wins": 48,
-  "wr": 57.8,
+  "total": 84,
+  "wins": 49,
+  "wr": 58.3,
   "spread_total": 49,
   "spread_wins": 24,
   "spread_wr": 49.0,
-  "ou_total": 34,
-  "ou_wins": 24,
-  "ou_wr": 70.6,
+  "ou_total": 35,
+  "ou_wins": 25,
+  "ou_wr": 71.4,
   "daily": [
-    {
-      "date": "20260513",
-      "wins": 4,
-      "total": 6,
-      "wr": 66.7
-    },
     {
       "date": "20260514",
       "wins": 5,
@@ -80,6 +74,12 @@
       "wins": 1,
       "total": 1,
       "wr": 100.0
+    },
+    {
+      "date": "20260601",
+      "wins": 1,
+      "total": 1,
+      "wr": 100.0
     }
   ],
   "edge_buckets": [
@@ -103,17 +103,17 @@
     },
     {
       "bucket": "8+",
-      "wins": 13,
-      "total": 24,
-      "wr": 54.2
+      "wins": 14,
+      "total": 25,
+      "wr": 56.0
     }
   ],
   "confidence_buckets": [
     {
       "bucket": "<60",
-      "wins": 21,
-      "total": 37,
-      "wr": 56.8
+      "wins": 22,
+      "total": 38,
+      "wr": 57.9
     },
     {
       "bucket": "60-70",
@@ -182,9 +182,9 @@
       },
       {
         "bucket": "8+",
-        "wins": 8,
-        "total": 15,
-        "wr": 53.3
+        "wins": 9,
+        "total": 16,
+        "wr": 56.2
       }
     ]
   },
@@ -242,6 +242,24 @@
       "tw_ou": 219.5,
       "model_spread": -1.2,
       "model_total": 231.1
+    },
+    {
+      "pick_date": "20260601",
+      "game_date": "20260526",
+      "away": "New York Knicks",
+      "home": "Cleveland Cavaliers",
+      "pick_type": "ou",
+      "pick_target": "over",
+      "pick_line": 217.5,
+      "pick_detail": "看大 Over 217.5",
+      "edge": 9.400000000000006,
+      "confidence": 56.0,
+      "result": "win",
+      "correct": 1,
+      "tw_spread": 1.5,
+      "tw_ou": 217.5,
+      "model_spread": -2.8,
+      "model_total": 226.9
     },
     {
       "pick_date": "20260526",
@@ -530,24 +548,6 @@
       "tw_ou": 212.5,
       "model_spread": 1.8,
       "model_total": 222.6
-    },
-    {
-      "pick_date": "20260515",
-      "game_date": "20260517",
-      "away": "Cleveland Cavaliers",
-      "home": "Detroit Pistons",
-      "pick_type": "spread",
-      "pick_target": "away",
-      "pick_line": -3.5,
-      "pick_detail": "買 Cavaliers 受讓 +3.5",
-      "edge": 4.4,
-      "confidence": 77.3,
-      "result": "win",
-      "correct": 1,
-      "tw_spread": -3.5,
-      "tw_ou": 212.5,
-      "model_spread": -0.9,
-      "model_total": 222.5
     }
   ],
   "current_picks": [],
@@ -572,6 +572,6 @@
       "missing_details": []
     }
   },
-  "generated_at": "2026-06-01T09:20:59",
-  "synced_at": "2026-06-01T09:20:59"
+  "generated_at": "2026-06-02T09:24:18",
+  "synced_at": "2026-06-02T09:24:18"
 }
