@@ -550,15 +550,75 @@
       "model_total": 222.6
     }
   ],
-  "current_picks": [],
-  "pending": 0,
+  "current_picks": [
+    {
+      "pick_date": "20260603",
+      "game_date": "20260604",
+      "away": "New York Knicks",
+      "home": "San Antonio Spurs",
+      "pick_type": "ou",
+      "pick_target": "over",
+      "pick_line": 218.5,
+      "pick_detail": "看大 Over 218.5",
+      "edge": 8.0,
+      "confidence": 71.0,
+      "result": "pending",
+      "correct": null,
+      "tw_spread": -4.5,
+      "tw_ou": 218.5,
+      "model_spread": 3.5,
+      "model_total": 226.5
+    },
+    {
+      "pick_date": "20260603",
+      "game_date": "20260606",
+      "away": "New York Knicks",
+      "home": "San Antonio Spurs",
+      "pick_type": "ou",
+      "pick_target": "over",
+      "pick_line": 218.5,
+      "pick_detail": "看大 Over 218.5",
+      "edge": 8.0,
+      "confidence": 71.0,
+      "result": "pending",
+      "correct": null,
+      "tw_spread": -4.5,
+      "tw_ou": 218.5,
+      "model_spread": 3.5,
+      "model_total": 226.5
+    }
+  ],
+  "pending": 2,
   "stale_pending": 0,
-  "resolution_gaps": [],
+  "resolution_gaps": [
+    {
+      "pick_date": "20260603",
+      "game_date": "20260604",
+      "away": "New York Knicks",
+      "home": "San Antonio Spurs",
+      "pick_type": "ou",
+      "pick_detail": "看大 Over 218.5",
+      "edge": 8.0,
+      "reason": "scheduled for future",
+      "status": "future_pending"
+    },
+    {
+      "pick_date": "20260603",
+      "game_date": "20260606",
+      "away": "New York Knicks",
+      "home": "San Antonio Spurs",
+      "pick_type": "ou",
+      "pick_detail": "看大 Over 218.5",
+      "edge": 8.0,
+      "reason": "scheduled for future",
+      "status": "future_pending"
+    }
+  ],
   "history_sync": {
     "imported_from_bets": {
-      "candidates": 21,
+      "candidates": 23,
       "imported": 0,
-      "skipped_existing": 21
+      "skipped_existing": 23
     },
     "manual_results": 0,
     "resolved": {
@@ -572,6 +632,6 @@
       "missing_details": []
     }
   },
-  "generated_at": "2026-06-02T09:24:18",
-  "synced_at": "2026-06-02T09:24:18"
+  "generated_at": "2026-06-03T09:20:58",
+  "synced_at": "2026-06-03T09:20:58"
 }

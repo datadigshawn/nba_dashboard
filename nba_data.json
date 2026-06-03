@@ -7,15 +7,15 @@
       "away": "New York Knicks",
       "home_record": "62-20",
       "away_record": "53-29",
-      "home_prob": 71.5,
-      "away_prob": 28.5,
+      "home_prob": 71.0,
+      "away_prob": 29.0,
       "model_margin": 4.5,
-      "home_elo": 1959,
-      "away_elo": 1933,
+      "home_elo": 1961,
+      "away_elo": 1937,
       "status": "Scheduled",
       "b2b_home": false,
       "b2b_away": false,
-      "rest_home": 3,
+      "rest_home": 4,
       "rest_away": 7,
       "injuries": {
         "home_out": [
@@ -36,12 +36,12 @@
         ]
       },
       "pred_spread": 3.5,
-      "spread_model_raw": 8.9,
-      "spread_bias_adj": -2.5,
-      "pred_total": 226.7,
+      "spread_model_raw": 11.6,
+      "spread_bias_adj": -3.4,
+      "pred_total": 226.5,
       "raw_total": 225.8,
-      "total_bias_adj": 0.8,
-      "away_expected": 114.1,
+      "total_bias_adj": 0.7,
+      "away_expected": 114.0,
       "home_expected": 112.6
     },
     {
@@ -50,15 +50,15 @@
       "away": "New York Knicks",
       "home_record": "62-20",
       "away_record": "53-29",
-      "home_prob": 71.5,
-      "away_prob": 28.5,
+      "home_prob": 71.0,
+      "away_prob": 29.0,
       "model_margin": 4.5,
-      "home_elo": 1959,
-      "away_elo": 1933,
+      "home_elo": 1961,
+      "away_elo": 1937,
       "status": "Scheduled",
       "b2b_home": false,
       "b2b_away": false,
-      "rest_home": 3,
+      "rest_home": 4,
       "rest_away": 7,
       "injuries": {
         "home_out": [
@@ -79,54 +79,115 @@
         ]
       },
       "pred_spread": 3.5,
-      "spread_model_raw": 8.9,
-      "spread_bias_adj": -2.5,
-      "pred_total": 226.7,
+      "spread_model_raw": 11.6,
+      "spread_bias_adj": -3.4,
+      "pred_total": 226.5,
       "raw_total": 225.8,
-      "total_bias_adj": 0.8,
-      "away_expected": 114.1,
+      "total_bias_adj": 0.7,
+      "away_expected": 114.0,
       "home_expected": 112.6
     }
   ],
   "next_games_date": "2026-06-04",
-  "official_picks": [],
+  "official_picks": [
+    {
+      "pick_date": "20260603",
+      "game_date": "20260604",
+      "game_key": "New York Knicks @ San Antonio Spurs",
+      "away": "New York Knicks",
+      "home": "San Antonio Spurs",
+      "matchup": "NY @ SA",
+      "confidence": 71.0,
+      "tier": "強推",
+      "stake_label": "標準注",
+      "score": 9.98,
+      "history": {
+        "bucket": "8+",
+        "wins": 9,
+        "total": 16,
+        "wr": 56.2
+      },
+      "tw_spread": -4.5,
+      "tw_ou": 218.5,
+      "model_spread": 3.5,
+      "model_total": 226.5,
+      "pick_type": "ou",
+      "pick_target": "over",
+      "pick_line": 218.5,
+      "pick_detail": "看大 Over 218.5",
+      "edge": 8.0,
+      "model_prob": 71.9,
+      "market_line": 218.5,
+      "model_line": 226.5
+    },
+    {
+      "pick_date": "20260603",
+      "game_date": "20260606",
+      "game_key": "New York Knicks @ San Antonio Spurs",
+      "away": "New York Knicks",
+      "home": "San Antonio Spurs",
+      "matchup": "NY @ SA",
+      "confidence": 71.0,
+      "tier": "強推",
+      "stake_label": "標準注",
+      "score": 9.98,
+      "history": {
+        "bucket": "8+",
+        "wins": 9,
+        "total": 16,
+        "wr": 56.2
+      },
+      "tw_spread": -4.5,
+      "tw_ou": 218.5,
+      "model_spread": 3.5,
+      "model_total": 226.5,
+      "pick_type": "ou",
+      "pick_target": "over",
+      "pick_line": 218.5,
+      "pick_detail": "看大 Over 218.5",
+      "edge": 8.0,
+      "model_prob": 71.9,
+      "market_line": 218.5,
+      "model_line": 226.5
+    }
+  ],
   "edges": [],
   "elo_teams": {
-    "Oklahoma City Thunder": 2021,
-    "San Antonio Spurs": 1959,
-    "New York Knicks": 1933,
-    "Denver Nuggets": 1804,
-    "Los Angeles Lakers": 1779,
-    "Boston Celtics": 1744,
-    "Atlanta Hawks": 1732,
-    "Minnesota Timberwolves": 1712,
-    "Charlotte Hornets": 1702,
-    "Detroit Pistons": 1671,
-    "Philadelphia 76ers": 1662,
-    "Portland Trail Blazers": 1656,
-    "Orlando Magic": 1642,
-    "Cleveland Cavaliers": 1628,
-    "Houston Rockets": 1621
+    "Oklahoma City Thunder": 2009,
+    "San Antonio Spurs": 1961,
+    "New York Knicks": 1937,
+    "Denver Nuggets": 1803,
+    "Los Angeles Lakers": 1781,
+    "Boston Celtics": 1750,
+    "Atlanta Hawks": 1733,
+    "Minnesota Timberwolves": 1713,
+    "Charlotte Hornets": 1695,
+    "Detroit Pistons": 1672,
+    "Philadelphia 76ers": 1665,
+    "Portland Trail Blazers": 1659,
+    "Orlando Magic": 1641,
+    "Houston Rockets": 1633,
+    "Cleveland Cavaliers": 1627
   },
   "calibration": {
     "lookback_days": 21,
-    "games_considered": 5,
-    "spread_samples": 5,
-    "spread_bias": -11.9,
-    "spread_mae": 20.86,
-    "spread_sign_accuracy": 0.6,
-    "moneyline_accuracy": 0.4,
-    "total_samples": 5,
-    "total_bias": 3.96,
-    "total_mae": 10.8
+    "games_considered": 4,
+    "spread_samples": 4,
+    "spread_bias": -20.47,
+    "spread_mae": 20.47,
+    "spread_sign_accuracy": 0.5,
+    "moneyline_accuracy": 0.25,
+    "total_samples": 4,
+    "total_bias": 4.25,
+    "total_mae": 12.8
   },
   "backtest": {
-    "games_tested": 106,
-    "all_wr": 72.6,
+    "games_tested": 104,
+    "all_wr": 74.0,
     "strong_count": 69,
     "strong_wr": 73.9,
-    "vstrong_count": 37,
-    "vstrong_wr": 75.7,
+    "vstrong_count": 34,
+    "vstrong_wr": 73.5,
     "star3_count": 1,
     "star3_wr": 100.0,
     "recent": [
@@ -144,7 +205,7 @@
         "date": "20260505",
         "away": "Los Angeles Lakers",
         "home": "Oklahoma City Thunder",
-        "conf": 90,
+        "conf": 89,
         "pick": "Oklahoma City Thunder",
         "winner": "Oklahoma City Thunder",
         "correct": true,
@@ -154,7 +215,7 @@
         "date": "20260506",
         "away": "Philadelphia 76ers",
         "home": "New York Knicks",
-        "conf": 95,
+        "conf": 94,
         "pick": "New York Knicks",
         "winner": "New York Knicks",
         "correct": true,
@@ -174,7 +235,7 @@
         "date": "20260507",
         "away": "Cleveland Cavaliers",
         "home": "Detroit Pistons",
-        "conf": 77,
+        "conf": 76,
         "pick": "Detroit Pistons",
         "winner": "Detroit Pistons",
         "correct": true,
@@ -184,7 +245,7 @@
         "date": "20260507",
         "away": "Los Angeles Lakers",
         "home": "Oklahoma City Thunder",
-        "conf": 91,
+        "conf": 89,
         "pick": "Oklahoma City Thunder",
         "winner": "Oklahoma City Thunder",
         "correct": true,
@@ -204,7 +265,7 @@
         "date": "20260508",
         "away": "San Antonio Spurs",
         "home": "Minnesota Timberwolves",
-        "conf": 54,
+        "conf": 55,
         "pick": "San Antonio Spurs",
         "winner": "San Antonio Spurs",
         "correct": true,
@@ -224,7 +285,7 @@
         "date": "20260509",
         "away": "Oklahoma City Thunder",
         "home": "Los Angeles Lakers",
-        "conf": 66,
+        "conf": 65,
         "pick": "Oklahoma City Thunder",
         "winner": "Oklahoma City Thunder",
         "correct": true,
@@ -234,7 +295,7 @@
         "date": "20260510",
         "away": "New York Knicks",
         "home": "Philadelphia 76ers",
-        "conf": 78,
+        "conf": 77,
         "pick": "New York Knicks",
         "winner": "New York Knicks",
         "correct": true,
@@ -244,7 +305,7 @@
         "date": "20260510",
         "away": "San Antonio Spurs",
         "home": "Minnesota Timberwolves",
-        "conf": 56,
+        "conf": 58,
         "pick": "San Antonio Spurs",
         "winner": "Minnesota Timberwolves",
         "correct": false,
@@ -264,7 +325,7 @@
         "date": "20260511",
         "away": "Oklahoma City Thunder",
         "home": "Los Angeles Lakers",
-        "conf": 68,
+        "conf": 66,
         "pick": "Oklahoma City Thunder",
         "winner": "Oklahoma City Thunder",
         "correct": true,
@@ -274,7 +335,7 @@
         "date": "20260512",
         "away": "Minnesota Timberwolves",
         "home": "San Antonio Spurs",
-        "conf": 84,
+        "conf": 85,
         "pick": "San Antonio Spurs",
         "winner": "San Antonio Spurs",
         "correct": true,
@@ -304,7 +365,7 @@
         "date": "20260515",
         "away": "San Antonio Spurs",
         "home": "Minnesota Timberwolves",
-        "conf": 55,
+        "conf": 56,
         "pick": "San Antonio Spurs",
         "winner": "San Antonio Spurs",
         "correct": true,
@@ -324,7 +385,7 @@
         "date": "20260518",
         "away": "San Antonio Spurs",
         "home": "Oklahoma City Thunder",
-        "conf": 77,
+        "conf": 76,
         "pick": "Oklahoma City Thunder",
         "winner": "San Antonio Spurs",
         "correct": false,
@@ -344,7 +405,7 @@
         "date": "20260520",
         "away": "San Antonio Spurs",
         "home": "Oklahoma City Thunder",
-        "conf": 75,
+        "conf": 73,
         "pick": "Oklahoma City Thunder",
         "winner": "Oklahoma City Thunder",
         "correct": true,
@@ -404,7 +465,7 @@
         "date": "20260526",
         "away": "San Antonio Spurs",
         "home": "Oklahoma City Thunder",
-        "conf": 76,
+        "conf": 75,
         "pick": "Oklahoma City Thunder",
         "winner": "Oklahoma City Thunder",
         "correct": true,
@@ -414,7 +475,7 @@
         "date": "20260528",
         "away": "Oklahoma City Thunder",
         "home": "San Antonio Spurs",
-        "conf": 56,
+        "conf": 57,
         "pick": "San Antonio Spurs",
         "winner": "San Antonio Spurs",
         "correct": true,
@@ -424,7 +485,7 @@
         "date": "20260530",
         "away": "San Antonio Spurs",
         "home": "Oklahoma City Thunder",
-        "conf": 76,
+        "conf": 75,
         "pick": "Oklahoma City Thunder",
         "winner": "San Antonio Spurs",
         "correct": false,
@@ -433,7 +494,7 @@
     ]
   },
   "playoff_bracket": {
-    "generated_at": "2026-06-02T09:21:05",
+    "generated_at": "2026-06-03T09:20:36",
     "n_sims": 10000,
     "west": {
       "seeds": [
@@ -442,35 +503,35 @@
           "team": "Oklahoma City Thunder",
           "abbrev": "OKC",
           "record": "64-18",
-          "elo": 2020
+          "elo": 2009
         },
         {
           "seed": 2,
           "team": "San Antonio Spurs",
           "abbrev": "SA",
           "record": "62-20",
-          "elo": 1958
+          "elo": 1960
         },
         {
           "seed": 3,
           "team": "Denver Nuggets",
           "abbrev": "DEN",
           "record": "54-28",
-          "elo": 1804
+          "elo": 1803
         },
         {
           "seed": 4,
           "team": "Los Angeles Lakers",
           "abbrev": "LAL",
           "record": "53-29",
-          "elo": 1779
+          "elo": 1781
         },
         {
           "seed": 5,
           "team": "Houston Rockets",
           "abbrev": "HOU",
           "record": "52-30",
-          "elo": 1620
+          "elo": 1632
         },
         {
           "seed": 6,
@@ -484,14 +545,14 @@
           "team": "Phoenix Suns",
           "abbrev": "PHX",
           "record": "45-37",
-          "elo": 1455
+          "elo": 1463
         },
         {
           "seed": 8,
           "team": "Portland Trail Blazers",
           "abbrev": "POR",
           "record": "42-40",
-          "elo": 1656
+          "elo": 1658
         }
       ],
       "r1": [
@@ -500,9 +561,9 @@
             "seed": 1,
             "team": "Oklahoma City Thunder",
             "abbrev": "OKC",
-            "elo": 2020,
+            "elo": 2009,
             "record": "64-18",
-            "advance_prob": 99.7,
+            "advance_prob": 99.5,
             "star": {
               "name": "Shai Gilgeous-Alexander",
               "status": "Healthy",
@@ -513,9 +574,9 @@
             "seed": 8,
             "team": "Portland Trail Blazers",
             "abbrev": "POR",
-            "elo": 1656,
+            "elo": 1658,
             "record": "42-40",
-            "advance_prob": 0.4,
+            "advance_prob": 0.5,
             "star": {
               "name": "Scoot Henderson",
               "status": "Healthy",
@@ -529,9 +590,9 @@
             "seed": 4,
             "team": "Los Angeles Lakers",
             "abbrev": "LAL",
-            "elo": 1779,
+            "elo": 1781,
             "record": "53-29",
-            "advance_prob": 89.7,
+            "advance_prob": 88.3,
             "star": {
               "name": "Luka Doncic",
               "status": "Out",
@@ -542,9 +603,9 @@
             "seed": 5,
             "team": "Houston Rockets",
             "abbrev": "HOU",
-            "elo": 1620,
+            "elo": 1632,
             "record": "52-30",
-            "advance_prob": 10.3,
+            "advance_prob": 11.7,
             "star": {
               "name": "Alperen Sengun",
               "status": "Healthy",
@@ -558,9 +619,9 @@
             "seed": 3,
             "team": "Denver Nuggets",
             "abbrev": "DEN",
-            "elo": 1804,
+            "elo": 1803,
             "record": "54-28",
-            "advance_prob": 78.0,
+            "advance_prob": 77.8,
             "star": {
               "name": "Nikola Jokic",
               "status": "Healthy",
@@ -573,7 +634,7 @@
             "abbrev": "MIN",
             "elo": 1712,
             "record": "49-33",
-            "advance_prob": 22.0,
+            "advance_prob": 22.2,
             "star": {
               "name": "Anthony Edwards",
               "status": "Healthy",
@@ -587,7 +648,7 @@
             "seed": 2,
             "team": "San Antonio Spurs",
             "abbrev": "SA",
-            "elo": 1958,
+            "elo": 1960,
             "record": "62-20",
             "advance_prob": 100.0,
             "star": {
@@ -600,7 +661,7 @@
             "seed": 7,
             "team": "Phoenix Suns",
             "abbrev": "PHX",
-            "elo": 1455,
+            "elo": 1463,
             "record": "45-37",
             "advance_prob": 0.0,
             "star": {
@@ -618,9 +679,9 @@
             "seed": 1,
             "team": "Oklahoma City Thunder",
             "abbrev": "OKC",
-            "elo": 2020,
+            "elo": 2009,
             "record": "64-18",
-            "advance_prob": 97.0,
+            "advance_prob": 96.2,
             "star": {
               "name": "Shai Gilgeous-Alexander",
               "status": "Healthy",
@@ -631,25 +692,25 @@
             "seed": 4,
             "team": "Los Angeles Lakers",
             "abbrev": "LAL",
-            "elo": 1779,
+            "elo": 1781,
             "record": "53-29",
-            "advance_prob": 2.9,
+            "advance_prob": 3.6,
             "star": {
               "name": "Luka Doncic",
               "status": "Out",
               "detail": "out"
             }
           },
-          "expected_games": 4.7
+          "expected_games": 4.8
         },
         {
           "top": {
             "seed": 3,
             "team": "Denver Nuggets",
             "abbrev": "DEN",
-            "elo": 1804,
+            "elo": 1803,
             "record": "54-28",
-            "advance_prob": 9.6,
+            "advance_prob": 9.2,
             "star": {
               "name": "Nikola Jokic",
               "status": "Healthy",
@@ -660,9 +721,9 @@
             "seed": 2,
             "team": "San Antonio Spurs",
             "abbrev": "SA",
-            "elo": 1958,
+            "elo": 1960,
             "record": "62-20",
-            "advance_prob": 89.7,
+            "advance_prob": 89.9,
             "star": {
               "name": "Victor Wembanyama",
               "status": "Healthy",
@@ -678,9 +739,9 @@
             "seed": 1,
             "team": "Oklahoma City Thunder",
             "abbrev": "OKC",
-            "elo": 2020,
+            "elo": 2009,
             "record": "64-18",
-            "advance_prob": 71.4,
+            "advance_prob": 67.2,
             "star": {
               "name": "Shai Gilgeous-Alexander",
               "status": "Healthy",
@@ -691,16 +752,16 @@
             "seed": 2,
             "team": "San Antonio Spurs",
             "abbrev": "SA",
-            "elo": 1958,
+            "elo": 1960,
             "record": "62-20",
-            "advance_prob": 27.6,
+            "advance_prob": 31.6,
             "star": {
               "name": "Victor Wembanyama",
               "status": "Healthy",
               "detail": ""
             }
           },
-          "expected_games": 5.5
+          "expected_games": 5.6
         }
       ]
     },
@@ -718,28 +779,28 @@
           "team": "Boston Celtics",
           "abbrev": "BOS",
           "record": "56-26",
-          "elo": 1744
+          "elo": 1749
         },
         {
           "seed": 3,
           "team": "New York Knicks",
           "abbrev": "NY",
           "record": "53-29",
-          "elo": 1933
+          "elo": 1936
         },
         {
           "seed": 4,
           "team": "Cleveland Cavaliers",
           "abbrev": "CLE",
           "record": "52-30",
-          "elo": 1627
+          "elo": 1626
         },
         {
           "seed": 5,
           "team": "Atlanta Hawks",
           "abbrev": "ATL",
           "record": "46-36",
-          "elo": 1732
+          "elo": 1733
         },
         {
           "seed": 6,
@@ -753,14 +814,14 @@
           "team": "Philadelphia 76ers",
           "abbrev": "PHI",
           "record": "45-37",
-          "elo": 1662
+          "elo": 1665
         },
         {
           "seed": 8,
           "team": "Orlando Magic",
           "abbrev": "ORL",
           "record": "45-37",
-          "elo": 1641
+          "elo": 1640
         }
       ],
       "r1": [
@@ -771,7 +832,7 @@
             "abbrev": "DET",
             "elo": 1671,
             "record": "60-22",
-            "advance_prob": 61.1,
+            "advance_prob": 61.7,
             "star": {
               "name": "Cade Cunningham",
               "status": "Healthy",
@@ -782,9 +843,9 @@
             "seed": 8,
             "team": "Orlando Magic",
             "abbrev": "ORL",
-            "elo": 1641,
+            "elo": 1640,
             "record": "45-37",
-            "advance_prob": 38.9,
+            "advance_prob": 38.3,
             "star": {
               "name": "Paolo Banchero",
               "status": "Healthy",
@@ -798,7 +859,7 @@
             "seed": 4,
             "team": "Cleveland Cavaliers",
             "abbrev": "CLE",
-            "elo": 1627,
+            "elo": 1626,
             "record": "52-30",
             "advance_prob": 21.7,
             "star": {
@@ -811,7 +872,7 @@
             "seed": 5,
             "team": "Atlanta Hawks",
             "abbrev": "ATL",
-            "elo": 1732,
+            "elo": 1733,
             "record": "46-36",
             "advance_prob": 78.3,
             "star": {
@@ -827,9 +888,9 @@
             "seed": 3,
             "team": "New York Knicks",
             "abbrev": "NY",
-            "elo": 1933,
+            "elo": 1936,
             "record": "53-29",
-            "advance_prob": 99.8,
+            "advance_prob": 99.7,
             "star": {
               "name": "Jalen Brunson",
               "status": "Healthy",
@@ -842,7 +903,7 @@
             "abbrev": "TOR",
             "elo": 1542,
             "record": "46-36",
-            "advance_prob": 0.2,
+            "advance_prob": 0.3,
             "star": {
               "name": "Scottie Barnes",
               "status": "Healthy",
@@ -856,9 +917,9 @@
             "seed": 2,
             "team": "Boston Celtics",
             "abbrev": "BOS",
-            "elo": 1744,
+            "elo": 1749,
             "record": "56-26",
-            "advance_prob": 75.8,
+            "advance_prob": 76.8,
             "star": {
               "name": "Jayson Tatum",
               "status": "Out",
@@ -869,16 +930,16 @@
             "seed": 7,
             "team": "Philadelphia 76ers",
             "abbrev": "PHI",
-            "elo": 1662,
+            "elo": 1665,
             "record": "45-37",
-            "advance_prob": 24.2,
+            "advance_prob": 23.2,
             "star": {
               "name": "Tyrese Maxey",
               "status": "Healthy",
               "detail": ""
             }
           },
-          "expected_games": 5.5
+          "expected_games": 5.4
         }
       ],
       "r2": [
@@ -900,7 +961,7 @@
             "seed": 5,
             "team": "Atlanta Hawks",
             "abbrev": "ATL",
-            "elo": 1732,
+            "elo": 1733,
             "record": "46-36",
             "advance_prob": 54.4,
             "star": {
@@ -916,9 +977,9 @@
             "seed": 3,
             "team": "New York Knicks",
             "abbrev": "NY",
-            "elo": 1933,
+            "elo": 1936,
             "record": "53-29",
-            "advance_prob": 94.5,
+            "advance_prob": 93.8,
             "star": {
               "name": "Jalen Brunson",
               "status": "Healthy",
@@ -929,16 +990,16 @@
             "seed": 2,
             "team": "Boston Celtics",
             "abbrev": "BOS",
-            "elo": 1744,
+            "elo": 1749,
             "record": "56-26",
-            "advance_prob": 5.1,
+            "advance_prob": 5.7,
             "star": {
               "name": "Jayson Tatum",
               "status": "Out",
               "detail": "out"
             }
           },
-          "expected_games": 4.9
+          "expected_games": 5.0
         }
       ],
       "conf_finals": [
@@ -947,9 +1008,9 @@
             "seed": 5,
             "team": "Atlanta Hawks",
             "abbrev": "ATL",
-            "elo": 1732,
+            "elo": 1733,
             "record": "46-36",
-            "advance_prob": 4.8,
+            "advance_prob": 4.7,
             "star": {
               "name": "Trae Young",
               "status": "Healthy",
@@ -960,9 +1021,9 @@
             "seed": 3,
             "team": "New York Knicks",
             "abbrev": "NY",
-            "elo": 1933,
+            "elo": 1936,
             "record": "53-29",
-            "advance_prob": 90.2,
+            "advance_prob": 89.9,
             "star": {
               "name": "Jalen Brunson",
               "status": "Healthy",
@@ -978,9 +1039,9 @@
         "seed": 1,
         "team": "Oklahoma City Thunder",
         "abbrev": "OKC",
-        "elo": 2020,
+        "elo": 2009,
         "record": "64-18",
-        "advance_prob": 55.5,
+        "advance_prob": 49.8,
         "star": {
           "name": "Shai Gilgeous-Alexander",
           "status": "Healthy",
@@ -991,17 +1052,17 @@
         "seed": 3,
         "team": "New York Knicks",
         "abbrev": "NY",
-        "elo": 1933,
+        "elo": 1936,
         "record": "53-29",
-        "advance_prob": 27.2,
+        "advance_prob": 30.5,
         "star": {
           "name": "Jalen Brunson",
           "status": "Healthy",
           "detail": ""
         }
       },
-      "expected_games": 5.6
+      "expected_games": 5.7
     }
   },
-  "official_picks_updated_at": "2026-06-02T09:24:18"
+  "official_picks_updated_at": "2026-06-03T09:20:58"
 }
