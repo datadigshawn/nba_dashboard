@@ -622,16 +622,62 @@
     },
     "manual_results": 0,
     "resolved": {
-      "candidates": 0,
+      "candidates": 1,
       "verified": 0,
       "wins": 0,
       "losses": 0,
       "pushes": 0,
-      "missing_results": 0,
+      "missing_results": 1,
       "ungraded": 0,
-      "missing_details": []
+      "missing_details": [
+        {
+          "pick_date": "20260603",
+          "game_date": "20260604",
+          "away": "New York Knicks",
+          "home": "San Antonio Spurs",
+          "pick_type": "ou",
+          "pick_target": "over",
+          "pick_detail": "看大 Over 218.5",
+          "candidate_keys": [
+            {
+              "game_date": "20260604",
+              "home": "san antonio spurs",
+              "away": "new york knicks"
+            },
+            {
+              "game_date": "20260603",
+              "home": "san antonio spurs",
+              "away": "new york knicks"
+            },
+            {
+              "game_date": "20260603",
+              "home": "new york knicks",
+              "away": "san antonio spurs"
+            },
+            {
+              "game_date": "20260605",
+              "home": "san antonio spurs",
+              "away": "new york knicks"
+            },
+            {
+              "game_date": "20260605",
+              "home": "new york knicks",
+              "away": "san antonio spurs"
+            },
+            {
+              "game_date": "20260604",
+              "home": "new york knicks",
+              "away": "san antonio spurs"
+            }
+          ],
+          "candidate_hits": [],
+          "nearby_espn_games": [],
+          "reason": "ESPN result not found",
+          "status": "missing_result"
+        }
+      ]
     }
   },
-  "generated_at": "2026-06-03T09:20:58",
-  "synced_at": "2026-06-03T09:20:58"
+  "generated_at": "2026-06-04T09:21:09",
+  "synced_at": "2026-06-04T09:21:09"
 }
