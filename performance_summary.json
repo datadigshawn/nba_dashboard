@@ -1,11 +1,11 @@
 {
-  "reference_date": "20260608",
+  "reference_date": "20260609",
   "today": {
-    "start_date": "20260608",
-    "end_date": "20260608",
-    "total": 0,
+    "start_date": "20260609",
+    "end_date": "20260609",
+    "total": 1,
     "resolved": 0,
-    "pending": 0,
+    "pending": 1,
     "wins": 0,
     "losses": 0,
     "wr": null,
@@ -13,10 +13,10 @@
   },
   "week": {
     "start_date": "20260608",
-    "end_date": "20260608",
-    "total": 0,
+    "end_date": "20260609",
+    "total": 1,
     "resolved": 0,
-    "pending": 0,
+    "pending": 1,
     "wins": 0,
     "losses": 0,
     "wr": null,
@@ -24,10 +24,10 @@
   },
   "month": {
     "start_date": "20260601",
-    "end_date": "20260608",
-    "total": 2,
+    "end_date": "20260609",
+    "total": 3,
     "resolved": 0,
-    "pending": 2,
+    "pending": 3,
     "wins": 0,
     "losses": 0,
     "wr": null,
@@ -44,5 +44,5 @@
     "wr": 58.3,
     "avg_margin_error": 15.2
   },
-  "generated_at": "2026-06-08T09:20:57"
+  "generated_at": "2026-06-09T09:24:01"
 }

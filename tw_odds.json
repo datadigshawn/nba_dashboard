@@ -1,29 +1,10 @@
 {
-  "synced_at": "2026-06-08T09:20:57",
+  "synced_at": "2026-06-09T09:24:01",
   "source": {
-    "sportweb_fetched_at": "2026-06-08T09:20:54",
+    "sportweb_fetched_at": "2026-06-09T09:20:59",
     "source_url": "https://www.sportslottery.com.tw/sportsbook/sport",
-    "game_count": 1
+    "game_count": 0
   },
-  "entries": [
-    {
-      "game": "San Antonio Spurs @ New York Knicks",
-      "away": "San Antonio Spurs",
-      "home": "New York Knicks",
-      "spread": null,
-      "ou": null,
-      "updated_at": "2026-06-08T09:20:54",
-      "source": "sportWeb",
-      "sportweb_game_id": "3472877.1",
-      "start_time": "2026-06-09T08:30:00.000+08:00"
-    }
-  ],
-  "odds": {
-    "San Antonio Spurs @ New York Knicks": {
-      "spread": null,
-      "ou": null,
-      "updated_at": "2026-06-08T09:20:54",
-      "source": "sportWeb"
-    }
-  }
+  "entries": [],
+  "odds": {}
 }
