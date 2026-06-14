@@ -13,6 +13,7 @@ from __future__ import annotations
 
 import argparse
 import json
+import os
 import sqlite3
 import sys
 from datetime import datetime
@@ -34,6 +35,46 @@ NBA_DATA_FILE = BASE_DIR / "nba_data.json"
 TW_ODDS_FILE = BASE_DIR / "tw_odds.json"
 SPORTBOOK_REPORT_FILE = BASE_DIR / "sportbook_report.json"
 PICK_STATS_FILE = BASE_DIR / "pick_stats.json"
+ALERT_LOG_PATH = BASE_DIR / "logs" / "alerts.log"
+
+# 盤口新鮮度上限：fetch 失敗時 blob_fetcher 不覆寫 latest_odds.json，會留下舊線。
+# 階段2 walk-forward 發現實盤押到平均差 ~2 分的過期盤口正是虧損主因，
+# 故超過此時數的盤口一律不拿來建新 picks（寧可跳過不下注）。
+MAX_ODDS_AGE_HOURS = float(os.environ.get("NBA_MAX_ODDS_AGE_HOURS", "18"))
+
+
+def log_alert(msg: str) -> None:
+    line = f"[{datetime.now().strftime('%Y-%m-%d %H:%M:%S')}] [sync_sportweb] {msg}"
+    print(line, file=sys.stderr)
+    try:
+        ALERT_LOG_PATH.parent.mkdir(parents=True, exist_ok=True)
+        with ALERT_LOG_PATH.open("a", encoding="utf-8") as f:
+            f.write(line + "\n")
+    except OSError:
+        pass
+
+
+def odds_age_hours(snapshot: dict) -> float | None:
+    """latest_odds.json 的 fetched_at 距今幾小時；無法解析回 None。"""
+    raw = snapshot.get("fetched_at") or ""
+    for fmt in ("%Y-%m-%dT%H:%M:%S", "%Y-%m-%dT%H:%M", "%Y-%m-%d %H:%M:%S"):
+        try:
+            return (datetime.now() - datetime.strptime(raw[:19], fmt)).total_seconds() / 3600
+        except ValueError:
+            continue
+    return None
+
+
+def odds_are_fresh(snapshot: dict) -> tuple[bool, str]:
+    """判斷盤口是否夠新鮮可用於下注。回傳 (是否新鮮, 原因)。"""
+    if snapshot.get("error"):
+        return False, f"snapshot error: {str(snapshot['error'])[:80]}"
+    age = odds_age_hours(snapshot)
+    if age is None:
+        return False, "fetched_at 無法解析"
+    if age > MAX_ODDS_AGE_HOURS:
+        return False, f"盤口已 {age:.1f}h 未更新（上限 {MAX_ODDS_AGE_HOURS:.0f}h）"
+    return True, f"{age:.1f}h"
 
 sys.path.insert(0, str(SPORTWEB_DIR / "src"))
 from sport_db import edge_backtest as sportweb_edge_backtest  # noqa: E402
@@ -74,8 +115,9 @@ def _two_way_probs(left_odds: float | None, right_odds: float | None):
     return raw_left / total, raw_right / total, total - 1.0
 
 
-def _pick_primary_line(lines: list[dict], left_key: str, right_key: str) -> float | None:
-    best_line = None
+def _pick_primary_line_row(lines: list[dict], left_key: str, right_key: str) -> dict | None:
+    """選主要盤口線（兩邊機率最接近 50/50），回傳完整 line dict（含賠率）。"""
+    best_row = None
     best_score = None
     for line in lines or []:
         market_line = line.get("line")
@@ -87,8 +129,15 @@ def _pick_primary_line(lines: list[dict], left_key: str, right_key: str) -> floa
         score = (abs(left_prob - 0.5), abs(float(market_line)))
         if best_score is None or score < best_score:
             best_score = score
-            best_line = float(market_line)
-    return best_line
+            best_row = line
+    return best_row
+
+
+def _pick_primary_line(lines: list[dict], left_key: str, right_key: str) -> float | None:
+    row = _pick_primary_line_row(lines, left_key, right_key)
+    if row is None or row.get("line") is None:
+        return None
+    return float(row["line"])
 
 
 def build_tw_odds_payload(snapshot: dict) -> dict:
@@ -103,14 +152,26 @@ def build_tw_odds_payload(snapshot: dict) -> dict:
         label = f"{away} @ {home}"
         spreads = game.get("spreads") or []
         totals = game.get("totals") or []
-        primary_spread = _pick_primary_line(spreads, "away", "home")
-        primary_total = _pick_primary_line(totals, "over", "under")
+        primary_spread_row = _pick_primary_line_row(spreads, "away", "home")
+        primary_total_row = _pick_primary_line_row(totals, "over", "under")
+        primary_spread = float(primary_spread_row["line"]) if primary_spread_row else None
+        primary_total = float(primary_total_row["line"]) if primary_total_row else None
+        spread_odds = {
+            "away": (primary_spread_row or {}).get("away"),
+            "home": (primary_spread_row or {}).get("home"),
+        }
+        ou_odds = {
+            "over": (primary_total_row or {}).get("over"),
+            "under": (primary_total_row or {}).get("under"),
+        }
         row = {
             "game": label,
             "away": away,
             "home": home,
             "spread": primary_spread,
             "ou": primary_total,
+            "spread_odds": spread_odds,
+            "ou_odds": ou_odds,
             "updated_at": fetched_at or synced_at,
             "source": "sportWeb",
             "sportweb_game_id": game.get("game_id", ""),
@@ -120,6 +181,8 @@ def build_tw_odds_payload(snapshot: dict) -> dict:
         odds_map[label] = {
             "spread": primary_spread,
             "ou": primary_total,
+            "spread_odds": spread_odds,
+            "ou_odds": ou_odds,
             "updated_at": row["updated_at"],
             "source": "sportWeb",
         }
@@ -295,6 +358,15 @@ def _build_pick_batch(games: list[dict], odds_map: dict, pick_date: str, limit: 
         if not bets:
             continue
 
+        # 補上每個 bet 在下注當下的十進位賠率（供 pnl_units 結算）
+        spread_odds = tw.get("spread_odds") or {}
+        ou_odds = tw.get("ou_odds") or {}
+        for bet in bets:
+            if bet["type"] == "spread":
+                bet["odds_at_pick"] = spread_odds.get(bet["target"])
+            elif bet["type"] == "ou":
+                bet["odds_at_pick"] = ou_odds.get(bet["target"])
+
         candidates.append({
             "game": game_key,
             "game_date": game.get("game_date", ""),
@@ -330,6 +402,7 @@ def _build_pick_batch(games: list[dict], odds_map: dict, pick_date: str, limit: 
                 "pick_line": bet["line"],
                 "pick_detail": bet["text"],
                 "edge": bet["edge"],
+                "odds_at_pick": bet.get("odds_at_pick"),
                 "confidence": candidate["confidence"],
                 "tw_spread": candidate["tw_spread"],
                 "tw_ou": candidate["tw_ou"],
@@ -407,10 +480,18 @@ def sync_local_odds_db(tw_odds_payload: dict):
     return saved
 
 
-def sync_recommended_picks(nba_data: dict, tw_odds_payload: dict) -> tuple[dict, int, dict, dict]:
+def sync_recommended_picks(nba_data: dict, tw_odds_payload: dict,
+                           odds_fresh: bool = True) -> tuple[dict, int, dict, dict]:
     init_db(DB_PATH)
     selection = build_recommended_picks_payload(nba_data, tw_odds_payload)
-    saved = save_recommended_picks(DB_PATH, selection.get("picks") or [])
+    # 新鮮度防護：盤口過期時不寫入新 picks，避免基於過期線下注（階段2 發現的虧損主因）。
+    # 仍照常結算既有 picks、刷新統計。
+    if odds_fresh:
+        saved = save_recommended_picks(DB_PATH, selection.get("picks") or [])
+    else:
+        saved = 0
+        selection["picks"] = []
+        selection.setdefault("meta", {})["skipped_stale_odds"] = True
     pick_history = sync_pick_history(DB_PATH)
     verified = pick_history["resolved"]
     stats = pick_history["stats"]
@@ -457,11 +538,22 @@ def main():
 
     snapshot = _load_json(SPORTWEB_ODDS)
     nba_data = _load_json(NBA_DATA_FILE)
+
+    fresh, reason = odds_are_fresh(snapshot)
+    if not fresh:
+        log_alert(f"盤口不新鮮，本輪不產生新 picks：{reason}")
+    else:
+        print(f"[sync] 盤口新鮮度 OK（{reason}）")
+
     tw_odds_payload = build_tw_odds_payload(snapshot)
+    tw_odds_payload["fresh"] = fresh
     report_payload = build_sportbook_report(snapshot, SPORTWEB_DB)
-    pick_selection, picks_saved, verified, pick_stats = sync_recommended_picks(nba_data, tw_odds_payload)
+    pick_selection, picks_saved, verified, pick_stats = sync_recommended_picks(
+        nba_data, tw_odds_payload, odds_fresh=fresh)
     pick_stats_payload = build_pick_stats_payload(pick_selection, picks_saved, verified, pick_stats)
-    nba_data = enrich_nba_data_with_official_picks(nba_data, tw_odds_payload, pick_stats)
+    # 盤口過期時，dashboard 的 official_picks 也不重建（避免顯示基於舊線的推薦）
+    official_odds = (tw_odds_payload.get("odds") or {}) if fresh else {}
+    nba_data = enrich_nba_data_with_official_picks(nba_data, {"odds": official_odds}, pick_stats)
 
     write_json(TW_ODDS_FILE, tw_odds_payload)
     write_json(SPORTBOOK_REPORT_FILE, report_payload)

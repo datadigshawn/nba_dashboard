@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>EnvironmentVariables</key>
+	<dict>
+		<key>PATH</key>
+		<string>/opt/homebrew/bin:/usr/local/bin:/usr/bin:/bin</string>
+	</dict>
+	<key>HardResourceLimits</key>
+	<dict>
+		<key>NumberOfFiles</key>
+		<integer>8192</integer>
+	</dict>
+	<key>KeepAlive</key>
+	<true/>
+	<key>Label</key>
+	<string>com.nba.dashboard</string>
+	<key>ProgramArguments</key>
+	<array>
+		<string>/Users/shawnclaw/autobot/investing/sports/autobots_NBA/.venv/bin/python</string>
+		<string>/Users/shawnclaw/autobot/investing/sports/autobots_NBA/dashboard.py</string>
+		<string>--port</string>
+		<string>8090</string>
+		<string>--host</string>
+		<string>0.0.0.0</string>
+	</array>
+	<key>RunAtLoad</key>
+	<true/>
+	<key>SoftResourceLimits</key>
+	<dict>
+		<key>NumberOfFiles</key>
+		<integer>4096</integer>
+	</dict>
+	<key>StandardErrorPath</key>
+	<string>/Users/shawnclaw/autobot/investing/sports/autobots_NBA/logs/dashboard.error.log</string>
+	<key>StandardOutPath</key>
+	<string>/Users/shawnclaw/autobot/investing/sports/autobots_NBA/logs/dashboard.log</string>
+	<key>WorkingDirectory</key>
+	<string>/Users/shawnclaw/autobot/investing/sports/autobots_NBA</string>
+</dict>
+</plist>

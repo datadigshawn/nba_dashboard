@@ -32,10 +32,30 @@ sys.path.insert(0, str(BASE_DIR))
 from nba_db import DB_PATH, init_db, get_latest_bankroll_balance, get_pending_bets
 
 DEFAULT_BANKROLL = 1000.0
-DEFAULT_STAKE_ODDS = 1.91  # standard -110 juice
-KELLY_FRACTION = 0.125     # 1/8 Kelly
+DEFAULT_STAKE_ODDS = 1.91  # standard -110 juice（僅 fallback；下注一律優先用真實 odds_at_pick）
+KELLY_FRACTION = 0.125     # 1/8 Kelly（保守；資料變厚前不放寬）
+
+# ── 階段5 紀律參數 ──────────────────────────────────────────────
+MAX_STAKE_PCT = 0.02        # 單注硬上限：銀行 2%（fractional Kelly 之上再加一道保險）
+MIN_CALIBRATED_EDGE = 0.03  # 校準後 edge 門檻：model_prob 須超出真實隱含機率 3 個百分點
+PICK_TYPE_WHITELIST = {"spread", "ou"}  # 允許下注的類型（保守起見可收窄）
 
 MODEL_STATE_PATH = BASE_DIR / "state" / "nba_model.json"
+
+
+def _calibrated_sigma() -> float:
+    """階段3 校準的 margin sigma；缺檔 fallback 回訓練 RMSE。
+
+    取代過去 place_from_picks / bet_filter 直接用 _load_rmse()（in-sample，過度自信）。
+    """
+    try:
+        from nba_predictor import load_prob_sigma
+        s = load_prob_sigma()
+        if s:
+            return s
+    except Exception:
+        pass
+    return _load_rmse()
 
 
 def _connect(db_path: Path | str = DB_PATH) -> sqlite3.Connection:
@@ -116,6 +136,10 @@ def place_paper_bet(db_path: Path | str, game_date: str, home: str, away: str,
 
     if stake is None:
         stake = round(balance * ks["kelly_fraction"], 2)
+    # 單注硬上限：即使 Kelly 算出更大也封頂在銀行的 MAX_STAKE_PCT
+    cap = round(balance * MAX_STAKE_PCT, 2)
+    if stake > cap:
+        stake = cap
     if stake <= 0:
         return None
 
@@ -155,10 +179,17 @@ def place_paper_bet(db_path: Path | str, game_date: str, home: str, away: str,
     }
 
 
-def place_from_picks(db_path: Path | str = DB_PATH) -> list[dict]:
+def place_from_picks(db_path: Path | str = DB_PATH, *, verbose: bool = False) -> list[dict]:
+    """從 recommended_picks 下 paper bet，套用階段5 紀律。
+
+    階段5 修正（過去會系統性超注）：
+      1. 用真實 odds_at_pick 算 Kelly/edge，而非假的 -110（1.91）
+      2. 用階段3 校準 sigma 算機率，而非 in-sample 訓練 RMSE
+      3. 閘門：類型白名單、有真實賠率、校準 edge ≥ 門檻
+    """
     today = datetime.now().strftime("%Y%m%d")
-    rmse = _load_rmse()
-    placed = []
+    sigma = _calibrated_sigma()
+    placed, skipped = [], []
 
     with _connect(db_path) as conn:
         picks = conn.execute("""
@@ -173,26 +204,54 @@ def place_from_picks(db_path: Path | str = DB_PATH) -> list[dict]:
         pick_line = p["pick_line"]
         model_spread = p["model_spread"]
         model_total = p["model_total"]
+        odds = p["odds_at_pick"]
 
-        if pick_type == "spread" and model_spread is not None and pick_line is not None:
-            model_prob = _margin_to_cover_prob(model_spread, -pick_line, rmse)
-        elif pick_type == "ou" and model_total is not None and pick_line is not None:
-            if pick_target == "over":
-                model_prob = _margin_to_cover_prob(model_total, pick_line, rmse)
-            else:
-                model_prob = 1 - _margin_to_cover_prob(model_total, pick_line, rmse)
-        else:
+        def _skip(reason):
+            skipped.append({"pick": p["pick_detail"], "reason": reason})
+
+        # 閘門 1：類型白名單
+        if pick_type not in PICK_TYPE_WHITELIST:
+            _skip(f"類型 {pick_type} 不在白名單")
             continue
 
-        if model_prob < 0.52:
+        # 機率（校準 sigma）
+        if pick_type == "spread" and model_spread is not None and pick_line is not None:
+            model_prob = _margin_to_cover_prob(model_spread, -pick_line, sigma)
+        elif pick_type == "ou" and model_total is not None and pick_line is not None:
+            if pick_target == "over":
+                model_prob = _margin_to_cover_prob(model_total, pick_line, sigma)
+            else:
+                model_prob = 1 - _margin_to_cover_prob(model_total, pick_line, sigma)
+        else:
+            _skip("缺 model line")
+            continue
+
+        # 閘門 2：必須有真實賠率（無則不下注，不用假賠率猜）
+        if not odds or odds <= 1.0:
+            _skip("無真實 odds_at_pick")
+            continue
+
+        # 閘門 3：校準後 edge 須達門檻（vig-aware）
+        implied = 1.0 / odds
+        cal_edge = model_prob - implied
+        if cal_edge < MIN_CALIBRATED_EDGE:
+            _skip(f"校準 edge {cal_edge:+.3f} < {MIN_CALIBRATED_EDGE}")
             continue
 
         result = place_paper_bet(
             db_path, p["game_date"], p["home"], p["away"],
             pick_type, pick_target, pick_line, model_prob,
+            market_odds=odds,
         )
         if result:
             placed.append(result)
+        else:
+            _skip("已下過或 stake=0")
+
+    if verbose:
+        print(f"[tracker] 評估 {len(picks)} 注 → 下 {len(placed)}，跳過 {len(skipped)}")
+        for s in skipped:
+            print(f"    skip: {s['pick']} — {s['reason']}")
 
     return placed
 
@@ -575,6 +634,77 @@ def scenario_analysis(db_path: Path | str = DB_PATH) -> dict:
 #  Phase 3: Kelly Filter & Recommendations
 # ═══════════════════════════════════════════════════════════════
 
+# ── 階段5：真錢升級就緒判斷 ────────────────────────────────────────
+
+# 升級真錢的門檻（全部須滿足才 go）
+READINESS_MIN_SETTLED = 100      # 已結算 paper bet 數（足夠樣本）
+READINESS_MIN_ROI = 0.0          # paper 每注 ROI 須 > 0（真實賠率口徑）
+READINESS_MIN_CLV_SAMPLES = 50   # CLV 樣本數（階段4 收盤線累積後才有）
+READINESS_MIN_CLV = 0.0          # 平均 CLV 須 > 0
+
+
+def real_money_readiness(db_path: Path | str = DB_PATH) -> dict:
+    """檢查是否達到「從 paper 升級真錢」的門檻，回傳逐項 go/no-go。
+
+    依據 recommended_picks 的真實損益（pnl_units，階段1）+ CLV（階段4，尚未上線）。
+    任一項未過即整體 no-go——這是刻意保守，寧可多等資料。
+    """
+    with _connect(db_path) as conn:
+        row = conn.execute("""
+            SELECT COUNT(*) AS settled,
+                   SUM(CASE WHEN pnl_units IS NOT NULL THEN 1 ELSE 0 END) AS with_pnl,
+                   COALESCE(SUM(pnl_units), 0) AS total_pnl
+            FROM recommended_picks
+            WHERE correct IN (0, 1)
+        """).fetchone()
+        # CLV 欄位可能尚未建立（階段4），容錯
+        try:
+            clv = conn.execute("""
+                SELECT COUNT(clv) AS n, COALESCE(AVG(clv), 0) AS avg_clv
+                FROM recommended_picks WHERE clv IS NOT NULL
+            """).fetchone()
+            clv_n, clv_avg = int(clv["n"] or 0), float(clv["avg_clv"] or 0)
+        except sqlite3.OperationalError:
+            clv_n, clv_avg = 0, 0.0
+
+    settled = int(row["settled"] or 0)
+    with_pnl = int(row["with_pnl"] or 0)
+    total_pnl = float(row["total_pnl"] or 0)
+    roi = (total_pnl / with_pnl) if with_pnl else None
+
+    checks = [
+        {"name": "樣本數", "pass": settled >= READINESS_MIN_SETTLED,
+         "detail": f"{settled}/{READINESS_MIN_SETTLED} 已結算"},
+        {"name": "paper ROI>0", "pass": roi is not None and roi > READINESS_MIN_ROI,
+         "detail": f"每注 {roi*100:+.1f}%" if roi is not None else "無資料"},
+        {"name": "CLV 樣本", "pass": clv_n >= READINESS_MIN_CLV_SAMPLES,
+         "detail": f"{clv_n}/{READINESS_MIN_CLV_SAMPLES}（階段4 後累積）"},
+        {"name": "CLV>0", "pass": clv_n >= READINESS_MIN_CLV_SAMPLES and clv_avg > READINESS_MIN_CLV,
+         "detail": f"平均 {clv_avg:+.3f}" if clv_n else "尚無 CLV 資料"},
+    ]
+    go = all(c["pass"] for c in checks)
+    return {
+        "ready": go,
+        "verdict": "GO ✅ 可考慮小額真錢" if go else "NO-GO ⛔ 繼續 paper trading",
+        "settled": settled, "paper_roi_per_bet": round(roi, 4) if roi is not None else None,
+        "total_units": round(total_pnl, 2),
+        "clv_samples": clv_n, "avg_clv": round(clv_avg, 4),
+        "checks": checks,
+    }
+
+
+def _print_readiness(r: dict):
+    print("\n" + "═" * 56)
+    print("  真錢升級就緒檢查（階段5）")
+    print("═" * 56)
+    for c in r["checks"]:
+        mark = "✅" if c["pass"] else "⛔"
+        print(f"  {mark} {c['name']:<12} {c['detail']}")
+    print("─" * 56)
+    print(f"  結論：{r['verdict']}")
+    print("═" * 56 + "\n")
+
+
 def bet_filter(db_path: Path | str = DB_PATH,
                candidates: list[dict] | None = None,
                min_sample: int = 10,
@@ -585,7 +715,7 @@ def bet_filter(db_path: Path | str = DB_PATH,
     if candidates is None:
         candidates = []
         today = datetime.now().strftime("%Y%m%d")
-        rmse = _load_rmse()
+        rmse = _calibrated_sigma()
         with _connect(db_path) as conn:
             picks = conn.execute("""
                 SELECT * FROM recommended_picks
@@ -799,6 +929,8 @@ def main():
                         help="場景分析")
     parser.add_argument("--recommend", action="store_true",
                         help="Kelly 過濾推薦")
+    parser.add_argument("--readiness", action="store_true",
+                        help="真錢升級就緒檢查（階段5）")
     parser.add_argument("--report", action="store_true",
                         help="完整報告")
     parser.add_argument("--json", action="store_true",
@@ -822,7 +954,7 @@ def main():
               f"PnL: {stats['total_pnl']:+.2f}")
 
     if args.place:
-        placed = place_from_picks(DB_PATH)
+        placed = place_from_picks(DB_PATH, verbose=not args.json)
         print(f"[tracker] 下注 {len(placed)} 注")
         for p in placed:
             print(f"  {p['game_date']} {p['away']}@{p['home']} "
@@ -864,8 +996,15 @@ def main():
         else:
             _print_recommendations(recs)
 
+    if args.readiness:
+        r = real_money_readiness(DB_PATH)
+        if args.json:
+            print(json.dumps(r, indent=2, ensure_ascii=False))
+        else:
+            _print_readiness(r)
+
     if not any([args.resolve, args.place, args.summary, args.calibration,
-                args.roi, args.scenarios, args.recommend]):
+                args.roi, args.scenarios, args.recommend, args.readiness]):
         parser.print_help()
 
 

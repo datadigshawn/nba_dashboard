@@ -42,7 +42,7 @@ launchctl list | grep sportweb
 
 ```bash
 # CF 失效（latest_odds.json 空掉）
-cd /Users/shawnclaw/autobot/sportWeb
+cd /Users/shawnclaw/autobot/investing/sports/autobots_NBA/sportweb
 .venv/bin/python src/bootstrap.py --wait 180
 # 或直接跑 fetcher，會自動觸發
 .venv/bin/python src/fetcher.py

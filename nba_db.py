@@ -102,6 +102,8 @@ CREATE TABLE IF NOT EXISTS recommended_picks (
     tw_ou        REAL,
     model_spread REAL,
     model_total  REAL,
+    odds_at_pick REAL,
+    pnl_units    REAL,
     result       TEXT,
     correct      INTEGER,
     verified_at  TEXT,
@@ -154,6 +156,30 @@ CREATE INDEX IF NOT EXISTS idx_bankroll_ts ON bankroll_log(ts);
 def init_db(db_path: Path | str = DB_PATH):
     with sqlite3.connect(str(db_path), timeout=10) as conn:
         conn.executescript(SCHEMA)
+        _migrate_pick_pnl_columns(conn)
+
+
+def _migrate_pick_pnl_columns(conn: sqlite3.Connection):
+    """既有 DB 補 odds_at_pick / pnl_units 欄位（CREATE IF NOT EXISTS 不會更新舊表）。"""
+    cols = {row[1] for row in conn.execute("PRAGMA table_info(recommended_picks)")}
+    if "odds_at_pick" not in cols:
+        conn.execute("ALTER TABLE recommended_picks ADD COLUMN odds_at_pick REAL")
+    if "pnl_units" not in cols:
+        conn.execute("ALTER TABLE recommended_picks ADD COLUMN pnl_units REAL")
+
+
+def compute_pnl_units(result: str | None, odds_at_pick: float | None) -> float | None:
+    """每注 1 單位的損益：win → odds-1，loss → -1，push/no_game → 0（退注）。
+
+    odds 未知時回傳 None（不以猜測賠率污染損益統計）。
+    """
+    if result in ("push", "no_game"):
+        return 0.0
+    if result == "win":
+        return round(float(odds_at_pick) - 1.0, 3) if odds_at_pick else None
+    if result == "loss":
+        return -1.0
+    return None
 
 
 def _connect(db_path: Path | str = DB_PATH) -> sqlite3.Connection:
@@ -362,8 +388,9 @@ def save_recommended_picks(db_path: Path | str, picks: list[dict]) -> int:
                 INSERT OR IGNORE INTO recommended_picks
                 (pick_date, game_date, game_key, away, home,
                  pick_type, pick_target, pick_line, pick_detail,
-                 edge, confidence, tw_spread, tw_ou, model_spread, model_total)
-                VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+                 edge, confidence, tw_spread, tw_ou, model_spread, model_total,
+                 odds_at_pick)
+                VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
             """, (
                 p.get("pick_date", ""),
                 p.get("game_date", ""),
@@ -380,6 +407,7 @@ def save_recommended_picks(db_path: Path | str, picks: list[dict]) -> int:
                 p.get("tw_ou"),
                 p.get("model_spread"),
                 p.get("model_total"),
+                p.get("odds_at_pick"),
             ))
             if cur.rowcount:
                 saved += 1
@@ -697,11 +725,12 @@ def resolve_recommended_picks(
                 int(result_row["home_score"]),
                 int(result_row["away_score"]),
             )
+            pnl = compute_pnl_units(result, row["odds_at_pick"])
             conn.execute("""
                 UPDATE recommended_picks
-                SET result = ?, correct = ?, verified_at = ?
+                SET result = ?, correct = ?, pnl_units = ?, verified_at = ?
                 WHERE id = ?
-            """, (result, correct, now, row["id"]))
+            """, (result, correct, pnl, now, row["id"]))
             stats["verified"] += 1
             if correct == 1:
                 stats["wins"] += 1
@@ -717,12 +746,58 @@ def resolve_recommended_picks(
     return stats
 
 
+def mark_stale_unresolvable_picks(
+    db_path: Path | str = DB_PATH,
+    stale_days: int = 3,
+) -> dict:
+    cutoff = (datetime.now() - timedelta(days=stale_days)).strftime("%Y%m%d")
+    now = datetime.now().isoformat(timespec="seconds")
+    with _connect(db_path) as conn:
+        rows = conn.execute("""
+            SELECT id, game_date, away, home, pick_type
+            FROM recommended_picks
+            WHERE correct IS NULL
+              AND (result IS NULL OR result = 'pending')
+              AND game_date <= ?
+        """, (cutoff,)).fetchall()
+        if not rows:
+            return {"marked": 0, "cutoff": cutoff}
+        ids = [r["id"] for r in rows]
+        placeholders = ",".join("?" * len(ids))
+        conn.execute(
+            f"UPDATE recommended_picks "
+            f"SET result = 'no_game', pnl_units = 0, verified_at = ? "
+            f"WHERE id IN ({placeholders})",
+            (now, *ids),
+        )
+    return {"marked": len(rows), "cutoff": cutoff, "rows": [dict(r) for r in rows]}
+
+
 def verify_pending_picks(db_path: Path | str = DB_PATH) -> dict:
     return resolve_recommended_picks(db_path)
 
 
 def get_pick_stats(db_path: Path | str = DB_PATH) -> dict:
     with _connect(db_path) as conn:
+        # 主 KPI：每注 1 單位的累積損益（只計賠率已知的已結算 picks，避免猜測賠率污染統計）
+        pnl_row = conn.execute("""
+            SELECT COUNT(*)                                        AS settled,
+                   SUM(CASE WHEN pnl_units IS NOT NULL THEN 1 ELSE 0 END) AS with_pnl,
+                   COALESCE(SUM(pnl_units), 0)                     AS total_pnl,
+                   COALESCE(AVG(odds_at_pick), 0)                  AS avg_odds
+            FROM recommended_picks
+            WHERE correct IN (0, 1)
+        """).fetchone()
+        pnl_daily_rows = conn.execute("""
+            SELECT pick_date AS date,
+                   COALESCE(SUM(pnl_units), 0) AS pnl,
+                   SUM(CASE WHEN pnl_units IS NOT NULL THEN 1 ELSE 0 END) AS n
+            FROM recommended_picks
+            WHERE correct IN (0, 1)
+            GROUP BY pick_date
+            ORDER BY pick_date
+        """).fetchall()
+
         total, wins = conn.execute("""
             SELECT COUNT(*),
                    COALESCE(SUM(CASE WHEN correct = 1 THEN 1 ELSE 0 END), 0)
@@ -917,7 +992,26 @@ def get_pick_stats(db_path: Path | str = DB_PATH) -> dict:
             "status": status,
         })
 
+    settled = int(pnl_row["settled"] or 0)
+    with_pnl = int(pnl_row["with_pnl"] or 0)
+    total_pnl = round(float(pnl_row["total_pnl"] or 0), 2)
+    cum = 0.0
+    pnl_curve = []
+    for row in pnl_daily_rows:
+        cum += float(row["pnl"] or 0)
+        pnl_curve.append({"date": row["date"], "pnl": round(float(row["pnl"] or 0), 2),
+                          "cum_pnl": round(cum, 2), "n": int(row["n"] or 0)})
+
     return {
+        "pnl": {
+            "total_units": total_pnl,
+            "roi_per_bet": round(total_pnl / with_pnl, 4) if with_pnl else None,
+            "settled": settled,
+            "with_odds": with_pnl,
+            "odds_coverage": round(with_pnl / settled * 100, 1) if settled else 0.0,
+            "avg_odds": round(float(pnl_row["avg_odds"] or 0), 3),
+            "curve": pnl_curve,
+        },
         "total": total or 0,
         "wins": wins or 0,
         "wr": _wr(wins or 0, total or 0),

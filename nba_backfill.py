@@ -3,7 +3,7 @@
 一次性回填：把現有 nba_data.json + ESPN 歷史寫入 nba.db。
 
 用法：
-    cd /Users/shawnclaw/autobot/autobots_NBA
+    cd /Users/shawnclaw/autobot/investing/sports/autobots_NBA
     .venv/bin/python nba_backfill.py
 """
 import json

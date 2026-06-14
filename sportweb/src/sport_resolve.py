@@ -13,7 +13,7 @@ Edge Outcome Resolver — 比賽結束後填入 edge 勝負結果。
 資料源：ESPN scoreboard API
 
 用法：
-    cd /Users/shawnclaw/autobot/sportWeb
+    cd /Users/shawnclaw/autobot/investing/sports/autobots_NBA/sportweb
     .venv/bin/python src/sport_resolve.py
     .venv/bin/python src/sport_resolve.py --days 7   # 查更多天
 """

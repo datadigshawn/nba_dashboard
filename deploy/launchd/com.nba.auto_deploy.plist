@@ -9,11 +9,11 @@
   <key>ProgramArguments</key>
   <array>
     <string>/bin/bash</string>
-    <string>/Users/shawnclaw/autobot/autobots_NBA/nba_auto_deploy.sh</string>
+    <string>/Users/shawnclaw/autobot/investing/sports/autobots_NBA/nba_auto_deploy.sh</string>
   </array>
 
   <key>WorkingDirectory</key>
-  <string>/Users/shawnclaw/autobot/autobots_NBA</string>
+  <string>/Users/shawnclaw/autobot/investing/sports/autobots_NBA</string>
 
   <key>StartCalendarInterval</key>
   <dict>
@@ -33,10 +33,10 @@
   </dict>
 
   <key>StandardOutPath</key>
-  <string>/Users/shawnclaw/autobot/autobots_NBA/logs/auto_deploy.launchd.log</string>
+  <string>/Users/shawnclaw/autobot/investing/sports/autobots_NBA/logs/auto_deploy.launchd.log</string>
 
   <key>StandardErrorPath</key>
-  <string>/Users/shawnclaw/autobot/autobots_NBA/logs/auto_deploy.launchd.error.log</string>
+  <string>/Users/shawnclaw/autobot/investing/sports/autobots_NBA/logs/auto_deploy.launchd.error.log</string>
 
   <key>SoftResourceLimits</key>
   <dict>

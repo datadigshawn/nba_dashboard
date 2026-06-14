@@ -3,7 +3,7 @@
 API 探索腳本 — 找出讓分/大小分的 marketGroup ID 或 event-level 端點。
 
 用法：
-    cd /Users/shawnclaw/autobot/sportWeb
+    cd /Users/shawnclaw/autobot/investing/sports/autobots_NBA/sportweb
     .venv/bin/python src/api_explore_markets.py
 """
 import asyncio
@@ -47,7 +47,7 @@ async def main():
 
     async with async_playwright() as p:
         browser = await p.chromium.launch(
-            headless=True, channel="chrome",
+            headless=True,
             args=["--disable-blink-features=AutomationControlled"],
         )
         ctx = await browser.new_context(

@@ -17,6 +17,7 @@ from nba_db import (
     get_pending_pick_dates,
     get_unresolved_dates,
     init_db,
+    mark_stale_unresolvable_picks,
     resolve_outcomes,
 )
 from pick_history import sync_pick_history
@@ -96,6 +97,15 @@ def main():
                 print(f"    espn nearby: {nearby_text}")
     else:
         print("[resolve] ESPN 無結果可用")
+
+    stale_stats = mark_stale_unresolvable_picks(DB_PATH, stale_days=3)
+    if stale_stats["marked"]:
+        print(
+            f"[resolve] 標記 {stale_stats['marked']} 筆 game_date<{stale_stats['cutoff']} "
+            "的 phantom 比賽為 no_game"
+        )
+        for row in stale_stats.get("rows", [])[:10]:
+            print(f"  · {row['game_date']} {row['away']} @ {row['home']} [{row['pick_type']}]")
 
 
 if __name__ == "__main__":

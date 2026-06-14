@@ -177,7 +177,7 @@ NBA 的 **實際 game 資料用另一個 content type**，可能是：
 ## 🛠️ 開發環境
 
 ```bash
-cd /Users/shawnclaw/autobot/sportWeb
+cd /Users/shawnclaw/autobot/investing/sports/autobots_NBA/sportweb
 source .venv/bin/activate     # 本地 venv（已建立）
 # playwright + chromium 已裝（重建時：pip install -r requirements.txt）
 ```

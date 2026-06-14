@@ -52,7 +52,7 @@ autobots_NBA/
 ## 🚀 快速啟動
 
 ```bash
-cd /Users/shawnclaw/autobot/autobots_NBA
+cd /Users/shawnclaw/autobot/investing/sports/autobots_NBA
 VENV=.venv/bin/python
 
 # 今日預測（文字輸出）
@@ -168,7 +168,7 @@ Streamlit Cloud（讀取 JSON 渲染儀表板）
 ### 手動同步（測試用）
 
 ```bash
-cd /Users/shawnclaw/autobot/autobots_NBA
+cd /Users/shawnclaw/autobot/investing/sports/autobots_NBA
 .venv/bin/python streamlit_app/sync_data.py
 ```
 
@@ -263,7 +263,7 @@ tail -f logs/dashboard.log
 
 重建 venv：
 ```bash
-cd /Users/shawnclaw/autobot/autobots_NBA
+cd /Users/shawnclaw/autobot/investing/sports/autobots_NBA
 rm -rf .venv
 /opt/homebrew/bin/python3 -m venv .venv
 .venv/bin/pip install -r requirements.txt

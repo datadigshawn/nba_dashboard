@@ -9,13 +9,13 @@
   <key>ProgramArguments</key>
   <array>
     <string>/bin/bash</string>
-    <string>/Users/shawnclaw/autobot/autobots_NBA/run_nba_betting_pipeline.sh</string>
+    <string>/Users/shawnclaw/autobot/investing/sports/autobots_NBA/run_nba_betting_pipeline.sh</string>
     <string>--predict-only</string>
     <string>--no-deploy</string>
   </array>
 
   <key>WorkingDirectory</key>
-  <string>/Users/shawnclaw/autobot/autobots_NBA</string>
+  <string>/Users/shawnclaw/autobot/investing/sports/autobots_NBA</string>
 
   <key>StartCalendarInterval</key>
   <dict>
@@ -35,10 +35,10 @@
   </dict>
 
   <key>StandardOutPath</key>
-  <string>/Users/shawnclaw/autobot/autobots_NBA/logs/betting_pipeline.launchd.log</string>
+  <string>/Users/shawnclaw/autobot/investing/sports/autobots_NBA/logs/betting_pipeline.launchd.log</string>
 
   <key>StandardErrorPath</key>
-  <string>/Users/shawnclaw/autobot/autobots_NBA/logs/betting_pipeline.launchd.error.log</string>
+  <string>/Users/shawnclaw/autobot/investing/sports/autobots_NBA/logs/betting_pipeline.launchd.error.log</string>
 
   <key>SoftResourceLimits</key>
   <dict>

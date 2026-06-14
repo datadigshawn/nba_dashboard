@@ -27,6 +27,7 @@ import html
 import json
 import os
 import sys
+import time
 import urllib.parse
 import urllib.request
 from datetime import datetime
@@ -37,7 +38,22 @@ ENV_PATH = BASE_DIR / ".env"
 DATA_PATH = BASE_DIR / "nba_data.json"
 PICK_STATS_PATH = BASE_DIR / "pick_stats.json"
 SPORTBOOK_REPORT_PATH = BASE_DIR / "sportbook_report.json"
+ALERT_LOG_PATH = BASE_DIR / "logs" / "alerts.log"
 TG_LIMIT = 4096  # Telegram message char limit
+SEND_RETRIES = 3
+RETRY_BASE_DELAY = 3  # seconds; 3 → 9 → 27
+
+
+def log_alert(msg: str) -> None:
+    """失敗告警統一落地到 logs/alerts.log，供人工與 auto_deploy 檢查。"""
+    line = f"[{datetime.now().strftime('%Y-%m-%d %H:%M:%S')}] [telegram_push] {msg}"
+    print(line, file=sys.stderr)
+    try:
+        ALERT_LOG_PATH.parent.mkdir(parents=True, exist_ok=True)
+        with ALERT_LOG_PATH.open("a", encoding="utf-8") as f:
+            f.write(line + "\n")
+    except OSError:
+        pass
 
 
 # ── env loader ────────────────────────────────────────────────────────
@@ -84,17 +100,26 @@ def send_message(text: str, chat_id: str | None = None,
         "disable_web_page_preview": "true",
     }
     data = urllib.parse.urlencode(payload).encode()
-    req = urllib.request.Request(url, data=data, method="POST")
-    try:
-        with urllib.request.urlopen(req, timeout=15) as r:
-            body = json.loads(r.read().decode())
-            if not body.get("ok"):
-                print(f"[telegram_push] ✗ API error: {body}", file=sys.stderr)
-                return False
-            return True
-    except Exception as e:
-        print(f"[telegram_push] ✗ send failed: {e}", file=sys.stderr)
-        return False
+    last_err = None
+    for attempt in range(1, SEND_RETRIES + 1):
+        req = urllib.request.Request(url, data=data, method="POST")
+        try:
+            with urllib.request.urlopen(req, timeout=15) as r:
+                body = json.loads(r.read().decode())
+                if not body.get("ok"):
+                    # API 層錯誤（格式/權限）重試無意義，直接告警
+                    log_alert(f"✗ API error: {body}")
+                    return False
+                return True
+        except Exception as e:
+            last_err = e
+            if attempt < SEND_RETRIES:
+                delay = RETRY_BASE_DELAY * (3 ** (attempt - 1))
+                print(f"[telegram_push] send failed (attempt {attempt}/{SEND_RETRIES}): {e} — retry in {delay}s",
+                      file=sys.stderr)
+                time.sleep(delay)
+    log_alert(f"✗ send failed after {SEND_RETRIES} attempts: {last_err}")
+    return False
 
 
 def send_chunked(text: str, chat_id: str | None = None) -> bool:
@@ -289,6 +314,16 @@ def format_betting_alert(topn: int = 5) -> str:
     ]
 
     if pick_stats.get("total", 0):
+        pnl = pick_stats.get("pnl") or {}
+        total_units = pnl.get("total_units")
+        roi = pnl.get("roi_per_bet")
+        if total_units is not None and pnl.get("with_odds"):
+            sign = "🟢" if total_units > 0 else ("🔴" if total_units < 0 else "⚪")
+            roi_text = f" · 每注 ROI {roi*100:+.1f}%" if roi is not None else ""
+            lines.append(
+                f"{sign} <b>累積損益</b>: {total_units:+.2f} 單位"
+                f"（{pnl.get('with_odds')} 注）{roi_text}"
+            )
         lines.append(
             f"📈 <b>歷史推薦</b>: 勝率 {pick_stats.get('wr', 0):.1f}% "
             f"({pick_stats.get('wins', 0)}/{pick_stats.get('total', 0)})"

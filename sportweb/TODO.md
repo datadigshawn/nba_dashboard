@@ -29,7 +29,7 @@ API 結構解碼了，但：
 - 找到所有 27 個國際聯盟
 
 ### ✅ 2026-04-15 下午~晚上（Phase A + C）
-- 專案 clone 到 `/Users/shawnclaw/autobot/sportWeb`
+- 專案 clone 到 `/Users/shawnclaw/autobot/investing/sports/autobots_NBA/sportweb`
 - 本地 `.venv` 建立，Playwright + Chromium 驗證
 - 5 張截圖（IMG_7268~7274）分析完成
 - 產出 `DOM_STRUCTURE.md`：推斷出 3 場比賽、4 種 market、完整資料模型
@@ -172,7 +172,7 @@ gamegroups, marketgroups, fwmarketgrouplist, events, tournament, league
 
 ### 環境
 ```bash
-cd /Users/shawnclaw/autobot/sportWeb
+cd /Users/shawnclaw/autobot/investing/sports/autobots_NBA/sportweb
 source .venv/bin/activate
 # Python 3.12+, playwright + Chromium（已安裝）
 ```

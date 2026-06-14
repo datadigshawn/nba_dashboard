@@ -2,7 +2,7 @@
 SPA Inspector — 等 JS 跑完 + 監控 API 請求，抓真實渲染後的 DOM
 
 執行：
-    cd /Users/shawnclaw/autobot/sportWeb
+    cd /Users/shawnclaw/autobot/investing/sports/autobots_NBA/sportweb
     .venv/bin/python src/inspect_spa.py
     HEADED=1 .venv/bin/python src/inspect_spa.py  # 看瀏覽器
 
@@ -43,7 +43,7 @@ async def main():
 
     async with async_playwright() as p:
         browser = await p.chromium.launch(
-            headless=not HEADED, channel="chrome",
+            headless=not HEADED,
             args=["--disable-blink-features=AutomationControlled"],
         )
         ctx = await browser.new_context(

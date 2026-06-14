@@ -1,7 +1,7 @@
 {
-  "synced_at": "2026-06-13T09:21:10",
+  "synced_at": "2026-06-13T10:35:40",
   "source": {
-    "sportweb_fetched_at": "2026-06-13T09:21:09",
+    "sportweb_fetched_at": "2026-06-13T10:00:02",
     "source_url": "https://blob3rd.sportslottery.com.tw/apidata/Pre/34765.1-Games.en.json",
     "game_count": 1
   },
@@ -13,14 +13,14 @@
       "spread": -4.5,
       "ou": 216.5,
       "spread_odds": {
-        "away": 1.72,
-        "home": 1.72
+        "away": 1.7,
+        "home": 1.73
       },
       "ou_odds": {
         "over": 1.68,
         "under": 1.75
       },
-      "updated_at": "2026-06-13T09:21:09",
+      "updated_at": "2026-06-13T10:00:02",
       "source": "sportWeb",
       "sportweb_game_id": "3473584.1",
       "start_time": "2026-06-14T08:30:00+08:00"
@@ -31,15 +31,16 @@
       "spread": -4.5,
       "ou": 216.5,
       "spread_odds": {
-        "away": 1.72,
-        "home": 1.72
+        "away": 1.7,
+        "home": 1.73
       },
       "ou_odds": {
         "over": 1.68,
         "under": 1.75
       },
-      "updated_at": "2026-06-13T09:21:09",
+      "updated_at": "2026-06-13T10:00:02",
       "source": "sportWeb"
     }
-  }
+  },
+  "fresh": true
 }

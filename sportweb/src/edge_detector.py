@@ -11,7 +11,7 @@
   - --json：JSON 輸出（給 dashboard / 其他程式用）
 
 執行：
-  cd /Users/shawnclaw/autobot/sportWeb
+  cd /Users/shawnclaw/autobot/investing/sports/autobots_NBA/sportweb
   .venv/bin/python src/edge_detector.py                    # 一次性報告
   .venv/bin/python src/edge_detector.py --min-edge 0.05    # 閾值 5%
   .venv/bin/python src/edge_detector.py --push             # 推 Telegram
@@ -190,8 +190,27 @@ def actionable_edge(model_prob: float, market_prob: float, odds: float,
     return edge, kelly_fraction(model_prob, odds), roi
 
 
-SPREAD_SIGMA = 12.0   # NBA per-game spread std dev (points)
-TOTAL_SIGMA = 18.0    # NBA per-game total std dev (points)
+def _load_calibrated_spread_sigma(default: float = 12.0) -> float:
+    """讀取階段3 校準的 margin sigma（autobots_NBA/state/prob_calibration.json）。
+
+    讓分 cover 機率與勝率共用同一個 margin 誤差 sigma（階段3 已驗證）。
+    缺檔則用 default。TOTAL_SIGMA 暫不校準（待總分模型）。
+    """
+    import json
+    from pathlib import Path
+    try:
+        p = Path(__file__).resolve().parents[2] / "state" / "prob_calibration.json"
+        if p.exists():
+            sigma = float(json.loads(p.read_text(encoding="utf-8")).get("sigma_margin") or 0)
+            if 4.0 <= sigma <= 30.0:
+                return sigma
+    except Exception:
+        pass
+    return default
+
+
+SPREAD_SIGMA = _load_calibrated_spread_sigma()   # 階段3 OOS 校準（fallback 12.0）
+TOTAL_SIGMA = 18.0    # NBA per-game total std dev (points)；待總分模型校準
 
 
 def _norm_cdf(x: float) -> float:

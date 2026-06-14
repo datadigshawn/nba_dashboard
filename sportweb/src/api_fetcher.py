@@ -5,7 +5,7 @@ API Fetcher — 直接打 /services/content/get，完全繞過 DOM 解析
 這樣可以拿到完整 JSON 而不用 JS 渲染
 
 執行：
-    cd /Users/shawnclaw/autobot/sportWeb
+    cd /Users/shawnclaw/autobot/investing/sports/autobots_NBA/sportweb
     .venv/bin/python src/api_fetcher.py           # 試探性抓完整導航樹
     .venv/bin/python src/api_fetcher.py --nba     # 只抓 NBA 相關 content
 
@@ -130,7 +130,7 @@ async def main():
 
     async with async_playwright() as p:
         browser = await p.chromium.launch(
-            headless=True, channel="chrome",
+            headless=True,
             args=["--disable-blink-features=AutomationControlled"],
         )
         ctx = await browser.new_context(

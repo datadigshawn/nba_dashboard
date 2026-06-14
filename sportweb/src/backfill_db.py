@@ -3,7 +3,7 @@
 一次性回填：把現有 data/odds_*.json 寫入 sportWeb.db。
 
 用法：
-    cd /Users/shawnclaw/autobot/sportWeb
+    cd /Users/shawnclaw/autobot/investing/sports/autobots_NBA/sportweb
     .venv/bin/python src/backfill_db.py
 """
 import json

@@ -30,7 +30,25 @@ if sys.platform == "win32":
 STATE_DIR = Path(__file__).parent / "state"
 MODEL_PATH = STATE_DIR / "nba_model.json"
 CALIBRATION_PATH = STATE_DIR / "nba_calibration.json"
+PROB_CALIBRATION_PATH = STATE_DIR / "prob_calibration.json"
 SPREAD_MODEL_PATH = STATE_DIR / "nba_spread_model.xgb"
+
+
+def load_prob_sigma() -> float | None:
+    """讀取階段3 校準的 margin→prob sigma（state/prob_calibration.json）。
+
+    這個 sigma 由 walk-forward OOS 資料擬合，同時校準勝率與讓分 cover 機率。
+    缺檔則回 None，呼叫端 fallback 回訓練期 RMSE。
+    """
+    try:
+        if PROB_CALIBRATION_PATH.exists():
+            payload = json.loads(PROB_CALIBRATION_PATH.read_text(encoding="utf-8"))
+            sigma = float(payload.get("sigma_margin") or 0)
+            if 4.0 <= sigma <= 30.0:
+                return sigma
+    except Exception:
+        pass
+    return None
 TW_ODDS_PATH = Path(__file__).parent / "tw_odds.json"
 
 ESPN_BASE = "https://site.api.espn.com/apis/site/v2/sports/basketball/nba"
@@ -1182,7 +1200,9 @@ class NBAPredictor:
         self.elo = EloSystem()
         self.feature_names: list[str] = []
         self.team_stats: dict[str, dict] = {}
-        self.rmse = 12.0  # Default RMSE for NBA point spreads
+        self.rmse = 12.0  # Default RMSE for NBA point spreads (in-sample 訓練值)
+        # 階段3：margin→prob 用的校準 sigma（OOS 擬合）。None 時 fallback 回 self.rmse。
+        self.prob_sigma = load_prob_sigma()
 
     def train(self, games: list[dict], standings: dict[str, dict] | None = None):
         """Train XGBoost on historical game results."""
@@ -1290,12 +1310,16 @@ class NBAPredictor:
             return elo_margin * 0.6 + stats_margin * 0.4
         return elo_margin
 
+    def prob_sigma_value(self) -> float:
+        """機率轉換用的 sigma：優先用階段3 校準值，否則 fallback 訓練 RMSE。"""
+        return self.prob_sigma or self.rmse or 12.0
+
     def margin_to_prob(self, margin: float, threshold: float) -> float:
         """Convert predicted margin and threshold to win probability using Normal CDF."""
         import math
-        # Z-score = (margin - threshold) / RMSE
+        # Z-score = (margin - threshold) / sigma；sigma 用 OOS 校準值（階段3）
         # Prob = 0.5 * (1 + erf(Z / sqrt(2)))
-        z = (margin - threshold) / (self.rmse or 12.0)
+        z = (margin - threshold) / self.prob_sigma_value()
         return 0.5 * (1 + math.erf(z / math.sqrt(2)))
 
     def save(self, path: Path | None = None):
@@ -1964,7 +1988,7 @@ def main():
             _recommendation_pool,
             load_tw_odds_map(),
             _pick_stats,
-            rmse=predictor.rmse or 12.0,
+            rmse=predictor.prob_sigma_value(),
         )
 
         # Edge detection

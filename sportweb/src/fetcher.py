@@ -13,7 +13,7 @@ Fetcher v2 — 透過 page.evaluate fetch API 抓 NBA 賠率（API-based，非 D
     4. 把 JSON 丟給 api_parser 解析成 OddsSnapshot
 
 執行：
-    cd /Users/shawnclaw/autobot/sportWeb
+    cd /Users/shawnclaw/autobot/investing/sports/autobots_NBA/sportweb
     .venv/bin/python src/fetcher.py           # headless
     .venv/bin/python src/fetcher.py --headed  # 看瀏覽器
 
@@ -102,7 +102,6 @@ async def fetch_once(headed: bool = False) -> OddsSnapshot:
     async with async_playwright() as p:
         browser = await p.chromium.launch(
             headless=not headed,
-            channel="chrome",
             args=[
                 "--disable-blink-features=AutomationControlled",
                 "--disable-features=IsolateOrigins,site-per-process",

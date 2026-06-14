@@ -2,7 +2,7 @@
 DOM Inspector — 載入 NBA 頁，把完整 HTML 存檔分析 CSS selector
 
 執行：
-    cd /Users/shawnclaw/autobot/sportWeb
+    cd /Users/shawnclaw/autobot/investing/sports/autobots_NBA/sportweb
     .venv/bin/python src/inspect_dom.py
 
 產出：
@@ -41,7 +41,6 @@ async def main():
     async with async_playwright() as p:
         browser = await p.chromium.launch(
             headless=not HEADED,
-            channel="chrome",
             args=[
                 "--disable-blink-features=AutomationControlled",
                 "--disable-features=IsolateOrigins,site-per-process",

@@ -72,7 +72,7 @@ async def main():
 
     async with async_playwright() as p:
         browser = await p.chromium.launch(
-            headless=True, channel="chrome",
+            headless=True,
             args=["--disable-blink-features=AutomationControlled"],
         )
         ctx = await browser.new_context(

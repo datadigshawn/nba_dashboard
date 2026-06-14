@@ -1,0 +1,70 @@
+{
+  "meta": {
+    "n_dates": 223,
+    "eval_dates": 198,
+    "final_sigma": 16.22
+  },
+  "model": {
+    "n": 1222,
+    "accuracy": 66.1,
+    "brier": 0.2136,
+    "log_loss": 0.6165,
+    "mean_abs_margin_err": 11.83,
+    "calibration": [
+      {
+        "bucket": "50-60%",
+        "n": 563,
+        "avg_pred": 55.0,
+        "actual_wr": 56.1,
+        "gap": -1.1
+      },
+      {
+        "bucket": "60-70%",
+        "n": 427,
+        "avg_pred": 64.5,
+        "actual_wr": 69.6,
+        "gap": -5.0
+      },
+      {
+        "bucket": "70-80%",
+        "n": 190,
+        "avg_pred": 74.3,
+        "actual_wr": 84.7,
+        "gap": -10.4
+      },
+      {
+        "bucket": "80-90%",
+        "n": 40,
+        "avg_pred": 82.6,
+        "actual_wr": 80.0,
+        "gap": 2.6
+      },
+      {
+        "bucket": "90-101%",
+        "n": 2,
+        "avg_pred": 90.4,
+        "actual_wr": 100.0,
+        "gap": -9.6
+      }
+    ]
+  },
+  "picks": {
+    "available": true,
+    "matched_games": 80,
+    "n_picks": 61,
+    "settled": 61,
+    "wins": 43,
+    "win_rate": 70.5,
+    "total_units": 12.92,
+    "roi_per_bet": 21.18,
+    "note": "僅 spread；total picks 待總分模型（階段3）"
+  },
+  "stale_lines": {
+    "available": true,
+    "overlap_games": 43,
+    "mean_abs_line_diff": 1.93,
+    "pct_ge_1pt": 70.0,
+    "pct_ge_2pt": 56.0
+  },
+  "generated_at": "2026-06-13T10:23:10"
+}

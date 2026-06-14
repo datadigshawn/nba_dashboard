@@ -128,7 +128,7 @@ refresh_nba() {
 }
 
 refresh_sportbook() {
-    run_in_dir "$SPORTWEB_DIR" "$SPORTWEB_PY" src/fetcher.py
+    run_in_dir "$SPORTWEB_DIR" "$SPORTWEB_PY" src/blob_fetcher.py
     run_in_dir "$SPORTWEB_DIR" "$SPORTWEB_PY" src/sport_resolve.py --days 30
     run_in_dir "$SPORTWEB_DIR" "$SPORTWEB_PY" src/edge_detector.py --min-edge "$MIN_EDGE"
 }
@@ -167,7 +167,7 @@ deploy_site() {
 }
 
 main() {
-    require_file "$SPORTWEB_DIR/src/fetcher.py"
+    require_file "$SPORTWEB_DIR/src/blob_fetcher.py"
     require_file "$SPORTWEB_DIR/src/edge_detector.py"
     require_file "$NBA_DIR/nba_daily_update.sh"
     require_file "$NBA_DIR/deploy_nba_site.sh"
