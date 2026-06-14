@@ -17,8 +17,13 @@
   <key>WorkingDirectory</key>
   <string>/Users/shawnclaw/autobot/investing/sports/autobots_NBA</string>
 
-  <key>Disabled</key>
-  <true/>
+  <key>StartCalendarInterval</key>
+  <dict>
+    <key>Hour</key>
+    <integer>9</integer>
+    <key>Minute</key>
+    <integer>20</integer>
+  </dict>
 
   <key>RunAtLoad</key>
   <false/>
