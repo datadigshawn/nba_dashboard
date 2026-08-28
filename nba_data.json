@@ -52,10 +52,36 @@
           }
         ],
         "away_out": [],
-        "away_gtd": []
+        "away_gtd": [
+          {
+            "name": "Bam Adebayo",
+            "status": "Day-To-Day",
+            "detail": "day-to-day"
+          },
+          {
+            "name": "Trevor Keels",
+            "status": "Day-To-Day",
+            "detail": "day-to-day"
+          },
+          {
+            "name": "Ryan Conwell",
+            "status": "Day-To-Day",
+            "detail": "day-to-day"
+          },
+          {
+            "name": "Myron Gardner",
+            "status": "Day-To-Day",
+            "detail": "day-to-day"
+          },
+          {
+            "name": "Giannis Antetokounmpo",
+            "status": "Day-To-Day",
+            "detail": "day-to-day"
+          }
+        ]
       },
-      "pred_spread": 4.1,
-      "spread_model_raw": -4.0,
+      "pred_spread": 4.2,
+      "spread_model_raw": -3.7,
       "spread_bias_adj": -1.4,
       "pred_total": 234.0,
       "raw_total": 234.1,
@@ -68,8 +94,8 @@
   "official_picks": [],
   "edges": [],
   "elo_teams": {
-    "New York Knicks": 2542,
-    "San Antonio Spurs": 2233,
+    "New York Knicks": 2545,
+    "San Antonio Spurs": 2230,
     "Oklahoma City Thunder": 1997,
     "Atlanta Hawks": 1915,
     "Minnesota Timberwolves": 1842,
@@ -108,7 +134,7 @@
     "recent": []
   },
   "playoff_bracket": {
-    "generated_at": "2026-08-27T09:20:54",
+    "generated_at": "2026-08-28T09:20:55",
     "n_sims": 10000,
     "west": {
       "seeds": [
@@ -124,7 +150,7 @@
           "team": "San Antonio Spurs",
           "abbrev": "SA",
           "record": "62-20",
-          "elo": 2233
+          "elo": 2230
         },
         {
           "seed": 3,
@@ -235,7 +261,7 @@
             "abbrev": "DEN",
             "elo": 1784,
             "record": "54-28",
-            "advance_prob": 33.9,
+            "advance_prob": 33.7,
             "star": {
               "name": "Nikola Jokic",
               "status": "Healthy",
@@ -248,7 +274,7 @@
             "abbrev": "MIN",
             "elo": 1842,
             "record": "49-33",
-            "advance_prob": 66.1,
+            "advance_prob": 66.3,
             "star": {
               "name": "Anthony Edwards",
               "status": "Healthy",
@@ -262,7 +288,7 @@
             "seed": 2,
             "team": "San Antonio Spurs",
             "abbrev": "SA",
-            "elo": 2233,
+            "elo": 2230,
             "record": "62-20",
             "advance_prob": 100.0,
             "star": {
@@ -335,7 +361,7 @@
             "seed": 2,
             "team": "San Antonio Spurs",
             "abbrev": "SA",
-            "elo": 2233,
+            "elo": 2230,
             "record": "62-20",
             "advance_prob": 99.8,
             "star": {
@@ -344,7 +370,7 @@
               "detail": ""
             }
           },
-          "expected_games": 4.5
+          "expected_games": 4.6
         }
       ],
       "conf_finals": [
@@ -355,7 +381,7 @@
             "abbrev": "OKC",
             "elo": 1997,
             "record": "64-18",
-            "advance_prob": 4.4,
+            "advance_prob": 4.7,
             "star": {
               "name": "Shai Gilgeous-Alexander",
               "status": "Healthy",
@@ -366,9 +392,9 @@
             "seed": 2,
             "team": "San Antonio Spurs",
             "abbrev": "SA",
-            "elo": 2233,
+            "elo": 2230,
             "record": "62-20",
-            "advance_prob": 95.6,
+            "advance_prob": 95.3,
             "star": {
               "name": "Victor Wembanyama",
               "status": "Healthy",
@@ -400,7 +426,7 @@
           "team": "New York Knicks",
           "abbrev": "NY",
           "record": "53-29",
-          "elo": 2542
+          "elo": 2545
         },
         {
           "seed": 4,
@@ -446,7 +472,7 @@
             "abbrev": "DET",
             "elo": 1667,
             "record": "60-22",
-            "advance_prob": 82.7,
+            "advance_prob": 82.8,
             "star": {
               "name": "Cade Cunningham",
               "status": "Healthy",
@@ -459,7 +485,7 @@
             "abbrev": "ORL",
             "elo": 1550,
             "record": "45-37",
-            "advance_prob": 17.3,
+            "advance_prob": 17.2,
             "star": {
               "name": "Paolo Banchero",
               "status": "Healthy",
@@ -475,7 +501,7 @@
             "abbrev": "CLE",
             "elo": 1840,
             "record": "52-30",
-            "advance_prob": 30.2,
+            "advance_prob": 30.1,
             "star": {
               "name": "Donovan Mitchell",
               "status": "Healthy",
@@ -488,7 +514,7 @@
             "abbrev": "ATL",
             "elo": 1915,
             "record": "46-36",
-            "advance_prob": 69.8,
+            "advance_prob": 69.9,
             "star": {
               "name": "Trae Young",
               "status": "Healthy",
@@ -502,13 +528,13 @@
             "seed": 3,
             "team": "New York Knicks",
             "abbrev": "NY",
-            "elo": 2542,
+            "elo": 2545,
             "record": "53-29",
             "advance_prob": 100.0,
             "star": {
               "name": "Jalen Brunson",
-              "status": "Healthy",
-              "detail": ""
+              "status": "Day-To-Day",
+              "detail": "day-to-day"
             }
           },
           "bot": {
@@ -533,11 +559,11 @@
             "abbrev": "BOS",
             "elo": 1542,
             "record": "56-26",
-            "advance_prob": 2.6,
+            "advance_prob": 2.5,
             "star": {
               "name": "Jayson Tatum",
-              "status": "Healthy",
-              "detail": ""
+              "status": "Day-To-Day",
+              "detail": "day-to-day"
             }
           },
           "bot": {
@@ -546,7 +572,7 @@
             "abbrev": "PHI",
             "elo": 1804,
             "record": "45-37",
-            "advance_prob": 97.4,
+            "advance_prob": 97.5,
             "star": {
               "name": "Tyrese Maxey",
               "status": "Healthy",
@@ -591,13 +617,13 @@
             "seed": 3,
             "team": "New York Knicks",
             "abbrev": "NY",
-            "elo": 2542,
+            "elo": 2545,
             "record": "53-29",
             "advance_prob": 100.0,
             "star": {
               "name": "Jalen Brunson",
-              "status": "Healthy",
-              "detail": ""
+              "status": "Day-To-Day",
+              "detail": "day-to-day"
             }
           },
           "bot": {
@@ -609,8 +635,8 @@
             "advance_prob": 0.0,
             "star": {
               "name": "Jayson Tatum",
-              "status": "Healthy",
-              "detail": ""
+              "status": "Day-To-Day",
+              "detail": "day-to-day"
             }
           },
           "expected_games": 4.0
@@ -635,13 +661,13 @@
             "seed": 3,
             "team": "New York Knicks",
             "abbrev": "NY",
-            "elo": 2542,
+            "elo": 2545,
             "record": "53-29",
             "advance_prob": 100.0,
             "star": {
               "name": "Jalen Brunson",
-              "status": "Healthy",
-              "detail": ""
+              "status": "Day-To-Day",
+              "detail": "day-to-day"
             }
           },
           "expected_games": 4.0
@@ -653,9 +679,9 @@
         "seed": 2,
         "team": "San Antonio Spurs",
         "abbrev": "SA",
-        "elo": 2233,
+        "elo": 2230,
         "record": "62-20",
-        "advance_prob": 0.9,
+        "advance_prob": 0.8,
         "star": {
           "name": "Victor Wembanyama",
           "status": "Healthy",
@@ -666,17 +692,17 @@
         "seed": 3,
         "team": "New York Knicks",
         "abbrev": "NY",
-        "elo": 2542,
+        "elo": 2545,
         "record": "53-29",
         "advance_prob": 99.2,
         "star": {
           "name": "Jalen Brunson",
-          "status": "Healthy",
-          "detail": ""
+          "status": "Day-To-Day",
+          "detail": "day-to-day"
         }
       },
-      "expected_games": 4.7
+      "expected_games": 4.6
     }
   },
-  "official_picks_updated_at": "2026-08-27T09:21:13"
+  "official_picks_updated_at": "2026-08-28T09:21:15"
 }
