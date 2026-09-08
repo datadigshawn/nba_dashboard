@@ -27,9 +27,9 @@
 		<integer>4096</integer>
 	</dict>
 	<key>StandardErrorPath</key>
-	<string>/Users/shawnclaw/autobot/investing/sports/autobots_NBA/logs/launchd.error.log</string>
+	<string>/Users/shawnclaw/Library/Logs/autobot/com.nba.daily_update.err.log</string>
 	<key>StandardOutPath</key>
-	<string>/Users/shawnclaw/autobot/investing/sports/autobots_NBA/logs/launchd.log</string>
+	<string>/Users/shawnclaw/Library/Logs/autobot/com.nba.daily_update.out.log</string>
 	<key>StartCalendarInterval</key>
 	<dict>
 		<key>Hour</key>

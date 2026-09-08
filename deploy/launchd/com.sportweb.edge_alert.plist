@@ -12,31 +12,33 @@
 		<key>NumberOfFiles</key>
 		<integer>8192</integer>
 	</dict>
-	<key>KeepAlive</key>
-	<true/>
 	<key>Label</key>
-	<string>com.nba.dashboard</string>
+	<string>com.sportweb.edge_alert</string>
 	<key>ProgramArguments</key>
 	<array>
-		<string>/Users/shawnclaw/autobot/investing/sports/autobots_NBA/.venv/bin/python</string>
-		<string>/Users/shawnclaw/autobot/investing/sports/autobots_NBA/dashboard.py</string>
-		<string>--port</string>
-		<string>8090</string>
-		<string>--host</string>
-		<string>0.0.0.0</string>
+		<string>/Users/shawnclaw/autobot/investing/sports/autobots_NBA/sportweb/.venv/bin/python</string>
+		<string>/Users/shawnclaw/autobot/investing/sports/autobots_NBA/sportweb/src/edge_detector.py</string>
+		<string>--push</string>
+		<string>--min-edge</string>
+		<string>0.05</string>
 	</array>
 	<key>RunAtLoad</key>
-	<true/>
+	<false/>
 	<key>SoftResourceLimits</key>
 	<dict>
 		<key>NumberOfFiles</key>
 		<integer>4096</integer>
 	</dict>
 	<key>StandardErrorPath</key>
-	<string>/Users/shawnclaw/Library/Logs/autobot/com.nba.dashboard.err.log</string>
+	<string>/Users/shawnclaw/Library/Logs/autobot/com.sportweb.edge_alert.err.log</string>
 	<key>StandardOutPath</key>
-	<string>/Users/shawnclaw/Library/Logs/autobot/com.nba.dashboard.out.log</string>
+	<string>/Users/shawnclaw/Library/Logs/autobot/com.sportweb.edge_alert.out.log</string>
+	<key>StartCalendarInterval</key>
+	<dict>
+		<key>Minute</key>
+		<integer>35</integer>
+	</dict>
 	<key>WorkingDirectory</key>
-	<string>/Users/shawnclaw/autobot/investing/sports/autobots_NBA</string>
+	<string>/Users/shawnclaw/autobot/investing/sports/autobots_NBA/sportweb</string>
 </dict>
 </plist>

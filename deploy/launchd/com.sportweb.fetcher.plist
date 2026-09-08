@@ -13,11 +13,12 @@
 		<integer>8192</integer>
 	</dict>
 	<key>Label</key>
-	<string>com.nba.closing_odds</string>
+	<string>com.sportweb.fetcher</string>
 	<key>ProgramArguments</key>
 	<array>
 		<string>/bin/bash</string>
-		<string>/Users/shawnclaw/autobot/investing/sports/autobots_NBA/fetch_closing_odds.sh</string>
+		<string>-c</string>
+		<string>sleep $((RANDOM % 1800)); cd /Users/shawnclaw/autobot/investing/sports/autobots_NBA/sportweb &amp;&amp; .venv/bin/python src/fetcher.py</string>
 	</array>
 	<key>RunAtLoad</key>
 	<false/>
@@ -27,49 +28,25 @@
 		<integer>4096</integer>
 	</dict>
 	<key>StandardErrorPath</key>
-	<string>/Users/shawnclaw/Library/Logs/autobot/com.nba.closing_odds.err.log</string>
+	<string>/Users/shawnclaw/Library/Logs/autobot/com.sportweb.fetcher.err.log</string>
 	<key>StandardOutPath</key>
-	<string>/Users/shawnclaw/Library/Logs/autobot/com.nba.closing_odds.out.log</string>
+	<string>/Users/shawnclaw/Library/Logs/autobot/com.sportweb.fetcher.out.log</string>
 	<key>StartCalendarInterval</key>
 	<array>
 		<dict>
 			<key>Hour</key>
-			<integer>0</integer>
+			<integer>9</integer>
 			<key>Minute</key>
 			<integer>30</integer>
 		</dict>
 		<dict>
 			<key>Hour</key>
-			<integer>2</integer>
+			<integer>21</integer>
 			<key>Minute</key>
 			<integer>30</integer>
-		</dict>
-		<dict>
-			<key>Hour</key>
-			<integer>6</integer>
-			<key>Minute</key>
-			<integer>30</integer>
-		</dict>
-		<dict>
-			<key>Hour</key>
-			<integer>7</integer>
-			<key>Minute</key>
-			<integer>30</integer>
-		</dict>
-		<dict>
-			<key>Hour</key>
-			<integer>8</integer>
-			<key>Minute</key>
-			<integer>30</integer>
-		</dict>
-		<dict>
-			<key>Hour</key>
-			<integer>10</integer>
-			<key>Minute</key>
-			<integer>0</integer>
 		</dict>
 	</array>
 	<key>WorkingDirectory</key>
-	<string>/Users/shawnclaw/autobot/investing/sports/autobots_NBA</string>
+	<string>/Users/shawnclaw/autobot/investing/sports/autobots_NBA/sportweb</string>
 </dict>
 </plist>
