@@ -39,16 +39,6 @@
         "away_out": [],
         "away_gtd": [
           {
-            "name": "Giannis Antetokounmpo",
-            "status": "Day-To-Day",
-            "detail": "day-to-day"
-          },
-          {
-            "name": "Bam Adebayo",
-            "status": "Day-To-Day",
-            "detail": "day-to-day"
-          },
-          {
             "name": "Ryan Conwell",
             "status": "Day-To-Day",
             "detail": "day-to-day"
@@ -114,7 +104,7 @@
     "recent": []
   },
   "playoff_bracket": {
-    "generated_at": "2026-09-29T09:21:02",
+    "generated_at": "2026-09-30T09:21:03",
     "n_sims": 10000,
     "west": {
       "seeds": [
@@ -468,8 +458,8 @@
             "advance_prob": 0.0,
             "star": {
               "name": "Bam Adebayo",
-              "status": "Day-To-Day",
-              "detail": "day-to-day"
+              "status": "Healthy",
+              "detail": ""
             }
           },
           "expected_games": 4.0
@@ -684,5 +674,5 @@
       "expected_games": 4.6
     }
   },
-  "official_picks_updated_at": "2026-09-29T09:21:27"
+  "official_picks_updated_at": "2026-09-30T09:21:26"
 }
