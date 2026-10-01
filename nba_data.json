@@ -58,6 +58,129 @@
       "total_bias_adj": -0.1,
       "away_expected": 0.0,
       "home_expected": 0.0
+    },
+    {
+      "game_date": "20261004",
+      "home": "Denver Nuggets",
+      "away": "Utah Jazz",
+      "home_record": "0-0",
+      "away_record": "0-0",
+      "home_prob": 99.9,
+      "away_prob": 0.1,
+      "model_margin": 35.1,
+      "home_elo": 1784,
+      "away_elo": 903,
+      "status": "Scheduled",
+      "b2b_home": false,
+      "b2b_away": false,
+      "rest_home": 3,
+      "rest_away": 3,
+      "injuries": {
+        "home_out": [],
+        "home_gtd": [
+          {
+            "name": "Trevon Brazile",
+            "status": "Day-To-Day",
+            "detail": "day-to-day"
+          }
+        ],
+        "away_out": [],
+        "away_gtd": [
+          {
+            "name": "Jaren Jackson Jr.",
+            "status": "Day-To-Day",
+            "detail": "day-to-day"
+          },
+          {
+            "name": "Trey Alexander",
+            "status": "Day-To-Day",
+            "detail": "day-to-day"
+          }
+        ]
+      },
+      "pred_spread": 27.8,
+      "spread_model_raw": -4.0,
+      "spread_bias_adj": -1.4,
+      "pred_total": 185.0,
+      "raw_total": -39.5,
+      "total_bias_adj": -0.1,
+      "away_expected": 0.0,
+      "home_expected": 0.0
+    },
+    {
+      "game_date": "20261004",
+      "home": "LA Clippers",
+      "away": "Golden State Warriors",
+      "home_record": "0-0",
+      "away_record": "0-0",
+      "home_prob": 52.0,
+      "away_prob": 48.0,
+      "model_margin": 0.5,
+      "home_elo": 1257,
+      "away_elo": 1342,
+      "status": "Scheduled",
+      "b2b_home": false,
+      "b2b_away": false,
+      "rest_home": 3,
+      "rest_away": 3,
+      "injuries": {
+        "home_out": [
+          {
+            "name": "Yanic Konan Niederhauser",
+            "status": "Out",
+            "detail": "out"
+          },
+          {
+            "name": "Brandon Ingram",
+            "status": "Out",
+            "detail": "out"
+          },
+          {
+            "name": "Jordan Miller",
+            "status": "Out",
+            "detail": "out"
+          }
+        ],
+        "home_gtd": [
+          {
+            "name": "Bradley Beal",
+            "status": "Day-To-Day",
+            "detail": "day-to-day"
+          }
+        ],
+        "away_out": [
+          {
+            "name": "Jimmy Butler III",
+            "status": "Out",
+            "detail": "out"
+          },
+          {
+            "name": "Moses Moody",
+            "status": "Out",
+            "detail": "out"
+          }
+        ],
+        "away_gtd": [
+          {
+            "name": "Kristaps Porzingis",
+            "status": "Day-To-Day",
+            "detail": "day-to-day"
+          },
+          {
+            "name": "Alex Toohey",
+            "status": "Day-To-Day",
+            "detail": "day-to-day"
+          }
+        ]
+      },
+      "pred_spread": -1.5,
+      "spread_model_raw": -4.0,
+      "spread_bias_adj": -1.4,
+      "pred_total": 185.0,
+      "raw_total": -39.5,
+      "total_bias_adj": -0.1,
+      "away_expected": 0.0,
+      "home_expected": 0.0
     }
   ],
   "next_games_date": "2026-10-03",
@@ -104,7 +227,7 @@
     "recent": []
   },
   "playoff_bracket": {
-    "generated_at": "2026-09-30T09:21:03",
+    "generated_at": "2026-10-01T09:21:12",
     "n_sims": 10000,
     "west": {
       "seeds": [
@@ -674,5 +797,5 @@
       "expected_games": 4.6
     }
   },
-  "official_picks_updated_at": "2026-09-30T09:21:26"
+  "official_picks_updated_at": "2026-10-01T09:21:34"
 }
