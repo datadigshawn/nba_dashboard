@@ -21,6 +21,21 @@
         "home_out": [],
         "home_gtd": [
           {
+            "name": "Jamison Battle",
+            "status": "Day-To-Day",
+            "detail": "day-to-day"
+          },
+          {
+            "name": "Kyle Anderson",
+            "status": "Day-To-Day",
+            "detail": "day-to-day"
+          },
+          {
+            "name": "Allen Graves",
+            "status": "Day-To-Day",
+            "detail": "day-to-day"
+          },
+          {
             "name": "Nate Bittle",
             "status": "Day-To-Day",
             "detail": "day-to-day"
@@ -39,7 +54,7 @@
         "away_out": [],
         "away_gtd": [
           {
-            "name": "Ryan Conwell",
+            "name": "Dru Smith",
             "status": "Day-To-Day",
             "detail": "day-to-day"
           },
@@ -86,11 +101,6 @@
         ],
         "away_out": [],
         "away_gtd": [
-          {
-            "name": "Jaren Jackson Jr.",
-            "status": "Day-To-Day",
-            "detail": "day-to-day"
-          },
           {
             "name": "Trey Alexander",
             "status": "Day-To-Day",
@@ -181,6 +191,245 @@
       "total_bias_adj": -0.1,
       "away_expected": 0.0,
       "home_expected": 0.0
+    },
+    {
+      "game_date": "20261005",
+      "home": "Atlanta Hawks",
+      "away": "Memphis Grizzlies",
+      "home_record": "0-0",
+      "away_record": "0-0",
+      "home_prob": 100.0,
+      "away_prob": 0.0,
+      "model_margin": 42.3,
+      "home_elo": 1915,
+      "away_elo": 831,
+      "status": "Scheduled",
+      "b2b_home": false,
+      "b2b_away": false,
+      "rest_home": 3,
+      "rest_away": 3,
+      "injuries": {
+        "home_out": [
+          {
+            "name": "Henri Veesaar",
+            "status": "Out",
+            "detail": "out"
+          }
+        ],
+        "home_gtd": [
+          {
+            "name": "Mouhamed Gueye",
+            "status": "Day-To-Day",
+            "detail": "day-to-day"
+          },
+          {
+            "name": "Keshon Gilbert",
+            "status": "Day-To-Day",
+            "detail": "day-to-day"
+          },
+          {
+            "name": "RayJ Dennis",
+            "status": "Day-To-Day",
+            "detail": "day-to-day"
+          }
+        ],
+        "away_out": [],
+        "away_gtd": [
+          {
+            "name": "Micah Peavy",
+            "status": "Day-To-Day",
+            "detail": "day-to-day"
+          },
+          {
+            "name": "Zach Edey",
+            "status": "Day-To-Day",
+            "detail": "day-to-day"
+          },
+          {
+            "name": "Karim Lopez",
+            "status": "Day-To-Day",
+            "detail": "day-to-day"
+          }
+        ]
+      },
+      "pred_spread": 34.0,
+      "spread_model_raw": -4.0,
+      "spread_bias_adj": -1.4,
+      "pred_total": 185.0,
+      "raw_total": -39.5,
+      "total_bias_adj": -0.1,
+      "away_expected": 0.0,
+      "home_expected": 0.0
+    },
+    {
+      "game_date": "20261005",
+      "home": "Detroit Pistons",
+      "away": "Phoenix Suns",
+      "home_record": "0-0",
+      "away_record": "0-0",
+      "home_prob": 89.9,
+      "away_prob": 10.1,
+      "model_margin": 13.8,
+      "home_elo": 1667,
+      "away_elo": 1382,
+      "status": "Scheduled",
+      "b2b_home": false,
+      "b2b_away": false,
+      "rest_home": 3,
+      "rest_away": 3,
+      "injuries": {
+        "home_out": [],
+        "home_gtd": [
+          {
+            "name": "Jalen Duren",
+            "status": "Day-To-Day",
+            "detail": "day-to-day"
+          }
+        ],
+        "away_out": [
+          {
+            "name": "Mark Williams",
+            "status": "Out",
+            "detail": "out"
+          }
+        ],
+        "away_gtd": [
+          {
+            "name": "Duop Reath",
+            "status": "Day-To-Day",
+            "detail": "day-to-day"
+          },
+          {
+            "name": "CJ Huntley",
+            "status": "Day-To-Day",
+            "detail": "day-to-day"
+          }
+        ]
+      },
+      "pred_spread": 9.7,
+      "spread_model_raw": -4.0,
+      "spread_bias_adj": -1.4,
+      "pred_total": 185.0,
+      "raw_total": -39.5,
+      "total_bias_adj": -0.1,
+      "away_expected": 0.0,
+      "home_expected": 0.0
+    },
+    {
+      "game_date": "20261005",
+      "home": "Philadelphia 76ers",
+      "away": "New York Knicks",
+      "home_record": "0-0",
+      "away_record": "0-0",
+      "home_prob": 1.6,
+      "away_prob": 98.4,
+      "model_margin": -23.2,
+      "home_elo": 1804,
+      "away_elo": 2555,
+      "status": "Scheduled",
+      "b2b_home": false,
+      "b2b_away": false,
+      "rest_home": 3,
+      "rest_away": 3,
+      "injuries": {
+        "home_out": [],
+        "home_gtd": [
+          {
+            "name": "Tacko Fall",
+            "status": "Day-To-Day",
+            "detail": "day-to-day"
+          },
+          {
+            "name": "Adem Bona",
+            "status": "Day-To-Day",
+            "detail": "day-to-day"
+          }
+        ],
+        "away_out": [],
+        "away_gtd": [
+          {
+            "name": "Drew Eubanks",
+            "status": "Day-To-Day",
+            "detail": "day-to-day"
+          },
+          {
+            "name": "Mohamed Diawara",
+            "status": "Day-To-Day",
+            "detail": "day-to-day"
+          }
+        ]
+      },
+      "pred_spread": -17.9,
+      "spread_model_raw": -4.0,
+      "spread_bias_adj": -1.4,
+      "pred_total": 185.0,
+      "raw_total": -39.5,
+      "total_bias_adj": -0.1,
+      "away_expected": 0.0,
+      "home_expected": 0.0
+    },
+    {
+      "game_date": "20261006",
+      "home": "Milwaukee Bucks",
+      "away": "Minnesota Timberwolves",
+      "home_record": "0-0",
+      "away_record": "0-0",
+      "home_prob": 2.4,
+      "away_prob": 97.6,
+      "model_margin": -21.3,
+      "home_elo": 1147,
+      "away_elo": 1842,
+      "status": "Scheduled",
+      "b2b_home": false,
+      "b2b_away": false,
+      "rest_home": 3,
+      "rest_away": 3,
+      "injuries": {
+        "home_out": [],
+        "home_gtd": [],
+        "away_out": [
+          {
+            "name": "Donte DiVincenzo",
+            "status": "Out",
+            "detail": "out"
+          }
+        ],
+        "away_gtd": []
+      },
+      "pred_spread": -16.6,
+      "spread_model_raw": -4.0,
+      "spread_bias_adj": -1.4,
+      "pred_total": 185.0,
+      "raw_total": -39.5,
+      "total_bias_adj": -0.1,
+      "away_expected": 0.0,
+      "home_expected": 0.0
+    },
+    {
+      "game_date": "20261006",
+      "home": "Sacramento Kings",
+      "away": "Los Angeles Lakers",
+      "home_record": "0-0",
+      "away_record": "0-0",
+      "home_prob": 40.1,
+      "away_prob": 59.9,
+      "model_margin": -2.7,
+      "home_elo": 1282,
+      "away_elo": 1458,
+      "status": "Scheduled",
+      "b2b_home": false,
+      "b2b_away": false,
+      "rest_home": 3,
+      "rest_away": 3,
+      "injuries": null,
+      "pred_spread": -4.5,
+      "spread_model_raw": -4.0,
+      "spread_bias_adj": -1.4,
+      "pred_total": 185.0,
+      "raw_total": -39.5,
+      "total_bias_adj": -0.1,
+      "away_expected": 0.0,
+      "home_expected": 0.0
     }
   ],
   "next_games_date": "2026-10-03",
@@ -227,7 +476,7 @@
     "recent": []
   },
   "playoff_bracket": {
-    "generated_at": "2026-10-01T09:21:12",
+    "generated_at": "2026-10-02T09:21:06",
     "n_sims": 10000,
     "west": {
       "seeds": [
@@ -797,5 +1046,5 @@
       "expected_games": 4.6
     }
   },
-  "official_picks_updated_at": "2026-10-01T09:21:34"
+  "official_picks_updated_at": "2026-10-02T09:21:29"
 }
