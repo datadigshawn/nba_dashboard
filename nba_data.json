@@ -7,20 +7,31 @@
       "away": "Boston Celtics",
       "home_record": "0-0",
       "away_record": "0-0",
-      "home_prob": 51.9,
-      "away_prob": 48.1,
-      "model_margin": 0.5,
-      "home_elo": 1607,
-      "away_elo": 1778,
+      "home_prob": 49.8,
+      "away_prob": 50.2,
+      "model_margin": -0.1,
+      "home_elo": 1613,
+      "away_elo": 1811,
       "status": "Scheduled",
       "b2b_home": false,
       "b2b_away": false,
-      "rest_home": 2,
-      "rest_away": 2,
-      "injuries": null,
-      "pred_spread": 2.3,
-      "spread_model_raw": -9.0,
-      "spread_bias_adj": 3.2,
+      "rest_home": 3,
+      "rest_away": 3,
+      "injuries": {
+        "home_out": [],
+        "home_gtd": [],
+        "away_out": [
+          {
+            "name": "Devin Carter",
+            "status": "Out",
+            "detail": "out"
+          }
+        ],
+        "away_gtd": []
+      },
+      "pred_spread": -0.4,
+      "spread_model_raw": -9.3,
+      "spread_bias_adj": 2.9,
       "pred_total": 244.4,
       "raw_total": 234.4,
       "total_bias_adj": 10.0,
@@ -33,16 +44,16 @@
       "away": "Philadelphia 76ers",
       "home_record": "0-0",
       "away_record": "0-0",
-      "home_prob": 82.7,
-      "away_prob": 17.3,
-      "model_margin": 10.2,
-      "home_elo": 2008,
-      "away_elo": 1772,
+      "home_prob": 80.6,
+      "away_prob": 19.4,
+      "model_margin": 9.3,
+      "home_elo": 1946,
+      "away_elo": 1750,
       "status": "Scheduled",
       "b2b_home": false,
       "b2b_away": false,
-      "rest_home": 3,
-      "rest_away": 2,
+      "rest_home": 4,
+      "rest_away": 3,
       "injuries": {
         "home_out": [],
         "home_gtd": [
@@ -61,6 +72,16 @@
         ],
         "away_gtd": [
           {
+            "name": "Adem Bona",
+            "status": "Day-To-Day",
+            "detail": "day-to-day"
+          },
+          {
+            "name": "Anfernee Simons",
+            "status": "Day-To-Day",
+            "detail": "day-to-day"
+          },
+          {
             "name": "Tacko Fall",
             "status": "Day-To-Day",
             "detail": "day-to-day"
@@ -74,22 +95,12 @@
             "name": "Dean Wade",
             "status": "Day-To-Day",
             "detail": "day-to-day"
-          },
-          {
-            "name": "Anfernee Simons",
-            "status": "Day-To-Day",
-            "detail": "day-to-day"
-          },
-          {
-            "name": "Adem Bona",
-            "status": "Day-To-Day",
-            "detail": "day-to-day"
           }
         ]
       },
-      "pred_spread": 11.7,
-      "spread_model_raw": 5.4,
-      "spread_bias_adj": 3.2,
+      "pred_spread": 10.8,
+      "spread_model_raw": 5.2,
+      "spread_bias_adj": 2.9,
       "pred_total": 242.9,
       "raw_total": 232.9,
       "total_bias_adj": 10.0,
@@ -102,16 +113,16 @@
       "away": "Oklahoma City Thunder",
       "home_record": "0-0",
       "away_record": "0-0",
-      "home_prob": 98.0,
-      "away_prob": 2.0,
-      "model_margin": 22.0,
-      "home_elo": 1831,
-      "away_elo": 1565,
+      "home_prob": 97.9,
+      "away_prob": 2.1,
+      "model_margin": 21.9,
+      "home_elo": 1783,
+      "away_elo": 1523,
       "status": "Scheduled",
       "b2b_home": false,
       "b2b_away": false,
-      "rest_home": 2,
-      "rest_away": 3,
+      "rest_home": 3,
+      "rest_away": 4,
       "injuries": {
         "home_out": [
           {
@@ -162,9 +173,9 @@
           }
         ]
       },
-      "pred_spread": 26.0,
-      "spread_model_raw": 24.1,
-      "spread_bias_adj": 3.2,
+      "pred_spread": 26.2,
+      "spread_model_raw": 25.8,
+      "spread_bias_adj": 2.9,
       "pred_total": 234.8,
       "raw_total": 224.8,
       "total_bias_adj": 10.0,
@@ -177,16 +188,16 @@
       "away": "Atlanta Hawks",
       "home_record": "0-0",
       "away_record": "0-0",
-      "home_prob": 41.4,
-      "away_prob": 58.6,
-      "model_margin": -2.4,
-      "home_elo": 1602,
-      "away_elo": 1877,
+      "home_prob": 42.3,
+      "away_prob": 57.7,
+      "model_margin": -2.1,
+      "home_elo": 1617,
+      "away_elo": 1879,
       "status": "Scheduled",
       "b2b_home": false,
       "b2b_away": false,
-      "rest_home": 2,
-      "rest_away": 2,
+      "rest_home": 3,
+      "rest_away": 3,
       "injuries": {
         "home_out": [
           {
@@ -202,7 +213,7 @@
         ],
         "home_gtd": [
           {
-            "name": "Jase Richardson",
+            "name": "Anthony Black",
             "status": "Day-To-Day",
             "detail": "day-to-day"
           },
@@ -212,12 +223,12 @@
             "detail": "day-to-day"
           },
           {
-            "name": "Jonathan Isaac",
+            "name": "Jase Richardson",
             "status": "Day-To-Day",
             "detail": "day-to-day"
           },
           {
-            "name": "Anthony Black",
+            "name": "Jonathan Isaac",
             "status": "Day-To-Day",
             "detail": "day-to-day"
           }
@@ -237,9 +248,9 @@
           }
         ]
       },
-      "pred_spread": 1.1,
-      "spread_model_raw": -1.7,
-      "spread_bias_adj": 3.2,
+      "pred_spread": 1.2,
+      "spread_model_raw": 0.7,
+      "spread_bias_adj": 2.9,
       "pred_total": 252.8,
       "raw_total": 242.8,
       "total_bias_adj": 10.0,
@@ -252,16 +263,16 @@
       "away": "Milwaukee Bucks",
       "home_record": "0-0",
       "away_record": "0-0",
-      "home_prob": 39.3,
-      "away_prob": 60.7,
-      "model_margin": -2.9,
-      "home_elo": 900,
-      "away_elo": 1281,
+      "home_prob": 40.9,
+      "away_prob": 59.1,
+      "model_margin": -2.5,
+      "home_elo": 936,
+      "away_elo": 1295,
       "status": "Scheduled",
       "b2b_home": false,
       "b2b_away": false,
-      "rest_home": 2,
-      "rest_away": 2,
+      "rest_home": 3,
+      "rest_away": 3,
       "injuries": {
         "home_out": [
           {
@@ -296,9 +307,9 @@
           }
         ]
       },
-      "pred_spread": 1.6,
-      "spread_model_raw": 5.5,
-      "spread_bias_adj": 3.2,
+      "pred_spread": 0.8,
+      "spread_model_raw": 0.0,
+      "spread_bias_adj": 2.9,
       "pred_total": 238.5,
       "raw_total": 228.5,
       "total_bias_adj": 10.0,
@@ -311,26 +322,26 @@
       "away": "Minnesota Timberwolves",
       "home_record": "0-0",
       "away_record": "0-0",
-      "home_prob": 79.9,
-      "away_prob": 20.1,
-      "model_margin": 9.0,
-      "home_elo": 1698,
-      "away_elo": 1814,
+      "home_prob": 80.7,
+      "away_prob": 19.3,
+      "model_margin": 9.4,
+      "home_elo": 1693,
+      "away_elo": 1795,
       "status": "Scheduled",
       "b2b_home": false,
       "b2b_away": false,
-      "rest_home": 2,
-      "rest_away": 2,
+      "rest_home": 3,
+      "rest_away": 3,
       "injuries": {
         "home_out": [],
         "home_gtd": [
           {
-            "name": "Pelle Larsson",
+            "name": "Dru Smith",
             "status": "Day-To-Day",
             "detail": "day-to-day"
           },
           {
-            "name": "Dru Smith",
+            "name": "Pelle Larsson",
             "status": "Day-To-Day",
             "detail": "day-to-day"
           },
@@ -355,9 +366,9 @@
           }
         ]
       },
-      "pred_spread": 9.9,
-      "spread_model_raw": 2.4,
-      "spread_bias_adj": 3.2,
+      "pred_spread": 10.9,
+      "spread_model_raw": -0.0,
+      "spread_bias_adj": 2.9,
       "pred_total": 255.0,
       "raw_total": 245.3,
       "total_bias_adj": 10.0,
@@ -370,16 +381,16 @@
       "away": "Charlotte Hornets",
       "home_record": "0-0",
       "away_record": "0-0",
-      "home_prob": 82.3,
-      "away_prob": 17.7,
-      "model_margin": 10.0,
-      "home_elo": 1411,
-      "away_elo": 1556,
+      "home_prob": 85.3,
+      "away_prob": 14.7,
+      "model_margin": 11.3,
+      "home_elo": 1444,
+      "away_elo": 1525,
       "status": "Scheduled",
       "b2b_home": false,
       "b2b_away": false,
-      "rest_home": 4,
-      "rest_away": 2,
+      "rest_home": 5,
+      "rest_away": 3,
       "injuries": {
         "home_out": [
           {
@@ -391,6 +402,16 @@
         "home_gtd": [],
         "away_out": [],
         "away_gtd": [
+          {
+            "name": "Coby White",
+            "status": "Day-To-Day",
+            "detail": "day-to-day"
+          },
+          {
+            "name": "Kon Knueppel",
+            "status": "Day-To-Day",
+            "detail": "day-to-day"
+          },
           {
             "name": "Grayson Allen",
             "status": "Day-To-Day",
@@ -407,30 +428,20 @@
             "detail": "day-to-day"
           },
           {
-            "name": "Coby White",
-            "status": "Day-To-Day",
-            "detail": "day-to-day"
-          },
-          {
-            "name": "Kon Knueppel",
-            "status": "Day-To-Day",
-            "detail": "day-to-day"
-          },
-          {
             "name": "Grant Williams",
             "status": "Day-To-Day",
             "detail": "day-to-day"
           }
         ]
       },
-      "pred_spread": 17.1,
-      "spread_model_raw": 21.2,
-      "spread_bias_adj": 3.2,
-      "pred_total": 233.6,
-      "raw_total": 223.6,
+      "pred_spread": 17.9,
+      "spread_model_raw": 22.0,
+      "spread_bias_adj": 2.9,
+      "pred_total": 233.5,
+      "raw_total": 223.5,
       "total_bias_adj": 10.0,
       "away_expected": 111.0,
-      "home_expected": 123.0
+      "home_expected": 122.9
     },
     {
       "game_date": "20261021",
@@ -438,16 +449,16 @@
       "away": "Chicago Bulls",
       "home_record": "0-0",
       "away_record": "0-0",
-      "home_prob": 87.3,
-      "away_prob": 12.7,
-      "model_margin": 12.3,
-      "home_elo": 1613,
-      "away_elo": 1129,
+      "home_prob": 85.8,
+      "away_prob": 14.2,
+      "model_margin": 11.5,
+      "home_elo": 1610,
+      "away_elo": 1162,
       "status": "Scheduled",
       "b2b_home": false,
       "b2b_away": false,
-      "rest_home": 2,
-      "rest_away": 2,
+      "rest_home": 3,
+      "rest_away": 3,
       "injuries": {
         "home_out": [],
         "home_gtd": [
@@ -481,9 +492,9 @@
           }
         ]
       },
-      "pred_spread": 12.7,
-      "spread_model_raw": -6.8,
-      "spread_bias_adj": 3.2,
+      "pred_spread": 11.2,
+      "spread_model_raw": -9.7,
+      "spread_bias_adj": 2.9,
       "pred_total": 250.1,
       "raw_total": 240.1,
       "total_bias_adj": 10.0,
@@ -496,16 +507,16 @@
       "away": "Utah Jazz",
       "home_record": "0-0",
       "away_record": "0-0",
-      "home_prob": 68.3,
-      "away_prob": 31.7,
-      "model_margin": 5.1,
-      "home_elo": 1187,
-      "away_elo": 1244,
+      "home_prob": 67.4,
+      "away_prob": 32.6,
+      "model_margin": 4.9,
+      "home_elo": 1229,
+      "away_elo": 1289,
       "status": "Scheduled",
       "b2b_home": false,
       "b2b_away": false,
-      "rest_home": 2,
-      "rest_away": 2,
+      "rest_home": 3,
+      "rest_away": 3,
       "injuries": {
         "home_out": [
           {
@@ -556,14 +567,14 @@
           }
         ]
       },
-      "pred_spread": 6.7,
-      "spread_model_raw": -5.8,
-      "spread_bias_adj": 3.2,
-      "pred_total": 235.8,
-      "raw_total": 225.8,
+      "pred_spread": 6.5,
+      "spread_model_raw": -3.6,
+      "spread_bias_adj": 2.9,
+      "pred_total": 235.6,
+      "raw_total": 225.6,
       "total_bias_adj": 10.0,
       "away_expected": 117.0,
-      "home_expected": 118.8
+      "home_expected": 118.7
     },
     {
       "game_date": "20261022",
@@ -571,16 +582,16 @@
       "away": "Indiana Pacers",
       "home_record": "0-0",
       "away_record": "0-0",
-      "home_prob": 56.2,
-      "away_prob": 43.8,
-      "model_margin": 1.7,
-      "home_elo": 1379,
-      "away_elo": 1419,
+      "home_prob": 59.3,
+      "away_prob": 40.7,
+      "model_margin": 2.5,
+      "home_elo": 1409,
+      "away_elo": 1410,
       "status": "Scheduled",
       "b2b_home": false,
       "b2b_away": false,
-      "rest_home": 2,
-      "rest_away": 2,
+      "rest_home": 3,
+      "rest_away": 3,
       "injuries": {
         "home_out": [],
         "home_gtd": [
@@ -615,9 +626,9 @@
           }
         ]
       },
-      "pred_spread": 3.5,
-      "spread_model_raw": -7.6,
-      "spread_bias_adj": 3.2,
+      "pred_spread": 3.9,
+      "spread_model_raw": -7.4,
+      "spread_bias_adj": 2.9,
       "pred_total": 239.9,
       "raw_total": 229.9,
       "total_bias_adj": 10.0,
@@ -630,21 +641,26 @@
       "away": "Dallas Mavericks",
       "home_record": "0-0",
       "away_record": "0-0",
-      "home_prob": 95.4,
-      "away_prob": 4.6,
-      "model_margin": 18.2,
-      "home_elo": 1442,
-      "away_elo": 1291,
+      "home_prob": 95.6,
+      "away_prob": 4.4,
+      "model_margin": 18.4,
+      "home_elo": 1443,
+      "away_elo": 1283,
       "status": "Scheduled",
       "b2b_home": false,
       "b2b_away": false,
-      "rest_home": 3,
-      "rest_away": 2,
+      "rest_home": 4,
+      "rest_away": 3,
       "injuries": {
         "home_out": [],
         "home_gtd": [],
         "away_out": [],
         "away_gtd": [
+          {
+            "name": "Santi Aldama",
+            "status": "Day-To-Day",
+            "detail": "day-to-day"
+          },
           {
             "name": "Tarik Biberovic",
             "status": "Day-To-Day",
@@ -659,17 +675,12 @@
             "name": "Dereck Lively II",
             "status": "Day-To-Day",
             "detail": "day-to-day"
-          },
-          {
-            "name": "Santi Aldama",
-            "status": "Day-To-Day",
-            "detail": "day-to-day"
           }
         ]
       },
       "pred_spread": 17.5,
-      "spread_model_raw": -7.7,
-      "spread_bias_adj": 3.2,
+      "spread_model_raw": -6.7,
+      "spread_bias_adj": 2.9,
       "pred_total": 246.8,
       "raw_total": 236.8,
       "total_bias_adj": 10.0,
@@ -682,16 +693,16 @@
       "away": "Golden State Warriors",
       "home_record": "0-0",
       "away_record": "0-0",
-      "home_prob": 15.2,
-      "away_prob": 84.8,
-      "model_margin": -11.1,
-      "home_elo": 1407,
-      "away_elo": 1435,
+      "home_prob": 13.2,
+      "away_prob": 86.8,
+      "model_margin": -12.1,
+      "home_elo": 1385,
+      "away_elo": 1459,
       "status": "Scheduled",
       "b2b_home": false,
       "b2b_away": false,
-      "rest_home": 2,
-      "rest_away": 2,
+      "rest_home": 3,
+      "rest_away": 3,
       "injuries": {
         "home_out": [],
         "home_gtd": [
@@ -733,11 +744,17 @@
             "detail": "out"
           }
         ],
-        "away_gtd": []
+        "away_gtd": [
+          {
+            "name": "Stephen Curry",
+            "status": "Day-To-Day",
+            "detail": "day-to-day"
+          }
+        ]
       },
-      "pred_spread": -9.2,
-      "spread_model_raw": -14.9,
-      "spread_bias_adj": 3.2,
+      "pred_spread": -10.4,
+      "spread_model_raw": -15.7,
+      "spread_bias_adj": 2.9,
       "pred_total": 228.2,
       "raw_total": 218.2,
       "total_bias_adj": 10.0,
@@ -750,16 +767,16 @@
       "away": "Phoenix Suns",
       "home_record": "0-0",
       "away_record": "0-0",
-      "home_prob": 96.5,
-      "away_prob": 3.5,
-      "model_margin": 19.5,
-      "home_elo": 1698,
-      "away_elo": 1356,
+      "home_prob": 96.6,
+      "away_prob": 3.4,
+      "model_margin": 19.6,
+      "home_elo": 1692,
+      "away_elo": 1343,
       "status": "Scheduled",
       "b2b_home": false,
       "b2b_away": false,
-      "rest_home": 2,
-      "rest_away": 2,
+      "rest_home": 3,
+      "rest_away": 3,
       "injuries": {
         "home_out": [
           {
@@ -805,9 +822,9 @@
           }
         ]
       },
-      "pred_spread": 22.4,
-      "spread_model_raw": 18.5,
-      "spread_bias_adj": 3.2,
+      "pred_spread": 22.7,
+      "spread_model_raw": 20.3,
+      "spread_bias_adj": 2.9,
       "pred_total": 231.1,
       "raw_total": 221.1,
       "total_bias_adj": 10.0,
@@ -820,16 +837,16 @@
       "away": "Sacramento Kings",
       "home_record": "0-0",
       "away_record": "0-0",
-      "home_prob": 87.9,
-      "away_prob": 12.1,
-      "model_margin": 12.6,
-      "home_elo": 1360,
-      "away_elo": 1141,
+      "home_prob": 88.9,
+      "away_prob": 11.1,
+      "model_margin": 13.2,
+      "home_elo": 1374,
+      "away_elo": 1128,
       "status": "Scheduled",
       "b2b_home": false,
       "b2b_away": false,
-      "rest_home": 4,
-      "rest_away": 2,
+      "rest_home": 5,
+      "rest_away": 3,
       "injuries": {
         "home_out": [
           {
@@ -861,6 +878,11 @@
         "home_gtd": [],
         "away_out": [
           {
+            "name": "Ben Simmons",
+            "status": "Out",
+            "detail": "out"
+          },
+          {
             "name": "Dylan Cardwell",
             "status": "Out",
             "detail": "out"
@@ -879,55 +901,209 @@
           }
         ]
       },
-      "pred_spread": 18.4,
-      "spread_model_raw": 19.9,
-      "spread_bias_adj": 3.2,
+      "pred_spread": 17.4,
+      "spread_model_raw": 17.0,
+      "spread_bias_adj": 2.9,
       "pred_total": 228.6,
       "raw_total": 218.6,
       "total_bias_adj": 10.0,
       "away_expected": 110.4,
       "home_expected": 119.4
+    },
+    {
+      "game_date": "20261022",
+      "home": "Philadelphia 76ers",
+      "away": "Cleveland Cavaliers",
+      "home_record": "0-0",
+      "away_record": "0-0",
+      "home_prob": 60.9,
+      "away_prob": 39.1,
+      "model_margin": 3.0,
+      "home_elo": 1750,
+      "away_elo": 1655,
+      "status": "Scheduled",
+      "b2b_home": false,
+      "b2b_away": false,
+      "rest_home": 3,
+      "rest_away": 6,
+      "injuries": {
+        "home_out": [
+          {
+            "name": "Ariel Hukporti",
+            "status": "Out",
+            "detail": "out"
+          }
+        ],
+        "home_gtd": [
+          {
+            "name": "Adem Bona",
+            "status": "Day-To-Day",
+            "detail": "day-to-day"
+          },
+          {
+            "name": "Anfernee Simons",
+            "status": "Day-To-Day",
+            "detail": "day-to-day"
+          },
+          {
+            "name": "Tacko Fall",
+            "status": "Day-To-Day",
+            "detail": "day-to-day"
+          },
+          {
+            "name": "Dominick Barlow",
+            "status": "Day-To-Day",
+            "detail": "day-to-day"
+          },
+          {
+            "name": "Dean Wade",
+            "status": "Day-To-Day",
+            "detail": "day-to-day"
+          }
+        ],
+        "away_out": [],
+        "away_gtd": [
+          {
+            "name": "Sam Merrill",
+            "status": "Day-To-Day",
+            "detail": "day-to-day"
+          },
+          {
+            "name": "Nae'Qwan Tomlin",
+            "status": "Day-To-Day",
+            "detail": "day-to-day"
+          },
+          {
+            "name": "Khalifa Diop",
+            "status": "Day-To-Day",
+            "detail": "day-to-day"
+          }
+        ]
+      },
+      "pred_spread": 4.8,
+      "spread_model_raw": -4.2,
+      "spread_bias_adj": 2.9,
+      "pred_total": 246.5,
+      "raw_total": 236.5,
+      "total_bias_adj": 10.0,
+      "away_expected": 123.0,
+      "home_expected": 121.8
+    },
+    {
+      "game_date": "20261023",
+      "home": "Oklahoma City Thunder",
+      "away": "Denver Nuggets",
+      "home_record": "0-0",
+      "away_record": "0-0",
+      "home_prob": 31.3,
+      "away_prob": 68.7,
+      "model_margin": -5.3,
+      "home_elo": 1523,
+      "away_elo": 1533,
+      "status": "Scheduled",
+      "b2b_home": false,
+      "b2b_away": false,
+      "rest_home": 4,
+      "rest_away": 3,
+      "injuries": {
+        "home_out": [
+          {
+            "name": "Otega Oweh",
+            "status": "Out",
+            "detail": "out"
+          }
+        ],
+        "home_gtd": [
+          {
+            "name": "Thomas Sorber",
+            "status": "Day-To-Day",
+            "detail": "day-to-day"
+          },
+          {
+            "name": "Jaylin Williams",
+            "status": "Day-To-Day",
+            "detail": "day-to-day"
+          },
+          {
+            "name": "Cason Wallace",
+            "status": "Day-To-Day",
+            "detail": "day-to-day"
+          },
+          {
+            "name": "Nikola Topic",
+            "status": "Day-To-Day",
+            "detail": "day-to-day"
+          },
+          {
+            "name": "Chet Holmgren",
+            "status": "Day-To-Day",
+            "detail": "day-to-day"
+          }
+        ],
+        "away_out": [
+          {
+            "name": "Julian Strawther",
+            "status": "Out",
+            "detail": "out"
+          }
+        ],
+        "away_gtd": [
+          {
+            "name": "Spencer Jones",
+            "status": "Day-To-Day",
+            "detail": "day-to-day"
+          }
+        ]
+      },
+      "pred_spread": -2.5,
+      "spread_model_raw": -5.8,
+      "spread_bias_adj": 2.9,
+      "pred_total": 238.7,
+      "raw_total": 228.7,
+      "total_bias_adj": 10.0,
+      "away_expected": 121.4,
+      "home_expected": 116.9
     }
   ],
   "next_games_date": "2026-10-20",
   "official_picks": [],
   "edges": [],
   "elo_teams": {
-    "New York Knicks": 2008,
-    "Atlanta Hawks": 1877,
-    "San Antonio Spurs": 1831,
-    "Minnesota Timberwolves": 1814,
-    "Boston Celtics": 1778,
-    "Philadelphia 76ers": 1772,
-    "Portland Trail Blazers": 1698,
-    "Miami Heat": 1698,
-    "Cleveland Cavaliers": 1670,
-    "Toronto Raptors": 1613,
-    "Detroit Pistons": 1607,
-    "Orlando Magic": 1602,
-    "Oklahoma City Thunder": 1565,
-    "Charlotte Hornets": 1556,
-    "Denver Nuggets": 1540
+    "New York Knicks": 1946,
+    "Atlanta Hawks": 1879,
+    "Boston Celtics": 1811,
+    "Minnesota Timberwolves": 1795,
+    "San Antonio Spurs": 1783,
+    "Philadelphia 76ers": 1750,
+    "Miami Heat": 1693,
+    "Portland Trail Blazers": 1692,
+    "Cleveland Cavaliers": 1655,
+    "Orlando Magic": 1617,
+    "Detroit Pistons": 1613,
+    "Toronto Raptors": 1610,
+    "Denver Nuggets": 1533,
+    "Charlotte Hornets": 1525,
+    "Oklahoma City Thunder": 1523
   },
   "calibration": {
     "lookback_days": 21,
     "games_considered": 30,
     "spread_samples": 30,
-    "spread_bias": 3.24,
-    "spread_mae": 18.91,
-    "spread_sign_accuracy": 0.4,
-    "moneyline_accuracy": 0.567,
+    "spread_bias": 2.9,
+    "spread_mae": 18.74,
+    "spread_sign_accuracy": 0.367,
+    "moneyline_accuracy": 0.533,
     "total_samples": 30,
-    "total_bias": 15.61,
-    "total_mae": 26.96
+    "total_bias": 15.44,
+    "total_mae": 26.91
   },
   "backtest": {
     "games_tested": 45,
-    "all_wr": 71.1,
-    "strong_count": 30,
-    "strong_wr": 76.7,
-    "vstrong_count": 16,
-    "vstrong_wr": 75.0,
+    "all_wr": 73.3,
+    "strong_count": 31,
+    "strong_wr": 80.6,
+    "vstrong_count": 17,
+    "vstrong_wr": 82.4,
     "star3_count": 0,
     "star3_wr": 0,
     "recent": [
@@ -935,7 +1111,7 @@
         "date": "20261012",
         "away": "Oklahoma City Thunder",
         "home": "Atlanta Hawks",
-        "conf": 98,
+        "conf": 99,
         "pick": "Atlanta Hawks",
         "winner": "Atlanta Hawks",
         "correct": true,
@@ -955,7 +1131,7 @@
         "date": "20261012",
         "away": "Minnesota Timberwolves",
         "home": "New York Knicks",
-        "conf": 72,
+        "conf": 69,
         "pick": "New York Knicks",
         "winner": "Minnesota Timberwolves",
         "correct": false,
@@ -965,7 +1141,7 @@
         "date": "20261012",
         "away": "San Antonio Spurs",
         "home": "Utah Jazz",
-        "conf": 86,
+        "conf": 81,
         "pick": "San Antonio Spurs",
         "winner": "Utah Jazz",
         "correct": false,
@@ -975,7 +1151,7 @@
         "date": "20261013",
         "away": "Cleveland Cavaliers",
         "home": "Orlando Magic",
-        "conf": 82,
+        "conf": 84,
         "pick": "Orlando Magic",
         "winner": "Orlando Magic",
         "correct": true,
@@ -985,7 +1161,7 @@
         "date": "20261013",
         "away": "New York Knicks",
         "home": "Toronto Raptors",
-        "conf": 67,
+        "conf": 71,
         "pick": "Toronto Raptors",
         "winner": "Toronto Raptors",
         "correct": true,
@@ -995,7 +1171,7 @@
         "date": "20261013",
         "away": "Indiana Pacers",
         "home": "Oklahoma City Thunder",
-        "conf": 56,
+        "conf": 59,
         "pick": "Indiana Pacers",
         "winner": "Oklahoma City Thunder",
         "correct": false,
@@ -1005,7 +1181,7 @@
         "date": "20261013",
         "away": "Golden State Warriors",
         "home": "Los Angeles Lakers",
-        "conf": 85,
+        "conf": 87,
         "pick": "Golden State Warriors",
         "winner": "Golden State Warriors",
         "correct": true,
@@ -1025,7 +1201,7 @@
         "date": "20261014",
         "away": "Brooklyn Nets",
         "home": "Miami Heat",
-        "conf": 78,
+        "conf": 76,
         "pick": "Miami Heat",
         "winner": "Miami Heat",
         "correct": true,
@@ -1035,7 +1211,7 @@
         "date": "20261014",
         "away": "Charlotte Hornets",
         "home": "Boston Celtics",
-        "conf": 92,
+        "conf": 94,
         "pick": "Boston Celtics",
         "winner": "Boston Celtics",
         "correct": true,
@@ -1045,7 +1221,7 @@
         "date": "20261014",
         "away": "Phoenix Suns",
         "home": "San Antonio Spurs",
-        "conf": 99,
+        "conf": 98,
         "pick": "San Antonio Spurs",
         "winner": "San Antonio Spurs",
         "correct": true,
@@ -1055,7 +1231,7 @@
         "date": "20261014",
         "away": "New Orleans Pelicans",
         "home": "Dallas Mavericks",
-        "conf": 65,
+        "conf": 68,
         "pick": "New Orleans Pelicans",
         "winner": "New Orleans Pelicans",
         "correct": true,
@@ -1065,7 +1241,7 @@
         "date": "20261014",
         "away": "Chicago Bulls",
         "home": "Milwaukee Bucks",
-        "conf": 58,
+        "conf": 60,
         "pick": "Chicago Bulls",
         "winner": "Chicago Bulls",
         "correct": true,
@@ -1075,7 +1251,7 @@
         "date": "20261014",
         "away": "Detroit Pistons",
         "home": "Minnesota Timberwolves",
-        "conf": 58,
+        "conf": 56,
         "pick": "Minnesota Timberwolves",
         "winner": "Detroit Pistons",
         "correct": false,
@@ -1085,17 +1261,17 @@
         "date": "20261014",
         "away": "Denver Nuggets",
         "home": "LA Clippers",
-        "conf": 51,
-        "pick": "Denver Nuggets",
+        "conf": 50,
+        "pick": "LA Clippers",
         "winner": "LA Clippers",
-        "correct": false,
+        "correct": true,
         "score": "110-122"
       },
       {
         "date": "20261015",
         "away": "Toronto Raptors",
         "home": "New York Knicks",
-        "conf": 56,
+        "conf": 52,
         "pick": "New York Knicks",
         "winner": "New York Knicks",
         "correct": true,
@@ -1105,7 +1281,7 @@
         "date": "20261015",
         "away": "Oklahoma City Thunder",
         "home": "Houston Rockets",
-        "conf": 90,
+        "conf": 91,
         "pick": "Houston Rockets",
         "winner": "Houston Rockets",
         "correct": true,
@@ -1115,7 +1291,7 @@
         "date": "20261016",
         "away": "Miami Heat",
         "home": "Orlando Magic",
-        "conf": 56,
+        "conf": 57,
         "pick": "Orlando Magic",
         "winner": "Orlando Magic",
         "correct": true,
@@ -1125,7 +1301,7 @@
         "date": "20261016",
         "away": "Boston Celtics",
         "home": "Philadelphia 76ers",
-        "conf": 70,
+        "conf": 74,
         "pick": "Boston Celtics",
         "winner": "Boston Celtics",
         "correct": true,
@@ -1135,7 +1311,7 @@
         "date": "20261016",
         "away": "Toronto Raptors",
         "home": "Detroit Pistons",
-        "conf": 57,
+        "conf": 58,
         "pick": "Detroit Pistons",
         "winner": "Detroit Pistons",
         "correct": true,
@@ -1145,7 +1321,7 @@
         "date": "20261016",
         "away": "Milwaukee Bucks",
         "home": "Indiana Pacers",
-        "conf": 82,
+        "conf": 81,
         "pick": "Indiana Pacers",
         "winner": "Milwaukee Bucks",
         "correct": false,
@@ -1175,11 +1351,11 @@
         "date": "20261016",
         "away": "Charlotte Hornets",
         "home": "Memphis Grizzlies",
-        "conf": 66,
+        "conf": 70,
         "pick": "Memphis Grizzlies",
         "winner": "Memphis Grizzlies",
         "correct": true,
-        "score": "98-117"
+        "score": "98-116"
       },
       {
         "date": "20261016",
@@ -1195,7 +1371,7 @@
         "date": "20261016",
         "away": "Minnesota Timberwolves",
         "home": "Chicago Bulls",
-        "conf": 56,
+        "conf": 52,
         "pick": "Minnesota Timberwolves",
         "winner": "Chicago Bulls",
         "correct": false,
@@ -1205,7 +1381,7 @@
         "date": "20261016",
         "away": "Portland Trail Blazers",
         "home": "Golden State Warriors",
-        "conf": 65,
+        "conf": 67,
         "pick": "Golden State Warriors",
         "winner": "Golden State Warriors",
         "correct": true,
@@ -1215,7 +1391,7 @@
         "date": "20261016",
         "away": "Utah Jazz",
         "home": "Phoenix Suns",
-        "conf": 59,
+        "conf": 64,
         "pick": "Utah Jazz",
         "winner": "Utah Jazz",
         "correct": true,
@@ -1225,7 +1401,7 @@
         "date": "20261016",
         "away": "Denver Nuggets",
         "home": "Los Angeles Lakers",
-        "conf": 70,
+        "conf": 71,
         "pick": "Denver Nuggets",
         "winner": "Denver Nuggets",
         "correct": true,
@@ -1234,7 +1410,7 @@
     ]
   },
   "playoff_bracket": {
-    "generated_at": "2026-10-18T09:21:13",
+    "generated_at": "2026-10-19T09:21:13",
     "n_sims": 10000,
     "west": {
       "seeds": [
@@ -1243,56 +1419,56 @@
           "team": "Portland Trail Blazers",
           "abbrev": "POR",
           "record": "3-1",
-          "elo": 1698
+          "elo": 1691
         },
         {
           "seed": 2,
           "team": "New Orleans Pelicans",
           "abbrev": "NO",
           "record": "3-1",
-          "elo": 1378
+          "elo": 1408
         },
         {
           "seed": 3,
           "team": "Utah Jazz",
           "abbrev": "UTA",
           "record": "3-1",
-          "elo": 1243
+          "elo": 1288
         },
         {
           "seed": 4,
           "team": "Memphis Grizzlies",
           "abbrev": "MEM",
           "record": "3-1",
-          "elo": 1186
+          "elo": 1228
         },
         {
           "seed": 5,
+          "team": "Golden State Warriors",
+          "abbrev": "GS",
+          "record": "4-2",
+          "elo": 1459
+        },
+        {
+          "seed": 6,
           "team": "Houston Rockets",
           "abbrev": "HOU",
           "record": "2-1",
           "elo": 1442
         },
         {
-          "seed": 6,
-          "team": "Golden State Warriors",
-          "abbrev": "GS",
-          "record": "4-2",
-          "elo": 1435
-        },
-        {
           "seed": 7,
           "team": "LA Clippers",
           "abbrev": "LAC",
           "record": "2-1",
-          "elo": 1359
+          "elo": 1373
         },
         {
           "seed": 8,
           "team": "Denver Nuggets",
           "abbrev": "DEN",
           "record": "3-2",
-          "elo": 1539
+          "elo": 1533
         }
       ],
       "r1": [
@@ -1301,9 +1477,9 @@
             "seed": 1,
             "team": "Portland Trail Blazers",
             "abbrev": "POR",
-            "elo": 1698,
+            "elo": 1691,
             "record": "3-1",
-            "advance_prob": 90.0,
+            "advance_prob": 90.1,
             "star": {
               "name": "Scoot Henderson",
               "status": "Healthy",
@@ -1314,9 +1490,9 @@
             "seed": 8,
             "team": "Denver Nuggets",
             "abbrev": "DEN",
-            "elo": 1539,
+            "elo": 1533,
             "record": "3-2",
-            "advance_prob": 10.1,
+            "advance_prob": 9.9,
             "star": {
               "name": "Nikola Jokic",
               "status": "Healthy",
@@ -1330,9 +1506,9 @@
             "seed": 4,
             "team": "Memphis Grizzlies",
             "abbrev": "MEM",
-            "elo": 1186,
+            "elo": 1228,
             "record": "3-1",
-            "advance_prob": 2.8,
+            "advance_prob": 4.1,
             "star": {
               "name": "Ja Morant",
               "status": "Healthy",
@@ -1341,27 +1517,27 @@
           },
           "bot": {
             "seed": 5,
-            "team": "Houston Rockets",
-            "abbrev": "HOU",
-            "elo": 1442,
-            "record": "2-1",
-            "advance_prob": 97.2,
+            "team": "Golden State Warriors",
+            "abbrev": "GS",
+            "elo": 1459,
+            "record": "4-2",
+            "advance_prob": 95.9,
             "star": {
-              "name": "Alperen Sengun",
-              "status": "Healthy",
-              "detail": ""
+              "name": "Stephen Curry",
+              "status": "Day-To-Day",
+              "detail": "day-to-day"
             }
           },
-          "expected_games": 5.1
+          "expected_games": 5.2
         },
         {
           "top": {
             "seed": 3,
             "team": "Utah Jazz",
             "abbrev": "UTA",
-            "elo": 1243,
+            "elo": 1288,
             "record": "3-1",
-            "advance_prob": 7.8,
+            "advance_prob": 13.0,
             "star": {
               "name": "Lauri Markkanen",
               "status": "Healthy",
@@ -1370,27 +1546,27 @@
           },
           "bot": {
             "seed": 6,
-            "team": "Golden State Warriors",
-            "abbrev": "GS",
-            "elo": 1435,
-            "record": "4-2",
-            "advance_prob": 92.2,
+            "team": "Houston Rockets",
+            "abbrev": "HOU",
+            "elo": 1442,
+            "record": "2-1",
+            "advance_prob": 87.0,
             "star": {
-              "name": "Stephen Curry",
+              "name": "Alperen Sengun",
               "status": "Healthy",
               "detail": ""
             }
           },
-          "expected_games": 5.4
+          "expected_games": 5.6
         },
         {
           "top": {
             "seed": 2,
             "team": "New Orleans Pelicans",
             "abbrev": "NO",
-            "elo": 1378,
+            "elo": 1408,
             "record": "3-1",
-            "advance_prob": 58.6,
+            "advance_prob": 62.7,
             "star": {
               "name": "Zion Williamson",
               "status": "Healthy",
@@ -1401,9 +1577,9 @@
             "seed": 7,
             "team": "LA Clippers",
             "abbrev": "LAC",
-            "elo": 1359,
+            "elo": 1373,
             "record": "2-1",
-            "advance_prob": 41.4,
+            "advance_prob": 37.2,
             "star": {
               "name": "Kawhi Leonard",
               "status": "Healthy",
@@ -1419,9 +1595,9 @@
             "seed": 1,
             "team": "Portland Trail Blazers",
             "abbrev": "POR",
-            "elo": 1698,
+            "elo": 1691,
             "record": "3-1",
-            "advance_prob": 87.9,
+            "advance_prob": 87.3,
             "star": {
               "name": "Scoot Henderson",
               "status": "Healthy",
@@ -1430,29 +1606,29 @@
           },
           "bot": {
             "seed": 5,
-            "team": "Houston Rockets",
-            "abbrev": "HOU",
-            "elo": 1442,
-            "record": "2-1",
-            "advance_prob": 4.2,
+            "team": "Golden State Warriors",
+            "abbrev": "GS",
+            "elo": 1459,
+            "record": "4-2",
+            "advance_prob": 5.5,
             "star": {
-              "name": "Alperen Sengun",
-              "status": "Healthy",
-              "detail": ""
+              "name": "Stephen Curry",
+              "status": "Day-To-Day",
+              "detail": "day-to-day"
             }
           },
-          "expected_games": 4.7
+          "expected_games": 4.8
         },
         {
           "top": {
             "seed": 6,
-            "team": "Golden State Warriors",
-            "abbrev": "GS",
-            "elo": 1435,
-            "record": "4-2",
-            "advance_prob": 65.6,
+            "team": "Houston Rockets",
+            "abbrev": "HOU",
+            "elo": 1442,
+            "record": "2-1",
+            "advance_prob": 57.8,
             "star": {
-              "name": "Stephen Curry",
+              "name": "Alperen Sengun",
               "status": "Healthy",
               "detail": ""
             }
@@ -1461,16 +1637,16 @@
             "seed": 2,
             "team": "New Orleans Pelicans",
             "abbrev": "NO",
-            "elo": 1378,
+            "elo": 1408,
             "record": "3-1",
-            "advance_prob": 20.6,
+            "advance_prob": 27.4,
             "star": {
               "name": "Zion Williamson",
               "status": "Healthy",
               "detail": ""
             }
           },
-          "expected_games": 5.6
+          "expected_games": 5.7
         }
       ],
       "conf_finals": [
@@ -1479,9 +1655,9 @@
             "seed": 1,
             "team": "Portland Trail Blazers",
             "abbrev": "POR",
-            "elo": 1698,
+            "elo": 1691,
             "record": "3-1",
-            "advance_prob": 86.3,
+            "advance_prob": 85.3,
             "star": {
               "name": "Scoot Henderson",
               "status": "Healthy",
@@ -1490,18 +1666,18 @@
           },
           "bot": {
             "seed": 6,
-            "team": "Golden State Warriors",
-            "abbrev": "GS",
-            "elo": 1435,
-            "record": "4-2",
-            "advance_prob": 3.6,
+            "team": "Houston Rockets",
+            "abbrev": "HOU",
+            "elo": 1442,
+            "record": "2-1",
+            "advance_prob": 3.7,
             "star": {
-              "name": "Stephen Curry",
+              "name": "Alperen Sengun",
               "status": "Healthy",
               "detail": ""
             }
           },
-          "expected_games": 4.6
+          "expected_games": 4.7
         }
       ]
     },
@@ -1512,56 +1688,56 @@
           "team": "Boston Celtics",
           "abbrev": "BOS",
           "record": "4-0",
-          "elo": 1778
+          "elo": 1811
         },
         {
           "seed": 2,
           "team": "Atlanta Hawks",
           "abbrev": "ATL",
           "record": "4-1",
-          "elo": 1877
+          "elo": 1878
         },
         {
           "seed": 3,
-          "team": "Detroit Pistons",
-          "abbrev": "DET",
-          "record": "3-1",
-          "elo": 1606
-        },
-        {
-          "seed": 4,
           "team": "Orlando Magic",
           "abbrev": "ORL",
           "record": "3-1",
-          "elo": 1602
+          "elo": 1616
+        },
+        {
+          "seed": 4,
+          "team": "Detroit Pistons",
+          "abbrev": "DET",
+          "record": "3-1",
+          "elo": 1612
         },
         {
           "seed": 5,
           "team": "Brooklyn Nets",
           "abbrev": "BKN",
           "record": "3-1",
-          "elo": 1410
+          "elo": 1444
         },
         {
           "seed": 6,
           "team": "Miami Heat",
           "abbrev": "MIA",
           "record": "3-2",
-          "elo": 1697
+          "elo": 1693
         },
         {
           "seed": 7,
           "team": "Chicago Bulls",
           "abbrev": "CHI",
           "record": "3-2",
-          "elo": 1129
+          "elo": 1162
         },
         {
           "seed": 8,
           "team": "Washington Wizards",
           "abbrev": "WAS",
           "record": "2-2",
-          "elo": 900
+          "elo": 935
         }
       ],
       "r1": [
@@ -1570,7 +1746,7 @@
             "seed": 1,
             "team": "Boston Celtics",
             "abbrev": "BOS",
-            "elo": 1778,
+            "elo": 1811,
             "record": "4-0",
             "advance_prob": 100.0,
             "star": {
@@ -1583,7 +1759,7 @@
             "seed": 8,
             "team": "Washington Wizards",
             "abbrev": "WAS",
-            "elo": 900,
+            "elo": 935,
             "record": "2-2",
             "advance_prob": 0.0,
             "star": {
@@ -1597,13 +1773,13 @@
         {
           "top": {
             "seed": 4,
-            "team": "Orlando Magic",
-            "abbrev": "ORL",
-            "elo": 1602,
+            "team": "Detroit Pistons",
+            "abbrev": "DET",
+            "elo": 1612,
             "record": "3-1",
-            "advance_prob": 93.7,
+            "advance_prob": 91.2,
             "star": {
-              "name": "Paolo Banchero",
+              "name": "Cade Cunningham",
               "status": "Healthy",
               "detail": ""
             }
@@ -1612,27 +1788,27 @@
             "seed": 5,
             "team": "Brooklyn Nets",
             "abbrev": "BKN",
-            "elo": 1410,
+            "elo": 1444,
             "record": "3-1",
-            "advance_prob": 6.3,
+            "advance_prob": 8.8,
             "star": {
               "name": "Cam Thomas",
               "status": "Healthy",
               "detail": ""
             }
           },
-          "expected_games": 4.9
+          "expected_games": 5.0
         },
         {
           "top": {
             "seed": 3,
-            "team": "Detroit Pistons",
-            "abbrev": "DET",
-            "elo": 1606,
+            "team": "Orlando Magic",
+            "abbrev": "ORL",
+            "elo": 1616,
             "record": "3-1",
-            "advance_prob": 24.7,
+            "advance_prob": 28.9,
             "star": {
-              "name": "Cade Cunningham",
+              "name": "Paolo Banchero",
               "status": "Healthy",
               "detail": ""
             }
@@ -1641,9 +1817,9 @@
             "seed": 6,
             "team": "Miami Heat",
             "abbrev": "MIA",
-            "elo": 1697,
+            "elo": 1693,
             "record": "3-2",
-            "advance_prob": 75.3,
+            "advance_prob": 71.1,
             "star": {
               "name": "Bam Adebayo",
               "status": "Day-To-Day",
@@ -1657,7 +1833,7 @@
             "seed": 2,
             "team": "Atlanta Hawks",
             "abbrev": "ATL",
-            "elo": 1877,
+            "elo": 1878,
             "record": "4-1",
             "advance_prob": 100.0,
             "star": {
@@ -1670,7 +1846,7 @@
             "seed": 7,
             "team": "Chicago Bulls",
             "abbrev": "CHI",
-            "elo": 1129,
+            "elo": 1162,
             "record": "3-2",
             "advance_prob": 0.0,
             "star": {
@@ -1688,9 +1864,9 @@
             "seed": 1,
             "team": "Boston Celtics",
             "abbrev": "BOS",
-            "elo": 1778,
+            "elo": 1811,
             "record": "4-0",
-            "advance_prob": 92.7,
+            "advance_prob": 94.7,
             "star": {
               "name": "Jayson Tatum",
               "status": "Healthy",
@@ -1699,27 +1875,27 @@
           },
           "bot": {
             "seed": 4,
-            "team": "Orlando Magic",
-            "abbrev": "ORL",
-            "elo": 1602,
+            "team": "Detroit Pistons",
+            "abbrev": "DET",
+            "elo": 1612,
             "record": "3-1",
-            "advance_prob": 7.3,
+            "advance_prob": 5.3,
             "star": {
-              "name": "Paolo Banchero",
+              "name": "Cade Cunningham",
               "status": "Healthy",
               "detail": ""
             }
           },
-          "expected_games": 5.0
+          "expected_games": 4.9
         },
         {
           "top": {
             "seed": 6,
             "team": "Miami Heat",
             "abbrev": "MIA",
-            "elo": 1697,
+            "elo": 1693,
             "record": "3-2",
-            "advance_prob": 7.1,
+            "advance_prob": 5.6,
             "star": {
               "name": "Bam Adebayo",
               "status": "Day-To-Day",
@@ -1730,16 +1906,16 @@
             "seed": 2,
             "team": "Atlanta Hawks",
             "abbrev": "ATL",
-            "elo": 1877,
+            "elo": 1878,
             "record": "4-1",
-            "advance_prob": 92.3,
+            "advance_prob": 93.7,
             "star": {
               "name": "Trae Young",
               "status": "Healthy",
               "detail": ""
             }
           },
-          "expected_games": 5.5
+          "expected_games": 5.4
         }
       ],
       "conf_finals": [
@@ -1748,9 +1924,9 @@
             "seed": 1,
             "team": "Boston Celtics",
             "abbrev": "BOS",
-            "elo": 1778,
+            "elo": 1811,
             "record": "4-0",
-            "advance_prob": 25.9,
+            "advance_prob": 33.8,
             "star": {
               "name": "Jayson Tatum",
               "status": "Healthy",
@@ -1761,9 +1937,9 @@
             "seed": 2,
             "team": "Atlanta Hawks",
             "abbrev": "ATL",
-            "elo": 1877,
+            "elo": 1878,
             "record": "4-1",
-            "advance_prob": 72.0,
+            "advance_prob": 64.9,
             "star": {
               "name": "Trae Young",
               "status": "Healthy",
@@ -1779,9 +1955,9 @@
         "seed": 1,
         "team": "Portland Trail Blazers",
         "abbrev": "POR",
-        "elo": 1698,
+        "elo": 1691,
         "record": "3-1",
-        "advance_prob": 11.8,
+        "advance_prob": 9.5,
         "star": {
           "name": "Scoot Henderson",
           "status": "Healthy",
@@ -1792,9 +1968,9 @@
         "seed": 2,
         "team": "Atlanta Hawks",
         "abbrev": "ATL",
-        "elo": 1877,
+        "elo": 1878,
         "record": "4-1",
-        "advance_prob": 66.9,
+        "advance_prob": 61.3,
         "star": {
           "name": "Trae Young",
           "status": "Healthy",
@@ -1804,5 +1980,5 @@
       "expected_games": 5.2
     }
   },
-  "official_picks_updated_at": "2026-10-18T09:21:38"
+  "official_picks_updated_at": "2026-10-19T09:21:48"
 }
