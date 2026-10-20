@@ -752,28 +752,327 @@
       "model_total": 226.5
     }
   ],
-  "current_picks": [],
-  "pending": 0,
+  "current_picks": [
+    {
+      "pick_date": "20261020",
+      "game_date": "20261020",
+      "away": "Boston Celtics",
+      "home": "Detroit Pistons",
+      "pick_type": "ou",
+      "pick_target": "over",
+      "pick_line": 221.5,
+      "pick_detail": "看大 Over 221.5",
+      "edge": 22.900000000000006,
+      "confidence": 52.1,
+      "result": "pending",
+      "correct": null,
+      "tw_spread": 1.5,
+      "tw_ou": 221.5,
+      "model_spread": 0.6,
+      "model_total": 244.4
+    },
+    {
+      "pick_date": "20261020",
+      "game_date": "20261020",
+      "away": "Philadelphia 76ers",
+      "home": "New York Knicks",
+      "pick_type": "ou",
+      "pick_target": "over",
+      "pick_line": 231.5,
+      "pick_detail": "看大 Over 231.5",
+      "edge": 11.400000000000006,
+      "confidence": 78.4,
+      "result": "pending",
+      "correct": null,
+      "tw_spread": -4.5,
+      "tw_ou": 231.5,
+      "model_spread": 9.6,
+      "model_total": 242.9
+    },
+    {
+      "pick_date": "20261020",
+      "game_date": "20261020",
+      "away": "Philadelphia 76ers",
+      "home": "New York Knicks",
+      "pick_type": "spread",
+      "pick_target": "home",
+      "pick_line": -4.5,
+      "pick_detail": "買 Knicks 讓分 -4.5",
+      "edge": 5.1,
+      "confidence": 78.4,
+      "result": "pending",
+      "correct": null,
+      "tw_spread": -4.5,
+      "tw_ou": 231.5,
+      "model_spread": 9.6,
+      "model_total": 242.9
+    },
+    {
+      "pick_date": "20261020",
+      "game_date": "20261020",
+      "away": "Boston Celtics",
+      "home": "Detroit Pistons",
+      "pick_type": "spread",
+      "pick_target": "home",
+      "pick_line": 1.5,
+      "pick_detail": "買 Pistons 受讓 +1.5",
+      "edge": 2.1,
+      "confidence": 52.1,
+      "result": "pending",
+      "correct": null,
+      "tw_spread": 1.5,
+      "tw_ou": 221.5,
+      "model_spread": 0.6,
+      "model_total": 244.4
+    }
+  ],
+  "pending": 4,
   "stale_pending": 0,
-  "resolution_gaps": [],
+  "resolution_gaps": [
+    {
+      "pick_date": "20261020",
+      "game_date": "20261020",
+      "away": "Boston Celtics",
+      "home": "Detroit Pistons",
+      "pick_type": "spread",
+      "pick_detail": "買 Pistons 受讓 +1.5",
+      "edge": 2.1,
+      "reason": "scheduled for future",
+      "status": "future_pending"
+    },
+    {
+      "pick_date": "20261020",
+      "game_date": "20261020",
+      "away": "Boston Celtics",
+      "home": "Detroit Pistons",
+      "pick_type": "ou",
+      "pick_detail": "看大 Over 221.5",
+      "edge": 22.900000000000006,
+      "reason": "scheduled for future",
+      "status": "future_pending"
+    },
+    {
+      "pick_date": "20261020",
+      "game_date": "20261020",
+      "away": "Philadelphia 76ers",
+      "home": "New York Knicks",
+      "pick_type": "spread",
+      "pick_detail": "買 Knicks 讓分 -4.5",
+      "edge": 5.1,
+      "reason": "scheduled for future",
+      "status": "future_pending"
+    },
+    {
+      "pick_date": "20261020",
+      "game_date": "20261020",
+      "away": "Philadelphia 76ers",
+      "home": "New York Knicks",
+      "pick_type": "ou",
+      "pick_detail": "看大 Over 231.5",
+      "edge": 11.400000000000006,
+      "reason": "scheduled for future",
+      "status": "future_pending"
+    }
+  ],
   "history_sync": {
     "imported_from_bets": {
-      "candidates": 27,
+      "candidates": 30,
       "imported": 0,
-      "skipped_existing": 27
+      "skipped_existing": 30
     },
     "manual_results": 0,
     "resolved": {
-      "candidates": 0,
+      "candidates": 4,
       "verified": 0,
       "wins": 0,
       "losses": 0,
       "pushes": 0,
-      "missing_results": 0,
+      "missing_results": 4,
       "ungraded": 0,
-      "missing_details": []
+      "missing_details": [
+        {
+          "pick_date": "20261020",
+          "game_date": "20261020",
+          "away": "Boston Celtics",
+          "home": "Detroit Pistons",
+          "pick_type": "spread",
+          "pick_target": "home",
+          "pick_detail": "買 Pistons 受讓 +1.5",
+          "candidate_keys": [
+            {
+              "game_date": "20261020",
+              "home": "detroit pistons",
+              "away": "boston celtics"
+            },
+            {
+              "game_date": "20261019",
+              "home": "detroit pistons",
+              "away": "boston celtics"
+            },
+            {
+              "game_date": "20261019",
+              "home": "boston celtics",
+              "away": "detroit pistons"
+            },
+            {
+              "game_date": "20261021",
+              "home": "detroit pistons",
+              "away": "boston celtics"
+            },
+            {
+              "game_date": "20261021",
+              "home": "boston celtics",
+              "away": "detroit pistons"
+            },
+            {
+              "game_date": "20261020",
+              "home": "boston celtics",
+              "away": "detroit pistons"
+            }
+          ],
+          "candidate_hits": [],
+          "nearby_espn_games": [],
+          "reason": "ESPN result not found",
+          "status": "missing_result"
+        },
+        {
+          "pick_date": "20261020",
+          "game_date": "20261020",
+          "away": "Boston Celtics",
+          "home": "Detroit Pistons",
+          "pick_type": "ou",
+          "pick_target": "over",
+          "pick_detail": "看大 Over 221.5",
+          "candidate_keys": [
+            {
+              "game_date": "20261020",
+              "home": "detroit pistons",
+              "away": "boston celtics"
+            },
+            {
+              "game_date": "20261019",
+              "home": "detroit pistons",
+              "away": "boston celtics"
+            },
+            {
+              "game_date": "20261019",
+              "home": "boston celtics",
+              "away": "detroit pistons"
+            },
+            {
+              "game_date": "20261021",
+              "home": "detroit pistons",
+              "away": "boston celtics"
+            },
+            {
+              "game_date": "20261021",
+              "home": "boston celtics",
+              "away": "detroit pistons"
+            },
+            {
+              "game_date": "20261020",
+              "home": "boston celtics",
+              "away": "detroit pistons"
+            }
+          ],
+          "candidate_hits": [],
+          "nearby_espn_games": [],
+          "reason": "ESPN result not found",
+          "status": "missing_result"
+        },
+        {
+          "pick_date": "20261020",
+          "game_date": "20261020",
+          "away": "Philadelphia 76ers",
+          "home": "New York Knicks",
+          "pick_type": "spread",
+          "pick_target": "home",
+          "pick_detail": "買 Knicks 讓分 -4.5",
+          "candidate_keys": [
+            {
+              "game_date": "20261020",
+              "home": "new york knicks",
+              "away": "philadelphia 76ers"
+            },
+            {
+              "game_date": "20261019",
+              "home": "new york knicks",
+              "away": "philadelphia 76ers"
+            },
+            {
+              "game_date": "20261019",
+              "home": "philadelphia 76ers",
+              "away": "new york knicks"
+            },
+            {
+              "game_date": "20261021",
+              "home": "new york knicks",
+              "away": "philadelphia 76ers"
+            },
+            {
+              "game_date": "20261021",
+              "home": "philadelphia 76ers",
+              "away": "new york knicks"
+            },
+            {
+              "game_date": "20261020",
+              "home": "philadelphia 76ers",
+              "away": "new york knicks"
+            }
+          ],
+          "candidate_hits": [],
+          "nearby_espn_games": [],
+          "reason": "ESPN result not found",
+          "status": "missing_result"
+        },
+        {
+          "pick_date": "20261020",
+          "game_date": "20261020",
+          "away": "Philadelphia 76ers",
+          "home": "New York Knicks",
+          "pick_type": "ou",
+          "pick_target": "over",
+          "pick_detail": "看大 Over 231.5",
+          "candidate_keys": [
+            {
+              "game_date": "20261020",
+              "home": "new york knicks",
+              "away": "philadelphia 76ers"
+            },
+            {
+              "game_date": "20261019",
+              "home": "new york knicks",
+              "away": "philadelphia 76ers"
+            },
+            {
+              "game_date": "20261019",
+              "home": "philadelphia 76ers",
+              "away": "new york knicks"
+            },
+            {
+              "game_date": "20261021",
+              "home": "new york knicks",
+              "away": "philadelphia 76ers"
+            },
+            {
+              "game_date": "20261021",
+              "home": "philadelphia 76ers",
+              "away": "new york knicks"
+            },
+            {
+              "game_date": "20261020",
+              "home": "philadelphia 76ers",
+              "away": "new york knicks"
+            }
+          ],
+          "candidate_hits": [],
+          "nearby_espn_games": [],
+          "reason": "ESPN result not found",
+          "status": "missing_result"
+        }
+      ]
     }
   },
-  "generated_at": "2026-10-19T09:21:48",
-  "synced_at": "2026-10-19T09:21:48"
+  "generated_at": "2026-10-20T09:21:33",
+  "synced_at": "2026-10-20T09:21:33"
 }
