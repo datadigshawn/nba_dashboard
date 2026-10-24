@@ -1,74 +1,36 @@
 {
-  "synced_at": "2026-10-23T09:21:31",
+  "synced_at": "2026-10-24T09:21:35",
   "source": {
-    "sportweb_fetched_at": "2026-10-23T09:21:30",
+    "sportweb_fetched_at": "2026-10-24T09:21:35",
     "source_url": "https://blob3rd.sportslottery.com.tw/apidata/Pre/34765.1-Games.en.json",
-    "game_count": 8
+    "game_count": 5
   },
   "entries": [
     {
-      "game": "Atlanta Hawks @ Charlotte Hornets",
-      "away": "Atlanta Hawks",
-      "home": "Charlotte Hornets",
-      "spread": 2.5,
-      "ou": 225.5,
+      "game": "Houston Rockets @ San Antonio Spurs",
+      "away": "Houston Rockets",
+      "home": "San Antonio Spurs",
+      "spread": -4.5,
+      "ou": 224.5,
       "spread_odds": {
-        "away": 1.73,
-        "home": 1.7
+        "away": 1.72,
+        "home": 1.72
       },
       "ou_odds": {
         "over": 1.72,
         "under": 1.72
       },
-      "updated_at": "2026-10-23T09:21:30",
+      "updated_at": "2026-10-24T09:21:35",
       "source": "sportWeb",
-      "sportweb_game_id": "3501198.1",
-      "start_time": "2026-10-24T07:00:00+08:00"
+      "sportweb_game_id": "3501236.1",
+      "start_time": "2026-10-24T09:30:00+08:00"
     },
     {
-      "game": "Chicago Bulls @ Milwaukee Bucks",
-      "away": "Chicago Bulls",
-      "home": "Milwaukee Bucks",
-      "spread": -1.5,
-      "ou": 237.5,
-      "spread_odds": {
-        "away": 1.7,
-        "home": 1.73
-      },
-      "ou_odds": {
-        "over": 1.7,
-        "under": 1.73
-      },
-      "updated_at": "2026-10-23T09:21:30",
-      "source": "sportWeb",
-      "sportweb_game_id": "3501168.1",
-      "start_time": "2026-10-24T04:00:00+08:00"
-    },
-    {
-      "game": "Dallas Mavericks @ Indiana Pacers",
-      "away": "Dallas Mavericks",
-      "home": "Indiana Pacers",
-      "spread": -5.5,
-      "ou": 236.5,
-      "spread_odds": {
-        "away": 1.73,
-        "home": 1.7
-      },
-      "ou_odds": {
-        "over": 1.68,
-        "under": 1.75
-      },
-      "updated_at": "2026-10-23T09:21:30",
-      "source": "sportWeb",
-      "sportweb_game_id": "3501200.1",
-      "start_time": "2026-10-24T07:00:00+08:00"
-    },
-    {
-      "game": "Denver Nuggets @ Oklahoma City Thunder",
-      "away": "Denver Nuggets",
-      "home": "Oklahoma City Thunder",
-      "spread": -7.5,
-      "ou": 237.5,
+      "game": "LA Clippers @ Los Angeles Lakers",
+      "away": "LA Clippers",
+      "home": "Los Angeles Lakers",
+      "spread": -9.5,
+      "ou": 225.5,
       "spread_odds": {
         "away": 1.68,
         "home": 1.75
@@ -77,92 +39,129 @@
         "over": 1.7,
         "under": 1.73
       },
-      "updated_at": "2026-10-23T09:21:30",
+      "updated_at": "2026-10-24T09:21:35",
       "source": "sportWeb",
-      "sportweb_game_id": "3500940.1",
-      "start_time": "2026-10-23T09:30:00+08:00"
+      "sportweb_game_id": "3501241.1",
+      "start_time": "2026-10-24T10:00:00+08:00"
     },
     {
-      "game": "Detroit Pistons @ Miami Heat",
-      "away": "Detroit Pistons",
-      "home": "Miami Heat",
-      "spread": 1.5,
+      "game": "Memphis Grizzlies @ Golden State Warriors",
+      "away": "Memphis Grizzlies",
+      "home": "Golden State Warriors",
+      "spread": -4.5,
       "ou": 236.5,
       "spread_odds": {
-        "away": 1.78,
-        "home": 1.65
+        "away": 1.7,
+        "home": 1.73
+      },
+      "ou_odds": {
+        "over": 1.7,
+        "under": 1.73
+      },
+      "updated_at": "2026-10-24T09:21:35",
+      "source": "sportWeb",
+      "sportweb_game_id": "3501240.1",
+      "start_time": "2026-10-24T10:00:00+08:00"
+    },
+    {
+      "game": "New Orleans Pelicans @ Utah Jazz",
+      "away": "New Orleans Pelicans",
+      "home": "Utah Jazz",
+      "spread": -1.5,
+      "ou": 238.5,
+      "spread_odds": {
+        "away": 1.68,
+        "home": 1.75
       },
       "ou_odds": {
         "over": 1.68,
         "under": 1.75
       },
-      "updated_at": "2026-10-23T09:21:30",
+      "updated_at": "2026-10-24T09:21:35",
       "source": "sportWeb",
-      "sportweb_game_id": "3501209.1",
-      "start_time": "2026-10-24T08:00:00+08:00"
+      "sportweb_game_id": "3501235.1",
+      "start_time": "2026-10-24T09:30:00+08:00"
     },
     {
-      "game": "Minnesota Timberwolves @ Orlando Magic",
-      "away": "Minnesota Timberwolves",
-      "home": "Orlando Magic",
-      "spread": 1.5,
-      "ou": 237.5,
+      "game": "Portland Trail Blazers @ Sacramento Kings",
+      "away": "Portland Trail Blazers",
+      "home": "Sacramento Kings",
+      "spread": 9.5,
+      "ou": 232.5,
       "spread_odds": {
-        "away": 1.7,
-        "home": 1.73
+        "away": 1.68,
+        "home": 1.75
       },
       "ou_odds": {
-        "over": 1.73,
-        "under": 1.7
+        "over": 1.72,
+        "under": 1.72
       },
-      "updated_at": "2026-10-23T09:21:30",
+      "updated_at": "2026-10-24T09:21:35",
       "source": "sportWeb",
-      "sportweb_game_id": "3501199.1",
-      "start_time": "2026-10-24T07:00:00+08:00"
-    },
-    {
-      "game": "New York Knicks @ Boston Celtics",
-      "away": "New York Knicks",
-      "home": "Boston Celtics",
-      "spread": -2.5,
-      "ou": 224.5,
-      "spread_odds": {
-        "away": 1.7,
-        "home": 1.73
-      },
-      "ou_odds": {
-        "over": 1.73,
-        "under": 1.7
-      },
-      "updated_at": "2026-10-23T09:21:30",
-      "source": "sportWeb",
-      "sportweb_game_id": "3501202.1",
-      "start_time": "2026-10-24T07:00:00+08:00"
-    },
-    {
-      "game": "Toronto Raptors @ Washington Wizards",
-      "away": "Toronto Raptors",
-      "home": "Washington Wizards",
-      "spread": 5.5,
-      "ou": 236.5,
-      "spread_odds": {
-        "away": 1.72,
-        "home": 1.72
-      },
-      "ou_odds": {
-        "over": 1.73,
-        "under": 1.7
-      },
-      "updated_at": "2026-10-23T09:21:30",
-      "source": "sportWeb",
-      "sportweb_game_id": "3501201.1",
-      "start_time": "2026-10-24T07:00:00+08:00"
+      "sportweb_game_id": "3501239.1",
+      "start_time": "2026-10-24T10:00:00+08:00"
     }
   ],
   "odds": {
-    "Denver Nuggets @ Oklahoma City Thunder": {
-      "spread": -7.5,
-      "ou": 237.5,
+    "New Orleans Pelicans @ Utah Jazz": {
+      "spread": -1.5,
+      "ou": 238.5,
+      "spread_odds": {
+        "away": 1.68,
+        "home": 1.75
+      },
+      "ou_odds": {
+        "over": 1.68,
+        "under": 1.75
+      },
+      "updated_at": "2026-10-24T09:21:35",
+      "source": "sportWeb"
+    },
+    "Houston Rockets @ San Antonio Spurs": {
+      "spread": -4.5,
+      "ou": 224.5,
+      "spread_odds": {
+        "away": 1.72,
+        "home": 1.72
+      },
+      "ou_odds": {
+        "over": 1.72,
+        "under": 1.72
+      },
+      "updated_at": "2026-10-24T09:21:35",
+      "source": "sportWeb"
+    },
+    "Portland Trail Blazers @ Sacramento Kings": {
+      "spread": 9.5,
+      "ou": 232.5,
+      "spread_odds": {
+        "away": 1.68,
+        "home": 1.75
+      },
+      "ou_odds": {
+        "over": 1.72,
+        "under": 1.72
+      },
+      "updated_at": "2026-10-24T09:21:35",
+      "source": "sportWeb"
+    },
+    "Memphis Grizzlies @ Golden State Warriors": {
+      "spread": -4.5,
+      "ou": 236.5,
+      "spread_odds": {
+        "away": 1.7,
+        "home": 1.73
+      },
+      "ou_odds": {
+        "over": 1.7,
+        "under": 1.73
+      },
+      "updated_at": "2026-10-24T09:21:35",
+      "source": "sportWeb"
+    },
+    "LA Clippers @ Los Angeles Lakers": {
+      "spread": -9.5,
+      "ou": 225.5,
       "spread_odds": {
         "away": 1.68,
         "home": 1.75
@@ -171,105 +170,7 @@
         "over": 1.7,
         "under": 1.73
       },
-      "updated_at": "2026-10-23T09:21:30",
-      "source": "sportWeb"
-    },
-    "Chicago Bulls @ Milwaukee Bucks": {
-      "spread": -1.5,
-      "ou": 237.5,
-      "spread_odds": {
-        "away": 1.7,
-        "home": 1.73
-      },
-      "ou_odds": {
-        "over": 1.7,
-        "under": 1.73
-      },
-      "updated_at": "2026-10-23T09:21:30",
-      "source": "sportWeb"
-    },
-    "Atlanta Hawks @ Charlotte Hornets": {
-      "spread": 2.5,
-      "ou": 225.5,
-      "spread_odds": {
-        "away": 1.73,
-        "home": 1.7
-      },
-      "ou_odds": {
-        "over": 1.72,
-        "under": 1.72
-      },
-      "updated_at": "2026-10-23T09:21:30",
-      "source": "sportWeb"
-    },
-    "Minnesota Timberwolves @ Orlando Magic": {
-      "spread": 1.5,
-      "ou": 237.5,
-      "spread_odds": {
-        "away": 1.7,
-        "home": 1.73
-      },
-      "ou_odds": {
-        "over": 1.73,
-        "under": 1.7
-      },
-      "updated_at": "2026-10-23T09:21:30",
-      "source": "sportWeb"
-    },
-    "Dallas Mavericks @ Indiana Pacers": {
-      "spread": -5.5,
-      "ou": 236.5,
-      "spread_odds": {
-        "away": 1.73,
-        "home": 1.7
-      },
-      "ou_odds": {
-        "over": 1.68,
-        "under": 1.75
-      },
-      "updated_at": "2026-10-23T09:21:30",
-      "source": "sportWeb"
-    },
-    "Toronto Raptors @ Washington Wizards": {
-      "spread": 5.5,
-      "ou": 236.5,
-      "spread_odds": {
-        "away": 1.72,
-        "home": 1.72
-      },
-      "ou_odds": {
-        "over": 1.73,
-        "under": 1.7
-      },
-      "updated_at": "2026-10-23T09:21:30",
-      "source": "sportWeb"
-    },
-    "New York Knicks @ Boston Celtics": {
-      "spread": -2.5,
-      "ou": 224.5,
-      "spread_odds": {
-        "away": 1.7,
-        "home": 1.73
-      },
-      "ou_odds": {
-        "over": 1.73,
-        "under": 1.7
-      },
-      "updated_at": "2026-10-23T09:21:30",
-      "source": "sportWeb"
-    },
-    "Detroit Pistons @ Miami Heat": {
-      "spread": 1.5,
-      "ou": 236.5,
-      "spread_odds": {
-        "away": 1.78,
-        "home": 1.65
-      },
-      "ou_odds": {
-        "over": 1.68,
-        "under": 1.75
-      },
-      "updated_at": "2026-10-23T09:21:30",
+      "updated_at": "2026-10-24T09:21:35",
       "source": "sportWeb"
     }
   },
