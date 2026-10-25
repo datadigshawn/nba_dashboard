@@ -1,11 +1,11 @@
 {
-  "reference_date": "20261024",
+  "reference_date": "20261025",
   "today": {
-    "start_date": "20261024",
-    "end_date": "20261024",
-    "total": 9,
+    "start_date": "20261025",
+    "end_date": "20261025",
+    "total": 11,
     "resolved": 0,
-    "pending": 9,
+    "pending": 11,
     "wins": 0,
     "losses": 0,
     "wr": null,
@@ -13,36 +13,36 @@
   },
   "week": {
     "start_date": "20261019",
-    "end_date": "20261024",
-    "total": 31,
-    "resolved": 7,
-    "pending": 24,
-    "wins": 2,
-    "losses": 5,
-    "wr": 28.6,
-    "avg_margin_error": 19.6
+    "end_date": "20261025",
+    "total": 42,
+    "resolved": 9,
+    "pending": 33,
+    "wins": 3,
+    "losses": 6,
+    "wr": 33.3,
+    "avg_margin_error": 16.8
   },
   "month": {
     "start_date": "20261001",
-    "end_date": "20261024",
-    "total": 98,
-    "resolved": 38,
-    "pending": 60,
-    "wins": 18,
-    "losses": 20,
-    "wr": 47.4,
-    "avg_margin_error": 19.5
+    "end_date": "20261025",
+    "total": 109,
+    "resolved": 40,
+    "pending": 69,
+    "wins": 19,
+    "losses": 21,
+    "wr": 47.5,
+    "avg_margin_error": 18.8
   },
   "season": {
     "start_date": "20260417",
-    "end_date": "20261028",
-    "total": 289,
-    "resolved": 86,
-    "pending": 203,
-    "wins": 46,
-    "losses": 40,
-    "wr": 53.5,
-    "avg_margin_error": 17.1
+    "end_date": "20261029",
+    "total": 301,
+    "resolved": 88,
+    "pending": 213,
+    "wins": 47,
+    "losses": 41,
+    "wr": 53.4,
+    "avg_margin_error": 16.9
   },
-  "generated_at": "2026-10-24T09:21:36"
+  "generated_at": "2026-10-25T09:21:38"
 }

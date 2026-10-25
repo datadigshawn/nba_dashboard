@@ -1,9 +1,9 @@
 {
   "pnl": {
-    "total_units": -6.51,
-    "roi_per_bet": -0.0547,
-    "settled": 120,
-    "with_odds": 119,
+    "total_units": -7.4,
+    "roi_per_bet": -0.0592,
+    "settled": 126,
+    "with_odds": 125,
     "odds_coverage": 99.2,
     "avg_odds": 1.703,
     "curve": [
@@ -222,25 +222,25 @@
         "pnl": 0.73,
         "cum_pnl": -6.51,
         "n": 1
+      },
+      {
+        "date": "20261024",
+        "pnl": -0.89,
+        "cum_pnl": -7.4,
+        "n": 6
       }
     ]
   },
-  "total": 120,
-  "wins": 67,
-  "wr": 55.8,
-  "spread_total": 64,
-  "spread_wins": 34,
-  "spread_wr": 53.1,
-  "ou_total": 56,
-  "ou_wins": 33,
-  "ou_wr": 58.9,
+  "total": 126,
+  "wins": 70,
+  "wr": 55.6,
+  "spread_total": 67,
+  "spread_wins": 36,
+  "spread_wr": 53.7,
+  "ou_total": 59,
+  "ou_wins": 34,
+  "ou_wr": 57.6,
   "daily": [
-    {
-      "date": "20260603",
-      "wins": 0,
-      "total": 2,
-      "wr": 0.0
-    },
     {
       "date": "20260604",
       "wins": 2,
@@ -306,6 +306,12 @@
       "wins": 1,
       "total": 1,
       "wr": 100.0
+    },
+    {
+      "date": "20261024",
+      "wins": 3,
+      "total": 6,
+      "wr": 50.0
     }
   ],
   "edge_buckets": [
@@ -317,29 +323,29 @@
     },
     {
       "bucket": "3-5",
-      "wins": 8,
-      "total": 15,
-      "wr": 53.3
+      "wins": 9,
+      "total": 16,
+      "wr": 56.2
     },
     {
       "bucket": "5-8",
-      "wins": 29,
-      "total": 44,
-      "wr": 65.9
+      "wins": 31,
+      "total": 48,
+      "wr": 64.6
     },
     {
       "bucket": "8+",
       "wins": 24,
-      "total": 47,
-      "wr": 51.1
+      "total": 48,
+      "wr": 50.0
     }
   ],
   "confidence_buckets": [
     {
       "bucket": "<60",
-      "wins": 28,
-      "total": 48,
-      "wr": 58.3
+      "wins": 31,
+      "total": 52,
+      "wr": 59.6
     },
     {
       "bucket": "60-70",
@@ -356,8 +362,8 @@
     {
       "bucket": "80+",
       "wins": 17,
-      "total": 32,
-      "wr": 53.1
+      "total": 34,
+      "wr": 50.0
     }
   ],
   "by_type_edge": {
@@ -370,15 +376,15 @@
       },
       {
         "bucket": "3-5",
-        "wins": 8,
-        "total": 15,
-        "wr": 53.3
+        "wins": 9,
+        "total": 16,
+        "wr": 56.2
       },
       {
         "bucket": "5-8",
-        "wins": 13,
-        "total": 22,
-        "wr": 59.1
+        "wins": 14,
+        "total": 24,
+        "wr": 58.3
       },
       {
         "bucket": "8+",
@@ -402,19 +408,127 @@
       },
       {
         "bucket": "5-8",
-        "wins": 16,
-        "total": 22,
-        "wr": 72.7
+        "wins": 17,
+        "total": 24,
+        "wr": 70.8
       },
       {
         "bucket": "8+",
         "wins": 17,
-        "total": 34,
-        "wr": 50.0
+        "total": 35,
+        "wr": 48.6
       }
     ]
   },
   "recent": [
+    {
+      "pick_date": "20261024",
+      "game_date": "20261024",
+      "away": "LA Clippers",
+      "home": "Los Angeles Lakers",
+      "pick_type": "spread",
+      "pick_target": "away",
+      "pick_line": -9.5,
+      "pick_detail": "買 Clippers 受讓 +9.5",
+      "edge": 7.1,
+      "confidence": 52.0,
+      "result": "win",
+      "correct": 1,
+      "tw_spread": -9.5,
+      "tw_ou": 225.5,
+      "model_spread": 2.4,
+      "model_total": 224.4
+    },
+    {
+      "pick_date": "20261024",
+      "game_date": "20261024",
+      "away": "Houston Rockets",
+      "home": "San Antonio Spurs",
+      "pick_type": "ou",
+      "pick_target": "over",
+      "pick_line": 224.5,
+      "pick_detail": "看大 Over 224.5",
+      "edge": 7.5,
+      "confidence": 50.3,
+      "result": "loss",
+      "correct": 0,
+      "tw_spread": -4.5,
+      "tw_ou": 224.5,
+      "model_spread": 3.1,
+      "model_total": 232.0
+    },
+    {
+      "pick_date": "20261024",
+      "game_date": "20261024",
+      "away": "Memphis Grizzlies",
+      "home": "Golden State Warriors",
+      "pick_type": "ou",
+      "pick_target": "under",
+      "pick_line": 236.5,
+      "pick_detail": "看小 Under 236.5",
+      "edge": 5.900000000000006,
+      "confidence": 59.4,
+      "result": "win",
+      "correct": 1,
+      "tw_spread": -4.5,
+      "tw_ou": 236.5,
+      "model_spread": 1.4,
+      "model_total": 230.6
+    },
+    {
+      "pick_date": "20261024",
+      "game_date": "20261024",
+      "away": "Memphis Grizzlies",
+      "home": "Golden State Warriors",
+      "pick_type": "spread",
+      "pick_target": "away",
+      "pick_line": -4.5,
+      "pick_detail": "買 Grizzlies 受讓 +4.5",
+      "edge": 3.1,
+      "confidence": 59.4,
+      "result": "win",
+      "correct": 1,
+      "tw_spread": -4.5,
+      "tw_ou": 236.5,
+      "model_spread": 1.4,
+      "model_total": 230.6
+    },
+    {
+      "pick_date": "20261024",
+      "game_date": "20261024",
+      "away": "Portland Trail Blazers",
+      "home": "Sacramento Kings",
+      "pick_type": "ou",
+      "pick_target": "under",
+      "pick_line": 232.5,
+      "pick_detail": "看小 Under 232.5",
+      "edge": 18.400000000000006,
+      "confidence": 98.2,
+      "result": "loss",
+      "correct": 0,
+      "tw_spread": 9.5,
+      "tw_ou": 232.5,
+      "model_spread": -15.7,
+      "model_total": 214.1
+    },
+    {
+      "pick_date": "20261024",
+      "game_date": "20261024",
+      "away": "Portland Trail Blazers",
+      "home": "Sacramento Kings",
+      "pick_type": "spread",
+      "pick_target": "away",
+      "pick_line": 9.5,
+      "pick_detail": "買 Blazers 讓分 -9.5",
+      "edge": 6.199999999999999,
+      "confidence": 98.2,
+      "result": "loss",
+      "correct": 0,
+      "tw_spread": 9.5,
+      "tw_ou": 232.5,
+      "model_spread": -15.7,
+      "model_total": 214.1
+    },
     {
       "pick_date": "20261023",
       "game_date": "20261023",
@@ -666,292 +780,39 @@
       "tw_ou": 216.5,
       "model_spread": 0.6,
       "model_total": 223.2
-    },
-    {
-      "pick_date": "20260613",
-      "game_date": "20260614",
-      "away": "New York Knicks",
-      "home": "San Antonio Spurs",
-      "pick_type": "spread",
-      "pick_target": "away",
-      "pick_line": -4.5,
-      "pick_detail": "買 Knicks 受讓 +4.5",
-      "edge": 3.9,
-      "confidence": 60.4,
-      "result": "win",
-      "correct": 1,
-      "tw_spread": -4.5,
-      "tw_ou": 216.5,
-      "model_spread": 0.6,
-      "model_total": 223.2
-    },
-    {
-      "pick_date": "20260613",
-      "game_date": "20260614",
-      "away": "New York Knicks",
-      "home": "San Antonio Spurs",
-      "pick_type": "ou",
-      "pick_target": "over",
-      "pick_line": 214.5,
-      "pick_detail": "看大 Over 214.5",
-      "edge": 8.699999999999989,
-      "confidence": 59.5,
-      "result": "loss",
-      "correct": 0,
-      "tw_spread": -5.5,
-      "tw_ou": 214.5,
-      "model_spread": 0.6,
-      "model_total": 223.2
-    },
-    {
-      "pick_date": "20260613",
-      "game_date": "20260614",
-      "away": "New York Knicks",
-      "home": "San Antonio Spurs",
-      "pick_type": "spread",
-      "pick_target": "away",
-      "pick_line": -5.5,
-      "pick_detail": "買 Knicks 受讓 +5.5",
-      "edge": 4.9,
-      "confidence": 59.5,
-      "result": "win",
-      "correct": 1,
-      "tw_spread": -5.5,
-      "tw_ou": 214.5,
-      "model_spread": 0.6,
-      "model_total": 223.2
-    },
-    {
-      "pick_date": "20260611",
-      "game_date": "20260614",
-      "away": "New York Knicks",
-      "home": "San Antonio Spurs",
-      "pick_type": "ou",
-      "pick_target": "over",
-      "pick_line": 214.5,
-      "pick_detail": "看大 Over 214.5",
-      "edge": 9.400000000000006,
-      "confidence": 59.5,
-      "result": "loss",
-      "correct": 0,
-      "tw_spread": -5.5,
-      "tw_ou": 214.5,
-      "model_spread": 0.0,
-      "model_total": 223.9
-    },
-    {
-      "pick_date": "20260611",
-      "game_date": "20260614",
-      "away": "New York Knicks",
-      "home": "San Antonio Spurs",
-      "pick_type": "spread",
-      "pick_target": "away",
-      "pick_line": -5.5,
-      "pick_detail": "買 Knicks 受讓 +5.5",
-      "edge": 5.5,
-      "confidence": 59.5,
-      "result": "win",
-      "correct": 1,
-      "tw_spread": -5.5,
-      "tw_ou": 214.5,
-      "model_spread": 0.0,
-      "model_total": 223.9
-    },
-    {
-      "pick_date": "20260610",
-      "game_date": "20260614",
-      "away": "New York Knicks",
-      "home": "San Antonio Spurs",
-      "pick_type": "ou",
-      "pick_target": "over",
-      "pick_line": 214.5,
-      "pick_detail": "看大 Over 214.5",
-      "edge": 9.400000000000006,
-      "confidence": 59.5,
-      "result": "loss",
-      "correct": 0,
-      "tw_spread": -5.5,
-      "tw_ou": 214.5,
-      "model_spread": 0.0,
-      "model_total": 223.9
     }
   ],
   "current_picks": [
     {
-      "pick_date": "20261024",
-      "game_date": "20261024",
-      "away": "Portland Trail Blazers",
-      "home": "Sacramento Kings",
-      "pick_type": "ou",
-      "pick_target": "under",
-      "pick_line": 232.5,
-      "pick_detail": "看小 Under 232.5",
-      "edge": 18.400000000000006,
-      "confidence": 98.2,
-      "result": "pending",
-      "correct": null,
-      "tw_spread": 9.5,
-      "tw_ou": 232.5,
-      "model_spread": -15.7,
-      "model_total": 214.1
-    },
-    {
-      "pick_date": "20261024",
-      "game_date": "20261024",
-      "away": "Houston Rockets",
-      "home": "San Antonio Spurs",
-      "pick_type": "ou",
-      "pick_target": "over",
-      "pick_line": 224.5,
-      "pick_detail": "看大 Over 224.5",
-      "edge": 7.5,
-      "confidence": 50.3,
-      "result": "pending",
-      "correct": null,
-      "tw_spread": -4.5,
-      "tw_ou": 224.5,
-      "model_spread": 3.1,
-      "model_total": 232.0
-    },
-    {
-      "pick_date": "20261024",
-      "game_date": "20261024",
-      "away": "LA Clippers",
-      "home": "Los Angeles Lakers",
+      "pick_date": "20261025",
+      "game_date": "20261025",
+      "away": "Golden State Warriors",
+      "home": "Phoenix Suns",
       "pick_type": "spread",
       "pick_target": "away",
-      "pick_line": -9.5,
-      "pick_detail": "買 Clippers 受讓 +9.5",
-      "edge": 7.1,
-      "confidence": 52.0,
+      "pick_line": -10.5,
+      "pick_detail": "買 Warriors 受讓 +10.5",
+      "edge": 14.4,
+      "confidence": 65.4,
       "result": "pending",
       "correct": null,
-      "tw_spread": -9.5,
-      "tw_ou": 225.5,
-      "model_spread": 2.4,
-      "model_total": 224.4
-    },
-    {
-      "pick_date": "20261024",
-      "game_date": "20261024",
-      "away": "Portland Trail Blazers",
-      "home": "Sacramento Kings",
-      "pick_type": "spread",
-      "pick_target": "away",
-      "pick_line": 9.5,
-      "pick_detail": "買 Blazers 讓分 -9.5",
-      "edge": 6.199999999999999,
-      "confidence": 98.2,
-      "result": "pending",
-      "correct": null,
-      "tw_spread": 9.5,
-      "tw_ou": 232.5,
-      "model_spread": -15.7,
-      "model_total": 214.1
-    },
-    {
-      "pick_date": "20261024",
-      "game_date": "20261024",
-      "away": "Memphis Grizzlies",
-      "home": "Golden State Warriors",
-      "pick_type": "ou",
-      "pick_target": "under",
-      "pick_line": 236.5,
-      "pick_detail": "看小 Under 236.5",
-      "edge": 5.900000000000006,
-      "confidence": 59.4,
-      "result": "pending",
-      "correct": null,
-      "tw_spread": -4.5,
-      "tw_ou": 236.5,
-      "model_spread": 1.4,
-      "model_total": 230.6
-    },
-    {
-      "pick_date": "20261024",
-      "game_date": "20261024",
-      "away": "Memphis Grizzlies",
-      "home": "Golden State Warriors",
-      "pick_type": "spread",
-      "pick_target": "away",
-      "pick_line": -4.5,
-      "pick_detail": "買 Grizzlies 受讓 +4.5",
-      "edge": 3.1,
-      "confidence": 59.4,
-      "result": "pending",
-      "correct": null,
-      "tw_spread": -4.5,
-      "tw_ou": 236.5,
-      "model_spread": 1.4,
-      "model_total": 230.6
+      "tw_spread": -10.5,
+      "tw_ou": 219.5,
+      "model_spread": -3.9,
+      "model_total": 222.4
     }
   ],
-  "pending": 6,
+  "pending": 1,
   "stale_pending": 0,
   "resolution_gaps": [
     {
-      "pick_date": "20261024",
-      "game_date": "20261024",
-      "away": "Portland Trail Blazers",
-      "home": "Sacramento Kings",
+      "pick_date": "20261025",
+      "game_date": "20261025",
+      "away": "Golden State Warriors",
+      "home": "Phoenix Suns",
       "pick_type": "spread",
-      "pick_detail": "買 Blazers 讓分 -9.5",
-      "edge": 6.199999999999999,
-      "reason": "scheduled for future",
-      "status": "future_pending"
-    },
-    {
-      "pick_date": "20261024",
-      "game_date": "20261024",
-      "away": "Portland Trail Blazers",
-      "home": "Sacramento Kings",
-      "pick_type": "ou",
-      "pick_detail": "看小 Under 232.5",
-      "edge": 18.400000000000006,
-      "reason": "scheduled for future",
-      "status": "future_pending"
-    },
-    {
-      "pick_date": "20261024",
-      "game_date": "20261024",
-      "away": "Memphis Grizzlies",
-      "home": "Golden State Warriors",
-      "pick_type": "spread",
-      "pick_detail": "買 Grizzlies 受讓 +4.5",
-      "edge": 3.1,
-      "reason": "scheduled for future",
-      "status": "future_pending"
-    },
-    {
-      "pick_date": "20261024",
-      "game_date": "20261024",
-      "away": "Memphis Grizzlies",
-      "home": "Golden State Warriors",
-      "pick_type": "ou",
-      "pick_detail": "看小 Under 236.5",
-      "edge": 5.900000000000006,
-      "reason": "scheduled for future",
-      "status": "future_pending"
-    },
-    {
-      "pick_date": "20261024",
-      "game_date": "20261024",
-      "away": "Houston Rockets",
-      "home": "San Antonio Spurs",
-      "pick_type": "ou",
-      "pick_detail": "看大 Over 224.5",
-      "edge": 7.5,
-      "reason": "scheduled for future",
-      "status": "future_pending"
-    },
-    {
-      "pick_date": "20261024",
-      "game_date": "20261024",
-      "away": "LA Clippers",
-      "home": "Los Angeles Lakers",
-      "pick_type": "spread",
-      "pick_detail": "買 Clippers 受讓 +9.5",
-      "edge": 7.1,
+      "pick_detail": "買 Warriors 受讓 +10.5",
+      "edge": 14.4,
       "reason": "scheduled for future",
       "status": "future_pending"
     }
@@ -964,315 +825,60 @@
     },
     "manual_results": 0,
     "resolved": {
-      "candidates": 6,
+      "candidates": 1,
       "verified": 0,
       "wins": 0,
       "losses": 0,
       "pushes": 0,
-      "missing_results": 6,
+      "missing_results": 1,
       "ungraded": 0,
       "missing_details": [
         {
-          "pick_date": "20261024",
-          "game_date": "20261024",
-          "away": "Portland Trail Blazers",
-          "home": "Sacramento Kings",
+          "pick_date": "20261025",
+          "game_date": "20261025",
+          "away": "Golden State Warriors",
+          "home": "Phoenix Suns",
           "pick_type": "spread",
           "pick_target": "away",
-          "pick_detail": "買 Blazers 讓分 -9.5",
+          "pick_detail": "買 Warriors 受讓 +10.5",
           "candidate_keys": [
             {
-              "game_date": "20261024",
-              "home": "sacramento kings",
-              "away": "portland trail blazers"
-            },
-            {
-              "game_date": "20261023",
-              "home": "sacramento kings",
-              "away": "portland trail blazers"
-            },
-            {
-              "game_date": "20261023",
-              "home": "portland trail blazers",
-              "away": "sacramento kings"
-            },
-            {
               "game_date": "20261025",
-              "home": "sacramento kings",
-              "away": "portland trail blazers"
-            },
-            {
-              "game_date": "20261025",
-              "home": "portland trail blazers",
-              "away": "sacramento kings"
+              "home": "phoenix suns",
+              "away": "golden state warriors"
             },
             {
               "game_date": "20261024",
-              "home": "portland trail blazers",
-              "away": "sacramento kings"
+              "home": "phoenix suns",
+              "away": "golden state warriors"
+            },
+            {
+              "game_date": "20261024",
+              "home": "golden state warriors",
+              "away": "phoenix suns"
+            },
+            {
+              "game_date": "20261026",
+              "home": "phoenix suns",
+              "away": "golden state warriors"
+            },
+            {
+              "game_date": "20261026",
+              "home": "golden state warriors",
+              "away": "phoenix suns"
+            },
+            {
+              "game_date": "20261025",
+              "home": "golden state warriors",
+              "away": "phoenix suns"
             }
           ],
           "candidate_hits": [],
           "nearby_espn_games": [
             {
-              "game_date": "20261023",
-              "home": "milwaukee bucks",
-              "away": "chicago bulls"
-            }
-          ],
-          "reason": "ESPN has games on nearby dates, but team/date key mismatched",
-          "status": "missing_result"
-        },
-        {
-          "pick_date": "20261024",
-          "game_date": "20261024",
-          "away": "Portland Trail Blazers",
-          "home": "Sacramento Kings",
-          "pick_type": "ou",
-          "pick_target": "under",
-          "pick_detail": "看小 Under 232.5",
-          "candidate_keys": [
-            {
               "game_date": "20261024",
-              "home": "sacramento kings",
-              "away": "portland trail blazers"
-            },
-            {
-              "game_date": "20261023",
-              "home": "sacramento kings",
-              "away": "portland trail blazers"
-            },
-            {
-              "game_date": "20261023",
-              "home": "portland trail blazers",
-              "away": "sacramento kings"
-            },
-            {
-              "game_date": "20261025",
-              "home": "sacramento kings",
-              "away": "portland trail blazers"
-            },
-            {
-              "game_date": "20261025",
-              "home": "portland trail blazers",
-              "away": "sacramento kings"
-            },
-            {
-              "game_date": "20261024",
-              "home": "portland trail blazers",
-              "away": "sacramento kings"
-            }
-          ],
-          "candidate_hits": [],
-          "nearby_espn_games": [
-            {
-              "game_date": "20261023",
-              "home": "milwaukee bucks",
-              "away": "chicago bulls"
-            }
-          ],
-          "reason": "ESPN has games on nearby dates, but team/date key mismatched",
-          "status": "missing_result"
-        },
-        {
-          "pick_date": "20261024",
-          "game_date": "20261024",
-          "away": "Memphis Grizzlies",
-          "home": "Golden State Warriors",
-          "pick_type": "spread",
-          "pick_target": "away",
-          "pick_detail": "買 Grizzlies 受讓 +4.5",
-          "candidate_keys": [
-            {
-              "game_date": "20261024",
-              "home": "golden state warriors",
-              "away": "memphis grizzlies"
-            },
-            {
-              "game_date": "20261023",
-              "home": "golden state warriors",
-              "away": "memphis grizzlies"
-            },
-            {
-              "game_date": "20261023",
-              "home": "memphis grizzlies",
-              "away": "golden state warriors"
-            },
-            {
-              "game_date": "20261025",
-              "home": "golden state warriors",
-              "away": "memphis grizzlies"
-            },
-            {
-              "game_date": "20261025",
-              "home": "memphis grizzlies",
-              "away": "golden state warriors"
-            },
-            {
-              "game_date": "20261024",
-              "home": "memphis grizzlies",
-              "away": "golden state warriors"
-            }
-          ],
-          "candidate_hits": [],
-          "nearby_espn_games": [
-            {
-              "game_date": "20261023",
-              "home": "milwaukee bucks",
-              "away": "chicago bulls"
-            }
-          ],
-          "reason": "ESPN has games on nearby dates, but team/date key mismatched",
-          "status": "missing_result"
-        },
-        {
-          "pick_date": "20261024",
-          "game_date": "20261024",
-          "away": "Memphis Grizzlies",
-          "home": "Golden State Warriors",
-          "pick_type": "ou",
-          "pick_target": "under",
-          "pick_detail": "看小 Under 236.5",
-          "candidate_keys": [
-            {
-              "game_date": "20261024",
-              "home": "golden state warriors",
-              "away": "memphis grizzlies"
-            },
-            {
-              "game_date": "20261023",
-              "home": "golden state warriors",
-              "away": "memphis grizzlies"
-            },
-            {
-              "game_date": "20261023",
-              "home": "memphis grizzlies",
-              "away": "golden state warriors"
-            },
-            {
-              "game_date": "20261025",
-              "home": "golden state warriors",
-              "away": "memphis grizzlies"
-            },
-            {
-              "game_date": "20261025",
-              "home": "memphis grizzlies",
-              "away": "golden state warriors"
-            },
-            {
-              "game_date": "20261024",
-              "home": "memphis grizzlies",
-              "away": "golden state warriors"
-            }
-          ],
-          "candidate_hits": [],
-          "nearby_espn_games": [
-            {
-              "game_date": "20261023",
-              "home": "milwaukee bucks",
-              "away": "chicago bulls"
-            }
-          ],
-          "reason": "ESPN has games on nearby dates, but team/date key mismatched",
-          "status": "missing_result"
-        },
-        {
-          "pick_date": "20261024",
-          "game_date": "20261024",
-          "away": "Houston Rockets",
-          "home": "San Antonio Spurs",
-          "pick_type": "ou",
-          "pick_target": "over",
-          "pick_detail": "看大 Over 224.5",
-          "candidate_keys": [
-            {
-              "game_date": "20261024",
-              "home": "san antonio spurs",
-              "away": "houston rockets"
-            },
-            {
-              "game_date": "20261023",
-              "home": "san antonio spurs",
-              "away": "houston rockets"
-            },
-            {
-              "game_date": "20261023",
-              "home": "houston rockets",
-              "away": "san antonio spurs"
-            },
-            {
-              "game_date": "20261025",
-              "home": "san antonio spurs",
-              "away": "houston rockets"
-            },
-            {
-              "game_date": "20261025",
-              "home": "houston rockets",
-              "away": "san antonio spurs"
-            },
-            {
-              "game_date": "20261024",
-              "home": "houston rockets",
-              "away": "san antonio spurs"
-            }
-          ],
-          "candidate_hits": [],
-          "nearby_espn_games": [
-            {
-              "game_date": "20261023",
-              "home": "milwaukee bucks",
-              "away": "chicago bulls"
-            }
-          ],
-          "reason": "ESPN has games on nearby dates, but team/date key mismatched",
-          "status": "missing_result"
-        },
-        {
-          "pick_date": "20261024",
-          "game_date": "20261024",
-          "away": "LA Clippers",
-          "home": "Los Angeles Lakers",
-          "pick_type": "spread",
-          "pick_target": "away",
-          "pick_detail": "買 Clippers 受讓 +9.5",
-          "candidate_keys": [
-            {
-              "game_date": "20261024",
-              "home": "los angeles lakers",
-              "away": "la clippers"
-            },
-            {
-              "game_date": "20261023",
-              "home": "los angeles lakers",
-              "away": "la clippers"
-            },
-            {
-              "game_date": "20261023",
-              "home": "la clippers",
-              "away": "los angeles lakers"
-            },
-            {
-              "game_date": "20261025",
-              "home": "los angeles lakers",
-              "away": "la clippers"
-            },
-            {
-              "game_date": "20261025",
-              "home": "la clippers",
-              "away": "los angeles lakers"
-            },
-            {
-              "game_date": "20261024",
-              "home": "la clippers",
-              "away": "los angeles lakers"
-            }
-          ],
-          "candidate_hits": [],
-          "nearby_espn_games": [
-            {
-              "game_date": "20261023",
-              "home": "milwaukee bucks",
-              "away": "chicago bulls"
+              "home": "charlotte hornets",
+              "away": "miami heat"
             }
           ],
           "reason": "ESPN has games on nearby dates, but team/date key mismatched",
@@ -1281,6 +887,6 @@
       ]
     }
   },
-  "generated_at": "2026-10-24T09:21:36",
-  "synced_at": "2026-10-24T09:21:36"
+  "generated_at": "2026-10-25T09:21:38",
+  "synced_at": "2026-10-25T09:21:38"
 }
