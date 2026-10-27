@@ -1,110 +1,44 @@
 {
-  "synced_at": "2026-10-26T09:21:41",
+  "synced_at": "2026-10-27T09:21:38",
   "source": {
-    "sportweb_fetched_at": "2026-10-26T09:21:41",
+    "sportweb_fetched_at": "2026-10-27T09:21:37",
     "source_url": "https://blob3rd.sportslottery.com.tw/apidata/Pre/34765.1-Games.en.json",
-    "game_count": 3
+    "game_count": 1
   },
   "entries": [
     {
-      "game": "Atlanta Hawks @ Houston Rockets",
-      "away": "Atlanta Hawks",
-      "home": "Houston Rockets",
-      "spread": -5.5,
-      "ou": 229.5,
+      "game": "Golden State Warriors @ Denver Nuggets",
+      "away": "Golden State Warriors",
+      "home": "Denver Nuggets",
+      "spread": -7.5,
+      "ou": 236.5,
       "spread_odds": {
-        "away": 1.68,
-        "home": 1.75
+        "away": 1.7,
+        "home": 1.73
       },
       "ou_odds": {
-        "over": 1.7,
-        "under": 1.73
+        "over": 1.72,
+        "under": 1.72
       },
-      "updated_at": "2026-10-26T09:21:41",
+      "updated_at": "2026-10-27T09:21:37",
       "source": "sportWeb",
-      "sportweb_game_id": "3502236.1",
-      "start_time": "2026-10-27T08:30:00+08:00"
-    },
-    {
-      "game": "Chicago Bulls @ Boston Celtics",
-      "away": "Chicago Bulls",
-      "home": "Boston Celtics",
-      "spread": -14.5,
-      "ou": 233.5,
-      "spread_odds": {
-        "away": 1.66,
-        "home": 1.76
-      },
-      "ou_odds": {
-        "over": 1.7,
-        "under": 1.73
-      },
-      "updated_at": "2026-10-26T09:21:41",
-      "source": "sportWeb",
-      "sportweb_game_id": "3502220.1",
-      "start_time": "2026-10-27T07:30:00+08:00"
-    },
-    {
-      "game": "Washington Wizards @ Charlotte Hornets",
-      "away": "Washington Wizards",
-      "home": "Charlotte Hornets",
-      "spread": -2.5,
-      "ou": 229.5,
-      "spread_odds": {
-        "away": 1.75,
-        "home": 1.68
-      },
-      "ou_odds": {
-        "over": 1.73,
-        "under": 1.7
-      },
-      "updated_at": "2026-10-26T09:21:41",
-      "source": "sportWeb",
-      "sportweb_game_id": "3502209.1",
-      "start_time": "2026-10-27T07:00:00+08:00"
+      "sportweb_game_id": "3502249.1",
+      "start_time": "2026-10-27T10:00:00+08:00"
     }
   ],
   "odds": {
-    "Washington Wizards @ Charlotte Hornets": {
-      "spread": -2.5,
-      "ou": 229.5,
+    "Golden State Warriors @ Denver Nuggets": {
+      "spread": -7.5,
+      "ou": 236.5,
       "spread_odds": {
-        "away": 1.75,
-        "home": 1.68
+        "away": 1.7,
+        "home": 1.73
       },
       "ou_odds": {
-        "over": 1.73,
-        "under": 1.7
+        "over": 1.72,
+        "under": 1.72
       },
-      "updated_at": "2026-10-26T09:21:41",
-      "source": "sportWeb"
-    },
-    "Chicago Bulls @ Boston Celtics": {
-      "spread": -14.5,
-      "ou": 233.5,
-      "spread_odds": {
-        "away": 1.66,
-        "home": 1.76
-      },
-      "ou_odds": {
-        "over": 1.7,
-        "under": 1.73
-      },
-      "updated_at": "2026-10-26T09:21:41",
-      "source": "sportWeb"
-    },
-    "Atlanta Hawks @ Houston Rockets": {
-      "spread": -5.5,
-      "ou": 229.5,
-      "spread_odds": {
-        "away": 1.68,
-        "home": 1.75
-      },
-      "ou_odds": {
-        "over": 1.7,
-        "under": 1.73
-      },
-      "updated_at": "2026-10-26T09:21:41",
+      "updated_at": "2026-10-27T09:21:37",
       "source": "sportWeb"
     }
   },

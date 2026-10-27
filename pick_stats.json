@@ -788,10 +788,41 @@
       "model_total": 244.4
     }
   ],
-  "current_picks": [],
-  "pending": 0,
+  "current_picks": [
+    {
+      "pick_date": "20261027",
+      "game_date": "20261027",
+      "away": "Golden State Warriors",
+      "home": "Denver Nuggets",
+      "pick_type": "spread",
+      "pick_target": "away",
+      "pick_line": -7.5,
+      "pick_detail": "買 Warriors 受讓 +7.5",
+      "edge": 5.8,
+      "confidence": 82.8,
+      "result": "pending",
+      "correct": null,
+      "tw_spread": -7.5,
+      "tw_ou": 236.5,
+      "model_spread": 1.7,
+      "model_total": 237.0
+    }
+  ],
+  "pending": 1,
   "stale_pending": 0,
-  "resolution_gaps": [],
+  "resolution_gaps": [
+    {
+      "pick_date": "20261027",
+      "game_date": "20261027",
+      "away": "Golden State Warriors",
+      "home": "Denver Nuggets",
+      "pick_type": "spread",
+      "pick_detail": "買 Warriors 受讓 +7.5",
+      "edge": 5.8,
+      "reason": "scheduled for future",
+      "status": "future_pending"
+    }
+  ],
   "history_sync": {
     "imported_from_bets": {
       "candidates": 41,
@@ -800,16 +831,62 @@
     },
     "manual_results": 0,
     "resolved": {
-      "candidates": 0,
+      "candidates": 1,
       "verified": 0,
       "wins": 0,
       "losses": 0,
       "pushes": 0,
-      "missing_results": 0,
+      "missing_results": 1,
       "ungraded": 0,
-      "missing_details": []
+      "missing_details": [
+        {
+          "pick_date": "20261027",
+          "game_date": "20261027",
+          "away": "Golden State Warriors",
+          "home": "Denver Nuggets",
+          "pick_type": "spread",
+          "pick_target": "away",
+          "pick_detail": "買 Warriors 受讓 +7.5",
+          "candidate_keys": [
+            {
+              "game_date": "20261027",
+              "home": "denver nuggets",
+              "away": "golden state warriors"
+            },
+            {
+              "game_date": "20261026",
+              "home": "denver nuggets",
+              "away": "golden state warriors"
+            },
+            {
+              "game_date": "20261026",
+              "home": "golden state warriors",
+              "away": "denver nuggets"
+            },
+            {
+              "game_date": "20261028",
+              "home": "denver nuggets",
+              "away": "golden state warriors"
+            },
+            {
+              "game_date": "20261028",
+              "home": "golden state warriors",
+              "away": "denver nuggets"
+            },
+            {
+              "game_date": "20261027",
+              "home": "golden state warriors",
+              "away": "denver nuggets"
+            }
+          ],
+          "candidate_hits": [],
+          "nearby_espn_games": [],
+          "reason": "ESPN result not found",
+          "status": "missing_result"
+        }
+      ]
     }
   },
-  "generated_at": "2026-10-26T09:21:42",
-  "synced_at": "2026-10-26T09:21:42"
+  "generated_at": "2026-10-27T09:21:38",
+  "synced_at": "2026-10-27T09:21:38"
 }
