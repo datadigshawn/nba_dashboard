@@ -1,9 +1,9 @@
 {
   "pnl": {
-    "total_units": -6.7,
-    "roi_per_bet": -0.0532,
-    "settled": 127,
-    "with_odds": 126,
+    "total_units": -6.0,
+    "roi_per_bet": -0.0472,
+    "settled": 128,
+    "with_odds": 127,
     "odds_coverage": 99.2,
     "avg_odds": 1.703,
     "curve": [
@@ -234,25 +234,25 @@
         "pnl": 0.7,
         "cum_pnl": -6.7,
         "n": 1
+      },
+      {
+        "date": "20261027",
+        "pnl": 0.7,
+        "cum_pnl": -6.0,
+        "n": 1
       }
     ]
   },
-  "total": 127,
-  "wins": 71,
-  "wr": 55.9,
-  "spread_total": 68,
-  "spread_wins": 37,
-  "spread_wr": 54.4,
+  "total": 128,
+  "wins": 72,
+  "wr": 56.2,
+  "spread_total": 69,
+  "spread_wins": 38,
+  "spread_wr": 55.1,
   "ou_total": 59,
   "ou_wins": 34,
   "ou_wr": 57.6,
   "daily": [
-    {
-      "date": "20260605",
-      "wins": 1,
-      "total": 6,
-      "wr": 16.7
-    },
     {
       "date": "20260606",
       "wins": 1,
@@ -318,6 +318,12 @@
       "wins": 1,
       "total": 1,
       "wr": 100.0
+    },
+    {
+      "date": "20261027",
+      "wins": 1,
+      "total": 1,
+      "wr": 100.0
     }
   ],
   "edge_buckets": [
@@ -335,9 +341,9 @@
     },
     {
       "bucket": "5-8",
-      "wins": 31,
-      "total": 48,
-      "wr": 64.6
+      "wins": 32,
+      "total": 49,
+      "wr": 65.3
     },
     {
       "bucket": "8+",
@@ -367,9 +373,9 @@
     },
     {
       "bucket": "80+",
-      "wins": 17,
-      "total": 34,
-      "wr": 50.0
+      "wins": 18,
+      "total": 35,
+      "wr": 51.4
     }
   ],
   "by_type_edge": {
@@ -388,9 +394,9 @@
       },
       {
         "bucket": "5-8",
-        "wins": 14,
-        "total": 24,
-        "wr": 58.3
+        "wins": 15,
+        "total": 25,
+        "wr": 60.0
       },
       {
         "bucket": "8+",
@@ -427,6 +433,24 @@
     ]
   },
   "recent": [
+    {
+      "pick_date": "20261027",
+      "game_date": "20261027",
+      "away": "Golden State Warriors",
+      "home": "Denver Nuggets",
+      "pick_type": "spread",
+      "pick_target": "away",
+      "pick_line": -7.5,
+      "pick_detail": "買 Warriors 受讓 +7.5",
+      "edge": 5.8,
+      "confidence": 82.8,
+      "result": "win",
+      "correct": 1,
+      "tw_spread": -7.5,
+      "tw_ou": 236.5,
+      "model_spread": 1.7,
+      "model_total": 237.0
+    },
     {
       "pick_date": "20261025",
       "game_date": "20261025",
@@ -768,66 +792,77 @@
       "tw_ou": 221.5,
       "model_spread": 0.6,
       "model_total": 244.4
-    },
-    {
-      "pick_date": "20261020",
-      "game_date": "20261020",
-      "away": "Boston Celtics",
-      "home": "Detroit Pistons",
-      "pick_type": "spread",
-      "pick_target": "home",
-      "pick_line": 1.5,
-      "pick_detail": "買 Pistons 受讓 +1.5",
-      "edge": 2.1,
-      "confidence": 52.1,
-      "result": "win",
-      "correct": 1,
-      "tw_spread": 1.5,
-      "tw_ou": 221.5,
-      "model_spread": 0.6,
-      "model_total": 244.4
     }
   ],
   "current_picks": [
     {
-      "pick_date": "20261027",
-      "game_date": "20261027",
-      "away": "Golden State Warriors",
-      "home": "Denver Nuggets",
+      "pick_date": "20261028",
+      "game_date": "20261028",
+      "away": "Portland Trail Blazers",
+      "home": "Los Angeles Lakers",
       "pick_type": "spread",
       "pick_target": "away",
-      "pick_line": -7.5,
-      "pick_detail": "買 Warriors 受讓 +7.5",
-      "edge": 5.8,
-      "confidence": 82.8,
+      "pick_line": -1.5,
+      "pick_detail": "買 Blazers 受讓 +1.5",
+      "edge": 10.3,
+      "confidence": 66.5,
       "result": "pending",
       "correct": null,
-      "tw_spread": -7.5,
-      "tw_ou": 236.5,
-      "model_spread": 1.7,
-      "model_total": 237.0
+      "tw_spread": -1.5,
+      "tw_ou": 233.5,
+      "model_spread": -8.8,
+      "model_total": 237.4
+    },
+    {
+      "pick_date": "20261028",
+      "game_date": "20261030",
+      "away": "Orlando Magic",
+      "home": "Toronto Raptors",
+      "pick_type": "ou",
+      "pick_target": "over",
+      "pick_line": 223.5,
+      "pick_detail": "看大 Over 223.5",
+      "edge": 7.099999999999994,
+      "confidence": 85.8,
+      "result": "pending",
+      "correct": null,
+      "tw_spread": -4.5,
+      "tw_ou": 223.5,
+      "model_spread": 3.3,
+      "model_total": 230.6
     }
   ],
-  "pending": 1,
+  "pending": 2,
   "stale_pending": 0,
   "resolution_gaps": [
     {
-      "pick_date": "20261027",
-      "game_date": "20261027",
-      "away": "Golden State Warriors",
-      "home": "Denver Nuggets",
+      "pick_date": "20261028",
+      "game_date": "20261028",
+      "away": "Portland Trail Blazers",
+      "home": "Los Angeles Lakers",
       "pick_type": "spread",
-      "pick_detail": "買 Warriors 受讓 +7.5",
-      "edge": 5.8,
+      "pick_detail": "買 Blazers 受讓 +1.5",
+      "edge": 10.3,
+      "reason": "scheduled for future",
+      "status": "future_pending"
+    },
+    {
+      "pick_date": "20261028",
+      "game_date": "20261030",
+      "away": "Orlando Magic",
+      "home": "Toronto Raptors",
+      "pick_type": "ou",
+      "pick_detail": "看大 Over 223.5",
+      "edge": 7.099999999999994,
       "reason": "scheduled for future",
       "status": "future_pending"
     }
   ],
   "history_sync": {
     "imported_from_bets": {
-      "candidates": 41,
+      "candidates": 42,
       "imported": 0,
-      "skipped_existing": 41
+      "skipped_existing": 42
     },
     "manual_results": 0,
     "resolved": {
@@ -840,43 +875,43 @@
       "ungraded": 0,
       "missing_details": [
         {
-          "pick_date": "20261027",
-          "game_date": "20261027",
-          "away": "Golden State Warriors",
-          "home": "Denver Nuggets",
+          "pick_date": "20261028",
+          "game_date": "20261028",
+          "away": "Portland Trail Blazers",
+          "home": "Los Angeles Lakers",
           "pick_type": "spread",
           "pick_target": "away",
-          "pick_detail": "買 Warriors 受讓 +7.5",
+          "pick_detail": "買 Blazers 受讓 +1.5",
           "candidate_keys": [
             {
-              "game_date": "20261027",
-              "home": "denver nuggets",
-              "away": "golden state warriors"
-            },
-            {
-              "game_date": "20261026",
-              "home": "denver nuggets",
-              "away": "golden state warriors"
-            },
-            {
-              "game_date": "20261026",
-              "home": "golden state warriors",
-              "away": "denver nuggets"
-            },
-            {
               "game_date": "20261028",
-              "home": "denver nuggets",
-              "away": "golden state warriors"
-            },
-            {
-              "game_date": "20261028",
-              "home": "golden state warriors",
-              "away": "denver nuggets"
+              "home": "los angeles lakers",
+              "away": "portland trail blazers"
             },
             {
               "game_date": "20261027",
-              "home": "golden state warriors",
-              "away": "denver nuggets"
+              "home": "los angeles lakers",
+              "away": "portland trail blazers"
+            },
+            {
+              "game_date": "20261027",
+              "home": "portland trail blazers",
+              "away": "los angeles lakers"
+            },
+            {
+              "game_date": "20261029",
+              "home": "los angeles lakers",
+              "away": "portland trail blazers"
+            },
+            {
+              "game_date": "20261029",
+              "home": "portland trail blazers",
+              "away": "los angeles lakers"
+            },
+            {
+              "game_date": "20261028",
+              "home": "portland trail blazers",
+              "away": "los angeles lakers"
             }
           ],
           "candidate_hits": [],
@@ -887,6 +922,6 @@
       ]
     }
   },
-  "generated_at": "2026-10-27T09:21:38",
-  "synced_at": "2026-10-27T09:21:38"
+  "generated_at": "2026-10-28T09:21:36",
+  "synced_at": "2026-10-28T09:21:36"
 }
