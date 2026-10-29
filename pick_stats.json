@@ -1,9 +1,9 @@
 {
   "pnl": {
-    "total_units": -6.0,
-    "roi_per_bet": -0.0472,
-    "settled": 128,
-    "with_odds": 127,
+    "total_units": -5.27,
+    "roi_per_bet": -0.0412,
+    "settled": 129,
+    "with_odds": 128,
     "odds_coverage": 99.2,
     "avg_odds": 1.703,
     "curve": [
@@ -240,25 +240,25 @@
         "pnl": 0.7,
         "cum_pnl": -6.0,
         "n": 1
+      },
+      {
+        "date": "20261028",
+        "pnl": 0.73,
+        "cum_pnl": -5.27,
+        "n": 1
       }
     ]
   },
-  "total": 128,
-  "wins": 72,
-  "wr": 56.2,
-  "spread_total": 69,
-  "spread_wins": 38,
-  "spread_wr": 55.1,
+  "total": 129,
+  "wins": 73,
+  "wr": 56.6,
+  "spread_total": 70,
+  "spread_wins": 39,
+  "spread_wr": 55.7,
   "ou_total": 59,
   "ou_wins": 34,
   "ou_wr": 57.6,
   "daily": [
-    {
-      "date": "20260606",
-      "wins": 1,
-      "total": 2,
-      "wr": 50.0
-    },
     {
       "date": "20260607",
       "wins": 1,
@@ -324,6 +324,12 @@
       "wins": 1,
       "total": 1,
       "wr": 100.0
+    },
+    {
+      "date": "20261028",
+      "wins": 1,
+      "total": 1,
+      "wr": 100.0
     }
   ],
   "edge_buckets": [
@@ -347,9 +353,9 @@
     },
     {
       "bucket": "8+",
-      "wins": 25,
-      "total": 49,
-      "wr": 51.0
+      "wins": 26,
+      "total": 50,
+      "wr": 52.0
     }
   ],
   "confidence_buckets": [
@@ -361,9 +367,9 @@
     },
     {
       "bucket": "60-70",
-      "wins": 15,
-      "total": 25,
-      "wr": 60.0
+      "wins": 16,
+      "total": 26,
+      "wr": 61.5
     },
     {
       "bucket": "70-80",
@@ -400,9 +406,9 @@
       },
       {
         "bucket": "8+",
-        "wins": 8,
-        "total": 14,
-        "wr": 57.1
+        "wins": 9,
+        "total": 15,
+        "wr": 60.0
       }
     ],
     "ou": [
@@ -433,6 +439,24 @@
     ]
   },
   "recent": [
+    {
+      "pick_date": "20261028",
+      "game_date": "20261028",
+      "away": "Portland Trail Blazers",
+      "home": "Los Angeles Lakers",
+      "pick_type": "spread",
+      "pick_target": "away",
+      "pick_line": -1.5,
+      "pick_detail": "買 Blazers 受讓 +1.5",
+      "edge": 10.3,
+      "confidence": 66.5,
+      "result": "win",
+      "correct": 1,
+      "tw_spread": -1.5,
+      "tw_ou": 233.5,
+      "model_spread": -8.8,
+      "model_total": 237.4
+    },
     {
       "pick_date": "20261027",
       "game_date": "20261027",
@@ -774,44 +798,62 @@
       "tw_ou": 231.5,
       "model_spread": 9.6,
       "model_total": 242.9
-    },
-    {
-      "pick_date": "20261020",
-      "game_date": "20261020",
-      "away": "Boston Celtics",
-      "home": "Detroit Pistons",
-      "pick_type": "ou",
-      "pick_target": "over",
-      "pick_line": 221.5,
-      "pick_detail": "看大 Over 221.5",
-      "edge": 22.900000000000006,
-      "confidence": 52.1,
-      "result": "win",
-      "correct": 1,
-      "tw_spread": 1.5,
-      "tw_ou": 221.5,
-      "model_spread": 0.6,
-      "model_total": 244.4
     }
   ],
   "current_picks": [
     {
-      "pick_date": "20261028",
-      "game_date": "20261028",
-      "away": "Portland Trail Blazers",
-      "home": "Los Angeles Lakers",
-      "pick_type": "spread",
-      "pick_target": "away",
-      "pick_line": -1.5,
-      "pick_detail": "買 Blazers 受讓 +1.5",
-      "edge": 10.3,
-      "confidence": 66.5,
+      "pick_date": "20261029",
+      "game_date": "20261029",
+      "away": "Los Angeles Lakers",
+      "home": "LA Clippers",
+      "pick_type": "ou",
+      "pick_target": "over",
+      "pick_line": 224.5,
+      "pick_detail": "看大 Over 224.5",
+      "edge": 16.400000000000006,
+      "confidence": 51.0,
       "result": "pending",
       "correct": null,
       "tw_spread": -1.5,
-      "tw_ou": 233.5,
-      "model_spread": -8.8,
-      "model_total": 237.4
+      "tw_ou": 224.5,
+      "model_spread": -1.9,
+      "model_total": 240.9
+    },
+    {
+      "pick_date": "20261029",
+      "game_date": "20261029",
+      "away": "Oklahoma City Thunder",
+      "home": "Dallas Mavericks",
+      "pick_type": "spread",
+      "pick_target": "away",
+      "pick_line": 5.5,
+      "pick_detail": "買 Thunder 讓分 -5.5",
+      "edge": 10.4,
+      "confidence": 83.0,
+      "result": "pending",
+      "correct": null,
+      "tw_spread": 5.5,
+      "tw_ou": 228.5,
+      "model_spread": -15.9,
+      "model_total": 225.6
+    },
+    {
+      "pick_date": "20261029",
+      "game_date": "20261029",
+      "away": "Los Angeles Lakers",
+      "home": "LA Clippers",
+      "pick_type": "spread",
+      "pick_target": "away",
+      "pick_line": -1.5,
+      "pick_detail": "買 Lakers 受讓 +1.5",
+      "edge": 3.4,
+      "confidence": 51.0,
+      "result": "pending",
+      "correct": null,
+      "tw_spread": -1.5,
+      "tw_ou": 224.5,
+      "model_spread": -1.9,
+      "model_total": 240.9
     },
     {
       "pick_date": "20261028",
@@ -832,17 +874,39 @@
       "model_total": 230.6
     }
   ],
-  "pending": 2,
+  "pending": 4,
   "stale_pending": 0,
   "resolution_gaps": [
     {
-      "pick_date": "20261028",
-      "game_date": "20261028",
-      "away": "Portland Trail Blazers",
-      "home": "Los Angeles Lakers",
+      "pick_date": "20261029",
+      "game_date": "20261029",
+      "away": "Los Angeles Lakers",
+      "home": "LA Clippers",
       "pick_type": "spread",
-      "pick_detail": "買 Blazers 受讓 +1.5",
-      "edge": 10.3,
+      "pick_detail": "買 Lakers 受讓 +1.5",
+      "edge": 3.4,
+      "reason": "scheduled for future",
+      "status": "future_pending"
+    },
+    {
+      "pick_date": "20261029",
+      "game_date": "20261029",
+      "away": "Los Angeles Lakers",
+      "home": "LA Clippers",
+      "pick_type": "ou",
+      "pick_detail": "看大 Over 224.5",
+      "edge": 16.400000000000006,
+      "reason": "scheduled for future",
+      "status": "future_pending"
+    },
+    {
+      "pick_date": "20261029",
+      "game_date": "20261029",
+      "away": "Oklahoma City Thunder",
+      "home": "Dallas Mavericks",
+      "pick_type": "spread",
+      "pick_detail": "買 Thunder 讓分 -5.5",
+      "edge": 10.4,
       "reason": "scheduled for future",
       "status": "future_pending"
     },
@@ -860,58 +924,148 @@
   ],
   "history_sync": {
     "imported_from_bets": {
-      "candidates": 42,
+      "candidates": 43,
       "imported": 0,
-      "skipped_existing": 42
+      "skipped_existing": 43
     },
     "manual_results": 0,
     "resolved": {
-      "candidates": 1,
+      "candidates": 3,
       "verified": 0,
       "wins": 0,
       "losses": 0,
       "pushes": 0,
-      "missing_results": 1,
+      "missing_results": 3,
       "ungraded": 0,
       "missing_details": [
         {
-          "pick_date": "20261028",
-          "game_date": "20261028",
-          "away": "Portland Trail Blazers",
-          "home": "Los Angeles Lakers",
+          "pick_date": "20261029",
+          "game_date": "20261029",
+          "away": "Los Angeles Lakers",
+          "home": "LA Clippers",
           "pick_type": "spread",
           "pick_target": "away",
-          "pick_detail": "買 Blazers 受讓 +1.5",
+          "pick_detail": "買 Lakers 受讓 +1.5",
           "candidate_keys": [
             {
-              "game_date": "20261028",
-              "home": "los angeles lakers",
-              "away": "portland trail blazers"
-            },
-            {
-              "game_date": "20261027",
-              "home": "los angeles lakers",
-              "away": "portland trail blazers"
-            },
-            {
-              "game_date": "20261027",
-              "home": "portland trail blazers",
-              "away": "los angeles lakers"
-            },
-            {
               "game_date": "20261029",
-              "home": "los angeles lakers",
-              "away": "portland trail blazers"
-            },
-            {
-              "game_date": "20261029",
-              "home": "portland trail blazers",
+              "home": "la clippers",
               "away": "los angeles lakers"
             },
             {
               "game_date": "20261028",
-              "home": "portland trail blazers",
+              "home": "la clippers",
               "away": "los angeles lakers"
+            },
+            {
+              "game_date": "20261028",
+              "home": "los angeles lakers",
+              "away": "la clippers"
+            },
+            {
+              "game_date": "20261030",
+              "home": "la clippers",
+              "away": "los angeles lakers"
+            },
+            {
+              "game_date": "20261030",
+              "home": "los angeles lakers",
+              "away": "la clippers"
+            },
+            {
+              "game_date": "20261029",
+              "home": "los angeles lakers",
+              "away": "la clippers"
+            }
+          ],
+          "candidate_hits": [],
+          "nearby_espn_games": [],
+          "reason": "ESPN result not found",
+          "status": "missing_result"
+        },
+        {
+          "pick_date": "20261029",
+          "game_date": "20261029",
+          "away": "Los Angeles Lakers",
+          "home": "LA Clippers",
+          "pick_type": "ou",
+          "pick_target": "over",
+          "pick_detail": "看大 Over 224.5",
+          "candidate_keys": [
+            {
+              "game_date": "20261029",
+              "home": "la clippers",
+              "away": "los angeles lakers"
+            },
+            {
+              "game_date": "20261028",
+              "home": "la clippers",
+              "away": "los angeles lakers"
+            },
+            {
+              "game_date": "20261028",
+              "home": "los angeles lakers",
+              "away": "la clippers"
+            },
+            {
+              "game_date": "20261030",
+              "home": "la clippers",
+              "away": "los angeles lakers"
+            },
+            {
+              "game_date": "20261030",
+              "home": "los angeles lakers",
+              "away": "la clippers"
+            },
+            {
+              "game_date": "20261029",
+              "home": "los angeles lakers",
+              "away": "la clippers"
+            }
+          ],
+          "candidate_hits": [],
+          "nearby_espn_games": [],
+          "reason": "ESPN result not found",
+          "status": "missing_result"
+        },
+        {
+          "pick_date": "20261029",
+          "game_date": "20261029",
+          "away": "Oklahoma City Thunder",
+          "home": "Dallas Mavericks",
+          "pick_type": "spread",
+          "pick_target": "away",
+          "pick_detail": "買 Thunder 讓分 -5.5",
+          "candidate_keys": [
+            {
+              "game_date": "20261029",
+              "home": "dallas mavericks",
+              "away": "oklahoma city thunder"
+            },
+            {
+              "game_date": "20261028",
+              "home": "dallas mavericks",
+              "away": "oklahoma city thunder"
+            },
+            {
+              "game_date": "20261028",
+              "home": "oklahoma city thunder",
+              "away": "dallas mavericks"
+            },
+            {
+              "game_date": "20261030",
+              "home": "dallas mavericks",
+              "away": "oklahoma city thunder"
+            },
+            {
+              "game_date": "20261030",
+              "home": "oklahoma city thunder",
+              "away": "dallas mavericks"
+            },
+            {
+              "game_date": "20261029",
+              "home": "oklahoma city thunder",
+              "away": "dallas mavericks"
             }
           ],
           "candidate_hits": [],
@@ -922,6 +1076,6 @@
       ]
     }
   },
-  "generated_at": "2026-10-28T09:21:36",
-  "synced_at": "2026-10-28T09:21:36"
+  "generated_at": "2026-10-29T09:21:38",
+  "synced_at": "2026-10-29T09:21:38"
 }
