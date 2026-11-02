@@ -818,28 +818,286 @@
       "model_total": 185.0
     }
   ],
-  "current_picks": [],
-  "pending": 0,
+  "current_picks": [
+    {
+      "pick_date": "20261102",
+      "game_date": "20261102",
+      "away": "LA Clippers",
+      "home": "Golden State Warriors",
+      "pick_type": "spread",
+      "pick_target": "home",
+      "pick_line": -2.5,
+      "pick_detail": "買 Warriors 讓分 -2.5",
+      "edge": 10.3,
+      "confidence": 91.4,
+      "result": "pending",
+      "correct": null,
+      "tw_spread": -2.5,
+      "tw_ou": 220.5,
+      "model_spread": 12.8,
+      "model_total": 214.9
+    },
+    {
+      "pick_date": "20261102",
+      "game_date": "20261102",
+      "away": "Toronto Raptors",
+      "home": "Los Angeles Lakers",
+      "pick_type": "ou",
+      "pick_target": "under",
+      "pick_line": 224.5,
+      "pick_detail": "看小 Under 224.5",
+      "edge": 5.800000000000011,
+      "confidence": 70.5,
+      "result": "pending",
+      "correct": null,
+      "tw_spread": -3.5,
+      "tw_ou": 224.5,
+      "model_spread": 4.1,
+      "model_total": 218.7
+    },
+    {
+      "pick_date": "20261102",
+      "game_date": "20261102",
+      "away": "LA Clippers",
+      "home": "Golden State Warriors",
+      "pick_type": "ou",
+      "pick_target": "under",
+      "pick_line": 220.5,
+      "pick_detail": "看小 Under 220.5",
+      "edge": 5.599999999999994,
+      "confidence": 91.4,
+      "result": "pending",
+      "correct": null,
+      "tw_spread": -2.5,
+      "tw_ou": 220.5,
+      "model_spread": 12.8,
+      "model_total": 214.9
+    }
+  ],
+  "pending": 3,
   "stale_pending": 0,
-  "resolution_gaps": [],
+  "resolution_gaps": [
+    {
+      "pick_date": "20261102",
+      "game_date": "20261102",
+      "away": "LA Clippers",
+      "home": "Golden State Warriors",
+      "pick_type": "spread",
+      "pick_detail": "買 Warriors 讓分 -2.5",
+      "edge": 10.3,
+      "reason": "scheduled for future",
+      "status": "future_pending"
+    },
+    {
+      "pick_date": "20261102",
+      "game_date": "20261102",
+      "away": "LA Clippers",
+      "home": "Golden State Warriors",
+      "pick_type": "ou",
+      "pick_detail": "看小 Under 220.5",
+      "edge": 5.599999999999994,
+      "reason": "scheduled for future",
+      "status": "future_pending"
+    },
+    {
+      "pick_date": "20261102",
+      "game_date": "20261102",
+      "away": "Toronto Raptors",
+      "home": "Los Angeles Lakers",
+      "pick_type": "ou",
+      "pick_detail": "看小 Under 224.5",
+      "edge": 5.800000000000011,
+      "reason": "scheduled for future",
+      "status": "future_pending"
+    }
+  ],
   "history_sync": {
     "imported_from_bets": {
-      "candidates": 43,
+      "candidates": 46,
       "imported": 0,
-      "skipped_existing": 43
+      "skipped_existing": 46
     },
     "manual_results": 0,
     "resolved": {
-      "candidates": 0,
+      "candidates": 3,
       "verified": 0,
       "wins": 0,
       "losses": 0,
       "pushes": 0,
-      "missing_results": 0,
+      "missing_results": 3,
       "ungraded": 0,
-      "missing_details": []
+      "missing_details": [
+        {
+          "pick_date": "20261102",
+          "game_date": "20261102",
+          "away": "LA Clippers",
+          "home": "Golden State Warriors",
+          "pick_type": "spread",
+          "pick_target": "home",
+          "pick_detail": "買 Warriors 讓分 -2.5",
+          "candidate_keys": [
+            {
+              "game_date": "20261102",
+              "home": "golden state warriors",
+              "away": "la clippers"
+            },
+            {
+              "game_date": "20261101",
+              "home": "golden state warriors",
+              "away": "la clippers"
+            },
+            {
+              "game_date": "20261101",
+              "home": "la clippers",
+              "away": "golden state warriors"
+            },
+            {
+              "game_date": "20261103",
+              "home": "golden state warriors",
+              "away": "la clippers"
+            },
+            {
+              "game_date": "20261103",
+              "home": "la clippers",
+              "away": "golden state warriors"
+            },
+            {
+              "game_date": "20261102",
+              "home": "la clippers",
+              "away": "golden state warriors"
+            }
+          ],
+          "candidate_hits": [],
+          "nearby_espn_games": [
+            {
+              "game_date": "20261101",
+              "home": "indiana pacers",
+              "away": "brooklyn nets"
+            },
+            {
+              "game_date": "20261101",
+              "home": "orlando magic",
+              "away": "boston celtics"
+            }
+          ],
+          "reason": "ESPN has games on nearby dates, but team/date key mismatched",
+          "status": "missing_result"
+        },
+        {
+          "pick_date": "20261102",
+          "game_date": "20261102",
+          "away": "LA Clippers",
+          "home": "Golden State Warriors",
+          "pick_type": "ou",
+          "pick_target": "under",
+          "pick_detail": "看小 Under 220.5",
+          "candidate_keys": [
+            {
+              "game_date": "20261102",
+              "home": "golden state warriors",
+              "away": "la clippers"
+            },
+            {
+              "game_date": "20261101",
+              "home": "golden state warriors",
+              "away": "la clippers"
+            },
+            {
+              "game_date": "20261101",
+              "home": "la clippers",
+              "away": "golden state warriors"
+            },
+            {
+              "game_date": "20261103",
+              "home": "golden state warriors",
+              "away": "la clippers"
+            },
+            {
+              "game_date": "20261103",
+              "home": "la clippers",
+              "away": "golden state warriors"
+            },
+            {
+              "game_date": "20261102",
+              "home": "la clippers",
+              "away": "golden state warriors"
+            }
+          ],
+          "candidate_hits": [],
+          "nearby_espn_games": [
+            {
+              "game_date": "20261101",
+              "home": "indiana pacers",
+              "away": "brooklyn nets"
+            },
+            {
+              "game_date": "20261101",
+              "home": "orlando magic",
+              "away": "boston celtics"
+            }
+          ],
+          "reason": "ESPN has games on nearby dates, but team/date key mismatched",
+          "status": "missing_result"
+        },
+        {
+          "pick_date": "20261102",
+          "game_date": "20261102",
+          "away": "Toronto Raptors",
+          "home": "Los Angeles Lakers",
+          "pick_type": "ou",
+          "pick_target": "under",
+          "pick_detail": "看小 Under 224.5",
+          "candidate_keys": [
+            {
+              "game_date": "20261102",
+              "home": "los angeles lakers",
+              "away": "toronto raptors"
+            },
+            {
+              "game_date": "20261101",
+              "home": "los angeles lakers",
+              "away": "toronto raptors"
+            },
+            {
+              "game_date": "20261101",
+              "home": "toronto raptors",
+              "away": "los angeles lakers"
+            },
+            {
+              "game_date": "20261103",
+              "home": "los angeles lakers",
+              "away": "toronto raptors"
+            },
+            {
+              "game_date": "20261103",
+              "home": "toronto raptors",
+              "away": "los angeles lakers"
+            },
+            {
+              "game_date": "20261102",
+              "home": "toronto raptors",
+              "away": "los angeles lakers"
+            }
+          ],
+          "candidate_hits": [],
+          "nearby_espn_games": [
+            {
+              "game_date": "20261101",
+              "home": "indiana pacers",
+              "away": "brooklyn nets"
+            },
+            {
+              "game_date": "20261101",
+              "home": "orlando magic",
+              "away": "boston celtics"
+            }
+          ],
+          "reason": "ESPN has games on nearby dates, but team/date key mismatched",
+          "status": "missing_result"
+        }
+      ]
     }
   },
-  "generated_at": "2026-11-01T09:21:34",
-  "synced_at": "2026-11-01T09:21:34"
+  "generated_at": "2026-11-02T09:21:32",
+  "synced_at": "2026-11-02T09:21:32"
 }
