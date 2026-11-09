@@ -1,209 +1,77 @@
 {
-  "synced_at": "2026-11-08T09:21:48",
+  "synced_at": "2026-11-09T09:21:43",
   "source": {
-    "sportweb_fetched_at": "2026-11-08T09:21:46",
+    "sportweb_fetched_at": "2026-11-09T09:21:40",
     "source_url": "https://blob3rd.sportslottery.com.tw/apidata/Pre/34765.1-Games.en.json",
-    "game_count": 6
+    "game_count": 2
   },
   "entries": [
     {
-      "game": "Boston Celtics @ Milwaukee Bucks",
-      "away": "Boston Celtics",
-      "home": "Milwaukee Bucks",
-      "spread": 12.5,
-      "ou": 222.5,
+      "game": "Miami Heat @ Sacramento Kings",
+      "away": "Miami Heat",
+      "home": "Sacramento Kings",
+      "spread": 11.5,
+      "ou": 237.5,
       "spread_odds": {
         "away": 1.73,
         "home": 1.7
       },
       "ou_odds": {
-        "over": 1.72,
-        "under": 1.72
-      },
-      "updated_at": "2026-11-08T09:21:46",
-      "source": "sportWeb",
-      "sportweb_game_id": "3505950.1",
-      "start_time": "2026-11-09T09:00:00+08:00"
-    },
-    {
-      "game": "Houston Rockets @ Phoenix Suns",
-      "away": "Houston Rockets",
-      "home": "Phoenix Suns",
-      "spread": 6.5,
-      "ou": 223.5,
-      "spread_odds": {
-        "away": 1.72,
-        "home": 1.72
-      },
-      "ou_odds": {
         "over": 1.7,
         "under": 1.73
       },
-      "updated_at": "2026-11-08T09:21:46",
+      "updated_at": "2026-11-09T09:21:40",
       "source": "sportWeb",
-      "sportweb_game_id": "3505650.1",
-      "start_time": "2026-11-08T10:00:00+08:00"
+      "sportweb_game_id": "3505957.1",
+      "start_time": "2026-11-09T10:00:00+08:00"
     },
     {
-      "game": "Los Angeles Lakers @ Detroit Pistons",
-      "away": "Los Angeles Lakers",
-      "home": "Detroit Pistons",
-      "spread": -4.5,
-      "ou": 220.5,
+      "game": "New Orleans Pelicans @ LA Clippers",
+      "away": "New Orleans Pelicans",
+      "home": "LA Clippers",
+      "spread": 1.5,
+      "ou": 226.5,
       "spread_odds": {
         "away": 1.7,
         "home": 1.73
       },
       "ou_odds": {
-        "over": 1.7,
-        "under": 1.73
-      },
-      "updated_at": "2026-11-08T09:21:46",
-      "source": "sportWeb",
-      "sportweb_game_id": "3505928.1",
-      "start_time": "2026-11-09T07:00:00+08:00"
-    },
-    {
-      "game": "Orlando Magic @ Golden State Warriors",
-      "away": "Orlando Magic",
-      "home": "Golden State Warriors",
-      "spread": -7.5,
-      "ou": 220.5,
-      "spread_odds": {
-        "away": 1.76,
-        "home": 1.66
-      },
-      "ou_odds": {
         "over": 1.72,
         "under": 1.72
       },
-      "updated_at": "2026-11-08T09:21:46",
+      "updated_at": "2026-11-09T09:21:40",
       "source": "sportWeb",
-      "sportweb_game_id": "3505645.1",
-      "start_time": "2026-11-08T09:30:00+08:00"
-    },
-    {
-      "game": "San Antonio Spurs @ Portland Trail Blazers",
-      "away": "San Antonio Spurs",
-      "home": "Portland Trail Blazers",
-      "spread": 5.5,
-      "ou": 229.5,
-      "spread_odds": {
-        "away": 1.7,
-        "home": 1.73
-      },
-      "ou_odds": {
-        "over": 1.7,
-        "under": 1.73
-      },
-      "updated_at": "2026-11-08T09:21:46",
-      "source": "sportWeb",
-      "sportweb_game_id": "3505661.1",
-      "start_time": "2026-11-08T11:00:00+08:00"
-    },
-    {
-      "game": "Utah Jazz @ Minnesota Timberwolves",
-      "away": "Utah Jazz",
-      "home": "Minnesota Timberwolves",
-      "spread": -11.5,
-      "ou": 223.5,
-      "spread_odds": {
-        "away": 1.72,
-        "home": 1.72
-      },
-      "ou_odds": {
-        "over": 1.73,
-        "under": 1.7
-      },
-      "updated_at": "2026-11-08T09:21:46",
-      "source": "sportWeb",
-      "sportweb_game_id": "3505942.1",
-      "start_time": "2026-11-09T08:00:00+08:00"
+      "sportweb_game_id": "3505956.1",
+      "start_time": "2026-11-09T10:00:00+08:00"
     }
   ],
   "odds": {
-    "Orlando Magic @ Golden State Warriors": {
-      "spread": -7.5,
-      "ou": 220.5,
+    "New Orleans Pelicans @ LA Clippers": {
+      "spread": 1.5,
+      "ou": 226.5,
       "spread_odds": {
-        "away": 1.76,
-        "home": 1.66
+        "away": 1.7,
+        "home": 1.73
       },
       "ou_odds": {
         "over": 1.72,
         "under": 1.72
       },
-      "updated_at": "2026-11-08T09:21:46",
+      "updated_at": "2026-11-09T09:21:40",
       "source": "sportWeb"
     },
-    "Houston Rockets @ Phoenix Suns": {
-      "spread": 6.5,
-      "ou": 223.5,
-      "spread_odds": {
-        "away": 1.72,
-        "home": 1.72
-      },
-      "ou_odds": {
-        "over": 1.7,
-        "under": 1.73
-      },
-      "updated_at": "2026-11-08T09:21:46",
-      "source": "sportWeb"
-    },
-    "San Antonio Spurs @ Portland Trail Blazers": {
-      "spread": 5.5,
-      "ou": 229.5,
-      "spread_odds": {
-        "away": 1.7,
-        "home": 1.73
-      },
-      "ou_odds": {
-        "over": 1.7,
-        "under": 1.73
-      },
-      "updated_at": "2026-11-08T09:21:46",
-      "source": "sportWeb"
-    },
-    "Los Angeles Lakers @ Detroit Pistons": {
-      "spread": -4.5,
-      "ou": 220.5,
-      "spread_odds": {
-        "away": 1.7,
-        "home": 1.73
-      },
-      "ou_odds": {
-        "over": 1.7,
-        "under": 1.73
-      },
-      "updated_at": "2026-11-08T09:21:46",
-      "source": "sportWeb"
-    },
-    "Utah Jazz @ Minnesota Timberwolves": {
-      "spread": -11.5,
-      "ou": 223.5,
-      "spread_odds": {
-        "away": 1.72,
-        "home": 1.72
-      },
-      "ou_odds": {
-        "over": 1.73,
-        "under": 1.7
-      },
-      "updated_at": "2026-11-08T09:21:46",
-      "source": "sportWeb"
-    },
-    "Boston Celtics @ Milwaukee Bucks": {
-      "spread": 12.5,
-      "ou": 222.5,
+    "Miami Heat @ Sacramento Kings": {
+      "spread": 11.5,
+      "ou": 237.5,
       "spread_odds": {
         "away": 1.73,
         "home": 1.7
       },
       "ou_odds": {
-        "over": 1.72,
-        "under": 1.72
+        "over": 1.7,
+        "under": 1.73
       },
-      "updated_at": "2026-11-08T09:21:46",
+      "updated_at": "2026-11-09T09:21:40",
       "source": "sportWeb"
     }
   },
