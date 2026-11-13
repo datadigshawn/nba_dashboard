@@ -2,12 +2,12 @@
   "lookback_days": 21,
   "games_considered": 30,
   "spread_samples": 30,
-  "spread_bias": -0.73,
-  "spread_mae": 12.38,
-  "spread_sign_accuracy": 0.633,
+  "spread_bias": -0.18,
+  "spread_mae": 12.32,
+  "spread_sign_accuracy": 0.667,
   "moneyline_accuracy": 0.667,
   "total_samples": 30,
-  "total_bias": -10.8,
-  "total_mae": 20.3,
-  "saved_at": "2026-11-12T09:21:24"
+  "total_bias": -11.49,
+  "total_mae": 19.61,
+  "saved_at": "2026-11-13T09:21:24"
 }
