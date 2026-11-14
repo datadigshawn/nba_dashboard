@@ -1,9 +1,9 @@
 {
   "pnl": {
-    "total_units": -21.65,
-    "roi_per_bet": -0.1077,
-    "settled": 206,
-    "with_odds": 201,
+    "total_units": -20.24,
+    "roi_per_bet": -0.0997,
+    "settled": 208,
+    "with_odds": 203,
     "odds_coverage": 97.6,
     "avg_odds": 1.708,
     "curve": [
@@ -330,25 +330,25 @@
         "pnl": -4.0,
         "cum_pnl": -21.65,
         "n": 4
+      },
+      {
+        "date": "20261113",
+        "pnl": 1.41,
+        "cum_pnl": -20.24,
+        "n": 2
       }
     ]
   },
-  "total": 206,
-  "wins": 110,
-  "wr": 53.4,
-  "spread_total": 112,
-  "spread_wins": 62,
-  "spread_wr": 55.4,
-  "ou_total": 94,
-  "ou_wins": 48,
-  "ou_wr": 51.1,
+  "total": 208,
+  "wins": 112,
+  "wr": 53.8,
+  "spread_total": 113,
+  "spread_wins": 63,
+  "spread_wr": 55.8,
+  "ou_total": 95,
+  "ou_wins": 49,
+  "ou_wr": 51.6,
   "daily": [
-    {
-      "date": "20261031",
-      "wins": 1,
-      "total": 2,
-      "wr": 50.0
-    },
     {
       "date": "20261102",
       "wins": 1,
@@ -414,6 +414,12 @@
       "wins": 0,
       "total": 4,
       "wr": 0.0
+    },
+    {
+      "date": "20261113",
+      "wins": 2,
+      "total": 2,
+      "wr": 100.0
     }
   ],
   "edge_buckets": [
@@ -425,15 +431,15 @@
     },
     {
       "bucket": "3-5",
-      "wins": 16,
-      "total": 28,
-      "wr": 57.1
+      "wins": 17,
+      "total": 29,
+      "wr": 58.6
     },
     {
       "bucket": "5-8",
-      "wins": 42,
-      "total": 73,
-      "wr": 57.5
+      "wins": 43,
+      "total": 74,
+      "wr": 58.1
     },
     {
       "bucket": "8+",
@@ -451,9 +457,9 @@
     },
     {
       "bucket": "60-70",
-      "wins": 21,
-      "total": 43,
-      "wr": 48.8
+      "wins": 23,
+      "total": 45,
+      "wr": 51.1
     },
     {
       "bucket": "70-80",
@@ -478,9 +484,9 @@
       },
       {
         "bucket": "3-5",
-        "wins": 16,
-        "total": 28,
-        "wr": 57.1
+        "wins": 17,
+        "total": 29,
+        "wr": 58.6
       },
       {
         "bucket": "5-8",
@@ -510,9 +516,9 @@
       },
       {
         "bucket": "5-8",
-        "wins": 21,
-        "total": 37,
-        "wr": 56.8
+        "wins": 22,
+        "total": 38,
+        "wr": 57.9
       },
       {
         "bucket": "8+",
@@ -523,6 +529,42 @@
     ]
   },
   "recent": [
+    {
+      "pick_date": "20261113",
+      "game_date": "20261113",
+      "away": "Charlotte Hornets",
+      "home": "Phoenix Suns",
+      "pick_type": "ou",
+      "pick_target": "under",
+      "pick_line": 214.5,
+      "pick_detail": "看小 Under 214.5",
+      "edge": 6.300000000000011,
+      "confidence": 61.2,
+      "result": "win",
+      "correct": 1,
+      "tw_spread": -6.5,
+      "tw_ou": 214.5,
+      "model_spread": 3.2,
+      "model_total": 208.2
+    },
+    {
+      "pick_date": "20261113",
+      "game_date": "20261113",
+      "away": "Charlotte Hornets",
+      "home": "Phoenix Suns",
+      "pick_type": "spread",
+      "pick_target": "away",
+      "pick_line": -6.5,
+      "pick_detail": "買 Hornets 受讓 +6.5",
+      "edge": 3.3,
+      "confidence": 61.2,
+      "result": "win",
+      "correct": 1,
+      "tw_spread": -6.5,
+      "tw_ou": 214.5,
+      "model_spread": 3.2,
+      "model_total": 208.2
+    },
     {
       "pick_date": "20261112",
       "game_date": "20261112",
@@ -846,162 +888,271 @@
       "tw_ou": 220.5,
       "model_spread": 13.3,
       "model_total": 214.4
-    },
-    {
-      "pick_date": "20261108",
-      "game_date": "20261108",
-      "away": "San Antonio Spurs",
-      "home": "Portland Trail Blazers",
-      "pick_type": "ou",
-      "pick_target": "under",
-      "pick_line": 229.5,
-      "pick_detail": "看小 Under 229.5",
-      "edge": 8.0,
-      "confidence": 82.1,
-      "result": "win",
-      "correct": 1,
-      "tw_spread": 5.5,
-      "tw_ou": 229.5,
-      "model_spread": 8.6,
-      "model_total": 221.5
-    },
-    {
-      "pick_date": "20261108",
-      "game_date": "20261108",
-      "away": "San Antonio Spurs",
-      "home": "Portland Trail Blazers",
-      "pick_type": "spread",
-      "pick_target": "home",
-      "pick_line": 5.5,
-      "pick_detail": "買 Blazers 受讓 +5.5",
-      "edge": 14.1,
-      "confidence": 82.1,
-      "result": "loss",
-      "correct": 0,
-      "tw_spread": 5.5,
-      "tw_ou": 229.5,
-      "model_spread": 8.6,
-      "model_total": 221.5
     }
   ],
   "current_picks": [
     {
-      "pick_date": "20261113",
-      "game_date": "20261113",
-      "away": "Charlotte Hornets",
-      "home": "Phoenix Suns",
-      "pick_type": "ou",
-      "pick_target": "under",
-      "pick_line": 214.5,
-      "pick_detail": "看小 Under 214.5",
-      "edge": 6.300000000000011,
-      "confidence": 61.2,
-      "result": "pending",
-      "correct": null,
-      "tw_spread": -6.5,
-      "tw_ou": 214.5,
-      "model_spread": 3.2,
-      "model_total": 208.2
-    },
-    {
-      "pick_date": "20261113",
-      "game_date": "20261113",
-      "away": "Charlotte Hornets",
-      "home": "Phoenix Suns",
+      "pick_date": "20261114",
+      "game_date": "20261114",
+      "away": "Golden State Warriors",
+      "home": "San Antonio Spurs",
       "pick_type": "spread",
       "pick_target": "away",
-      "pick_line": -6.5,
-      "pick_detail": "買 Hornets 受讓 +6.5",
-      "edge": 3.3,
-      "confidence": 61.2,
+      "pick_line": -12.5,
+      "pick_detail": "買 Warriors 受讓 +12.5",
+      "edge": 12.3,
+      "confidence": 57.3,
       "result": "pending",
       "correct": null,
-      "tw_spread": -6.5,
-      "tw_ou": 214.5,
-      "model_spread": 3.2,
-      "model_total": 208.2
+      "tw_spread": -12.5,
+      "tw_ou": 216.5,
+      "model_spread": 0.2,
+      "model_total": 219.2
+    },
+    {
+      "pick_date": "20261114",
+      "game_date": "20261114",
+      "away": "Utah Jazz",
+      "home": "Houston Rockets",
+      "pick_type": "ou",
+      "pick_target": "under",
+      "pick_line": 221.5,
+      "pick_detail": "看小 Under 221.5",
+      "edge": 11.099999999999994,
+      "confidence": 94.0,
+      "result": "pending",
+      "correct": null,
+      "tw_spread": -15.5,
+      "tw_ou": 221.5,
+      "model_spread": 12.3,
+      "model_total": 210.4
+    },
+    {
+      "pick_date": "20261114",
+      "game_date": "20261114",
+      "away": "Portland Trail Blazers",
+      "home": "Sacramento Kings",
+      "pick_type": "ou",
+      "pick_target": "under",
+      "pick_line": 229.5,
+      "pick_detail": "看小 Under 229.5",
+      "edge": 9.099999999999994,
+      "confidence": 92.2,
+      "result": "pending",
+      "correct": null,
+      "tw_spread": 10.5,
+      "tw_ou": 229.5,
+      "model_spread": -15.2,
+      "model_total": 220.4
+    },
+    {
+      "pick_date": "20261114",
+      "game_date": "20261114",
+      "away": "Oklahoma City Thunder",
+      "home": "LA Clippers",
+      "pick_type": "ou",
+      "pick_target": "under",
+      "pick_line": 222.5,
+      "pick_detail": "看小 Under 222.5",
+      "edge": 5.599999999999994,
+      "confidence": 90.6,
+      "result": "pending",
+      "correct": null,
+      "tw_spread": 7.5,
+      "tw_ou": 222.5,
+      "model_spread": -12.4,
+      "model_total": 216.9
+    },
+    {
+      "pick_date": "20261114",
+      "game_date": "20261114",
+      "away": "Oklahoma City Thunder",
+      "home": "LA Clippers",
+      "pick_type": "spread",
+      "pick_target": "away",
+      "pick_line": 7.5,
+      "pick_detail": "買 Thunder 讓分 -7.5",
+      "edge": 4.9,
+      "confidence": 90.6,
+      "result": "pending",
+      "correct": null,
+      "tw_spread": 7.5,
+      "tw_ou": 222.5,
+      "model_spread": -12.4,
+      "model_total": 216.9
+    },
+    {
+      "pick_date": "20261114",
+      "game_date": "20261114",
+      "away": "Portland Trail Blazers",
+      "home": "Sacramento Kings",
+      "pick_type": "spread",
+      "pick_target": "away",
+      "pick_line": 10.5,
+      "pick_detail": "買 Blazers 讓分 -10.5",
+      "edge": 4.699999999999999,
+      "confidence": 92.2,
+      "result": "pending",
+      "correct": null,
+      "tw_spread": 10.5,
+      "tw_ou": 229.5,
+      "model_spread": -15.2,
+      "model_total": 220.4
+    },
+    {
+      "pick_date": "20261114",
+      "game_date": "20261114",
+      "away": "Utah Jazz",
+      "home": "Houston Rockets",
+      "pick_type": "spread",
+      "pick_target": "away",
+      "pick_line": -15.5,
+      "pick_detail": "買 Jazz 受讓 +15.5",
+      "edge": 3.1999999999999993,
+      "confidence": 94.0,
+      "result": "pending",
+      "correct": null,
+      "tw_spread": -15.5,
+      "tw_ou": 221.5,
+      "model_spread": 12.3,
+      "model_total": 210.4
     }
   ],
-  "pending": 2,
+  "pending": 7,
   "stale_pending": 0,
   "resolution_gaps": [
     {
-      "pick_date": "20261113",
-      "game_date": "20261113",
-      "away": "Charlotte Hornets",
-      "home": "Phoenix Suns",
+      "pick_date": "20261114",
+      "game_date": "20261114",
+      "away": "Utah Jazz",
+      "home": "Houston Rockets",
       "pick_type": "spread",
-      "pick_detail": "買 Hornets 受讓 +6.5",
-      "edge": 3.3,
+      "pick_detail": "買 Jazz 受讓 +15.5",
+      "edge": 3.1999999999999993,
       "reason": "scheduled for future",
       "status": "future_pending"
     },
     {
-      "pick_date": "20261113",
-      "game_date": "20261113",
-      "away": "Charlotte Hornets",
-      "home": "Phoenix Suns",
+      "pick_date": "20261114",
+      "game_date": "20261114",
+      "away": "Utah Jazz",
+      "home": "Houston Rockets",
       "pick_type": "ou",
-      "pick_detail": "看小 Under 214.5",
-      "edge": 6.300000000000011,
+      "pick_detail": "看小 Under 221.5",
+      "edge": 11.099999999999994,
+      "reason": "scheduled for future",
+      "status": "future_pending"
+    },
+    {
+      "pick_date": "20261114",
+      "game_date": "20261114",
+      "away": "Portland Trail Blazers",
+      "home": "Sacramento Kings",
+      "pick_type": "spread",
+      "pick_detail": "買 Blazers 讓分 -10.5",
+      "edge": 4.699999999999999,
+      "reason": "scheduled for future",
+      "status": "future_pending"
+    },
+    {
+      "pick_date": "20261114",
+      "game_date": "20261114",
+      "away": "Portland Trail Blazers",
+      "home": "Sacramento Kings",
+      "pick_type": "ou",
+      "pick_detail": "看小 Under 229.5",
+      "edge": 9.099999999999994,
+      "reason": "scheduled for future",
+      "status": "future_pending"
+    },
+    {
+      "pick_date": "20261114",
+      "game_date": "20261114",
+      "away": "Oklahoma City Thunder",
+      "home": "LA Clippers",
+      "pick_type": "spread",
+      "pick_detail": "買 Thunder 讓分 -7.5",
+      "edge": 4.9,
+      "reason": "scheduled for future",
+      "status": "future_pending"
+    },
+    {
+      "pick_date": "20261114",
+      "game_date": "20261114",
+      "away": "Oklahoma City Thunder",
+      "home": "LA Clippers",
+      "pick_type": "ou",
+      "pick_detail": "看小 Under 222.5",
+      "edge": 5.599999999999994,
+      "reason": "scheduled for future",
+      "status": "future_pending"
+    },
+    {
+      "pick_date": "20261114",
+      "game_date": "20261114",
+      "away": "Golden State Warriors",
+      "home": "San Antonio Spurs",
+      "pick_type": "spread",
+      "pick_detail": "買 Warriors 受讓 +12.5",
+      "edge": 12.3,
       "reason": "scheduled for future",
       "status": "future_pending"
     }
   ],
   "history_sync": {
     "imported_from_bets": {
-      "candidates": 85,
+      "candidates": 88,
       "imported": 0,
-      "skipped_existing": 85
+      "skipped_existing": 88
     },
     "manual_results": 0,
     "resolved": {
-      "candidates": 2,
+      "candidates": 7,
       "verified": 0,
       "wins": 0,
       "losses": 0,
       "pushes": 0,
-      "missing_results": 2,
+      "missing_results": 7,
       "ungraded": 0,
       "missing_details": [
         {
-          "pick_date": "20261113",
-          "game_date": "20261113",
-          "away": "Charlotte Hornets",
-          "home": "Phoenix Suns",
+          "pick_date": "20261114",
+          "game_date": "20261114",
+          "away": "Utah Jazz",
+          "home": "Houston Rockets",
           "pick_type": "spread",
           "pick_target": "away",
-          "pick_detail": "買 Hornets 受讓 +6.5",
+          "pick_detail": "買 Jazz 受讓 +15.5",
           "candidate_keys": [
             {
-              "game_date": "20261113",
-              "home": "phoenix suns",
-              "away": "charlotte hornets"
-            },
-            {
-              "game_date": "20261112",
-              "home": "phoenix suns",
-              "away": "charlotte hornets"
-            },
-            {
-              "game_date": "20261112",
-              "home": "charlotte hornets",
-              "away": "phoenix suns"
-            },
-            {
               "game_date": "20261114",
-              "home": "phoenix suns",
-              "away": "charlotte hornets"
-            },
-            {
-              "game_date": "20261114",
-              "home": "charlotte hornets",
-              "away": "phoenix suns"
+              "home": "houston rockets",
+              "away": "utah jazz"
             },
             {
               "game_date": "20261113",
-              "home": "charlotte hornets",
-              "away": "phoenix suns"
+              "home": "houston rockets",
+              "away": "utah jazz"
+            },
+            {
+              "game_date": "20261113",
+              "home": "utah jazz",
+              "away": "houston rockets"
+            },
+            {
+              "game_date": "20261115",
+              "home": "houston rockets",
+              "away": "utah jazz"
+            },
+            {
+              "game_date": "20261115",
+              "home": "utah jazz",
+              "away": "houston rockets"
+            },
+            {
+              "game_date": "20261114",
+              "home": "utah jazz",
+              "away": "houston rockets"
             }
           ],
           "candidate_hits": [],
@@ -1010,43 +1161,268 @@
           "status": "missing_result"
         },
         {
-          "pick_date": "20261113",
-          "game_date": "20261113",
-          "away": "Charlotte Hornets",
-          "home": "Phoenix Suns",
+          "pick_date": "20261114",
+          "game_date": "20261114",
+          "away": "Utah Jazz",
+          "home": "Houston Rockets",
           "pick_type": "ou",
           "pick_target": "under",
-          "pick_detail": "看小 Under 214.5",
+          "pick_detail": "看小 Under 221.5",
           "candidate_keys": [
             {
-              "game_date": "20261113",
-              "home": "phoenix suns",
-              "away": "charlotte hornets"
-            },
-            {
-              "game_date": "20261112",
-              "home": "phoenix suns",
-              "away": "charlotte hornets"
-            },
-            {
-              "game_date": "20261112",
-              "home": "charlotte hornets",
-              "away": "phoenix suns"
-            },
-            {
               "game_date": "20261114",
-              "home": "phoenix suns",
-              "away": "charlotte hornets"
-            },
-            {
-              "game_date": "20261114",
-              "home": "charlotte hornets",
-              "away": "phoenix suns"
+              "home": "houston rockets",
+              "away": "utah jazz"
             },
             {
               "game_date": "20261113",
-              "home": "charlotte hornets",
-              "away": "phoenix suns"
+              "home": "houston rockets",
+              "away": "utah jazz"
+            },
+            {
+              "game_date": "20261113",
+              "home": "utah jazz",
+              "away": "houston rockets"
+            },
+            {
+              "game_date": "20261115",
+              "home": "houston rockets",
+              "away": "utah jazz"
+            },
+            {
+              "game_date": "20261115",
+              "home": "utah jazz",
+              "away": "houston rockets"
+            },
+            {
+              "game_date": "20261114",
+              "home": "utah jazz",
+              "away": "houston rockets"
+            }
+          ],
+          "candidate_hits": [],
+          "nearby_espn_games": [],
+          "reason": "ESPN result not found",
+          "status": "missing_result"
+        },
+        {
+          "pick_date": "20261114",
+          "game_date": "20261114",
+          "away": "Portland Trail Blazers",
+          "home": "Sacramento Kings",
+          "pick_type": "spread",
+          "pick_target": "away",
+          "pick_detail": "買 Blazers 讓分 -10.5",
+          "candidate_keys": [
+            {
+              "game_date": "20261114",
+              "home": "sacramento kings",
+              "away": "portland trail blazers"
+            },
+            {
+              "game_date": "20261113",
+              "home": "sacramento kings",
+              "away": "portland trail blazers"
+            },
+            {
+              "game_date": "20261113",
+              "home": "portland trail blazers",
+              "away": "sacramento kings"
+            },
+            {
+              "game_date": "20261115",
+              "home": "sacramento kings",
+              "away": "portland trail blazers"
+            },
+            {
+              "game_date": "20261115",
+              "home": "portland trail blazers",
+              "away": "sacramento kings"
+            },
+            {
+              "game_date": "20261114",
+              "home": "portland trail blazers",
+              "away": "sacramento kings"
+            }
+          ],
+          "candidate_hits": [],
+          "nearby_espn_games": [],
+          "reason": "ESPN result not found",
+          "status": "missing_result"
+        },
+        {
+          "pick_date": "20261114",
+          "game_date": "20261114",
+          "away": "Portland Trail Blazers",
+          "home": "Sacramento Kings",
+          "pick_type": "ou",
+          "pick_target": "under",
+          "pick_detail": "看小 Under 229.5",
+          "candidate_keys": [
+            {
+              "game_date": "20261114",
+              "home": "sacramento kings",
+              "away": "portland trail blazers"
+            },
+            {
+              "game_date": "20261113",
+              "home": "sacramento kings",
+              "away": "portland trail blazers"
+            },
+            {
+              "game_date": "20261113",
+              "home": "portland trail blazers",
+              "away": "sacramento kings"
+            },
+            {
+              "game_date": "20261115",
+              "home": "sacramento kings",
+              "away": "portland trail blazers"
+            },
+            {
+              "game_date": "20261115",
+              "home": "portland trail blazers",
+              "away": "sacramento kings"
+            },
+            {
+              "game_date": "20261114",
+              "home": "portland trail blazers",
+              "away": "sacramento kings"
+            }
+          ],
+          "candidate_hits": [],
+          "nearby_espn_games": [],
+          "reason": "ESPN result not found",
+          "status": "missing_result"
+        },
+        {
+          "pick_date": "20261114",
+          "game_date": "20261114",
+          "away": "Oklahoma City Thunder",
+          "home": "LA Clippers",
+          "pick_type": "spread",
+          "pick_target": "away",
+          "pick_detail": "買 Thunder 讓分 -7.5",
+          "candidate_keys": [
+            {
+              "game_date": "20261114",
+              "home": "la clippers",
+              "away": "oklahoma city thunder"
+            },
+            {
+              "game_date": "20261113",
+              "home": "la clippers",
+              "away": "oklahoma city thunder"
+            },
+            {
+              "game_date": "20261113",
+              "home": "oklahoma city thunder",
+              "away": "la clippers"
+            },
+            {
+              "game_date": "20261115",
+              "home": "la clippers",
+              "away": "oklahoma city thunder"
+            },
+            {
+              "game_date": "20261115",
+              "home": "oklahoma city thunder",
+              "away": "la clippers"
+            },
+            {
+              "game_date": "20261114",
+              "home": "oklahoma city thunder",
+              "away": "la clippers"
+            }
+          ],
+          "candidate_hits": [],
+          "nearby_espn_games": [],
+          "reason": "ESPN result not found",
+          "status": "missing_result"
+        },
+        {
+          "pick_date": "20261114",
+          "game_date": "20261114",
+          "away": "Oklahoma City Thunder",
+          "home": "LA Clippers",
+          "pick_type": "ou",
+          "pick_target": "under",
+          "pick_detail": "看小 Under 222.5",
+          "candidate_keys": [
+            {
+              "game_date": "20261114",
+              "home": "la clippers",
+              "away": "oklahoma city thunder"
+            },
+            {
+              "game_date": "20261113",
+              "home": "la clippers",
+              "away": "oklahoma city thunder"
+            },
+            {
+              "game_date": "20261113",
+              "home": "oklahoma city thunder",
+              "away": "la clippers"
+            },
+            {
+              "game_date": "20261115",
+              "home": "la clippers",
+              "away": "oklahoma city thunder"
+            },
+            {
+              "game_date": "20261115",
+              "home": "oklahoma city thunder",
+              "away": "la clippers"
+            },
+            {
+              "game_date": "20261114",
+              "home": "oklahoma city thunder",
+              "away": "la clippers"
+            }
+          ],
+          "candidate_hits": [],
+          "nearby_espn_games": [],
+          "reason": "ESPN result not found",
+          "status": "missing_result"
+        },
+        {
+          "pick_date": "20261114",
+          "game_date": "20261114",
+          "away": "Golden State Warriors",
+          "home": "San Antonio Spurs",
+          "pick_type": "spread",
+          "pick_target": "away",
+          "pick_detail": "買 Warriors 受讓 +12.5",
+          "candidate_keys": [
+            {
+              "game_date": "20261114",
+              "home": "san antonio spurs",
+              "away": "golden state warriors"
+            },
+            {
+              "game_date": "20261113",
+              "home": "san antonio spurs",
+              "away": "golden state warriors"
+            },
+            {
+              "game_date": "20261113",
+              "home": "golden state warriors",
+              "away": "san antonio spurs"
+            },
+            {
+              "game_date": "20261115",
+              "home": "san antonio spurs",
+              "away": "golden state warriors"
+            },
+            {
+              "game_date": "20261115",
+              "home": "golden state warriors",
+              "away": "san antonio spurs"
+            },
+            {
+              "game_date": "20261114",
+              "home": "golden state warriors",
+              "away": "san antonio spurs"
             }
           ],
           "candidate_hits": [],
@@ -1057,6 +1433,6 @@
       ]
     }
   },
-  "generated_at": "2026-11-13T09:21:41",
-  "synced_at": "2026-11-13T09:21:41"
+  "generated_at": "2026-11-14T09:21:44",
+  "synced_at": "2026-11-14T09:21:44"
 }
