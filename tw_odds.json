@@ -1,11 +1,112 @@
 {
-  "synced_at": "2026-11-15T09:22:10",
+  "synced_at": "2026-11-16T09:22:47",
   "source": {
-    "sportweb_fetched_at": "2026-11-15T09:22:09",
+    "sportweb_fetched_at": "2026-11-16T09:22:45",
     "source_url": "https://blob3rd.sportslottery.com.tw/apidata/Pre/34765.1-Games.en.json",
-    "game_count": 0
+    "game_count": 3
   },
-  "entries": [],
-  "odds": {},
+  "entries": [
+    {
+      "game": "Golden State Warriors @ New Orleans Pelicans",
+      "away": "Golden State Warriors",
+      "home": "New Orleans Pelicans",
+      "spread": 2.5,
+      "ou": 225.5,
+      "spread_odds": {
+        "away": 1.72,
+        "home": 1.72
+      },
+      "ou_odds": {
+        "over": 1.68,
+        "under": 1.75
+      },
+      "updated_at": "2026-11-16T09:22:45",
+      "source": "sportWeb",
+      "sportweb_game_id": "3507520.1",
+      "start_time": "2026-11-17T09:00:00+08:00"
+    },
+    {
+      "game": "Oklahoma City Thunder @ Sacramento Kings",
+      "away": "Oklahoma City Thunder",
+      "home": "Sacramento Kings",
+      "spread": 12.5,
+      "ou": 223.5,
+      "spread_odds": {
+        "away": 1.7,
+        "home": 1.73
+      },
+      "ou_odds": {
+        "over": 1.72,
+        "under": 1.72
+      },
+      "updated_at": "2026-11-16T09:22:45",
+      "source": "sportWeb",
+      "sportweb_game_id": "3507381.1",
+      "start_time": "2026-11-16T10:00:00+08:00"
+    },
+    {
+      "game": "Portland Trail Blazers @ Minnesota Timberwolves",
+      "away": "Portland Trail Blazers",
+      "home": "Minnesota Timberwolves",
+      "spread": -2.5,
+      "ou": 228.5,
+      "spread_odds": {
+        "away": 1.75,
+        "home": 1.68
+      },
+      "ou_odds": {
+        "over": 1.73,
+        "under": 1.7
+      },
+      "updated_at": "2026-11-16T09:22:45",
+      "source": "sportWeb",
+      "sportweb_game_id": "3507518.1",
+      "start_time": "2026-11-17T09:00:00+08:00"
+    }
+  ],
+  "odds": {
+    "Oklahoma City Thunder @ Sacramento Kings": {
+      "spread": 12.5,
+      "ou": 223.5,
+      "spread_odds": {
+        "away": 1.7,
+        "home": 1.73
+      },
+      "ou_odds": {
+        "over": 1.72,
+        "under": 1.72
+      },
+      "updated_at": "2026-11-16T09:22:45",
+      "source": "sportWeb"
+    },
+    "Portland Trail Blazers @ Minnesota Timberwolves": {
+      "spread": -2.5,
+      "ou": 228.5,
+      "spread_odds": {
+        "away": 1.75,
+        "home": 1.68
+      },
+      "ou_odds": {
+        "over": 1.73,
+        "under": 1.7
+      },
+      "updated_at": "2026-11-16T09:22:45",
+      "source": "sportWeb"
+    },
+    "Golden State Warriors @ New Orleans Pelicans": {
+      "spread": 2.5,
+      "ou": 225.5,
+      "spread_odds": {
+        "away": 1.72,
+        "home": 1.72
+      },
+      "ou_odds": {
+        "over": 1.68,
+        "under": 1.75
+      },
+      "updated_at": "2026-11-16T09:22:45",
+      "source": "sportWeb"
+    }
+  },
   "fresh": true
 }

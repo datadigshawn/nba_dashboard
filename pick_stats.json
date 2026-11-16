@@ -896,28 +896,260 @@
       "model_total": 214.4
     }
   ],
-  "current_picks": [],
-  "pending": 0,
+  "current_picks": [
+    {
+      "pick_date": "20261116",
+      "game_date": "20261116",
+      "away": "Oklahoma City Thunder",
+      "home": "Sacramento Kings",
+      "pick_type": "ou",
+      "pick_target": "under",
+      "pick_line": 223.5,
+      "pick_detail": "看小 Under 223.5",
+      "edge": 7.400000000000006,
+      "confidence": 97.3,
+      "result": "pending",
+      "correct": null,
+      "tw_spread": 12.5,
+      "tw_ou": 223.5,
+      "model_spread": -14.9,
+      "model_total": 216.1
+    },
+    {
+      "pick_date": "20261116",
+      "game_date": "20261116",
+      "away": "Oklahoma City Thunder",
+      "home": "Sacramento Kings",
+      "pick_type": "spread",
+      "pick_target": "away",
+      "pick_line": 12.5,
+      "pick_detail": "買 Thunder 讓分 -12.5",
+      "edge": 2.4000000000000004,
+      "confidence": 97.3,
+      "result": "pending",
+      "correct": null,
+      "tw_spread": 12.5,
+      "tw_ou": 223.5,
+      "model_spread": -14.9,
+      "model_total": 216.1
+    },
+    {
+      "pick_date": "20261116",
+      "game_date": "20261118",
+      "away": "Portland Trail Blazers",
+      "home": "Minnesota Timberwolves",
+      "pick_type": "ou",
+      "pick_target": "under",
+      "pick_line": 228.5,
+      "pick_detail": "看小 Under 228.5",
+      "edge": 6.599999999999994,
+      "confidence": 62.3,
+      "result": "pending",
+      "correct": null,
+      "tw_spread": -2.5,
+      "tw_ou": 228.5,
+      "model_spread": 4.3,
+      "model_total": 221.9
+    }
+  ],
+  "pending": 3,
   "stale_pending": 0,
-  "resolution_gaps": [],
+  "resolution_gaps": [
+    {
+      "pick_date": "20261116",
+      "game_date": "20261116",
+      "away": "Oklahoma City Thunder",
+      "home": "Sacramento Kings",
+      "pick_type": "spread",
+      "pick_detail": "買 Thunder 讓分 -12.5",
+      "edge": 2.4000000000000004,
+      "reason": "scheduled for future",
+      "status": "future_pending"
+    },
+    {
+      "pick_date": "20261116",
+      "game_date": "20261116",
+      "away": "Oklahoma City Thunder",
+      "home": "Sacramento Kings",
+      "pick_type": "ou",
+      "pick_detail": "看小 Under 223.5",
+      "edge": 7.400000000000006,
+      "reason": "scheduled for future",
+      "status": "future_pending"
+    },
+    {
+      "pick_date": "20261116",
+      "game_date": "20261118",
+      "away": "Portland Trail Blazers",
+      "home": "Minnesota Timberwolves",
+      "pick_type": "ou",
+      "pick_detail": "看小 Under 228.5",
+      "edge": 6.599999999999994,
+      "reason": "scheduled for future",
+      "status": "future_pending"
+    }
+  ],
   "history_sync": {
     "imported_from_bets": {
-      "candidates": 88,
+      "candidates": 90,
       "imported": 0,
-      "skipped_existing": 88
+      "skipped_existing": 90
     },
     "manual_results": 0,
     "resolved": {
-      "candidates": 0,
+      "candidates": 2,
       "verified": 0,
       "wins": 0,
       "losses": 0,
       "pushes": 0,
-      "missing_results": 0,
+      "missing_results": 2,
       "ungraded": 0,
-      "missing_details": []
+      "missing_details": [
+        {
+          "pick_date": "20261116",
+          "game_date": "20261116",
+          "away": "Oklahoma City Thunder",
+          "home": "Sacramento Kings",
+          "pick_type": "spread",
+          "pick_target": "away",
+          "pick_detail": "買 Thunder 讓分 -12.5",
+          "candidate_keys": [
+            {
+              "game_date": "20261116",
+              "home": "sacramento kings",
+              "away": "oklahoma city thunder"
+            },
+            {
+              "game_date": "20261115",
+              "home": "sacramento kings",
+              "away": "oklahoma city thunder"
+            },
+            {
+              "game_date": "20261115",
+              "home": "oklahoma city thunder",
+              "away": "sacramento kings"
+            },
+            {
+              "game_date": "20261117",
+              "home": "sacramento kings",
+              "away": "oklahoma city thunder"
+            },
+            {
+              "game_date": "20261117",
+              "home": "oklahoma city thunder",
+              "away": "sacramento kings"
+            },
+            {
+              "game_date": "20261116",
+              "home": "oklahoma city thunder",
+              "away": "sacramento kings"
+            }
+          ],
+          "candidate_hits": [],
+          "nearby_espn_games": [
+            {
+              "game_date": "20261115",
+              "home": "boston celtics",
+              "away": "dallas mavericks"
+            },
+            {
+              "game_date": "20261115",
+              "home": "la clippers",
+              "away": "charlotte hornets"
+            },
+            {
+              "game_date": "20261115",
+              "home": "philadelphia 76ers",
+              "away": "indiana pacers"
+            },
+            {
+              "game_date": "20261115",
+              "home": "phoenix suns",
+              "away": "los angeles lakers"
+            },
+            {
+              "game_date": "20261115",
+              "home": "utah jazz",
+              "away": "san antonio spurs"
+            }
+          ],
+          "reason": "ESPN has games on nearby dates, but team/date key mismatched",
+          "status": "missing_result"
+        },
+        {
+          "pick_date": "20261116",
+          "game_date": "20261116",
+          "away": "Oklahoma City Thunder",
+          "home": "Sacramento Kings",
+          "pick_type": "ou",
+          "pick_target": "under",
+          "pick_detail": "看小 Under 223.5",
+          "candidate_keys": [
+            {
+              "game_date": "20261116",
+              "home": "sacramento kings",
+              "away": "oklahoma city thunder"
+            },
+            {
+              "game_date": "20261115",
+              "home": "sacramento kings",
+              "away": "oklahoma city thunder"
+            },
+            {
+              "game_date": "20261115",
+              "home": "oklahoma city thunder",
+              "away": "sacramento kings"
+            },
+            {
+              "game_date": "20261117",
+              "home": "sacramento kings",
+              "away": "oklahoma city thunder"
+            },
+            {
+              "game_date": "20261117",
+              "home": "oklahoma city thunder",
+              "away": "sacramento kings"
+            },
+            {
+              "game_date": "20261116",
+              "home": "oklahoma city thunder",
+              "away": "sacramento kings"
+            }
+          ],
+          "candidate_hits": [],
+          "nearby_espn_games": [
+            {
+              "game_date": "20261115",
+              "home": "boston celtics",
+              "away": "dallas mavericks"
+            },
+            {
+              "game_date": "20261115",
+              "home": "la clippers",
+              "away": "charlotte hornets"
+            },
+            {
+              "game_date": "20261115",
+              "home": "philadelphia 76ers",
+              "away": "indiana pacers"
+            },
+            {
+              "game_date": "20261115",
+              "home": "phoenix suns",
+              "away": "los angeles lakers"
+            },
+            {
+              "game_date": "20261115",
+              "home": "utah jazz",
+              "away": "san antonio spurs"
+            }
+          ],
+          "reason": "ESPN has games on nearby dates, but team/date key mismatched",
+          "status": "missing_result"
+        }
+      ]
     }
   },
-  "generated_at": "2026-11-15T09:22:10",
-  "synced_at": "2026-11-15T09:22:10"
+  "generated_at": "2026-11-16T09:22:48",
+  "synced_at": "2026-11-16T09:22:48"
 }
