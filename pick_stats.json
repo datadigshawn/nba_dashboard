@@ -1,9 +1,9 @@
 {
   "pnl": {
-    "total_units": -22.1,
-    "roi_per_bet": -0.1052,
-    "settled": 215,
-    "with_odds": 210,
+    "total_units": -22.4,
+    "roi_per_bet": -0.1057,
+    "settled": 217,
+    "with_odds": 212,
     "odds_coverage": 97.7,
     "avg_odds": 1.707,
     "curve": [
@@ -342,25 +342,25 @@
         "pnl": -1.86,
         "cum_pnl": -22.1,
         "n": 7
+      },
+      {
+        "date": "20261116",
+        "pnl": -0.3,
+        "cum_pnl": -22.4,
+        "n": 2
       }
     ]
   },
-  "total": 215,
-  "wins": 115,
+  "total": 217,
+  "wins": 116,
   "wr": 53.5,
-  "spread_total": 117,
-  "spread_wins": 65,
-  "spread_wr": 55.6,
-  "ou_total": 98,
+  "spread_total": 118,
+  "spread_wins": 66,
+  "spread_wr": 55.9,
+  "ou_total": 99,
   "ou_wins": 50,
-  "ou_wr": 51.0,
+  "ou_wr": 50.5,
   "daily": [
-    {
-      "date": "20261103",
-      "wins": 6,
-      "total": 9,
-      "wr": 66.7
-    },
     {
       "date": "20261104",
       "wins": 4,
@@ -426,14 +426,20 @@
       "wins": 3,
       "total": 7,
       "wr": 42.9
+    },
+    {
+      "date": "20261116",
+      "wins": 1,
+      "total": 2,
+      "wr": 50.0
     }
   ],
   "edge_buckets": [
     {
       "bucket": "0-3",
-      "wins": 8,
-      "total": 17,
-      "wr": 47.1
+      "wins": 9,
+      "total": 18,
+      "wr": 50.0
     },
     {
       "bucket": "3-5",
@@ -444,8 +450,8 @@
     {
       "bucket": "5-8",
       "wins": 43,
-      "total": 75,
-      "wr": 57.3
+      "total": 76,
+      "wr": 56.6
     },
     {
       "bucket": "8+",
@@ -475,18 +481,18 @@
     },
     {
       "bucket": "80+",
-      "wins": 42,
-      "total": 73,
-      "wr": 57.5
+      "wins": 43,
+      "total": 75,
+      "wr": 57.3
     }
   ],
   "by_type_edge": {
     "spread": [
       {
         "bucket": "0-3",
-        "wins": 8,
-        "total": 17,
-        "wr": 47.1
+        "wins": 9,
+        "total": 18,
+        "wr": 50.0
       },
       {
         "bucket": "3-5",
@@ -523,8 +529,8 @@
       {
         "bucket": "5-8",
         "wins": 22,
-        "total": 39,
-        "wr": 56.4
+        "total": 40,
+        "wr": 55.0
       },
       {
         "bucket": "8+",
@@ -535,6 +541,42 @@
     ]
   },
   "recent": [
+    {
+      "pick_date": "20261116",
+      "game_date": "20261116",
+      "away": "Oklahoma City Thunder",
+      "home": "Sacramento Kings",
+      "pick_type": "ou",
+      "pick_target": "under",
+      "pick_line": 223.5,
+      "pick_detail": "看小 Under 223.5",
+      "edge": 7.400000000000006,
+      "confidence": 97.3,
+      "result": "loss",
+      "correct": 0,
+      "tw_spread": 12.5,
+      "tw_ou": 223.5,
+      "model_spread": -14.9,
+      "model_total": 216.1
+    },
+    {
+      "pick_date": "20261116",
+      "game_date": "20261116",
+      "away": "Oklahoma City Thunder",
+      "home": "Sacramento Kings",
+      "pick_type": "spread",
+      "pick_target": "away",
+      "pick_line": 12.5,
+      "pick_detail": "買 Thunder 讓分 -12.5",
+      "edge": 2.4000000000000004,
+      "confidence": 97.3,
+      "result": "win",
+      "correct": 1,
+      "tw_spread": 12.5,
+      "tw_ou": 223.5,
+      "model_spread": -14.9,
+      "model_total": 216.1
+    },
     {
       "pick_date": "20261114",
       "game_date": "20261114",
@@ -858,80 +900,44 @@
       "tw_ou": 227.5,
       "model_spread": -3.7,
       "model_total": 220.8
-    },
-    {
-      "pick_date": "20261110",
-      "game_date": "20261110",
-      "away": "New Orleans Pelicans",
-      "home": "Golden State Warriors",
-      "pick_type": "spread",
-      "pick_target": "home",
-      "pick_line": -12.5,
-      "pick_detail": "買 Warriors 讓分 -12.5",
-      "edge": 3.8000000000000007,
-      "confidence": 94.7,
-      "result": "win",
-      "correct": 1,
-      "tw_spread": -12.5,
-      "tw_ou": 229.5,
-      "model_spread": 16.3,
-      "model_total": 228.3
-    },
-    {
-      "pick_date": "20261110",
-      "game_date": "20261110",
-      "away": "Denver Nuggets",
-      "home": "Houston Rockets",
-      "pick_type": "ou",
-      "pick_target": "under",
-      "pick_line": 219.5,
-      "pick_detail": "看小 Under 219.5",
-      "edge": 5.099999999999994,
-      "confidence": 68.2,
-      "result": "win",
-      "correct": 1,
-      "tw_spread": -4.5,
-      "tw_ou": 219.5,
-      "model_spread": 3.6,
-      "model_total": 214.4
     }
   ],
   "current_picks": [
     {
-      "pick_date": "20261116",
-      "game_date": "20261116",
-      "away": "Oklahoma City Thunder",
-      "home": "Sacramento Kings",
+      "pick_date": "20261117",
+      "game_date": "20261117",
+      "away": "Phoenix Suns",
+      "home": "Denver Nuggets",
       "pick_type": "ou",
       "pick_target": "under",
-      "pick_line": 223.5,
-      "pick_detail": "看小 Under 223.5",
-      "edge": 7.400000000000006,
-      "confidence": 97.3,
+      "pick_line": 229.5,
+      "pick_detail": "看小 Under 229.5",
+      "edge": 9.5,
+      "confidence": 91.2,
       "result": "pending",
       "correct": null,
-      "tw_spread": 12.5,
-      "tw_ou": 223.5,
-      "model_spread": -14.9,
-      "model_total": 216.1
+      "tw_spread": -10.5,
+      "tw_ou": 229.5,
+      "model_spread": 13.3,
+      "model_total": 220.0
     },
     {
-      "pick_date": "20261116",
-      "game_date": "20261116",
-      "away": "Oklahoma City Thunder",
-      "home": "Sacramento Kings",
+      "pick_date": "20261117",
+      "game_date": "20261117",
+      "away": "Phoenix Suns",
+      "home": "Denver Nuggets",
       "pick_type": "spread",
-      "pick_target": "away",
-      "pick_line": 12.5,
-      "pick_detail": "買 Thunder 讓分 -12.5",
-      "edge": 2.4000000000000004,
-      "confidence": 97.3,
+      "pick_target": "home",
+      "pick_line": -10.5,
+      "pick_detail": "買 Nuggets 讓分 -10.5",
+      "edge": 2.8000000000000007,
+      "confidence": 91.2,
       "result": "pending",
       "correct": null,
-      "tw_spread": 12.5,
-      "tw_ou": 223.5,
-      "model_spread": -14.9,
-      "model_total": 216.1
+      "tw_spread": -10.5,
+      "tw_ou": 229.5,
+      "model_spread": 13.3,
+      "model_total": 220.0
     },
     {
       "pick_date": "20261116",
@@ -956,24 +962,24 @@
   "stale_pending": 0,
   "resolution_gaps": [
     {
-      "pick_date": "20261116",
-      "game_date": "20261116",
-      "away": "Oklahoma City Thunder",
-      "home": "Sacramento Kings",
+      "pick_date": "20261117",
+      "game_date": "20261117",
+      "away": "Phoenix Suns",
+      "home": "Denver Nuggets",
       "pick_type": "spread",
-      "pick_detail": "買 Thunder 讓分 -12.5",
-      "edge": 2.4000000000000004,
+      "pick_detail": "買 Nuggets 讓分 -10.5",
+      "edge": 2.8000000000000007,
       "reason": "scheduled for future",
       "status": "future_pending"
     },
     {
-      "pick_date": "20261116",
-      "game_date": "20261116",
-      "away": "Oklahoma City Thunder",
-      "home": "Sacramento Kings",
+      "pick_date": "20261117",
+      "game_date": "20261117",
+      "away": "Phoenix Suns",
+      "home": "Denver Nuggets",
       "pick_type": "ou",
-      "pick_detail": "看小 Under 223.5",
-      "edge": 7.400000000000006,
+      "pick_detail": "看小 Under 229.5",
+      "edge": 9.5,
       "reason": "scheduled for future",
       "status": "future_pending"
     },
@@ -991,9 +997,9 @@
   ],
   "history_sync": {
     "imported_from_bets": {
-      "candidates": 90,
+      "candidates": 92,
       "imported": 0,
-      "skipped_existing": 90
+      "skipped_existing": 92
     },
     "manual_results": 0,
     "resolved": {
@@ -1006,150 +1012,98 @@
       "ungraded": 0,
       "missing_details": [
         {
-          "pick_date": "20261116",
-          "game_date": "20261116",
-          "away": "Oklahoma City Thunder",
-          "home": "Sacramento Kings",
+          "pick_date": "20261117",
+          "game_date": "20261117",
+          "away": "Phoenix Suns",
+          "home": "Denver Nuggets",
           "pick_type": "spread",
-          "pick_target": "away",
-          "pick_detail": "買 Thunder 讓分 -12.5",
+          "pick_target": "home",
+          "pick_detail": "買 Nuggets 讓分 -10.5",
           "candidate_keys": [
             {
-              "game_date": "20261116",
-              "home": "sacramento kings",
-              "away": "oklahoma city thunder"
-            },
-            {
-              "game_date": "20261115",
-              "home": "sacramento kings",
-              "away": "oklahoma city thunder"
-            },
-            {
-              "game_date": "20261115",
-              "home": "oklahoma city thunder",
-              "away": "sacramento kings"
-            },
-            {
               "game_date": "20261117",
-              "home": "sacramento kings",
-              "away": "oklahoma city thunder"
-            },
-            {
-              "game_date": "20261117",
-              "home": "oklahoma city thunder",
-              "away": "sacramento kings"
+              "home": "denver nuggets",
+              "away": "phoenix suns"
             },
             {
               "game_date": "20261116",
-              "home": "oklahoma city thunder",
-              "away": "sacramento kings"
+              "home": "denver nuggets",
+              "away": "phoenix suns"
+            },
+            {
+              "game_date": "20261116",
+              "home": "phoenix suns",
+              "away": "denver nuggets"
+            },
+            {
+              "game_date": "20261118",
+              "home": "denver nuggets",
+              "away": "phoenix suns"
+            },
+            {
+              "game_date": "20261118",
+              "home": "phoenix suns",
+              "away": "denver nuggets"
+            },
+            {
+              "game_date": "20261117",
+              "home": "phoenix suns",
+              "away": "denver nuggets"
             }
           ],
           "candidate_hits": [],
-          "nearby_espn_games": [
-            {
-              "game_date": "20261115",
-              "home": "boston celtics",
-              "away": "dallas mavericks"
-            },
-            {
-              "game_date": "20261115",
-              "home": "la clippers",
-              "away": "charlotte hornets"
-            },
-            {
-              "game_date": "20261115",
-              "home": "philadelphia 76ers",
-              "away": "indiana pacers"
-            },
-            {
-              "game_date": "20261115",
-              "home": "phoenix suns",
-              "away": "los angeles lakers"
-            },
-            {
-              "game_date": "20261115",
-              "home": "utah jazz",
-              "away": "san antonio spurs"
-            }
-          ],
-          "reason": "ESPN has games on nearby dates, but team/date key mismatched",
+          "nearby_espn_games": [],
+          "reason": "ESPN result not found",
           "status": "missing_result"
         },
         {
-          "pick_date": "20261116",
-          "game_date": "20261116",
-          "away": "Oklahoma City Thunder",
-          "home": "Sacramento Kings",
+          "pick_date": "20261117",
+          "game_date": "20261117",
+          "away": "Phoenix Suns",
+          "home": "Denver Nuggets",
           "pick_type": "ou",
           "pick_target": "under",
-          "pick_detail": "看小 Under 223.5",
+          "pick_detail": "看小 Under 229.5",
           "candidate_keys": [
             {
-              "game_date": "20261116",
-              "home": "sacramento kings",
-              "away": "oklahoma city thunder"
-            },
-            {
-              "game_date": "20261115",
-              "home": "sacramento kings",
-              "away": "oklahoma city thunder"
-            },
-            {
-              "game_date": "20261115",
-              "home": "oklahoma city thunder",
-              "away": "sacramento kings"
-            },
-            {
               "game_date": "20261117",
-              "home": "sacramento kings",
-              "away": "oklahoma city thunder"
-            },
-            {
-              "game_date": "20261117",
-              "home": "oklahoma city thunder",
-              "away": "sacramento kings"
+              "home": "denver nuggets",
+              "away": "phoenix suns"
             },
             {
               "game_date": "20261116",
-              "home": "oklahoma city thunder",
-              "away": "sacramento kings"
+              "home": "denver nuggets",
+              "away": "phoenix suns"
+            },
+            {
+              "game_date": "20261116",
+              "home": "phoenix suns",
+              "away": "denver nuggets"
+            },
+            {
+              "game_date": "20261118",
+              "home": "denver nuggets",
+              "away": "phoenix suns"
+            },
+            {
+              "game_date": "20261118",
+              "home": "phoenix suns",
+              "away": "denver nuggets"
+            },
+            {
+              "game_date": "20261117",
+              "home": "phoenix suns",
+              "away": "denver nuggets"
             }
           ],
           "candidate_hits": [],
-          "nearby_espn_games": [
-            {
-              "game_date": "20261115",
-              "home": "boston celtics",
-              "away": "dallas mavericks"
-            },
-            {
-              "game_date": "20261115",
-              "home": "la clippers",
-              "away": "charlotte hornets"
-            },
-            {
-              "game_date": "20261115",
-              "home": "philadelphia 76ers",
-              "away": "indiana pacers"
-            },
-            {
-              "game_date": "20261115",
-              "home": "phoenix suns",
-              "away": "los angeles lakers"
-            },
-            {
-              "game_date": "20261115",
-              "home": "utah jazz",
-              "away": "san antonio spurs"
-            }
-          ],
-          "reason": "ESPN has games on nearby dates, but team/date key mismatched",
+          "nearby_espn_games": [],
+          "reason": "ESPN result not found",
           "status": "missing_result"
         }
       ]
     }
   },
-  "generated_at": "2026-11-16T09:22:48",
-  "synced_at": "2026-11-16T09:22:48"
+  "generated_at": "2026-11-17T09:22:50",
+  "synced_at": "2026-11-17T09:22:50"
 }
