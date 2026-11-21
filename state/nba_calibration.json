@@ -1,13 +1,13 @@
 {
   "lookback_days": 21,
-  "games_considered": 21,
-  "spread_samples": 21,
-  "spread_bias": 1.73,
-  "spread_mae": 9.42,
-  "spread_sign_accuracy": 0.762,
-  "moneyline_accuracy": 0.762,
-  "total_samples": 21,
-  "total_bias": -5.27,
-  "total_mae": 22.45,
-  "saved_at": "2026-11-20T09:21:24"
+  "games_considered": 16,
+  "spread_samples": 16,
+  "spread_bias": 2.12,
+  "spread_mae": 9.99,
+  "spread_sign_accuracy": 0.75,
+  "moneyline_accuracy": 0.75,
+  "total_samples": 16,
+  "total_bias": 0.75,
+  "total_mae": 21.35,
+  "saved_at": "2026-11-21T09:22:13"
 }

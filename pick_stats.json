@@ -1,10 +1,10 @@
 {
   "pnl": {
-    "total_units": -27.47,
-    "roi_per_bet": -0.1226,
-    "settled": 229,
-    "with_odds": 224,
-    "odds_coverage": 97.8,
+    "total_units": -35.47,
+    "roi_per_bet": -0.1529,
+    "settled": 241,
+    "with_odds": 232,
+    "odds_coverage": 96.3,
     "avg_odds": 1.708,
     "curve": [
       {
@@ -366,25 +366,25 @@
         "pnl": -3.25,
         "cum_pnl": -27.47,
         "n": 5
+      },
+      {
+        "date": "20261120",
+        "pnl": -8.0,
+        "cum_pnl": -35.47,
+        "n": 8
       }
     ]
   },
-  "total": 229,
-  "wins": 120,
-  "wr": 52.4,
-  "spread_total": 124,
-  "spread_wins": 67,
-  "spread_wr": 54.0,
-  "ou_total": 105,
-  "ou_wins": 53,
-  "ou_wr": 50.5,
+  "total": 241,
+  "wins": 124,
+  "wr": 51.5,
+  "spread_total": 130,
+  "spread_wins": 69,
+  "spread_wr": 53.1,
+  "ou_total": 111,
+  "ou_wins": 55,
+  "ou_wr": 49.5,
   "daily": [
-    {
-      "date": "20261107",
-      "wins": 1,
-      "total": 4,
-      "wr": 25.0
-    },
     {
       "date": "20261108",
       "wins": 1,
@@ -450,6 +450,12 @@
       "wins": 1,
       "total": 5,
       "wr": 20.0
+    },
+    {
+      "date": "20261120",
+      "wins": 4,
+      "total": 12,
+      "wr": 33.3
     }
   ],
   "edge_buckets": [
@@ -461,47 +467,47 @@
     },
     {
       "bucket": "3-5",
-      "wins": 19,
-      "total": 32,
-      "wr": 59.4
+      "wins": 20,
+      "total": 35,
+      "wr": 57.1
     },
     {
       "bucket": "5-8",
-      "wins": 46,
-      "total": 84,
-      "wr": 54.8
+      "wins": 47,
+      "total": 86,
+      "wr": 54.7
     },
     {
       "bucket": "8+",
-      "wins": 46,
-      "total": 92,
-      "wr": 50.0
+      "wins": 48,
+      "total": 99,
+      "wr": 48.5
     }
   ],
   "confidence_buckets": [
     {
       "bucket": "<60",
       "wins": 38,
-      "total": 73,
-      "wr": 52.1
+      "total": 75,
+      "wr": 50.7
     },
     {
       "bucket": "60-70",
-      "wins": 25,
-      "total": 48,
-      "wr": 52.1
+      "wins": 26,
+      "total": 52,
+      "wr": 50.0
     },
     {
       "bucket": "70-80",
       "wins": 13,
-      "total": 28,
-      "wr": 46.4
+      "total": 30,
+      "wr": 43.3
     },
     {
       "bucket": "80+",
-      "wins": 44,
-      "total": 80,
-      "wr": 55.0
+      "wins": 47,
+      "total": 84,
+      "wr": 56.0
     }
   ],
   "by_type_edge": {
@@ -514,21 +520,21 @@
       },
       {
         "bucket": "3-5",
-        "wins": 19,
-        "total": 32,
-        "wr": 59.4
+        "wins": 20,
+        "total": 35,
+        "wr": 57.1
       },
       {
         "bucket": "5-8",
-        "wins": 22,
-        "total": 39,
-        "wr": 56.4
+        "wins": 23,
+        "total": 41,
+        "wr": 56.1
       },
       {
         "bucket": "8+",
         "wins": 17,
-        "total": 32,
-        "wr": 53.1
+        "total": 33,
+        "wr": 51.5
       }
     ],
     "ou": [
@@ -552,9 +558,9 @@
       },
       {
         "bucket": "8+",
-        "wins": 29,
-        "total": 60,
-        "wr": 48.3
+        "wins": 31,
+        "total": 66,
+        "wr": 47.0
       }
     ]
   },
@@ -920,28 +926,179 @@
       "model_total": 210.4
     }
   ],
-  "current_picks": [],
-  "pending": 0,
+  "current_picks": [
+    {
+      "pick_date": "20261121",
+      "game_date": "20261121",
+      "away": "Phoenix Suns",
+      "home": "Utah Jazz",
+      "pick_type": "spread",
+      "pick_target": "home",
+      "pick_line": 4.5,
+      "pick_detail": "買 Jazz 受讓 +4.5",
+      "edge": 9.1,
+      "confidence": 66.6,
+      "result": "pending",
+      "correct": null,
+      "tw_spread": 4.5,
+      "tw_ou": 225.5,
+      "model_spread": 4.6,
+      "model_total": 227.9
+    },
+    {
+      "pick_date": "20261121",
+      "game_date": "20261121",
+      "away": "Sacramento Kings",
+      "home": "Los Angeles Lakers",
+      "pick_type": "spread",
+      "pick_target": "home",
+      "pick_line": -14.5,
+      "pick_detail": "買 Lakers 讓分 -14.5",
+      "edge": 3.3999999999999986,
+      "confidence": 98.3,
+      "result": "pending",
+      "correct": null,
+      "tw_spread": -14.5,
+      "tw_ou": 229.5,
+      "model_spread": 17.9,
+      "model_total": 232.8
+    }
+  ],
+  "pending": 2,
   "stale_pending": 0,
-  "resolution_gaps": [],
+  "resolution_gaps": [
+    {
+      "pick_date": "20261121",
+      "game_date": "20261121",
+      "away": "Phoenix Suns",
+      "home": "Utah Jazz",
+      "pick_type": "spread",
+      "pick_detail": "買 Jazz 受讓 +4.5",
+      "edge": 9.1,
+      "reason": "scheduled for future",
+      "status": "future_pending"
+    },
+    {
+      "pick_date": "20261121",
+      "game_date": "20261121",
+      "away": "Sacramento Kings",
+      "home": "Los Angeles Lakers",
+      "pick_type": "spread",
+      "pick_detail": "買 Lakers 讓分 -14.5",
+      "edge": 3.3999999999999986,
+      "reason": "scheduled for future",
+      "status": "future_pending"
+    }
+  ],
   "history_sync": {
     "imported_from_bets": {
-      "candidates": 98,
+      "candidates": 100,
       "imported": 0,
-      "skipped_existing": 98
+      "skipped_existing": 100
     },
     "manual_results": 0,
     "resolved": {
-      "candidates": 0,
+      "candidates": 2,
       "verified": 0,
       "wins": 0,
       "losses": 0,
       "pushes": 0,
-      "missing_results": 0,
+      "missing_results": 2,
       "ungraded": 0,
-      "missing_details": []
+      "missing_details": [
+        {
+          "pick_date": "20261121",
+          "game_date": "20261121",
+          "away": "Phoenix Suns",
+          "home": "Utah Jazz",
+          "pick_type": "spread",
+          "pick_target": "home",
+          "pick_detail": "買 Jazz 受讓 +4.5",
+          "candidate_keys": [
+            {
+              "game_date": "20261121",
+              "home": "utah jazz",
+              "away": "phoenix suns"
+            },
+            {
+              "game_date": "20261120",
+              "home": "utah jazz",
+              "away": "phoenix suns"
+            },
+            {
+              "game_date": "20261120",
+              "home": "phoenix suns",
+              "away": "utah jazz"
+            },
+            {
+              "game_date": "20261122",
+              "home": "utah jazz",
+              "away": "phoenix suns"
+            },
+            {
+              "game_date": "20261122",
+              "home": "phoenix suns",
+              "away": "utah jazz"
+            },
+            {
+              "game_date": "20261121",
+              "home": "phoenix suns",
+              "away": "utah jazz"
+            }
+          ],
+          "candidate_hits": [],
+          "nearby_espn_games": [],
+          "reason": "ESPN result not found",
+          "status": "missing_result"
+        },
+        {
+          "pick_date": "20261121",
+          "game_date": "20261121",
+          "away": "Sacramento Kings",
+          "home": "Los Angeles Lakers",
+          "pick_type": "spread",
+          "pick_target": "home",
+          "pick_detail": "買 Lakers 讓分 -14.5",
+          "candidate_keys": [
+            {
+              "game_date": "20261121",
+              "home": "los angeles lakers",
+              "away": "sacramento kings"
+            },
+            {
+              "game_date": "20261120",
+              "home": "los angeles lakers",
+              "away": "sacramento kings"
+            },
+            {
+              "game_date": "20261120",
+              "home": "sacramento kings",
+              "away": "los angeles lakers"
+            },
+            {
+              "game_date": "20261122",
+              "home": "los angeles lakers",
+              "away": "sacramento kings"
+            },
+            {
+              "game_date": "20261122",
+              "home": "sacramento kings",
+              "away": "los angeles lakers"
+            },
+            {
+              "game_date": "20261121",
+              "home": "sacramento kings",
+              "away": "los angeles lakers"
+            }
+          ],
+          "candidate_hits": [],
+          "nearby_espn_games": [],
+          "reason": "ESPN result not found",
+          "status": "missing_result"
+        }
+      ]
     }
   },
-  "generated_at": "2026-11-20T09:22:02",
-  "synced_at": "2026-11-20T09:22:02"
+  "generated_at": "2026-11-21T09:22:42",
+  "synced_at": "2026-11-21T09:22:42"
 }
