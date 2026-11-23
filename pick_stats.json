@@ -1,11 +1,11 @@
 {
   "pnl": {
-    "total_units": -37.47,
-    "roi_per_bet": -0.1601,
-    "settled": 243,
-    "with_odds": 234,
+    "total_units": -39.47,
+    "roi_per_bet": -0.1672,
+    "settled": 245,
+    "with_odds": 236,
     "odds_coverage": 96.3,
-    "avg_odds": 1.708,
+    "avg_odds": 1.709,
     "curve": [
       {
         "date": "20260425",
@@ -378,25 +378,25 @@
         "pnl": -2.0,
         "cum_pnl": -37.47,
         "n": 2
+      },
+      {
+        "date": "20261122",
+        "pnl": -2.0,
+        "cum_pnl": -39.47,
+        "n": 2
       }
     ]
   },
-  "total": 243,
+  "total": 245,
   "wins": 124,
-  "wr": 51.0,
-  "spread_total": 132,
+  "wr": 50.6,
+  "spread_total": 133,
   "spread_wins": 69,
-  "spread_wr": 52.3,
-  "ou_total": 111,
+  "spread_wr": 51.9,
+  "ou_total": 112,
   "ou_wins": 55,
-  "ou_wr": 49.5,
+  "ou_wr": 49.1,
   "daily": [
-    {
-      "date": "20261109",
-      "wins": 1,
-      "total": 3,
-      "wr": 33.3
-    },
     {
       "date": "20261110",
       "wins": 3,
@@ -462,6 +462,12 @@
       "wins": 0,
       "total": 2,
       "wr": 0.0
+    },
+    {
+      "date": "20261122",
+      "wins": 0,
+      "total": 2,
+      "wr": 0.0
     }
   ],
   "edge_buckets": [
@@ -486,8 +492,8 @@
     {
       "bucket": "8+",
       "wins": 48,
-      "total": 100,
-      "wr": 48.0
+      "total": 102,
+      "wr": 47.1
     }
   ],
   "confidence_buckets": [
@@ -512,8 +518,8 @@
     {
       "bucket": "80+",
       "wins": 47,
-      "total": 85,
-      "wr": 55.3
+      "total": 87,
+      "wr": 54.0
     }
   ],
   "by_type_edge": {
@@ -539,8 +545,8 @@
       {
         "bucket": "8+",
         "wins": 17,
-        "total": 34,
-        "wr": 50.0
+        "total": 35,
+        "wr": 48.6
       }
     ],
     "ou": [
@@ -565,12 +571,48 @@
       {
         "bucket": "8+",
         "wins": 31,
-        "total": 66,
-        "wr": 47.0
+        "total": 67,
+        "wr": 46.3
       }
     ]
   },
   "recent": [
+    {
+      "pick_date": "20261122",
+      "game_date": "20261122",
+      "away": "Boston Celtics",
+      "home": "Sacramento Kings",
+      "pick_type": "ou",
+      "pick_target": "over",
+      "pick_line": 216.5,
+      "pick_detail": "看大 Over 216.5",
+      "edge": 8.5,
+      "confidence": 97.5,
+      "result": "loss",
+      "correct": 0,
+      "tw_spread": 12.5,
+      "tw_ou": 216.5,
+      "model_spread": -20.6,
+      "model_total": 225.0
+    },
+    {
+      "pick_date": "20261122",
+      "game_date": "20261122",
+      "away": "Boston Celtics",
+      "home": "Sacramento Kings",
+      "pick_type": "spread",
+      "pick_target": "away",
+      "pick_line": 12.5,
+      "pick_detail": "買 Celtics 讓分 -12.5",
+      "edge": 8.100000000000001,
+      "confidence": 97.5,
+      "result": "loss",
+      "correct": 0,
+      "tw_spread": 12.5,
+      "tw_ou": 216.5,
+      "model_spread": -20.6,
+      "model_total": 225.0
+    },
     {
       "pick_date": "20261121",
       "game_date": "20261121",
@@ -894,113 +936,77 @@
       "tw_ou": 222.5,
       "model_spread": -12.4,
       "model_total": 216.9
-    },
-    {
-      "pick_date": "20261114",
-      "game_date": "20261114",
-      "away": "Oklahoma City Thunder",
-      "home": "LA Clippers",
-      "pick_type": "spread",
-      "pick_target": "away",
-      "pick_line": 7.5,
-      "pick_detail": "買 Thunder 讓分 -7.5",
-      "edge": 4.9,
-      "confidence": 90.6,
-      "result": "loss",
-      "correct": 0,
-      "tw_spread": 7.5,
-      "tw_ou": 222.5,
-      "model_spread": -12.4,
-      "model_total": 216.9
-    },
-    {
-      "pick_date": "20261114",
-      "game_date": "20261114",
-      "away": "Portland Trail Blazers",
-      "home": "Sacramento Kings",
-      "pick_type": "ou",
-      "pick_target": "under",
-      "pick_line": 229.5,
-      "pick_detail": "看小 Under 229.5",
-      "edge": 9.099999999999994,
-      "confidence": 92.2,
-      "result": "win",
-      "correct": 1,
-      "tw_spread": 10.5,
-      "tw_ou": 229.5,
-      "model_spread": -15.2,
-      "model_total": 220.4
     }
   ],
   "current_picks": [
     {
-      "pick_date": "20261122",
-      "game_date": "20261122",
+      "pick_date": "20261123",
+      "game_date": "20261123",
       "away": "Boston Celtics",
-      "home": "Sacramento Kings",
+      "home": "Golden State Warriors",
       "pick_type": "ou",
       "pick_target": "over",
-      "pick_line": 216.5,
-      "pick_detail": "看大 Over 216.5",
-      "edge": 8.5,
-      "confidence": 97.5,
+      "pick_line": 210.5,
+      "pick_detail": "看大 Over 210.5",
+      "edge": 13.599999999999994,
+      "confidence": 74.3,
       "result": "pending",
       "correct": null,
-      "tw_spread": 12.5,
-      "tw_ou": 216.5,
-      "model_spread": -20.6,
-      "model_total": 225.0
+      "tw_spread": 9.5,
+      "tw_ou": 210.5,
+      "model_spread": -4.8,
+      "model_total": 224.1
     },
     {
-      "pick_date": "20261122",
-      "game_date": "20261122",
+      "pick_date": "20261123",
+      "game_date": "20261123",
       "away": "Boston Celtics",
-      "home": "Sacramento Kings",
+      "home": "Golden State Warriors",
       "pick_type": "spread",
-      "pick_target": "away",
-      "pick_line": 12.5,
-      "pick_detail": "買 Celtics 讓分 -12.5",
-      "edge": 8.100000000000001,
-      "confidence": 97.5,
+      "pick_target": "home",
+      "pick_line": 9.5,
+      "pick_detail": "買 Warriors 受讓 +9.5",
+      "edge": 4.7,
+      "confidence": 74.3,
       "result": "pending",
       "correct": null,
-      "tw_spread": 12.5,
-      "tw_ou": 216.5,
-      "model_spread": -20.6,
-      "model_total": 225.0
+      "tw_spread": 9.5,
+      "tw_ou": 210.5,
+      "model_spread": -4.8,
+      "model_total": 224.1
     }
   ],
   "pending": 2,
   "stale_pending": 0,
   "resolution_gaps": [
     {
-      "pick_date": "20261122",
-      "game_date": "20261122",
+      "pick_date": "20261123",
+      "game_date": "20261123",
       "away": "Boston Celtics",
-      "home": "Sacramento Kings",
+      "home": "Golden State Warriors",
       "pick_type": "spread",
-      "pick_detail": "買 Celtics 讓分 -12.5",
-      "edge": 8.100000000000001,
+      "pick_detail": "買 Warriors 受讓 +9.5",
+      "edge": 4.7,
       "reason": "scheduled for future",
       "status": "future_pending"
     },
     {
-      "pick_date": "20261122",
-      "game_date": "20261122",
+      "pick_date": "20261123",
+      "game_date": "20261123",
       "away": "Boston Celtics",
-      "home": "Sacramento Kings",
+      "home": "Golden State Warriors",
       "pick_type": "ou",
-      "pick_detail": "看大 Over 216.5",
-      "edge": 8.5,
+      "pick_detail": "看大 Over 210.5",
+      "edge": 13.599999999999994,
       "reason": "scheduled for future",
       "status": "future_pending"
     }
   ],
   "history_sync": {
     "imported_from_bets": {
-      "candidates": 101,
+      "candidates": 103,
       "imported": 0,
-      "skipped_existing": 101
+      "skipped_existing": 103
     },
     "manual_results": 0,
     "resolved": {
@@ -1013,102 +1019,102 @@
       "ungraded": 0,
       "missing_details": [
         {
-          "pick_date": "20261122",
-          "game_date": "20261122",
+          "pick_date": "20261123",
+          "game_date": "20261123",
           "away": "Boston Celtics",
-          "home": "Sacramento Kings",
+          "home": "Golden State Warriors",
           "pick_type": "spread",
-          "pick_target": "away",
-          "pick_detail": "買 Celtics 讓分 -12.5",
+          "pick_target": "home",
+          "pick_detail": "買 Warriors 受讓 +9.5",
           "candidate_keys": [
             {
+              "game_date": "20261123",
+              "home": "golden state warriors",
+              "away": "boston celtics"
+            },
+            {
               "game_date": "20261122",
-              "home": "sacramento kings",
+              "home": "golden state warriors",
               "away": "boston celtics"
-            },
-            {
-              "game_date": "20261121",
-              "home": "sacramento kings",
-              "away": "boston celtics"
-            },
-            {
-              "game_date": "20261121",
-              "home": "boston celtics",
-              "away": "sacramento kings"
-            },
-            {
-              "game_date": "20261123",
-              "home": "sacramento kings",
-              "away": "boston celtics"
-            },
-            {
-              "game_date": "20261123",
-              "home": "boston celtics",
-              "away": "sacramento kings"
             },
             {
               "game_date": "20261122",
               "home": "boston celtics",
-              "away": "sacramento kings"
+              "away": "golden state warriors"
+            },
+            {
+              "game_date": "20261124",
+              "home": "golden state warriors",
+              "away": "boston celtics"
+            },
+            {
+              "game_date": "20261124",
+              "home": "boston celtics",
+              "away": "golden state warriors"
+            },
+            {
+              "game_date": "20261123",
+              "home": "boston celtics",
+              "away": "golden state warriors"
             }
           ],
           "candidate_hits": [],
           "nearby_espn_games": [
             {
-              "game_date": "20261121",
-              "home": "philadelphia 76ers",
-              "away": "milwaukee bucks"
+              "game_date": "20261122",
+              "home": "atlanta hawks",
+              "away": "detroit pistons"
             }
           ],
           "reason": "ESPN has games on nearby dates, but team/date key mismatched",
           "status": "missing_result"
         },
         {
-          "pick_date": "20261122",
-          "game_date": "20261122",
+          "pick_date": "20261123",
+          "game_date": "20261123",
           "away": "Boston Celtics",
-          "home": "Sacramento Kings",
+          "home": "Golden State Warriors",
           "pick_type": "ou",
           "pick_target": "over",
-          "pick_detail": "看大 Over 216.5",
+          "pick_detail": "看大 Over 210.5",
           "candidate_keys": [
             {
+              "game_date": "20261123",
+              "home": "golden state warriors",
+              "away": "boston celtics"
+            },
+            {
               "game_date": "20261122",
-              "home": "sacramento kings",
+              "home": "golden state warriors",
               "away": "boston celtics"
-            },
-            {
-              "game_date": "20261121",
-              "home": "sacramento kings",
-              "away": "boston celtics"
-            },
-            {
-              "game_date": "20261121",
-              "home": "boston celtics",
-              "away": "sacramento kings"
-            },
-            {
-              "game_date": "20261123",
-              "home": "sacramento kings",
-              "away": "boston celtics"
-            },
-            {
-              "game_date": "20261123",
-              "home": "boston celtics",
-              "away": "sacramento kings"
             },
             {
               "game_date": "20261122",
               "home": "boston celtics",
-              "away": "sacramento kings"
+              "away": "golden state warriors"
+            },
+            {
+              "game_date": "20261124",
+              "home": "golden state warriors",
+              "away": "boston celtics"
+            },
+            {
+              "game_date": "20261124",
+              "home": "boston celtics",
+              "away": "golden state warriors"
+            },
+            {
+              "game_date": "20261123",
+              "home": "boston celtics",
+              "away": "golden state warriors"
             }
           ],
           "candidate_hits": [],
           "nearby_espn_games": [
             {
-              "game_date": "20261121",
-              "home": "philadelphia 76ers",
-              "away": "milwaukee bucks"
+              "game_date": "20261122",
+              "home": "atlanta hawks",
+              "away": "detroit pistons"
             }
           ],
           "reason": "ESPN has games on nearby dates, but team/date key mismatched",
@@ -1117,6 +1123,6 @@
       ]
     }
   },
-  "generated_at": "2026-11-22T09:22:21",
-  "synced_at": "2026-11-22T09:22:21"
+  "generated_at": "2026-11-23T09:22:24",
+  "synced_at": "2026-11-23T09:22:24"
 }
