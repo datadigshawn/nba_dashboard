@@ -952,6 +952,78 @@
   ],
   "current_picks": [
     {
+      "pick_date": "20261126",
+      "game_date": "20261126",
+      "away": "Phoenix Suns",
+      "home": "Houston Rockets",
+      "pick_type": "ou",
+      "pick_target": "over",
+      "pick_line": 222.5,
+      "pick_detail": "看大 Over 222.5",
+      "edge": 14.800000000000011,
+      "confidence": 86.0,
+      "result": "pending",
+      "correct": null,
+      "tw_spread": -9.5,
+      "tw_ou": 222.5,
+      "model_spread": 11.4,
+      "model_total": 237.3
+    },
+    {
+      "pick_date": "20261126",
+      "game_date": "20261126",
+      "away": "Sacramento Kings",
+      "home": "Golden State Warriors",
+      "pick_type": "ou",
+      "pick_target": "over",
+      "pick_line": 215.5,
+      "pick_detail": "看大 Over 215.5",
+      "edge": 10.5,
+      "confidence": 93.1,
+      "result": "pending",
+      "correct": null,
+      "tw_spread": -7.5,
+      "tw_ou": 215.5,
+      "model_spread": 12.6,
+      "model_total": 226.0
+    },
+    {
+      "pick_date": "20261126",
+      "game_date": "20261126",
+      "away": "Sacramento Kings",
+      "home": "Golden State Warriors",
+      "pick_type": "spread",
+      "pick_target": "home",
+      "pick_line": -7.5,
+      "pick_detail": "買 Warriors 讓分 -7.5",
+      "edge": 5.1,
+      "confidence": 93.1,
+      "result": "pending",
+      "correct": null,
+      "tw_spread": -7.5,
+      "tw_ou": 215.5,
+      "model_spread": 12.6,
+      "model_total": 226.0
+    },
+    {
+      "pick_date": "20261126",
+      "game_date": "20261126",
+      "away": "San Antonio Spurs",
+      "home": "Portland Trail Blazers",
+      "pick_type": "spread",
+      "pick_target": "home",
+      "pick_line": 3.5,
+      "pick_detail": "買 Blazers 受讓 +3.5",
+      "edge": 2.4,
+      "confidence": 62.5,
+      "result": "pending",
+      "correct": null,
+      "tw_spread": 3.5,
+      "tw_ou": 227.5,
+      "model_spread": -1.1,
+      "model_total": 227.3
+    },
+    {
       "pick_date": "20261124",
       "game_date": "20261201",
       "away": "AwayQ",
@@ -1006,9 +1078,53 @@
       "model_total": null
     }
   ],
-  "pending": 3,
+  "pending": 7,
   "stale_pending": 0,
   "resolution_gaps": [
+    {
+      "pick_date": "20261126",
+      "game_date": "20261126",
+      "away": "Sacramento Kings",
+      "home": "Golden State Warriors",
+      "pick_type": "spread",
+      "pick_detail": "買 Warriors 讓分 -7.5",
+      "edge": 5.1,
+      "reason": "scheduled for future",
+      "status": "future_pending"
+    },
+    {
+      "pick_date": "20261126",
+      "game_date": "20261126",
+      "away": "Sacramento Kings",
+      "home": "Golden State Warriors",
+      "pick_type": "ou",
+      "pick_detail": "看大 Over 215.5",
+      "edge": 10.5,
+      "reason": "scheduled for future",
+      "status": "future_pending"
+    },
+    {
+      "pick_date": "20261126",
+      "game_date": "20261126",
+      "away": "Phoenix Suns",
+      "home": "Houston Rockets",
+      "pick_type": "ou",
+      "pick_detail": "看大 Over 222.5",
+      "edge": 14.800000000000011,
+      "reason": "scheduled for future",
+      "status": "future_pending"
+    },
+    {
+      "pick_date": "20261126",
+      "game_date": "20261126",
+      "away": "San Antonio Spurs",
+      "home": "Portland Trail Blazers",
+      "pick_type": "spread",
+      "pick_detail": "買 Blazers 受讓 +3.5",
+      "edge": 2.4,
+      "reason": "scheduled for future",
+      "status": "future_pending"
+    },
     {
       "pick_date": "20261124",
       "game_date": "20261201",
@@ -1045,22 +1161,227 @@
   ],
   "history_sync": {
     "imported_from_bets": {
-      "candidates": 105,
+      "candidates": 108,
       "imported": 0,
-      "skipped_existing": 105
+      "skipped_existing": 108
     },
     "manual_results": 0,
     "resolved": {
-      "candidates": 0,
+      "candidates": 4,
       "verified": 0,
       "wins": 0,
       "losses": 0,
       "pushes": 0,
-      "missing_results": 0,
+      "missing_results": 4,
       "ungraded": 0,
-      "missing_details": []
+      "missing_details": [
+        {
+          "pick_date": "20261126",
+          "game_date": "20261126",
+          "away": "Sacramento Kings",
+          "home": "Golden State Warriors",
+          "pick_type": "spread",
+          "pick_target": "home",
+          "pick_detail": "買 Warriors 讓分 -7.5",
+          "candidate_keys": [
+            {
+              "game_date": "20261126",
+              "home": "golden state warriors",
+              "away": "sacramento kings"
+            },
+            {
+              "game_date": "20261125",
+              "home": "golden state warriors",
+              "away": "sacramento kings"
+            },
+            {
+              "game_date": "20261125",
+              "home": "sacramento kings",
+              "away": "golden state warriors"
+            },
+            {
+              "game_date": "20261127",
+              "home": "golden state warriors",
+              "away": "sacramento kings"
+            },
+            {
+              "game_date": "20261127",
+              "home": "sacramento kings",
+              "away": "golden state warriors"
+            },
+            {
+              "game_date": "20261126",
+              "home": "sacramento kings",
+              "away": "golden state warriors"
+            }
+          ],
+          "candidate_hits": [],
+          "nearby_espn_games": [
+            {
+              "game_date": "20261125",
+              "home": "philadelphia 76ers",
+              "away": "miami heat"
+            }
+          ],
+          "reason": "ESPN has games on nearby dates, but team/date key mismatched",
+          "status": "missing_result"
+        },
+        {
+          "pick_date": "20261126",
+          "game_date": "20261126",
+          "away": "Sacramento Kings",
+          "home": "Golden State Warriors",
+          "pick_type": "ou",
+          "pick_target": "over",
+          "pick_detail": "看大 Over 215.5",
+          "candidate_keys": [
+            {
+              "game_date": "20261126",
+              "home": "golden state warriors",
+              "away": "sacramento kings"
+            },
+            {
+              "game_date": "20261125",
+              "home": "golden state warriors",
+              "away": "sacramento kings"
+            },
+            {
+              "game_date": "20261125",
+              "home": "sacramento kings",
+              "away": "golden state warriors"
+            },
+            {
+              "game_date": "20261127",
+              "home": "golden state warriors",
+              "away": "sacramento kings"
+            },
+            {
+              "game_date": "20261127",
+              "home": "sacramento kings",
+              "away": "golden state warriors"
+            },
+            {
+              "game_date": "20261126",
+              "home": "sacramento kings",
+              "away": "golden state warriors"
+            }
+          ],
+          "candidate_hits": [],
+          "nearby_espn_games": [
+            {
+              "game_date": "20261125",
+              "home": "philadelphia 76ers",
+              "away": "miami heat"
+            }
+          ],
+          "reason": "ESPN has games on nearby dates, but team/date key mismatched",
+          "status": "missing_result"
+        },
+        {
+          "pick_date": "20261126",
+          "game_date": "20261126",
+          "away": "Phoenix Suns",
+          "home": "Houston Rockets",
+          "pick_type": "ou",
+          "pick_target": "over",
+          "pick_detail": "看大 Over 222.5",
+          "candidate_keys": [
+            {
+              "game_date": "20261126",
+              "home": "houston rockets",
+              "away": "phoenix suns"
+            },
+            {
+              "game_date": "20261125",
+              "home": "houston rockets",
+              "away": "phoenix suns"
+            },
+            {
+              "game_date": "20261125",
+              "home": "phoenix suns",
+              "away": "houston rockets"
+            },
+            {
+              "game_date": "20261127",
+              "home": "houston rockets",
+              "away": "phoenix suns"
+            },
+            {
+              "game_date": "20261127",
+              "home": "phoenix suns",
+              "away": "houston rockets"
+            },
+            {
+              "game_date": "20261126",
+              "home": "phoenix suns",
+              "away": "houston rockets"
+            }
+          ],
+          "candidate_hits": [],
+          "nearby_espn_games": [
+            {
+              "game_date": "20261125",
+              "home": "philadelphia 76ers",
+              "away": "miami heat"
+            }
+          ],
+          "reason": "ESPN has games on nearby dates, but team/date key mismatched",
+          "status": "missing_result"
+        },
+        {
+          "pick_date": "20261126",
+          "game_date": "20261126",
+          "away": "San Antonio Spurs",
+          "home": "Portland Trail Blazers",
+          "pick_type": "spread",
+          "pick_target": "home",
+          "pick_detail": "買 Blazers 受讓 +3.5",
+          "candidate_keys": [
+            {
+              "game_date": "20261126",
+              "home": "portland trail blazers",
+              "away": "san antonio spurs"
+            },
+            {
+              "game_date": "20261125",
+              "home": "portland trail blazers",
+              "away": "san antonio spurs"
+            },
+            {
+              "game_date": "20261125",
+              "home": "san antonio spurs",
+              "away": "portland trail blazers"
+            },
+            {
+              "game_date": "20261127",
+              "home": "portland trail blazers",
+              "away": "san antonio spurs"
+            },
+            {
+              "game_date": "20261127",
+              "home": "san antonio spurs",
+              "away": "portland trail blazers"
+            },
+            {
+              "game_date": "20261126",
+              "home": "san antonio spurs",
+              "away": "portland trail blazers"
+            }
+          ],
+          "candidate_hits": [],
+          "nearby_espn_games": [
+            {
+              "game_date": "20261125",
+              "home": "philadelphia 76ers",
+              "away": "miami heat"
+            }
+          ],
+          "reason": "ESPN has games on nearby dates, but team/date key mismatched",
+          "status": "missing_result"
+        }
+      ]
     }
   },
-  "generated_at": "2026-11-25T09:22:22",
-  "synced_at": "2026-11-25T09:22:22"
+  "generated_at": "2026-11-26T09:22:26",
+  "synced_at": "2026-11-26T09:22:26"
 }
