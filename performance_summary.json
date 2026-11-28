@@ -1,11 +1,11 @@
 {
-  "reference_date": "20261127",
+  "reference_date": "20261128",
   "today": {
-    "start_date": "20261127",
-    "end_date": "20261127",
-    "total": 0,
+    "start_date": "20261128",
+    "end_date": "20261128",
+    "total": 13,
     "resolved": 0,
-    "pending": 0,
+    "pending": 13,
     "wins": 0,
     "losses": 0,
     "wr": null,
@@ -13,10 +13,10 @@
   },
   "week": {
     "start_date": "20261123",
-    "end_date": "20261127",
-    "total": 27,
+    "end_date": "20261128",
+    "total": 40,
     "resolved": 1,
-    "pending": 26,
+    "pending": 39,
     "wins": 1,
     "losses": 0,
     "wr": 100.0,
@@ -24,10 +24,10 @@
   },
   "month": {
     "start_date": "20261101",
-    "end_date": "20261127",
-    "total": 186,
+    "end_date": "20261128",
+    "total": 199,
     "resolved": 17,
-    "pending": 169,
+    "pending": 182,
     "wins": 14,
     "losses": 3,
     "wr": 82.4,
@@ -35,14 +35,14 @@
   },
   "season": {
     "start_date": "20260417",
-    "end_date": "20261201",
-    "total": 537,
+    "end_date": "20261202",
+    "total": 545,
     "resolved": 139,
-    "pending": 398,
+    "pending": 406,
     "wins": 84,
     "losses": 55,
     "wr": 60.4,
     "avg_margin_error": 15.1
   },
-  "generated_at": "2026-11-27T09:22:54"
+  "generated_at": "2026-11-28T09:22:40"
 }
